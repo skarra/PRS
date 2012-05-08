@@ -1,0 +1,21 @@
+-*- org -*-
+
+Created       : Tue May 08 17:03:44 IST 2012
+Last Modified : Tue May 08 17:09:50 IST 2012
+
+This is a very simple patient data management system developed for use in a
+Charity Clinic in Delhi. It is written as an HTML5 application, and uses
+Indexeddb as the underlying data store. As such this also serves as an
+exercise in learning this nascent and fast-changing API.
+
+Support for IndexedDB is not available in all browsers. You need the very
+latest versions of Chrome or Firefox to have this work.
+
+* Installation
+
+  - Ensure you have the latest version of Chrome or Firefox installed on your
+    system
+    
+  - Clone the repository
+
+  - Point your browser to prs/prs.html

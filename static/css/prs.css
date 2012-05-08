@@ -1,0 +1,500 @@
+/*  HTML5 ✰ Boilerplate  */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, footer, header, controls, 
+hgroup,
+menu, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+#site-title {
+  font-family: ff-meta-web-pro-1, ff-meta-web-pro-2, MetaPlus, "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif;
+  float: left;
+  padding-right: 0.5em;
+  font-size: 30px;
+  font-weight: bold;
+  color: #816894;
+}
+
+article, aside, details, figcaption, figure, footer, controls, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+body {
+  font: 13px/1.231 sans-serif;
+/*  *font-size: small;*/
+}
+
+select, input, textarea, button {
+  font: 99% sans-serif;
+}
+
+pre, code, kbd, samp {
+  font-family: monospace, sans-serif;
+}
+
+body, select, input, textarea {
+  color: #444;
+}
+
+.search {
+  float: left;
+  padding-left: 0px;
+  position: relative;
+  margin-top: 0.5em;
+}
+
+.search input {
+  padding: 5px 5px;
+  font-size: 14px;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -o-border-radius: 0;
+  -ms-border-radius: 0;
+  -khtml-border-radius: 0;
+  border-radius: 0;
+  border: none;
+}
+
+.search input[type="text"] {
+  border: 1px solid #b7b7b7;
+  font-family: ff-meta-web-pro-1, ff-meta-web-pro-2, MetaPlus, "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif;
+  background: white url('../img/search.png?1299763894') 4px center no-repeat;
+  padding-left: 20px;
+  padding-right: 40px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  width: 12em;
+  height: 25px;
+}
+
+.search input[type="submit"] {
+  border: 1px solid #b7b7b7;
+  border-left: 0;
+  font-family: ff-meta-web-pro-1, ff-meta-web-pro-2, MetaPlus, "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -o-border-top-right-radius: 3px;
+  -ms-border-top-right-radius: 3px;
+  -khtml-border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -o-border-bottom-right-radius: 3px;
+  -ms-border-bottom-right-radius: 3px;
+  -khtml-border-bottom-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 0 12px;
+  background: #e6e6e6;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e6e6e6), color-stop(100%, #d6d6d6));
+  background-image: -webkit-linear-gradient(#e6e6e6, #d6d6d6);
+  background-image: -moz-linear-gradient(#e6e6e6, #d6d6d6);
+  background-image: -o-linear-gradient(#e6e6e6, #d6d6d6);
+  background-image: -ms-linear-gradient(#e6e6e6, #d6d6d6);
+  background-image: linear-gradient(#e6e6e6, #d6d6d6);
+  font-weight: bold;
+  color: #666;
+  width: 40px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.search input[type="submit"]:hover {
+  background: #d6d6d6;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d6d6d6), color-stop(100%, #c6c6c6));
+  background-image: -webkit-linear-gradient(#d6d6d6, #c6c6c6);
+  background-image: -moz-linear-gradient(#d6d6d6, #c6c6c6);
+  background-image: -o-linear-gradient(#d6d6d6, #c6c6c6);
+  background-image: -ms-linear-gradient(#d6d6d6, #c6c6c6);
+  background-image: linear-gradient(#d6d6d6, #c6c6c6);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 200%;
+  color: #df5e0e;
+  margin: 0;
+}
+
+h2 {
+  font-size: 150%;
+  color: #816894;
+  margin: 1em 0 0;
+  margin-top: 0;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+a:hover, a:active {
+  outline: none;
+}
+
+a, a:active, a:visited {
+  color: #607890;
+}
+
+a:hover {
+  color: #036;
+}
+
+ul, ol {
+  margin-left: 1.8em;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+nav ul, nav li {
+  margin: 0;
+}
+
+small {
+  font-size: 85%;
+}
+
+strong, th {
+  font-weight: bold;
+}
+
+td, td img {
+  vertical-align: top;
+}
+
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+pre {
+  padding: 15px;
+  white-space: pre;
+  white-space: pre-wrap;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+textarea {
+  overflow: auto;
+}
+
+.ie6 legend, .ie7 legend {
+  margin-left: -7px;
+}
+
+input[type="radio"] {
+  vertical-align: baseline;
+}
+
+input[type="checkbox"] {
+  vertical-align: baseline;
+}
+
+.ie7 input[type="checkbox"] {
+  vertical-align: baseline;
+}
+
+.ie6 input {
+  vertical-align: text-bottom;
+}
+
+label, input[type=button], input[type=submit], button {
+  cursor: pointer;
+}
+
+button, input, select, textarea {
+  margin: 0;
+}
+
+input:invalid, textarea:invalid {
+  border-radius: 1px;
+  -moz-box-shadow: 0px 0px 5px red;
+  -webkit-box-shadow: 0px 0px 5px red;
+  box-shadow: 0px 0px 5px red;
+}
+
+.no-boxshadow input:invalid,
+.no-boxshadow textarea:invalid {
+  background-color: #f0dddd;
+}
+
+::-moz-selection {
+  background: #FF5E99;
+  color: #fff;
+  text-shadow: none;
+}
+
+::selection {
+  background: #FF5E99;
+  color: #fff;
+  text-shadow: none;
+}
+
+a:link {
+  -webkit-tap-highlight-color: #FF5E99;
+}
+
+button {
+  width: auto;
+  overflow: visible;
+}
+
+.ie7 img {
+  -ms-interpolation-mode: bicubic;
+}
+
+.ir {
+  display: block;
+  text-indent: -999em;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.visuallyhidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* Background textures by Rüdiger Appel from http://www.3quarks.com/en/BackgroundPattern/ */
+body {
+  font-family: ff-meta-web-pro-1, ff-meta-web-pro-2, "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif, ;
+  background: url('../img/canvas.jpg?881083570');
+}
+
+/* Header area */
+header {
+  *zoom: 1;
+  padding: 10px 20px;
+  background: url('../img/paper.jpg?884184256');
+  border-bottom: 1px solid #afafaf;
+  -moz-box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+header #sections li {
+  float: left;
+  list-style-image: none;
+  list-style-type: none;
+  border: 1px solid black;
+  margin: 0.25em;
+  padding: 0.5em;
+}
+
+/* Header area */
+controls {
+    float: left;
+    padding: 10px 20px;
+    background-color: #f6f6f6;
+    border-bottom: 1px solid #afafaf;
+    -moz-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
+    -webkit-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
+    -o-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
+    box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
+    width:100%;
+
+    margin: 0;
+    list-style: none;
+}
+
+.control {
+    font-family: "Walter Turncoat", "Trebuchet MS", Verdana, Helvetica, Arial,sans-serif;
+    background: url('../img/cardboard.jpg?884184256');
+    -moz-transition-property: background-color;
+    -webkit-transition-property: background-color;
+    -o-transition-property: background-color;
+    transition-property: background-color;
+    -moz-transition-duration: 0.5s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    width:230px;
+
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    padding: 15px 20px;
+
+    margin: 5px 5px;
+
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+
+  border-radius: 4px;
+  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.6) inset;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.6) inset;
+  -o-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.6) inset;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.6) inset;
+}
+
+.control:before, .control:after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  height: 20%;
+  max-width: 300px;
+  -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+  -moz-transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.control:after {
+  right: 10px;
+  left: auto;
+  -moz-transform: rotate(3deg);
+  -webkit-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.control_label {
+    width: 8.1em;
+    height: 40px;
+
+    margin-top: 0.5em;
+    text-align: center;
+    padding-left: 8px;
+    padding-right: 21px;
+    position: relative;
+
+    color: #666;
+    font-weight: bold;
+    font-size: 14px;
+
+    -moz-border-radius:    3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius:      3px;
+    -ms-border-radius:     3px;
+    -khtml-border-radius:  3px;
+    border-radius:         3px;
+    border: 1px solid #b7b7b7;
+
+    background: #e6e6e6;
+}
+
+.control_label:hover {
+    color:#333333;
+    background: #d6d6d6;
+}
