@@ -392,13 +392,14 @@ controls {
     padding: 10px 20px;
     background-color: #f6f6f6;
     border-bottom: 1px solid #afafaf;
-    -moz-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
-    -webkit-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
-    -o-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
-    box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
-    width:100%;
+    -moz-box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.7);
+    -o-box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.7);
+    box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.7);
+    width:275px;
+    height: 100%;
 
-    margin: 0;
+    margin: 10px;
     list-style: none;
 }
 

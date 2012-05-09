@@ -1,6 +1,6 @@
 <!--
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue May 08 17:11:44 IST 2012
+// Last Modified : Wed May 09 09:06:20 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -11,18 +11,22 @@
 
 <!DOCTYPE html>
 <html>
-<title>Lajpat Bhavan Patient Record System</title>
+<title>CMC, Lajpat Bhavan Patient Record System</title>
 <head>
 
 <!-- Stylesheets -->
 <link href="./static/css/prs.css" media="screen, projection"
       rel="stylesheet" type="text/css" />
-
 <link href="./static/css/print.css" media="screen, projection"
+      rel="stylesheet" type="text/css" />
+<link href="./static/css/demo_page.css" media="screen, projection"
+      rel="stylesheet" type="text/css" />
+<link href="./static/css/demo_table.css" media="screen, projection"
       rel="stylesheet" type="text/css" />
 
 <!-- Javascripts -->
 <script src="./static/js/libs/jquery-1.7.2.min.js"></script>
+<script src="./static/js/libs/jquery.dataTables-1.9.1.min.js"></script>
 <script src="./static/js/prs.js"></script>
 
 </head>
@@ -32,11 +36,10 @@
 
 <header>
   <div id="site-title">
-      Lajpat Bhavan Patient Record System
+      CMC, Lajpat Bhavan Patient Record System
   </div>
 </header>
 
-<controls>
   <div id="patient_admin" class="control">
     <h2> Patient Administration </h2>
 
@@ -62,11 +65,13 @@
     </p>
     </div>        
  </div>
-</controls>
+
  
 <forms>
   <div id="sheet" style="display:none">
-    <form id="new_record" style="display:none">
+
+    <!-- Input form for a new patient -->
+    <form id="new_patient_form" style="display:none">
       <br/>
       <h2>New Patient Details:</h2>
       <br/>
@@ -91,9 +96,13 @@
   	<br/>
   
   	<button type="new_submit">Go</button>
-        </form> 
-  </div>
+    </form> 
 
+    <table cellpadding="0" cellspacing="0" border="0" class="display"
+      style="display:none" id="display_patients_table">
+    </table>
+
+  </div>
 </forms>
 </body>
 </html>

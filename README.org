@@ -1,0 +1,23 @@
+-*- org -*-
+
+Created       : Tue May 08 17:03:44 IST 2012
+Last Modified : Wed May 09 11:58:16 IST 2012
+
+PRS is a simple Patient Record System to be used in clinics/medical
+centers, first written for the needs of the Charity Medical Center, Lajpat
+Bhavan, New Delhi. Features included:
+
+- Patient Contat information, visit and case history tracking
+- Doctor database and availability database
+- Invoice generation for paying patients.
+
+Originally I wanted to implement this an offine HTML5 application using
+IndexedDB, which would be very simple to install and use. However the state of
+IndexedDB support is somewhat disappointing. Chrome suffers from numerous
+bugs, Firefox does not allow indexeddb creation for offline apps (file:///
+URIs). There is no IE release with support at all. It is all rather
+frustrating enough that I have decided to move it to a full web application
+served through tornado.
+
+The git tag corresponding to the point I abandoned the html5 approach is
+called 'indexeddb_noworkie'

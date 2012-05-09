@@ -1,6 +1,6 @@
 // 
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue May 08 16:45:18 IST 2012
+// Last Modified : Wed May 09 09:00:20 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -20,7 +20,7 @@ var indexedDB = window.indexedDB ||    // Use the standard DB API
     window.webkitIndexedDB;            // Or Chrome's early version
 
 var dbName    = "PRS";
-var dbVersion = 3;
+var dbVersion = 4;
 
 // Firefox does not prefix these two:
 var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
@@ -55,7 +55,7 @@ function initdb (db) {
     }
 
     if (db.version) {
-	console.log("Database does not exist. Will initialize");
+	console.log("No Database found. Initializing...");
     } else {
 	console.log("Database is old version(" + db.version + "). " +
 		    "Will upgrade to version: " + dbVersion);
@@ -91,18 +91,8 @@ function initdb (db) {
 }
 
 function getNewPatientData (event) {
-    event = event || window.event;
-
-    var action  = document.getElementById("sheet");
-    var newrec  = document.getElementById("new_record");
-
-    // Just display the right html
-    action.style.display = "block";
-    newrec.style.display = "block";
-
-    // We will have to hide the rest...
-    
-    // Finally return without refreshing page...
+    // Display the data entry form, and return without refreshing the page.
+    showElement("new_patient_form");
     return false;
 }
 
@@ -112,15 +102,36 @@ function displayRecords (recs) {
     alert("Hoorah! " + recs[0].name);
 }
 
+function showElement (elt) {
+    document.getElementById("new_patient_form").style.display = "none";
+    document.getElementById("display_patients_table").style.display = "none";
+
+    document.getElementById("sheet").style.display = "block";
+    document.getElementById(elt).style.display     = "block";
+}
+
 function viewAllRecords () {
+    showElement("display_patients_table");
+
+    var aaDataSet   = [];
+    var aaColumnSet = [{'sTitle' : 'ID'},
+		      {'sTitle' : 'Name'},
+		      {'sTitle' : 'Age', 'sClass' : "center"},
+		      {'sTitle' : 'Regn. Date'},
+		      {'sTitle' : 'Doctors Seen'},
+		      {'sTitle' : 'Last Visit'},
+		      {'sTitle' : 'Visit Count', 'sClass' : "center"},
+		      {'sTitle' : 'Phone No.'},
+		      {'sTitle' : 'Postal Address'}];
+
     withDB(function(db) {
 	var txn   = db.transaction(["patients"], IDBTransaction.READ_WRITE);
 	var store = txn.objectStore("patients");
 
-	var keyRange = IDBKeyRange.lowerBound(0);
+	var keyRange      = IDBKeyRange.lowerBound(0);
 	var cursorRequest = store.openCursor(keyRange);
 
-	console.log("cursorRequest.onsucess...");
+	console.log("cursorRequest.onsuccess...");
 
 	cursorRequest.onsuccess = function(e) {
 	    var result = e.target.result;
@@ -129,10 +140,19 @@ function viewAllRecords () {
 		return false;
 	    }
 
-	    console.log("Found: " + result.value["name"]);
+	    console.log("Found: " + result.value.name);
+	    item = [result.value.id,        result.value.name,  result.value.age, 
+		    result.value.reg_date,  result.value.docs,  result.value.last_visit,
+		    result.value.visit_cnt, result.value.phone, result.value.addr];
+	    aaDataSet.push(item);
+	    console.log('item    : ' + item);
+	    console.log('dataset : ' + aaDataSet);
 	    result.continue();
 	};
 	cursorRequest.onerror = logerr;
+	
+	$("#display_patients_table").dataTable({"aaData"    : aaDataSet,
+						"aoColumns" : aaColumnSet});
 
 	return false;
     })
@@ -185,7 +205,9 @@ function createNewRecord (event) {
 		"reg_date" : f_reg_date,
 		"phone"    : f_phone,
 		"addr"     : f_addr,
-		"doc"      : f_doc,
+		"docs"     : [f_doc], // Can see diff doctors on diff days
+		"visit_cnt"  : 0,
+		"last_visit" : f_reg_date,
 	    }
 	    var req = store.add(record);
 	    req.onerror = logerr;
@@ -215,7 +237,7 @@ function addFormHandlers () {
     addHandlerToElement(document.getElementById("dispatch_new_p"),
 			"click", getNewPatientData);
 
-    addHandlerToElement(document.getElementById("new_record"),
+    addHandlerToElement(document.getElementById("new_patient_form"),
 			"submit", createNewRecord);
 
     addHandlerToElement(document.getElementById("view_all_p"),

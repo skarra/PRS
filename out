@@ -1,0 +1,227 @@
+diff --git a/prs.html b/prs.html
+index f76be2a..60d3af6 100644
+--- a/prs.html
++++ b/prs.html
+@@ -1,6 +1,6 @@
+ <!--
+ // Created       : Sat May 05 13:15:20 IST 2012
+-// Last Modified : Tue May 08 17:11:44 IST 2012
++// Last Modified : Wed May 09 07:36:39 IST 2012
+ //
+ // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
+ // All Rights Reserved
+@@ -17,12 +17,16 @@
+ <!-- Stylesheets -->
+ <link href="./static/css/prs.css" media="screen, projection"
+       rel="stylesheet" type="text/css" />
+-
+ <link href="./static/css/print.css" media="screen, projection"
+       rel="stylesheet" type="text/css" />
++<link href="./static/css/demo_page.css" media="screen, projection"
++      rel="stylesheet" type="text/css" />
++<link href="./static/css/demo_table.css" media="screen, projection"
++      rel="stylesheet" type="text/css" />
+ 
+ <!-- Javascripts -->
+ <script src="./static/js/libs/jquery-1.7.2.min.js"></script>
++<script src="./static/js/libs/jquery.dataTables-1.9.1.min.js"></script>
+ <script src="./static/js/prs.js"></script>
+ 
+ </head>
+@@ -36,7 +40,6 @@
+   </div>
+ </header>
+ 
+-<controls>
+   <div id="patient_admin" class="control">
+     <h2> Patient Administration </h2>
+ 
+@@ -62,11 +65,13 @@
+     </p>
+     </div>        
+  </div>
+-</controls>
++
+  
+ <forms>
+   <div id="sheet" style="display:none">
+-    <form id="new_record" style="display:none">
++
++    <!-- Input form for a new patient -->
++    <form id="new_patient_form" style="display:none">
+       <br/>
+       <h2>New Patient Details:</h2>
+       <br/>
+@@ -91,9 +96,14 @@
+   	<br/>
+   
+   	<button type="new_submit">Go</button>
+-        </form> 
+-  </div>
++    </form> 
+ 
++    <div id="display_patients" style="display:none">
++      <table cellpadding="0" cellspacing="0" border="0" class="display"
++	id="display_patients_table"></table>
++   <div>
++
++  </div>
+ </forms>
+ </body>
+ </html>
+diff --git a/static/css/prs.css b/static/css/prs.css
+index 739d3ee..d1819bf 100644
+--- a/static/css/prs.css
++++ b/static/css/prs.css
+@@ -392,13 +392,14 @@ controls {
+     padding: 10px 20px;
+     background-color: #f6f6f6;
+     border-bottom: 1px solid #afafaf;
+-    -moz-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
+-    -webkit-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
+-    -o-box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
+-    box-shadow: -5px 1px 5px rgba(0, 0, 0, 1.0);
+-    width:100%;
+-
+-    margin: 0;
++    -moz-box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.7);
++    -webkit-box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.7);
++    -o-box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.7);
++    box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.7);
++    width:275px;
++    height: 100%;
++
++    margin: 10px;
+     list-style: none;
+ }
+ 
+diff --git a/static/img/favicon.ico b/static/img/favicon.ico
+index 30cb620..6eeaa2a 100644
+Binary files a/static/img/favicon.ico and b/static/img/favicon.ico differ
+diff --git a/static/js/prs.js b/static/js/prs.js
+index f1f69b5..fef7502 100644
+--- a/static/js/prs.js
++++ b/static/js/prs.js
+@@ -1,6 +1,6 @@
+ // 
+ // Created       : Sat May 05 13:15:20 IST 2012
+-// Last Modified : Tue May 08 16:45:18 IST 2012
++// Last Modified : Wed May 09 07:51:32 IST 2012
+ //
+ // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
+ // All Rights Reserved
+@@ -20,7 +20,7 @@ var indexedDB = window.indexedDB ||    // Use the standard DB API
+     window.webkitIndexedDB;            // Or Chrome's early version
+ 
+ var dbName    = "PRS";
+-var dbVersion = 3;
++var dbVersion = 4;
+ 
+ // Firefox does not prefix these two:
+ var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+@@ -55,7 +55,7 @@ function initdb (db) {
+     }
+ 
+     if (db.version) {
+-	console.log("Database does not exist. Will initialize");
++	console.log("No Database found. Initializing...");
+     } else {
+ 	console.log("Database is old version(" + db.version + "). " +
+ 		    "Will upgrade to version: " + dbVersion);
+@@ -91,18 +91,8 @@ function initdb (db) {
+ }
+ 
+ function getNewPatientData (event) {
+-    event = event || window.event;
+-
+-    var action  = document.getElementById("sheet");
+-    var newrec  = document.getElementById("new_record");
+-
+-    // Just display the right html
+-    action.style.display = "block";
+-    newrec.style.display = "block";
+-
+-    // We will have to hide the rest...
+-    
+-    // Finally return without refreshing page...
++    // Display the data entry form, and return without refreshing the page.
++    showElement("new_patient_form");
+     return false;
+ }
+ 
+@@ -112,15 +102,36 @@ function displayRecords (recs) {
+     alert("Hoorah! " + recs[0].name);
+ }
+ 
++function showElement (elt) {
++    document.getElementById("new_patient_form").style.display = "none";
++    document.getElementById("display_patients").style.display = "none";
++
++    document.getElementById("sheet").style.display = "block";
++    document.getElementById(elt).style.display     = "block";
++}
++
+ function viewAllRecords () {
++    showElement("display_patients");
++
++    var aaDataSet   = [];
++    var aaColumnSet = [{'sTitle' : 'ID'},
++		      {'sTitle' : 'Name'},
++		      {'sTitle' : 'Age', 'sClass' : "center"},
++		      {'sTitle' : 'Regn. Date'},
++		      {'sTitle' : 'Doctors Seen'},
++		      {'sTitle' : 'Last Visit'},
++		      {'sTitle' : 'Visit Count', 'sClass' : "center"},
++		      {'sTitle' : 'Phone No.'},
++		      {'sTitle' : 'Postal Address'}];
++
+     withDB(function(db) {
+ 	var txn   = db.transaction(["patients"], IDBTransaction.READ_WRITE);
+ 	var store = txn.objectStore("patients");
+ 
+-	var keyRange = IDBKeyRange.lowerBound(0);
++	var keyRange      = IDBKeyRange.lowerBound(0);
+ 	var cursorRequest = store.openCursor(keyRange);
+ 
+-	console.log("cursorRequest.onsucess...");
++	console.log("cursorRequest.onsuccess...");
+ 
+ 	cursorRequest.onsuccess = function(e) {
+ 	    var result = e.target.result;
+@@ -130,9 +141,16 @@ function viewAllRecords () {
+ 	    }
+ 
+ 	    console.log("Found: " + result.value["name"]);
++	    item = [result.value.id,        result.value.name,  result.value.age, 
++		    result.value.reg_date,  result.value.docs,  result.value.last_visit,
++		    result.value.visit_cnt, result.value.phone, result.value.addr];
++	    aaDataSet.push(item);
+ 	    result.continue();
+ 	};
+ 	cursorRequest.onerror = logerr;
++	
++	$("#display_patients_table").dataTable({"aaData"    : aaDataSet,
++						"aoColumns" : aaColumnSet});
+ 
+ 	return false;
+     })
+@@ -185,7 +203,9 @@ function createNewRecord (event) {
+ 		"reg_date" : f_reg_date,
+ 		"phone"    : f_phone,
+ 		"addr"     : f_addr,
+-		"doc"      : f_doc,
++		"docs"     : [f_doc], // Can see diff doctors on diff days
++		"visit_cnt"  : 0,
++		"last_visit" : f_reg_date,
+ 	    }
+ 	    var req = store.add(record);
+ 	    req.onerror = logerr;
+@@ -215,7 +235,7 @@ function addFormHandlers () {
+     addHandlerToElement(document.getElementById("dispatch_new_p"),
+ 			"click", getNewPatientData);
+ 
+-    addHandlerToElement(document.getElementById("new_record"),
++    addHandlerToElement(document.getElementById("new_patient_form"),
+ 			"submit", createNewRecord);
+ 
+     addHandlerToElement(document.getElementById("view_all_p"),
