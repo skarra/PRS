@@ -1,11 +1,16 @@
 Created       : Tue May 08 17:03:44 IST 2012
-Last Modified : Mon May 14 17:38:11 IST 2012
+Last Modified : Mon May 14 20:20:32 IST 2012
 
 * Introduction
 
   PRS is a simple Patient Record System to be used in clinics/medical centers,
   first written for the needs of the Charity Medical Center, Lajpat Bhavan,
-  New Delhi. Features included:
+  New Delhi. 
+
+  PRS is released under the GNU Affero GPL v3. 
+
+  It is designed to run from within a browser, but without an internet
+  connection. Broad features will include:
 
   - Patient Contat information, visit and case history tracking
   - Doctor database and availability database
