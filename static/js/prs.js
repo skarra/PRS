@@ -1,6 +1,6 @@
 // 
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed May 09 09:00:20 IST 2012
+// Last Modified : Wed May 09 12:09:45 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -151,8 +151,9 @@ function viewAllRecords () {
 	};
 	cursorRequest.onerror = logerr;
 	
-	$("#display_patients_table").dataTable({"aaData"    : aaDataSet,
-						"aoColumns" : aaColumnSet});
+	$('#display_patients_table').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>');
+	$("#example").dataTable({"aaData"    : aaDataSet,
+				 "aoColumns" : aaColumnSet});
 
 	return false;
     })
