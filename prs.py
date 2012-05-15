@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Mon May 14 19:05:28 IST 2012
+## Last Modified : Tue May 15 07:58:14 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -28,17 +28,21 @@ EXTRA_PATHS = [os.path.join(DIR_PATH, 'libs'),
                os.path.join(DIR_PATH, 'libs/tornado')]
 sys.path = EXTRA_PATHS + sys.path
 
-import tornado.ioloop
-import tornado.web
+import tornado.ioloop, tornado.web
+from config import Config
 
 static_path = os.path.join(DIR_PATH, 'static')
+config_file = os.path.join(DIR_PATH, 'config.json')
+config      = Config(config_file)
+
+main_template = os.path.join(DIR_PATH, 'templates', 'prs.html')
 
 settings = {'debug': True, 
             'static_path': os.path.join(__file__, 'static')}
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('templates/prs.html')
+        self.render(main_template, title='CMC, Lajpat Bhavan')
 
 application = tornado.web.Application([
     (r"/", MainHandler),
