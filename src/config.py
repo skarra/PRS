@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Mon May 14 23:17:36 IST 2012
+## Last Modified : Fri May 18 08:21:00 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -22,7 +22,10 @@ class Config:
             raise
 
         stc = confi.read()
-        self.state = { 'state'  : demjson.decode(stc)}
+        self.state = demjson.decode(stc)
+
+        print 'self.state: ', self.state
+
         confi.close()
 
         self.set_app_root(os.path.abspath(''))
@@ -75,10 +78,10 @@ class Config:
     ##
 
     def get_title (self):
-        return _get_prop('title')    
+        return self._get_prop('title')    
 
     def get_app_root (self):
-        return _get_prop('app_root')
+        return self._get_prop('app_root')
 
     def set_app_root (self, val):
         return self._set_prop('app_root', val)

@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri May 18 06:44:04 IST 2012
+## Last Modified : Fri May 18 15:14:00 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -37,17 +37,22 @@ static_path = os.path.join(DIR_PATH, 'static')
 config_file = os.path.join(DIR_PATH, 'config.json')
 config      = config.Config(config_file)
 
-main_template = os.path.join(DIR_PATH, 'templates', 'prs.html')
-
 settings = {'debug': True, 
             'static_path': os.path.join(__file__, 'static')}
 
+class NewPatientHandler(tornado.web.RequestHandler):
+    def get(self):
+        template = os.path.join(DIR_PATH, 'templates', 'new-patient.html')
+        self.render(template, title=config.get_title())
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render(main_template, title='CMC, Lajpat Bhavan')
+        template = os.path.join(DIR_PATH, 'templates', 'index.html')
+        self.render(template, title=config.get_title())
 
 application = tornado.web.Application([
     (r"/", MainHandler),
+    (r"/newpatient", NewPatientHandler),
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ])
 
