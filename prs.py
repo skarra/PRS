@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue May 15 07:58:14 IST 2012
+## Last Modified : Fri May 18 06:44:04 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -24,16 +24,18 @@
 import os, sys
 
 DIR_PATH    = os.path.abspath('')
-EXTRA_PATHS = [os.path.join(DIR_PATH, 'libs'),
+EXTRA_PATHS = [os.path.join(DIR_PATH, 'src'),
+               os.path.join(DIR_PATH, 'libs'),
                os.path.join(DIR_PATH, 'libs/tornado')]
+
 sys.path = EXTRA_PATHS + sys.path
 
-import tornado.ioloop, tornado.web
-from config import Config
+import   tornado.ioloop, tornado.web
+import   models, config
 
 static_path = os.path.join(DIR_PATH, 'static')
 config_file = os.path.join(DIR_PATH, 'config.json')
-config      = Config(config_file)
+config      = config.Config(config_file)
 
 main_template = os.path.join(DIR_PATH, 'templates', 'prs.html')
 
