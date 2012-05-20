@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri May 18 07:13:48 IST 2012
+## Last Modified : Sun May 20 21:53:27 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -20,7 +20,7 @@ from   sqlalchemy.schema import Column, ForeignKey
 
 from   sqlalchemy.ext.declarative import declarative_base
 
-Base   = declarative_base(bind=create_engine('sqlite:///../db/prs.db',
+Base   = declarative_base(bind=create_engine('sqlite:///db/prs.db',
                                            echo=False))
 
 def now():
@@ -33,12 +33,13 @@ class Patient(Base):
     name    = Column(Unicode(255), nullable=False)
     regdate = Column(DateTime(), default=now)
     age     = Column(Integer, nullable=False)
+    gender  = Column(Unicode(6), nullable=False)
 
     phone   = Column(Unicode(255), nullable=False)
     address = Column(Text())
     email   = Column(Unicode(255))
 
-    relative          = Column(Unicode(255), nullable=False)
+    relative          = Column(Unicode(255))
     relative_phone    = Column(Unicode(255))
     relative_relation = Column(Unicode(255))
 

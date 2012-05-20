@@ -24,6 +24,11 @@ canvas, footer, header, hgroup, menu, section, summary, time, audio, video {
     color: #666666;
 }
 
+#site-title:hover {
+    color: blue;
+    cursor: pointer;
+}
+
 a {
   font-size: 100%;
   vertical-align: baseline;
@@ -520,22 +525,19 @@ footer p {
 //  clear: both;
 }
 
-#sheet div.field .checkbox label {
-  padding-left: 0.5em;
-}
-
 #sheet .field.small {
     max-width: 310px;
     margin: 0;
     padding: 0;
     float: left;
+    padding-top: 5px;
 }
 
 #sheet .field.small label {
-  font-weight: bold;
-  font-size: 110%;
-  float: left;
-  width: 310px;
+    font-weight: bold;
+    font-size: 110%;
+    float: left;
+    width: 310px;
 }
 
 #sheet div.field.small div.ctrl {
@@ -556,7 +558,7 @@ footer p {
   -khtml-border-radius: 4px;
   border-radius: 4px;
 }
-#sheet div.field.small div.ctrl ul li label {
+#sheet div.field.small .checkbox div.ctrl ul li label {
   padding-left: 0.5em;
 }
 #sheet div.field.small div.ctrl ul li.selected {
@@ -686,4 +688,14 @@ li {
 p { 
     margin-top: 0.9em;
 //    margin-bottom: 0.9em; 
+}
+
+.reqd_field {
+    color: red;
+    font-size: 80%;
+    vertical-align: super;
+}
+
+#newp_submit {
+    
 }

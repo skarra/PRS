@@ -3,60 +3,53 @@
 {% block content %}
 
     <!-- Input form for a new patient -->
-    <form id="new_patient_form" enctype="multipart/form-data" method="POST">
+    <form id="new_patient_form" method="POST">
       <h1>New Patient Details:</h1>
   
       <div class="field small">
 	<div class="ctrl">
-	    <label>Full Name</label>
-	  <input class="age" type="text" id="new_title"/>
-	  <input type="text" id="new_name"/>
+	    <label>Full Name<span class="reqd_field">*</span></label>
+	  <input class="age" type="text" name="new_title"/>
+	  <input type="text" id="new_name" name="new_name"/>
 	</div> <!-- .ctrl -->
       </div> <!-- .field.small -->
   
       <div class="field small">
 	<div class="ctrl">
-	    <label>Age</label>
-	  <input class="age" type="text" id="new_age"/>
+	    <label>Age<span class="reqd_field">*</span></label>
+	  <input class="age" type="text" id="new_age" name="new_age"/>
 	</div> <!-- .ctrl -->
       </div> <!-- .field.small -->
 
       <div class="field small">
 	<div class="ctrl">
 	  <label>Gender</label>
- 	  <input type="text" id="new_gender"/>
+ 	  <input type="text" id="new_gender" name="new_gender"/>
 	</div> <!-- .ctrl -->
       </div> <!-- .field.small -->
 
       <div class="field small">
 	<div class="ctrl">
-	  <label>Date of Registration</label>
-	  <input type="text" id="new_reg_date"/>
+	  <label>Date of Registration<span class="reqd_field">*</span></label>
+	  <input type="text" id="new_reg_date" name="new_reg_date"/>
 	</div> <!-- .ctrl -->
       </div> <!-- .field.small -->
  
       <div class="field small">
 	<div class="ctrl">
-	  <label>Contact Number</label>
-	  <input type="text" id="new_phone"/>
+	  <label>Contact Number<span class="reqd_field">*</span></label>
+	  <input type="text" id="new_phone" name="new_phone"/>
 	</div> <!-- .ctrl -->
       </div> <!-- .field.small -->
 
       <div class="field small">
 	<div class="ctrl">
 	  <label>Contact Address</label>
- 	  <input type="text" id="new_addr"/>
+ 	  <input type="text" id="new_addr" name="new_addr"/>
 	</div> <!-- .ctrl -->
       </div> <!-- .field.small -->
   
-      <div class="field small">
-	<div class="ctrl">
-	  <label>Doctor</label>
-  	  <input type="text" id="new_reg_date"/>
-	</div> <!-- .ctrl -->
-      </div> <!-- .field.small -->
- 
-      <input type="submit" id="new_submit" value="Add Patient Details &rarr;"/>
+      <input type="submit" id="newp_submit" value="Add Patient Details &rarr;"/>
     </form> 
 
     <!--
