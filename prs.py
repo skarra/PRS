@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sun May 20 22:51:41 IST 2012
+## Last Modified : Tue May 22 10:36:28 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -39,7 +39,7 @@ config_file = os.path.join(DIR_PATH, 'config.json')
 config      = config.Config(config_file)
 
 settings = {'debug': True, 
-            'static_path': os.path.join(__file__, 'static')}
+            'static_path': os.path.join(DIR_PATH, 'static')}
 
 class SearchHandler(tornado.web.RequestHandler):
     def search (self, role, field, value):
@@ -133,7 +133,7 @@ class NewPatientHandler(tornado.web.RequestHandler):
 
 class MainHandler(tornado.web.RequestHandler):
     def get (self):
-        template = os.path.join(DIR_PATH, 'templates', 'index.html')
+        template = os.path.join('templates', 'index.html')
         self.render(template, title=config.get_title())
 
 def engine (val=None):
