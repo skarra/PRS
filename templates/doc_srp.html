@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link href="/static/css/demo_table.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/srp.css"        rel="stylesheet" type="text/css" />
+{% end block %}
+
+{% block content %}
+
+<h1 class="doctors">Search Results Summary: Doctors</h1>
+You searched for: {{ search_query }}.
+<br/>
+Total rows in database: {{ total_cnt }}
+Matches: {{ match_cnt }}
+<hr/>
+
+<table id="srp_table" class="display" name="srp_table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      </tr>
+  </thead>
+
+  <tbody>
+    {% for res in search_results %}
+    <tr>
+      <td> {{ res.id }}    </td>
+      <td> {{ res.title }} </td>
+      <td> {{ res.name }}  </td>
+      <td> {{ res.email }} </td>
+      <td> {{ res.phone }} </td>
+    </tr>
+    {% end %}
+  </tbody>
+</table>
+
+{% end block %}

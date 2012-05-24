@@ -1,5 +1,9 @@
-h1 {
+h1.patients {
     color: blue;
+}
+
+h1.doctors {
+    color: green;
 }
 
 #sheet .dataTables_filter input[type="text"] {

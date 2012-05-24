@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu May 24 22:21:35 IST 2012
+## Last Modified : Thu May 24 23:36:19 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -45,8 +45,10 @@ class SearchHandler(tornado.web.RequestHandler):
     def search (self, role, field, value):
         if role == 'patient':
             model = models.Patient
+            template = 'pat_srp.html'
         elif role == 'doctor':
             model = models.Doctor
+            template = 'doc_srp.html'
         else:
             print 'SearchHandler:search: Invalid role: %s' % role
             return
@@ -63,18 +65,19 @@ class SearchHandler(tornado.web.RequestHandler):
         qstr = 'Role: "%-7s" Field: "%6s" Value: "%s"' % (role, field, value)
         match_cnt = query.count()
 
-        self.render('srp.html', title=config.get_title(), search_query=qstr,
+        self.render(template, title=config.get_title(), search_query=qstr,
                     search_results=query.order_by(model.id), total_cnt=total_cnt,
                     match_cnt=match_cnt)
 
     def get (self, role):
         """role is one of 'patient' or 'doctor', field will be one of Name or
-        ID (for now). value is the value to lookup for the field in the database"""
+        ID (for now). value is the value to lookup for the field in the
+        database"""
 
         print 'SearchHandler.get()...'
 
-        name = self.get_argument('name', None)
-        id   = self.get_argument('id', None)
+        name = self.get_argument('name', self.get_argument('named', None))
+        id   = self.get_argument('id', self.get_argument('idd', None))
 
         if id:
             field = 'id'

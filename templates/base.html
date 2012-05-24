@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed May 23 16:10:19 IST 2012
+// Last Modified : Thu May 24 23:21:45 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -38,6 +38,7 @@
   </header>
 
   <div id="patient_admin" class="control">
+    <div class="panel first">
     <h2> Patient Administration </h2>
 
     <p/>
@@ -56,11 +57,39 @@
     <br/>
 
     <form id="search_id_p" class="search" action="/search/patient">
-      <input type="text" placeholder="Find patient by ID..." 
+      <input type="text" placeholder="Find patient by ID..."
 	     id="id_pat_v" name="id"/>
       <input type="submit" value="Go" id="id_pat_q"/>
     </form>
-  </div> <!-- .patient_admin -->
+    </div>
+
+    <br/>
+    <div class="panel">
+    <h2> Doctor Administration </h2>
+
+    <p/>
+    <input id="dispatch_new_d" class="control_label"
+           type="submit" value="Add New &rarr;"/>
+
+    <input id="view_all_d" class="control_label"
+           type="submit" value="View All &rarr;"/>
+    <br/>
+
+    <form id="search_name_d" class="search" action="/search/doctor">
+      <input type="text" placeholder="Find doctor by name..." 
+	       id="name_doc_v" name="named"/>
+      <input type="submit" value="Go" id="name_doc_q"/>
+    </form>
+    <br/>
+    
+    <form id="search_id_d" class="search" action="/search/doctor">
+      <input type="text" placeholder="Find doctor by ID..." 
+	     id="id_doc_v" name="idd"/>
+      <input type="submit" value="Go" id="id_doc_q"/>
+    </form>
+    </div>
+  </div> <!-- .admin -->
+
   <div class="push"></div>
 
   <div id="content">

@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed May 23 18:51:46 IST 2012
+// Last Modified : Thu May 24 23:23:26 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -57,6 +57,10 @@ function addHandlers () {
 
     $("#view_all_p").click(function() {
 	window.location = '/search/patient?id=all';
+    });
+
+    $("#view_all_d").click(function() {
+	window.location = '/search/doctor?id=all';
     });
 
     // The following only applies to the srp.html, but it is still

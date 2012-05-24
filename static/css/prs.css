@@ -337,6 +337,18 @@ header #sections li {
   padding: 0.5em;
 }
 
+.panel {
+    padding-top: 10px;
+    float: left;
+    position: relative
+    *zoom: 1;
+    vertical-align: top;
+}
+
+.panel.first {
+    padding-top: 0px;
+}
+
 .control {
     float: left;
     -moz-transition-property: background-color;
