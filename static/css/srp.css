@@ -1,3 +1,16 @@
 h1 {
     color: blue;
 }
+
+#sheet .dataTables_filter input[type="text"] {
+    padding: 2px, 2px;
+    font-family: "Trebuchet MS", Trebuchet, Verdana, Arial;
+    font-size: 12px;
+    max-width: 120px;
+    height: 15px;
+    margin-bottom: 0;
+}
+
+#sheet .dataTables_filter label {
+    float: right;
+}

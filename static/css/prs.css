@@ -440,16 +440,15 @@ footer p {
     float: right;
     width: 70%;
     margin-top: 20px;
-//    height: 90%;
 }
 
 #sheet {
     *zoom: 1;
     background: white;
-    min-height: 50%;
+    min-height: 100%;
 
     margin-bottom: 2em;
-    padding: 1em 0;
+    padding: 1em 1em;
 
     font-size: 13px;
     line-height: 150%;
@@ -469,33 +468,12 @@ footer p {
 /* Form elements */
 }
 
-/*
-#sheet #post-meta {
-  color: #816894;
-}
-*/
-
 #sheet .section {
     *zoom: 1;
-  padding: 0 2em;
+  padding: 1em 1em;
   vertical-align: top;
-//  border-top: 1px solid #e8e8e8;
+  
 }
-
-// #sheet .section:after {
-//   content: "";
-//   display: table;
-//   clear: both;
-// }
-// 
-// #sheet .section.first {
-//   border-top: 0;
-// }
-// 
-// #sheet .section.columns {
-//   padding-left: 2em;
-//   padding-right: 0;
-// }
 
 #sheet p.post-date {
   margin-top: 0.5em;

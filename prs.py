@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue May 22 10:36:28 IST 2012
+## Last Modified : Thu May 24 22:21:35 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -63,8 +63,7 @@ class SearchHandler(tornado.web.RequestHandler):
         qstr = 'Role: "%-7s" Field: "%6s" Value: "%s"' % (role, field, value)
         match_cnt = query.count()
 
-        template = os.path.join(DIR_PATH, 'templates', 'srp.html')
-        self.render(template, title=config.get_title(), search_query=qstr,
+        self.render('srp.html', title=config.get_title(), search_query=qstr,
                     search_results=query.order_by(model.id), total_cnt=total_cnt,
                     match_cnt=match_cnt)
 
@@ -93,13 +92,13 @@ class ViewHandler (tornado.web.RequestHandler):
     """once search is done, this handler will serve up a page with all the
     details."""
 
-    def view_doctor (self, field, value):       
-        template = os.path.join(DIR_PATH, 'templates', 'doctor.html')       
-        self.render(template, title=config.get_title(), name="Goofy", value=value)
+    def view_doctor (self, field, value):
+        self.render('doctor.html', title=config.get_title(), name="Goofy",
+                    value=value)
 
-    def view_patient (self, field, value):       
-        template = os.path.join(DIR_PATH, 'templates', 'patient.html')
-        self.render(template, title=config.get_title(), name="Goofy", value=value)
+    def view_patient (self, field, value):
+        self.render('patient.html', title=config.get_title(), name="Goofy",
+                    value=value)
 
     def get (self, role, field, value):
         """role is one of 'patient' or 'doctor', field will be one of Name or
@@ -128,13 +127,11 @@ class NewPatientHandler(tornado.web.RequestHandler):
         self.redirect('/')
 
     def get (self):
-        template = os.path.join(DIR_PATH, 'templates', 'new-patient.html')
-        self.render(template, title=config.get_title())
+        self.render('new-patient.html', title=config.get_title())
 
 class MainHandler(tornado.web.RequestHandler):
     def get (self):
-        template = os.path.join('templates', 'index.html')
-        self.render(template, title=config.get_title())
+        self.render('index.html', title=config.get_title())
 
 def engine (val=None):
     global _engine
@@ -156,12 +153,12 @@ application = tornado.web.Application([
     (r"/view/(.*)/(.*)/(.*)", ViewHandler),
     (r"/search/(.*)", SearchHandler),
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
-], debug=True)
+], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
 
-    eng, sess= models.setup_tables()
+    eng, sess= models.setup_tables('db/sample.db')
     engine(eng)
     session(sess)
     

@@ -1,12 +1,14 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sun May 20 22:51:09 IST 2012
+// Last Modified : Wed May 23 18:51:46 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
 //
 // Licensed under the GNU GPL v3
 //
+
+var srp_table;
 
 function validateNewPatient (event) {
     console.log('Validating new patient record...');
@@ -57,15 +59,18 @@ function addHandlers () {
 	window.location = '/search/patient?id=all';
     });
 
-/*
-    $("#name_pat_q").submit(function() {
-	window.location = '/search/patient/name/' + $("#name_pat_v").val();
+    // The following only applies to the srp.html, but it is still
+    // desirable to have all the javascipt centralized here (??)...
+    srp_table = $("#srp_table").dataTable({
+	"fnDrawCallback" : function(oSettings) {
+	    $("#srp_table tbody td").click(function () {
+		var aPos = srp_table.fnGetPosition(this);
+		var aData = srp_table.fnGetData(aPos[0]);
+		console.log('Hurrah. ID selected is: ' + aData[0]);
+		window.location = '/view/patient/id/' + aData[0];
+	    });
+	}
     });
-
-    $("#id_pat_q").submit(function() {
-	window.location = '/search/patient/id/' + $("#id_pat_v").val();
-    });
-*/
 
     $("#new_patient_form").submit(validateNewPatient);
 }

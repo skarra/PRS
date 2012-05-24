@@ -2,37 +2,42 @@
 
 {% block styles %}
 
-<link href="/static/css/srp.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/demo_table.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/srp.css"        rel="stylesheet" type="text/css" />
 
 {% end block %}
 
 {% block content %}
 
 <h1>Search Results Summary</h1>
-<hr/>
-
-<h3>You searched for: {{ search_query }}</h3>
-<p/>
-Total rows in database: {{ total_cnt }}
+You searched for: {{ search_query }}.
 <br/>
+Total rows in database: {{ total_cnt }}
 Matches: {{ match_cnt }}
-
 <hr/>
 
-<table>
-  <tr>
-    <td>ID</td>
-    <td>Name</td>
-    <td>Phone</td>
-  </tr>
+<table id="srp_table" class="display" name="srp_table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Name</th>
+      <th>Age</th>      
+      <th>Phone</th>
+      </tr>
+  </thead>
 
-  {% for res in search_results %}
-  <tr>
-    <td> {{ res.id }}    </td>
-    <td> {{ res.name }}  </td>
-    <td> {{ res.phone }} </td>
-  </tr>
-  {% end %}
+  <tbody>
+    {% for res in search_results %}
+    <tr>
+      <td> {{ res.id }}    </td>
+      <td> {{ res.title }} </td>
+      <td> {{ res.name }}  </td>
+      <td> {{ res.age }}  </td>
+      <td> {{ res.phone }} </td>
+    </tr>
+    {% end %}
+  </tbody>
 </table>
 
 {% end block %}
