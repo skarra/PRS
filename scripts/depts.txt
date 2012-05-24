@@ -1,0 +1,8 @@
+Name
+Orthopaedics
+Pediatrics
+Medicine
+Dental
+Mental
+ENT
+Cardiology

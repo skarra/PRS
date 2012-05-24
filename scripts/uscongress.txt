@@ -1,0 +1,541 @@
+District	Name	Party	DC Office	DC Voice	District Voice	Electronic Correspondence	Web
+AKSR	Lisa Murkowski	R	709 Hart Senate Office Building	202-224-6665	907-376-7665	http://www.murkowski.senate.gov/public/index.cfm?p=EMailLisa	http://www.murkowski.senate.gov/public/
+AKJR	Mark Begich	D	111 Russell Senate Office Building	202-224-3004	907-271-5915	http://begich.senate.gov/public/index.cfm/emailsenator	http://begich.senate.gov/public/
+AK00	Don Young	R	2314 Rayburn House Office Building	202-225-5765	907-283-7701	http://donyoung.house.gov/Contact/	http://donyoung.house.gov/
+ALSR	Richard Shelby	R	304 Russell Senate Office Building	202-224-5744	334-223-7303	http://shelby.senate.gov/public/index.cfm/contactsenatorshelby?p=EmailSenatorShelby	http://shelby.senate.gov/public/
+ALJR	Jeff Sessions	R	326 Russell Senate Office Building	202-224-4124	334-244-7017	http://www.sessions.senate.gov/public/index.cfm?FuseAction=ConstituentServices.ContactMe	http://www.sessions.senate.gov/public/
+AL01	Jo Bonner	R	2236 Rayburn House Office Building	202-225-4931	251-943-2073	https://forms.house.gov/bonner/webforms/issue_subscribe.html	http://bonner.house.gov/
+AL02	Martha Roby	R	414 Cannon House Office Building	202-225-2901	334-428-1129	http://roby.house.gov/Contact/emailmartha.htm	http://roby.house.gov/
+AL03	Mike Rogers	R	324 Cannon House Office Building	202-225-3261	256-236-5655	https://mike-rogers.house.gov/contact-mike/email-me	http://mike-rogers.house.gov/
+AL04	Robert B. Aderholt	R	2264 Rayburn House Office Building	202-225-4876	205-221-2310	http://aderholt.house.gov/email-me2/	http://aderholt.house.gov/
+AL05	Mo Brooks	R	1641 Longworth House Office Building	202-225-4801	256-355-9400	https://brooksforms.house.gov/email-me	http://brooks.house.gov/
+AL06	Spencer Bachus	R	2246 Rayburn House Office Building	202-225-4921	205-280-0704	https://writerep.house.gov/writerep/welcome.shtml	http://bachus.house.gov/
+AL07	Terri A. Sewell	D	1133 Longworth House Office Building	202-225-2665	205-752-5380	https://sewell.house.gov/contact-me/email-me	http://sewell.house.gov/
+ARSR	Mark Pryor	D	255 Dirksen Senate Office Building	202-224-2353	501-324-6336	http://pryor.senate.gov/public/index.cfm?p=ContactForm	http://pryor.senate.gov/public/
+ARJR	John Boozman	R	320 Hart Senate Office Building	202-224-4843	479-725-0400	http://www.boozman.senate.gov/public/index.cfm/e-mail-me	http://www.boozman.senate.gov/public/
+AR01	Rick Crawford	R	1408 Longworth House Office Building	202-225-4076	501-843-3043	http://crawford.house.gov/Contact/	http://crawford.house.gov
+AR02	Tim Griffin	R	1232 Longworth House Office Building	202-225-2506	501-324-5941	https://griffin.house.gov/contact-me/email-me	http://griffin.house.gov/
+AR03	Steve Womack	R	1508 Longworth House Office Building	202-225-4301	479-424-1146	http://womack.house.gov/Contact/	http://womack.house.gov/
+AR04	Mike Ross	D	2436 Rayburn House Office Building	202-225-3772	870-887-6787	http://ross.house.gov/Contact/	http://ross.house.gov/
+AS00	Eni F. H. Faleomavaega	D	2422 Rayburn House Office Building	202-225-8577	684-633-1372	faleomavaega@mail.house.gov	http://www.house.gov/faleomavaega/
+AZSR	John McCain	R	241 Russell Senate Office Building	202-224-2235	602-952-2410	http://www.mccain.senate.gov/public/index.cfm?FuseAction=Contact.ContactForm	http://www.mccain.senate.gov/public/
+AZJR	Jon Kyl	R	730 Hart Senate Office Building	202-224-4521	520-575-8633	http://kyl.senate.gov/contact.cfm	http://kyl.senate.gov/
+AZ01	Paul A. Gosar	R	504 Cannon House Office Building	202-225-2315	520-836-5289	https://gosar.house.gov/contact-me/email-me	http://gosar.house.gov/
+AZ02	Trent Franks	R	2435 Rayburn House Office Building	202-225-4576	623-776-7911	http://franks.house.gov/contacts/new	http://franks.house.gov/
+AZ03	Ben Quayle	R	1419 Longworth House Office Building	202-225-3361	602-263-5300	https://quayleforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://quayle.house.gov/
+AZ04	Ed Pastor	D	2465 Rayburn House Office Building	202-225-4065	602-256-0551	https://forms.house.gov/pastor/webforms/issue_subscribe.htm	http://www.pastor.house.gov/
+AZ05	David Schweikert	R	1205 Longworth House Office Building	202-225-2190	480-946-2411	http://schweikert.house.gov/Contact/	http://schweikert.house.gov
+AZ06	Jeff Flake	R	240 Cannon House Office Building	202-225-2635	480-833-0092	https://writerep.house.gov/writerep/welcome.shtml	http://flake.house.gov/
+AZ07	Raul M. Grijalva	D	1511 Longworth House Office Building	202-225-2435	928-343-7933	http://grijalva.house.gov/index.cfm?sectionid=126&sectiontree=2126	http://grijalva.house.gov/index.html
+AZ08	Vacant		1030 Longworth House Office Building	202-225-2542	520-459-3115	N/A	N/A
+CASR	Dianne Feinstein	D	331 Hart Senate Office Building	202-224-3841	415-393-0707	http://feinstein.senate.gov/public/index.cfm/e-mail-me	http://www.feinstein.senate.gov/public/index.cfm
+CAJR	Barbara Boxer	D	112 Hart Senate Office Building	202-224-3553	213-894-5000	http://boxer.senate.gov/en/contact/policycomments.cfm	http://boxer.senate.gov/
+CA01	Mike Thompson	D	231 Cannon House Office Building	202-225-3311	707-269-9595	http://mikethompson.house.gov/Contact/	http://mikethompson.house.gov/
+CA02	Wally Herger	R	242 Cannon House Office Building	202-225-3076	530-223-5898	https://forms.house.gov/herger/webforms/landing.html	http://herger.house.gov/
+CA03	Dan Lungren	R	2313 Rayburn House Office Building	202-225-5716	916-859-9906	https://lungrenforms.house.gov/index.cfm?sectionid=84&sectiontree=384	http://lungren.house.gov/index.html
+CA04	Tom McClintock	R	428 Cannon House Office Building	202-225-2511	916-786-5560	https://forms.house.gov/mcclintock/contact-form.shtml	http://mcclintock.house.gov/
+CA05	Doris Matsui	D	222 Cannon House Office Building	202-225-7163	916-498-5600	https://forms.house.gov/matsui/webforms/issue_subscribe.htm	http://www.matsui.house.gov/
+CA06	Lynn Woolsey	D	2263 Rayburn House Office Building	202-225-5161	415-507-9554	https://woolseyforms.house.gov/index.cfm?sectionid=80	http://woolsey.house.gov/
+CA07	George Miller	D	2205 Rayburn House Office Building	202-225-2095	510-262-6500	http://georgemiller.house.gov/contact/email-me.shtml	http://georgemiller.house.gov/
+CA08	Nancy Pelosi	D	235 Cannon House Office Building	202-225-4965	415-556-4862	https://pelosi.house.gov/contact/email-me.shtml	http://pelosi.house.gov/
+CA09	Barbara Lee	D	2267 Rayburn House Office Building	202-225-2661	510-763-0370	http://lee.house.gov/index.cfm?sectionid=128&sectiontree=18128	http://lee.house.gov/
+CA10	John Garamendi	D	228 Cannon House Office Building	202-225-1880	707-438-1822	http://garamendi.house.gov/contact/email-me.shtml	http://garamendi.house.gov/
+CA11	Jerry McNerney	D	1210 Longworth House Office Building	202-225-1947	209-476-8552	https://forms.house.gov/mcnerney/webforms/issue_subscribezipauth.html	http://mcnerney.house.gov/
+CA12	Jackie Speier	D	211 Cannon House Office Building	202-225-3531	650-342-0300	https://forms.house.gov/speier/webforms/email_jackie.shtml	http://speier.house.gov/
+CA13	Pete Stark	D	239 Cannon House Office Building	202-225-5065	510-494-1388	https://forms.house.gov/stark/webforms/contact.htm	http://www.stark.house.gov/
+CA14	Anna G. Eshoo	D	205 Cannon House Office Building	202-225-8104	650-323-2984	https://forms.house.gov/eshoo/webforms/issue_subscribe.htm	http://eshoo.house.gov/
+CA15	Mike Honda	D	1713 Longworth House Office Building	202-225-2631	408-558-8085	https://forms.house.gov/honda/webforms/issue_subscribe.htm	http://honda.house.gov/
+CA16	Zoe Lofgren	D	1401 Longworth House Office Building	202-225-3072	408-271-8700	http://forms.house.gov/lofgren/webforms/landing.html	http://www.lofgren.house.gov/
+CA17	Sam Farr	D	1126 Longworth House Office Building	202-225-2861	831-429-1976	https://forms.house.gov/farr/webforms/issue_subscribe.html	http://www.farr.house.gov/
+CA18	Dennis Cardoza	D	2437 Rayburn House Office Building	202-225-6131	209-527-1914	https://writerep.house.gov/writerep/welcome.shtml	http://cardoza.house.gov/
+CA19	Jeff Denham	R	1605 Longworth House Office Building	202-225-4540	209-579-5458	https://denham.house.gov/contact-me/email-me	http://denham.house.gov
+CA20	Jim Costa	D	1314 Longworth House Office Building	202-225-3341	661-869-1620	http://www.house.gov/formcosta/issue.htm	http://www.costa.house.gov/
+CA21	Devin Nunes	R	1013 Longworth House Office Building	202-225-2523	559-323-5235	http://www.nunes.house.gov/ContactForm/	http://www.nunes.house.gov/
+CA22	Kevin McCarthy	R	326 Cannon House Office Building	202-225-2915	661-327-3611	https://forms.house.gov/kevinmccarthy/webforms/issue_subscribe.html	http://kevinmccarthy.house.gov/
+CA23	Lois Capps	D	2231 Rayburn House Office Building	202-225-3601	805-985-6807	https://capps.house.gov/contact-me/email-me	http://capps.house.gov/
+CA24	Elton Gallegly	R	2309 Rayburn House Office Building	202-225-5811	805-482-2424	https://writerep.house.gov/writerep/welcome.shtml	http://www.house.gov/gallegly/
+CA25	Howard P. (Buck) McKeon	R	2184 Rayburn House Office Building	202-225-1956	661-274-9688	http://mckeon.house.gov/Contact/	http://mckeon.house.gov/
+CA26	David Dreier	R	233 Cannon House Office Building	202-225-2305	909-575-6226	http://dreier.house.gov/contact.shtml	http://dreier.house.gov/index.shtml
+CA27	Brad Sherman	D	2242 Rayburn House Office Building	202-225-5911	818-501-9200	http://shermanforms.house.gov/contact/contact-form.shtml	http://bradsherman.house.gov/
+CA28	Howard L. Berman	D	2221 Rayburn House Office Building	202-225-4695	818-994-7200	http://www.house.gov/berman/contact/	http://www.house.gov/berman/
+CA29	Adam Schiff	D	2411 Rayburn House Office Building	202-225-4176	626-304-2727	https://schiffforms.house.gov/email-congressman-schiff1	http://schiff.house.gov/index.html
+CA30	Henry A. Waxman	D	2204 Rayburn House Office Building	202-225-3976	323-651-1040	http://waxman.house.gov/contact-me/email-me	http://waxman.house.gov/
+CA31	Xavier Becerra	D	1226 Longworth House Office Building	202-225-6235	213-483-1425	http://forms.house.gov/becerra/webforms/issue_subscribe.html	http://becerra.house.gov/
+CA32	Judy Chu	D	1520 Longworth House Office Building	202-225-5464	323-307-9904	http://chu.house.gov/connect-with-me/email-judy	http://chu.house.gov/
+CA33	Karen Bass	D	408 Cannon House Office Building	202-225-7084	323-965-1422	https://karenbass.house.gov/contact-me/email-me	http://karenbass.house.gov/
+CA34	Lucille Roybal-Allard	D	2330 Rayburn House Office Building	202-225-1766	213-628-9230	http://roybal-allard.house.gov/Contact/	http://roybal-allard.house.gov/
+CA35	Maxine Waters	D	2344 Rayburn House Office Building	202-225-2201	323-757-8900	https://watersforms.house.gov/Contact/ContactForm.htm	http://waters.house.gov/
+CA36	Janice Hahn	D	2400 Rayburn House Office Building	202-225-8220	310-831-1799	https://hahn.house.gov/contact-me/email-me	http://hahn.house.gov/
+CA37	Laura Richardson	D	1330 Longworth House Office Building	202-225-7924	562-436-3828	https://forms.house.gov/richardson/webforms/issue_subscribe.htm	http://richardson.house.gov/
+CA38	Grace Napolitano	D	1610 Longworth House Office Building	202-225-5256	562-801-2134	https://napolitano.house.gov/contact-me/email-me	http://napolitano.house.gov/
+CA39	Linda Sanchez	D	2423 Rayburn House Office Building	202-225-6676	562-860-5050	https://forms.house.gov/lindasanchez/webforms/issue_subscribe.htm	http://lindasanchez.house.gov/
+CA40	Ed Royce	R	2185 Rayburn House Office Building	202-225-4111	714-744-4130	http://royce.house.gov/Contact/ZipCheck.htm	http://royce.house.gov/
+CA41	Jerry Lewis	R	2112 Rayburn House Office Building	202-225-5861	800-233-1700	https://jerrylewisforms.house.gov/showpage.asp?ID=291	http://jerrylewis.house.gov/
+CA42	Gary Miller	R	2349 Rayburn House Office Building	202-225-3201	714-257-1142	http://garymiller.house.gov/Contact/	http://garymiller.house.gov/
+CA43	Joe Baca	D	2366 Rayburn House Office Building	202-225-6161	909-885-2222	https://bacaforms.house.gov/contact-form	http://baca.house.gov/
+CA44	Ken Calvert	R	2269 Rayburn House Office Building	202-225-1986	951-784-4300	http://calvert.house.gov/Contact/	http://calvert.house.gov/
+CA45	Mary Bono Mack	R	104 Cannon House Office Building	202-225-5330	760-320-1076	https://bonoforms.house.gov/Contact_Mary/ContactForm.htm	http://bono.house.gov/
+CA46	Dana Rohrabacher	R	2300 Rayburn House Office Building	202-225-2415	714-960-6483	http://rohrabacher.house.gov/Contact/Zip.htm	http://rohrabacher.house.gov/
+CA47	Loretta Sanchez	D	1114 Longworth House Office Building	202-225-2965	714-621-0102	https://lorettasanchez.house.gov/contact-me/email-me	http://www.lorettasanchez.house.gov/
+CA48	John Campbell	R	1507 Longworth House Office Building	202-225-5611	949-756-2244	https://forms.house.gov/campbell/webforms/issue_subscribe.htm	http://campbell.house.gov/
+CA49	Darrell Issa	R	2347 Rayburn House Office Building	202-225-3906	760-599-5000	http://issa.house.gov/index.php?option=com_content&view=article&id=597&Itemid=73	http://issa.house.gov/
+CA50	Brian P. Bilbray	R	2410 Rayburn House Office Building	202-225-0508	858-350-1150	https://bilbray.house.gov/contact-me/email-me	http://bilbray.house.gov/
+CA51	Bob Filner	D	2428 Rayburn House Office Building	202-225-8045	760-355-8800	https://filner.house.gov/contact-me/email-me	http://filner.house.gov/
+CA52	Duncan D. Hunter	R	223 Cannon House Office Building	202-225-5672	619-448-5201	https://forms.house.gov/hunter/zipauthen_contact.shtml	http://hunter.house.gov/
+CA53	Susan A. Davis	D	1526 Longworth House Office Building	202-225-2040	619-280-5353	https://susandavisforms.house.gov/forms/writeyourrep/	http://www.house.gov/susandavis/
+COSR	Mark Udall	D	328 Hart Senate Office Building	202-224-5941	719-542-1701	http://www.markudall.senate.gov/?p=contact_us	http://www.markudall.senate.gov/
+COJR	Michael Bennet	D	458 Russell Senate Office Building	202-224-5852	970-224-2200	http://www.bennet.senate.gov/contact/	http://www.bennet.senate.gov/
+CO01	Diana DeGette	D	2335 Rayburn House Office Building	202-225-4431	303-844-4988	http://degette.house.gov/index.php?option=com_content&view=article&id=1045&Itemid=202	http://degette.house.gov/
+CO02	Jared Polis	D	501 Cannon House Office Building	202-225-2161	970-668-3240	https://polisforms.house.gov/Forms/WriteYourRep/default.aspx	http://polis.house.gov/
+CO03	Scott R. Tipton	R	218 Cannon House Office Building	202-225-4761	970-241-2499	https://tipton.house.gov/contact-me/email-me	http://tipton.house.gov/
+CO04	Cory Gardner	R	213 Cannon House Office Building	202-225-4676	970-221-7110	https://gardner.house.gov/contact-me	http://gardner.house.gov/
+CO05	Doug Lamborn	R	437 Cannon House Office Building	202-225-4422	719-520-0055	https://lambornforms.house.gov/index.cfm?sectionid=138	http://lamborn.house.gov/index.html
+CO06	Mike Coffman	R	1222 Longworth House Office Building	202-225-7882	720-283-9772	http://forms.house.gov/coffman/webforms/issue_subscribe.htm	http://coffman.house.gov/
+CO07	Ed Perlmutter	D	1221 Longworth House Office Building	202-225-2645	303-274-7944	https://forms.house.gov/perlmutter/webforms/contact.shtml	http://perlmutter.house.gov/
+CTSR	Joe Lieberman	D	706 Hart Senate Office Building	202-224-4041	860-549-8463	http://lieberman.senate.gov/index.cfm/contact/email-me-about-an-issue	http://lieberman.senate.gov/
+CTJR	Richard Blumenthal	D	702 Hart Senate Office Building	202-224-2823	860-258-6940	http://blumenthal.senate.gov/contact/	http://blumenthal.senate.gov/
+CT01	John Larson	D	1501 Longworth House Office Building	202-225-2265	860-278-8888	https://forms.house.gov/larson/contact_new.html	http://www.larson.house.gov/
+CT02	Joe Courtney	D	215 Cannon House Office Building	202-225-2076	860-741-6011	http://forms.house.gov/courtney/webforms/contact-form.shtml	http://courtney.house.gov/
+CT03	Rosa L. DeLauro	D	2413 Rayburn House Office Building	202-225-3661	203-562-3718	http://delauro.house.gov/contact_form_email.cfm	http://delauro.house.gov/
+CT04	Jim Himes	D	119 Cannon House Office Building	202-225-5541	866-453-0028	https://himes.house.gov/contact-me/email-me	http://himes.house.gov/
+CT05	Chris Murphy	D	412 Cannon House Office Building	202-225-4476	860-223-8412	https://forms.house.gov/chrismurphy/webforms/issue_subscribe.htm	http://www.chrismurphy.house.gov/
+DC00	Eleanor Holmes Norton	D	2136 Rayburn House Office Building	202-225-8050	202-783-5065	https://forms.house.gov/norton/webforms/issue_subscribe.htm	http://www.norton.house.gov/
+DESR	Tom Carper	D	513 Hart Senate Office Building	202-224-2441	302-674-3308	http://www.carper.senate.gov/public/index.cfm/email-senator-carper	http://www.carper.senate.gov/public/
+DEJR	Christopher Coons	D	127A Russell Senate Office Building	202-224-5042	302-573-6345	http://www.coons.senate.gov/contact/	http://www.coons.senate.gov/
+DE00	John Carney	D	1429 Longworth House Office Building	202-225-4165	302-691-7333	https://forms.house.gov/carney/webforms/email-me.shtml	http://johncarney.house.gov/
+FLSR	Bill Nelson	D	716 Hart Senate Office Building	202-224-5274	239-334-7760	http://billnelson.senate.gov/contact/email.cfm	http://billnelson.senate.gov/
+FLJR	Marco Rubio	R	317 Hart Senate Office Building	202-224-3041	407-254-2573	http://www.rubio.senate.gov/public/index.cfm/email-senator-rubio?p=Contact	http://www.rubio.senate.gov/public/
+FL01	Jeff Miller	R	2416 Rayburn House Office Building	202-225-4136	850-664-1266	http://jeffmiller.house.gov/Contact/	http://jeffmiller.house.gov/
+FL02	Steve Southerland	R	1229 Longworth House Office Building	202-225-5235	850-785-0812	https://southerland.house.gov/index.cfm/email-me	http://southerland.house.gov/
+FL03	Corrine Brown	D	2336 Rayburn House Office Building	202-225-0123	904-354-1652	https://forms.house.gov/corrinebrown/webforms/contact-me.shtml	http://corrinebrown.house.gov/
+FL04	Ander Crenshaw	R	440 Cannon House Office Building	202-225-2501	904-598-0481	https://writerep.house.gov/writerep/welcome.shtml	http://crenshaw.house.gov/
+FL05	Richard Nugent	R	1517 Longworth House Office Building	202-225-1002	352-799-8354	https://forms.house.gov/nugent/webforms/zipauthen_contact.shtml	http://nugent.house.gov/
+FL06	Cliff Stearns	R	2306 Rayburn House Office Building	202-225-5744	352-351-8777	https://stearnsforms.house.gov/Forms/WriteYourRep/default.aspx	http://www.stearns.house.gov/
+FL07	John L. Mica	R	2187 Rayburn House Office Building	202-225-4035	407-657-8080	https://mica.house.gov/contact-form	http://mica.house.gov/
+FL08	Daniel Webster	R	1039 Longworth House Office Building	202-225-2176	407-654-5705	http://webster.house.gov/Contact/	http://webster.house.gov/
+FL09	Gus M. Bilirakis	R	407 Cannon House Office Building	202-225-5755	727-773-2871	http://bilirakis.house.gov/index.php?option=com_content&view=article&id=79&Itemid=155	http://bilirakis.house.gov/
+FL10	C. W. (Bill) Young	R	2407 Rayburn House Office Building	202-225-5961	727-394-6950	https://young.house.gov/contact-me/email-me	http://young.house.gov/
+FL11	Kathy Castor	D	137 Cannon House Office Building	202-225-3376	813-871-2817	https://writerep.house.gov/writerep/welcome.shtml	http://castor.house.gov/
+FL12	Dennis Ross	R	404 Cannon House Office Building	202-225-1252	863-644-8215	https://dennisross.house.gov/Contact/	http://dennisross.house.gov/
+FL13	Vern Buchanan	R	221 Cannon House Office Building	202-225-5015	941-747-9081	https://forms.house.gov/buchanan/webforms/contact-new.html	http://buchanan.house.gov/
+FL14	Connie Mack	R	115 Cannon House Office Building	202-225-2536	239-573-5837	https://mack.house.gov/?p=Email	http://mack.house.gov/
+FL15	Bill Posey	R	120 Cannon House Office Building	202-225-3671	321-632-1776	https://poseyforms.house.gov/forms/writeyourrep/default.aspx	http://posey.house.gov/
+FL16	Thomas J. Rooney	R	1529 Longworth House Office Building	202-225-5792	772-461-3933	https://forms.house.gov/rooney/webforms/issue_subscribe.html	http://rooney.house.gov/
+FL17	Frederica Wilson	D	208 Cannon House Office Building	202-225-4506	305-690-5905	https://wilsonforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://wilson.house.gov/
+FL18	Ileana Ros-Lehtinen	R	2206 Rayburn House Office Building	202-225-3931	305-668-2285	https://ros-lehtinen.house.gov/contact-me/email-me	http://ros-lehtinen.house.gov/
+FL19	Ted Deutch	D	1024 Longworth House Office Building	202-225-3001	954-597-3990	https://deutchforms.house.gov/Forms/WriteYourRep/default.aspx	http://deutch.house.gov/
+FL20	Debbie Wasserman Schultz	D	118 Cannon House Office Building	202-225-7931	305-936-5724	http://wassermanschultz.house.gov/contact/email-me.shtml	http://wassermanschultz.house.gov/
+FL21	Mario Diaz-Balart	R	436 Cannon House Office Building	202-225-4211	239-348-1620	https://writerep.house.gov/writerep/welcome.shtml	http://mariodiazbalart.house.gov/
+FL22	Allen West	R	1708 Longworth House Office Building	202-225-3026	954-202-6211	https://forms.house.gov/west/webforms/contact-form.shtml	http://west.house.gov/
+FL23	Alcee L. Hastings	D	2353 Rayburn House Office Building	202-225-1313	561-243-7042	https://forms.house.gov/alceehastings/webforms/issue_subscribe.htm	http://alceehastings.house.gov/
+FL24	Sandy Adams	R	216 Cannon House Office Building	202-225-2706	407-977-7601	http://adams.house.gov/Contact/	http://adams.house.gov/
+FL25	David Rivera	R	417 Cannon House Office Building	202-225-2778	305-222-0160	https://rivera.house.gov/contact-me/email-me	http://rivera.house.gov/
+GASR	Saxby Chambliss	R	416 Russell Senate Office Building	202-224-3521	770-763-9090	http://www.chambliss.senate.gov/public/index.cfm/email	http://www.chambliss.senate.gov/public/index.cfm
+GAJR	Johnny Isakson	R	131 Russell Senate Office Building	202-224-3643	770-661-0999	http://isakson.senate.gov/contact.cfm	http://isakson.senate.gov/
+GA01	Jack Kingston	R	2372 Rayburn House Office Building	202-225-5831	912-367-7403	https://kingstonforms.house.gov/ContactForm/default.aspx	http://kingston.house.gov/
+GA02	Sanford D. Bishop, Jr.	D	2429 Rayburn House Office Building	202-225-3631	706-320-9477	https://bishop.house.gov/contact-me/email-me	http://bishop.house.gov/
+GA03	Lynn Westmoreland	R	2433 Rayburn House Office Building	202-225-5901	770-683-2033	https://forms.house.gov/westmoreland/webforms/zip_authen.html	http://westmoreland.house.gov/
+GA04	Hank Johnson	D	1427 Longworth House Office Building	202-225-1605	770-987-2291	https://hankjohnsonforms.house.gov/contact-form.shtml	http://hankjohnson.house.gov/
+GA05	John Lewis	D	343 Cannon House Office Building	202-225-3801	404-659-0116	https://johnlewis.house.gov/contact-me/email-me	http://johnlewis.house.gov/
+GA06	Tom Price	R	403 Cannon House Office Building	202-225-4501	770-565-4990	https://tomprice.house.gov/contact-me	http://tomprice.house.gov/
+GA07	Rob Woodall	R	1725 Longworth House Office Building	202-225-4272	770-232-3005	https://woodall.house.gov/contact-me/email-me	http://woodall.house.gov/
+GA08	Austin Scott	R	516 Cannon House Office Building	202-225-6531	229-396-5175	https://forms.house.gov/austinscott/webforms/zipauthen_contact.shtml	http://austinscott.house.gov/
+GA09	Tom Graves	R	1113 Longworth House Office Building	202-225-5211	770-535-2592	http://tomgraves.house.gov/Contact/	http://tomgraves.house.gov/
+GA10	Paul C. Broun	R	325 Cannon House Office Building	202-225-4101	706-886-1008	http://broun.house.gov/Contact/zipauth.htm	http://broun.house.gov/
+GA11	Phil Gingrey	R	442 Cannon House Office Building	202-225-2931	770-429-1776	http://www.house.gov/formgingrey/IMA/issue.htm	http://gingrey.house.gov/
+GA12	John Barrow	D	2202 Rayburn House Office Building	202-225-2823	478-553-1923	https://forms.house.gov/barrow/webforms/issue_subscribe.htm	http://www.barrow.house.gov/
+GA13	David Scott	D	225 Cannon House Office Building	202-225-2939	770-432-5405	https://writerep.house.gov/writerep/welcome.shtml	http://davidscott.house.gov/
+GU00	Madeleine Bordallo	D	2441 Rayburn House Office Building	202-225-1188	671-477-4272	http://www.house.gov/bordallo/contact.shtml	http://www.house.gov/bordallo/
+HISR	Dan Inouye	D	722 Hart Senate Office Building	202-224-3934	808-541-2542	http://www.inouye.senate.gov/contact-dan	http://www.inouye.senate.gov/
+HIJR	Daniel Kahikina Akaka	D	141 Hart Senate Office Building	202-224-6361	808-935-1114	http://akaka.senate.gov/email-senator-akaka.cfm	http://akaka.senate.gov/
+HI01	Colleen Hanabusa	D	238 Cannon House Office Building	202-225-2726	808-541-2570	https://hanabusa.house.gov/contact-me/email-me	http://hanabusa.house.gov
+HI02	Mazie Hirono	D	1410 Longworth House Office Building	202-225-4906	808-541-1986	http://hirono.house.gov/ContactMe/Email.htm	http://hirono.house.gov/
+IASR	Chuck Grassley	R	135 Hart Senate Office Building	202-224-3744	712-322-7103	http://www.grassley.senate.gov/contact.cfm	http://www.grassley.senate.gov/
+IAJR	Tom Harkin	D	731 Hart Senate Office Building	202-224-3254	515-284-4574	http://harkin.senate.gov/contact_opinion.cfm	http://harkin.senate.gov/
+IA01	Bruce Braley	D	1727 Longworth House Office Building	202-225-2911	563-557-7789	http://braley.house.gov/contact	http://braley.house.gov/
+IA02	Dave Loebsack	D	1527 Longworth House Office Building	202-225-6576	319-351-0789	https://loebsackforms.house.gov/contactform/default.aspx	http://loebsack.house.gov/
+IA03	Leonard L. Boswell	D	1026 Longworth House Office Building	202-225-3806	888-432-1984	http://boswell.house.gov/index.cfm?sectionid=81&sectiontree=481	http://boswell.house.gov/index.html
+IA04	Tom Latham	R	2217 Rayburn House Office Building	202-225-5476	641-357-5225	http://www.tomlatham.house.gov/Contact/	http://www.tomlatham.house.gov/
+IA05	Steve King	R	1131 Longworth House Office Building	202-225-4426	712-732-4197	https://forms.house.gov/king/webforms/issue_subscribe.html	http://steveking.house.gov/
+IDSR	Mike Crapo	R	239 Dirksen Senate Office Building	202-224-6142	208-334-1776	http://www.crapo.senate.gov/contact/email.cfm	http://www.crapo.senate.gov/
+IDJR	James E. Risch	R	483 Russell Senate Office Building	202-224-2752	208-523-5541	http://www.risch.senate.gov/public/index.cfm/email	http://www.risch.senate.gov/public/
+ID01	Raul Labrador	R	1523 Longworth House Office Building	202-225-6611	208-454-5518	https://labradorforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://labrador.house.gov
+ID02	Mike Simpson	R	2312 Rayburn House Office Building	202-225-5531	208-523-6701	http://simpson.house.gov/Contact/	http://simpson.house.gov/
+ILSR	Dick Durbin	D	711 Hart Senate Office Building	202-224-2152	217-492-4062	http://durbin.senate.gov/public/index.cfm/contact	http://durbin.senate.gov/public/
+ILJR	Mark Kirk	R	524 Hart Senate Office Building	202-224-2854	312-886-3506	http://www.kirk.senate.gov/?p=comment_on_legislation	http://www.kirk.senate.gov/index.cfm
+IL01	Bobby L. Rush	D	2268 Rayburn House Office Building	202-225-4372	708-385-9550	https://rush.house.gov/contact-me/email-me	http://rush.house.gov/
+IL02	Jesse L. Jackson, Jr.	D	2419 Rayburn House Office Building	202-225-0773	708-798-6000	https://forms.house.gov/jackson/webforms/issue_subscribe.htm	http://jackson.house.gov/
+IL03	Dan Lipinski	D	1717 Longworth House Office Building	202-225-5701	708-424-0853	https://lipinskiforms.house.gov/contact-form	http://lipinski.house.gov/
+IL04	Luis V. Gutierrez	D	2266 Rayburn House Office Building	202-225-8203	773-342-0774	https://forms.house.gov/gutierrez/webforms/zip_auth.shtm	http://www.gutierrez.house.gov/
+IL05	Mike Quigley	D	1124 Longworth House Office Building	202-225-4061	773-267-5926	https://forms.house.gov/quigley/contact-form.shtml	http://quigley.house.gov/
+IL06	Peter Roskam	R	227 Cannon House Office Building	202-225-4561	630-893-9670	https://forms.house.gov/roskam/webforms/zipauthen_contact.shtml	http://roskam.house.gov/
+IL07	Danny K. Davis	D	2159 Rayburn House Office Building	202-225-5006	773-533-7520	https://forms.house.gov/davis/webforms/issue_subscribe.htm	http://www.davis.house.gov/
+IL08	Joe Walsh	R	432 Cannon House Office Building	202-225-3711	847-973-9341	https://walshforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://walsh.house.gov/
+IL09	Janice Schakowsky	D	2367 Rayburn House Office Building	202-225-2111	773-506-7100	https://forms.house.gov/schakowsky/webforms/issue_subscribe.htm	http://schakowsky.house.gov/
+IL10	Robert J. Dold	R	212 Cannon House Office Building	202-225-4835	847-272-0404	https://dold.house.gov/contact-me/email-me	http://dold.house.gov/
+IL11	Adam Kinzinger	R	1218 Longworth House Office Building	202-225-3635	815-726-4998	https://kinzingerforms.house.gov/email-adam	http://kinzinger.house.gov/
+IL12	Jerry F. Costello	D	2408 Rayburn House Office Building	202-225-5661	618-397-8833	http://costello.house.gov/IMA/issue_subscribe.shtml	http://costello.house.gov/
+IL13	Judy Biggert	R	2113 Rayburn House Office Building	202-225-3515	630-655-2052	https://biggertforms.house.gov/index.cfm?sectionid=81	http://judybiggert.house.gov/
+IL14	Randy Hultgren	R	427 Cannon House Office Building	202-225-2976	630-232-7104	https://hultgrenforms.house.gov/index.cfm?sectionid=89&sectiontree=389	http://hultgren.house.gov/
+IL15	Timothy V. Johnson	R	1207 Longworth House Office Building	202-225-2371	309-663-7049	http://timjohnson.house.gov/ContactTim/#emailtim	http://timjohnson.house.gov/
+IL16	Don Manzullo	R	2228 Rayburn House Office Building	202-225-5676	815-394-1231	http://manzullo.house.gov/Contact/ZipAuth.htm	http://manzullo.house.gov/
+IL17	Bobby Schilling	R	507 Cannon House Office Building	202-225-5905	309-757-7630	https://schillingforms.house.gov/Contact/ContactForm.htm	http://schilling.house.gov/
+IL18	Aaron Schock	R	328 Cannon House Office Building	202-225-6201	217-245-1431	http://schock.house.gov/Contact/	http://schock.house.gov/
+IL19	John Shimkus	R	2452 Rayburn House Office Building	202-225-5271	217-492-5090	http://shimkus.house.gov/index.cfm?sectionid=54&sectiontree=5154	http://shimkus.house.gov/
+INSR	Richard G. Lugar	R	306 Hart Senate Office Building	202-224-4814	219-548-8035	http://lugar.senate.gov/contact/contactform.cfm	http://lugar.senate.gov/
+INJR	Dan Coats	R	493 Russell Senate Office Building	202-224-5623	317-554-0750	http://www.coats.senate.gov/contact/	http://www.coats.senate.gov/
+IN01	Peter J. Visclosky	D	2256 Rayburn House Office Building	202-225-2461	219-795-1844	http://visclosky.house.gov/contact/email-me.shtml	http://visclosky.house.gov/
+IN02	Joe Donnelly	D	1530 Longworth House Office Building	202-225-3915	574-288-2780	http://donnelly.house.gov/contact/contact-us-form.shtml	http://donnelly.house.gov/
+IN03	Marlin Stutzman	R	1728 Longworth House Office Building	202-225-4436	260-599-0554	http://stutzman.house.gov/contacts/new	http://stutzman.house.gov/
+IN04	Todd Rokita	R	236 Cannon House Office Building	202-225-5037	812-849-9378	https://rokita.house.gov/contact-me/email-me	http://rokita.house.gov/
+IN05	Dan Burton	R	2308 Rayburn House Office Building	202-225-2276	800-382-6020	http://burton.house.gov/contacts/new	http://burton.house.gov/
+IN06	Mike Pence	R	100 Cannon House Office Building	202-225-3021	765-962-2883	https://forms.house.gov/pence/IMA/webforms/contact_form.htm	http://mikepence.house.gov/
+IN07	Andre Carson	D	425 Cannon House Office Building	202-225-4011	317-283-6516	http://forms.house.gov/carson/webforms/issue_subscribe.htm	http://carson.house.gov/
+IN08	Larry Bucshon	R	1123 Longworth House Office Building	202-225-4636	812-465-6484	https://bucshon.house.gov/contact-me/email-me	http://bucshon.house.gov/
+IN09	Todd Young	R	1721 Longworth House Office Building	202-225-5315	812-336-3000	https://toddyoungforms.house.gov/index.cfm?sectionid=114&sectiontree=3114	http://toddyoung.house.gov/
+KSSR	Pat Roberts	R	109 Hart Senate Office Building	202-224-4774	620-227-2244	http://roberts.senate.gov/public/index.cfm?p=EmailPat	http://roberts.senate.gov/public/index.cfm?p=Home
+KSJR	Jerry Moran	R	354 Russell Senate Office Building	202-224-6521	913-393-0711	http://moran.senate.gov/public/index.cfm/e-mail-jerry	http://moran.senate.gov/public/
+KS01	Tim Huelskamp	R	126 Cannon House Office Building	202-225-2715	785-309-0572	https://forms.house.gov/huelskamp/webforms/zipauthen_contact.shtml	http://huelskamp.house.gov/
+KS02	Lynn Jenkins	R	1122 Longworth House Office Building	202-225-6601	620-231-5966	http://lynnjenkins.house.gov/index.cfm?sectionid=209&sectiontree=209	http://lynnjenkins.house.gov/index.html
+KS03	Kevin Yoder	R	214 Cannon House Office Building	202-225-2865	913-621-0832	https://yoderforms.house.gov/email-me	http://yoder.house.gov/
+KS04	Mike Pompeo	R	107 Cannon House Office Building	202-225-6216	316-262-8992	http://pompeo.house.gov/Contact/	http://pompeo.house.gov/
+KYSR	Mitch McConnell	R	317 Russell Senate Office Building	202-224-2541	606-864-2026	http://www.mcconnell.senate.gov/public/index.cfm?p=ContactForm	http://www.mcconnell.senate.gov/public/
+KYJR	Rand Paul	R	208 Russell Senate Office Building	202-224-4343	270-782-8303	http://paul.senate.gov/?p=contact	http://paul.senate.gov/?p=home
+KY01	Ed Whitfield	R	2368 Rayburn House Office Building	202-225-3115	270-442-6901	http://whitfield.house.gov/contact-ed/email-ed	http://whitfield.house.gov/
+KY02	Brett Guthrie	R	308 Cannon House Office Building	202-225-3501	N/A	https://guthrieforms.house.gov/index.cfm?sectionid=117&sectiontree=4117#dialog	http://guthrie.house.gov/index.html
+KY03	John Yarmuth	D	435 Cannon House Office Building	202-225-5401	502-582-5129	http://yarmuth.house.gov/index.cfm?sectionid=124&sectiontree=124	http://yarmuth.house.gov/index.html
+KY04	Geoff Davis	R	1119 Longworth House Office Building	202-225-3465	606-824-3320	http://geoffdavis.house.gov/Contact/	http://geoffdavis.house.gov/
+KY05	Hal Rogers	R	2406 Rayburn House Office Building	202-225-4601	606-439-0794	https://halrogersforms.house.gov/Contact/ContactForm.htm	http://halrogers.house.gov/
+KY06	Ben Chandler	D	1504 Longworth House Office Building	202-225-4706	859-219-1366	https://chandlerforms.house.gov/contact-form.shtml	http://chandler.house.gov/
+LASR	Mary Landrieu	D	431 Dirksen Senate Office Building	202-224-5824	318-676-3085	http://landrieu.senate.gov/about/contact.cfm	http://landrieu.senate.gov/
+LAJR	David Vitter	R	516 Hart Senate Office Building	202-224-4623	504-589-2753	http://www.vitter.senate.gov/public/index.cfm?FuseAction=Contact.ContactForm	http://www.vitter.senate.gov/public/
+LA01	Steve Scalise	R	429 Cannon House Office Building	202-225-3015	985-893-9064	https://scalise.house.gov/contact-me/email-me	http://scalise.house.gov/
+LA02	Cedric Richmond	D	415 Cannon House Office Building	202-225-6636	504-365-0390	https://richmond.house.gov/contact-me/email-me	http://richmond.house.gov/
+LA03	Jeff Landry	R	206 Cannon House Office Building	202-225-4031	985-879-2300	https://landry.house.gov/contact-me/email-me	http://landry.house.gov/
+LA04	John Fleming	R	416 Cannon House Office Building	202-225-2777	318-549-1712	https://flemingforms.house.gov/Contact/ContactForm.htm	http://fleming.house.gov/
+LA05	Rodney Alexander	R	316 Cannon House Office Building	202-225-8490	318-445-0818	https://alexanderforms.house.gov/contact-form-cc8	http://alexander.house.gov/index.html
+LA06	Bill Cassidy	R	1535 Longworth House Office Building	202-225-3901	225-929-7711	http://cassidy.house.gov/contact-bill	http://cassidy.house.gov/
+LA07	Charles W. Boustany, Jr.	R	1431 Longworth House Office Building	202-225-2031	337-433-1747	https://boustanyforms.house.gov/index.cfm?sectionid=96&sectiontree=496	http://boustany.house.gov/index.html
+MASR	John Kerry	D	218 Russell Senate Office Building	202-224-2742	508-677-0522	http://www.kerry.senate.gov/contact/	http://www.kerry.senate.gov/
+MAJR	Scott Brown	R	359 Dirksen Senate Office Building	202-224-4543	617-565-3170	https://www.scottbrown.senate.gov/public/index.cfm/contactme	http://www.scottbrown.senate.gov/public/index.cfm/home
+MA01	John W. Olver	D	1111 Longworth House Office Building	202-225-5335	978-342-8722	https://olverforms.house.gov/Forms/WriteYourRep/default.aspx	http://olver.house.gov/
+MA02	Richard E. Neal	D	2208 Rayburn House Office Building	202-225-5601	413-785-0325	https://forms.house.gov/neal/webforms/Contact_Form.shtml	http://neal.house.gov/
+MA03	Jim McGovern	D	438 Cannon House Office Building	202-225-6101	508-431-8025	https://mcgovernforms.house.gov/index.cfm?sectionid=163	http://mcgovern.house.gov/index.html
+MA04	Barney Frank	D	2252 Rayburn House Office Building	202-225-5931	508-822-4796	https://frank.house.gov/contact-me/email-me	http://frank.house.gov/
+MA05	Niki Tsongas	D	1607 Longworth House Office Building	202-225-3411	978-681-6200	https://tsongasforms.house.gov/index.cfm?sectionid=117&sectiontree=116117	http://tsongas.house.gov/index.html
+MA06	John F. Tierney	D	2238 Rayburn House Office Building	202-225-8020	781-595-7375	https://forms.house.gov/tierney/webform/issue_subscribe.htm	http://tierney.house.gov/
+MA07	Ed Markey	D	2108 Rayburn House Office Building	202-225-2836	508-875-2900	http://markey.house.gov/contact	http://markey.house.gov/
+MA08	Michael E. Capuano	D	1414 Longworth House Office Building	202-225-5111	617-621-6208	http://www.house.gov/capuano/contact/email.shtml	http://www.house.gov/capuano/
+MA09	Stephen F. Lynch	D	2348 Rayburn House Office Building	202-225-8273	617-428-2000	https://lynch.house.gov/contact-me/email-me	http://lynch.house.gov/
+MA10	William Keating	D	315 Cannon House Office Building	202-225-3111	617-770-3700	https://forms.house.gov/keating/webforms/contact.shtml	http://keating.house.gov/
+MDSR	Barbara Mikulski	D	503 Hart Senate Office Building	202-224-4654	410-546-7711	http://www.mikulski.senate.gov/contact/shareyouropinion.cfm	http://www.mikulski.senate.gov/
+MDJR	Benjamin L. Cardin	D	509 Hart Senate Office Building	202-224-4524	410-962-4436	http://www.cardin.senate.gov/contact/	http://www.cardin.senate.gov/
+MD01	Andy Harris	R	506 Cannon House Office Building	202-225-5311	410-588-5670	https://harris.house.gov/contact-me/email-me	http://harris.house.gov/
+MD02	C. A. Dutch Ruppersberger	D	2453 Rayburn House Office Building	202-225-3061	410-628-2701	http://dutch.house.gov/email-dutch.shtml	http://dutch.house.gov/
+MD03	John Sarbanes	D	2444 Rayburn House Office Building	202-225-4016	410-295-1679	http://sarbanes.house.gov/federal.asp	http://sarbanes.house.gov/
+MD04	Donna F. Edwards	D	318 Cannon House Office Building	202-225-8699	301-516-7601	http://donnaedwards.house.gov/index.cfm?sectionid=52&sectiontree=452	http://donnaedwards.house.gov/index.html
+MD05	Steny Hoyer	D	1705 Longworth House Office Building	202-225-4131	301-474-0119	https://forms.house.gov/hoyer/webforms/zip_auth.shtm	http://hoyer.house.gov/
+MD06	Roscoe G. Bartlett	R	2412 Rayburn House Office Building	202-225-2721	301-694-3030	https://bartlettforms.house.gov/Email_Roscoe/default.aspx	http://bartlett.house.gov/
+MD07	Elijah E. Cummings	D	2235 Rayburn House Office Building	202-225-4741	410-465-8259	https://cummingsforms.house.gov/contact/message-form.shtml	http://cummings.house.gov/
+MD08	Chris Van Hollen, Jr.	D	1707 Longworth House Office Building	202-225-5341	301-424-3501	http://vanhollen.house.gov/Contact/	http://vanhollen.house.gov/
+MESR	Olympia J. Snowe	R	154 Russell Senate Office Building	202-224-5344	207-786-2451	http://www.snowe.senate.gov/public/index.cfm/email	http://www.snowe.senate.gov/public/
+MEJR	Susan Collins	R	413 Dirksen Senate Office Building	202-224-2523	207-784-6969	http://www.collins.senate.gov/public/index.cfm/email	http://www.collins.senate.gov/public/index.cfm/
+ME01	Chellie Pingree	D	1318 Longworth House Office Building	202-225-6116	207-774-5019	https://forms.house.gov/pingree/webforms/contact-form.shtml	http://pingree.house.gov/
+ME02	Mike Michaud	D	1724 Longworth House Office Building	202-225-6306	207-764-1036	https://michaud.house.gov/contact-me/email-mike	http://michaud.house.gov/
+MISR	Carl Levin	D	269 Russell Senate Office Building	202-224-6221	231-947-9569	https://www.levin.senate.gov/contact/email/	http://www.levin.senate.gov/
+MIJR	Debbie Stabenow	D	133 Hart Senate Office Building	202-224-4822	313-961-4330	http://www.stabenow.senate.gov/?p=contact	http://www.stabenow.senate.gov/
+MI01	Dan Benishek	R	514 Cannon House Office Building	202-225-4735	231-348-0657	https://benishek.house.gov/contact-me/email-me	http://benishek.house.gov/
+MI02	Bill Huizenga	R	1217 Longworth House Office Building	202-225-4401	231-775-0050	http://huizenga.house.gov/Contact/	http://huizenga.house.gov/
+MI03	Justin Amash	R	114 Cannon House Office Building	202-225-3831	616-451-8383	https://amash.house.gov/contact-me/email-me	http://amash.house.gov/
+MI04	Dave Camp	R	341 Cannon House Office Building	202-225-3561	231-929-4711	http://camp.house.gov/Contact/	http://camp.house.gov/
+MI05	Dale Kildee	D	2107 Rayburn House Office Building	202-225-3611	989-755-8904	https://kildeeforms.house.gov/contact/contact-form.shtml	http://kildee.house.gov/index.shtml
+MI06	Fred Upton	R	2183 Rayburn House Office Building	202-225-3761	269-982-1986	http://upton.house.gov/Contact/	http://upton.house.gov/
+MI07	Tim Walberg	R	418 Cannon House Office Building	202-225-6276	517-780-9075	https://walbergforms.house.gov/contact-form	http://walberg.house.gov/
+MI08	Mike Rogers	R	133 Cannon House Office Building	202-225-4872	517-702-8000	http://www.mikerogers.house.gov/Contact/	http://www.mikerogers.house.gov/
+MI09	Gary Peters	D	1609 Longworth House Office Building	202-225-5802	248-273-4227	https://petersforms.house.gov/index.cfm?sectionid=59&sectiontree=359	http://peters.house.gov/index.html
+MI10	Candice Miller	R	1034 Longworth House Office Building	202-225-2106	586-997-5010	http://candicemiller.house.gov/forms/email.shtml	http://candicemiller.house.gov/
+MI11	Thaddeus McCotter	R	2243 Rayburn House Office Building	202-225-8171	734-632-0314	https://mccotter.house.gov/contact-me/email-me-form	http://mccotter.house.gov/
+MI12	Sandy Levin	D	1236 Longworth House Office Building	202-225-4961	586-498-7122	https://levin.house.gov/contact-me/email-me	http://levin.house.gov/
+MI13	Hansen Clarke	D	1319 Longworth House Office Building	202-225-2261	313-962-7700	https://hansenclarke.house.gov/contact-me/email-me	http://hansenclarke.house.gov/
+MI14	John Conyers, Jr.	D	2426 Rayburn House Office Building	202-225-5126	734-675-4084	http://conyers.house.gov/index.cfm?FuseAction=Contact.OnlineContactForm	http://conyers.house.gov/
+MI15	John D. Dingell	D	2328 Rayburn House Office Building	202-225-4071	734-481-1100	https://dingell.house.gov/contact/email-me.shtml	http://dingell.house.gov/
+MNSR	Amy Klobuchar	D	302 Hart Senate Office Building	202-224-3244	507-288-5321	http://klobuchar.senate.gov/emailamy.cfm	http://klobuchar.senate.gov/
+MNJR	Al Franken	D	309 Hart Senate Office Building	202-224-5641	507-931-5813	http://www.franken.senate.gov/?p=email_al	http://www.franken.senate.gov/
+MN01	Tim Walz	D	1722 Longworth House Office Building	202-225-2472	507-206-0643	https://forms.house.gov/walz/webforms/zip_auth.shtm	http://walz.house.gov/
+MN02	John Kline	R	2439 Rayburn House Office Building	202-225-2271	952-808-1213	https://klineforms.house.gov/index.cfm?sectionid=7&sectiontree=47	http://kline.house.gov/index.html
+MN03	Erik Paulsen	R	127 Cannon House Office Building	202-225-2871	952-405-8510	https://paulsenforms.house.gov/contact-me	http://paulsen.house.gov/index.html
+MN04	Betty McCollum	D	1714 Longworth House Office Building	202-225-6631	651-224-9191	https://mccollum.house.gov/contact-me/email-me	http://mccollum.house.gov/
+MN05	Keith Ellison	D	1027 Longworth House Office Building	202-225-4755	612-522-1212	http://forms.house.gov/ellison/webforms/issue_subscribe.htm	http://ellison.house.gov/
+MN06	Michele Bachmann	R	103 Cannon House Office Building	202-225-2331	651-731-5400	http://bachmann.house.gov/Email/	http://bachmann.house.gov/
+MN07	Collin Peterson	D	2211 Rayburn House Office Building	202-225-2165	320-235-1061	https://collinpeterson.house.gov/contact-me/email-me	http://collinpeterson.house.gov/
+MN08	Chip Cravaack	R	508 Cannon House Office Building	202-225-6211	651-237-8220	https://cravaackforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://cravaack.house.gov/
+MOSR	Claire McCaskill	D	506 Hart Senate Office Building	202-224-6154	573-442-7130	http://mccaskill.senate.gov/?p=contact	http://mccaskill.senate.gov/
+MOJR	Roy Blunt	R	260 Russell Senate Office Building	202-224-5721	816-471-7141	http://www.blunt.senate.gov/public/index.cfm/contact-form?p=contact-roy	http://www.blunt.senate.gov/public/
+MO01	William Lacy Clay, Jr.	D	2418 Rayburn House Office Building	202-225-2406	314-367-1970	http://lacyclay.house.gov/index.cfm?sectionid=90&sectiontree=390	http://lacyclay.house.gov/index.html
+MO02	Todd W. Akin	R	117 Cannon House Office Building	202-225-2561	314-590-0029	https://forms.house.gov/akin/webforms/issue_subscribe.htm	http://akin.house.gov/
+MO03	Russ Carnahan	D	1710 Longworth House Office Building	202-225-2671	636-937-8039	https://forms.house.gov/carnahan/webforms/issue_subscribe.htm	http://carnahan.house.gov/
+MO04	Vicky Hartzler	R	1023 Longworth House Office Building	202-225-2876	417-532-5582	https://hartzler.house.gov/contact-me/email-me	http://hartzler.house.gov/
+MO05	Emanuel Cleaver, II	D	1433 Longworth House Office Building	202-225-4535	816-833-4545	https://cleaver.house.gov/contact-me/email-me	http://cleaver.house.gov/
+MO06	Sam Graves	R	1415 Longworth House Office Building	202-225-7041	816-792-3976	https://gravesforms.house.gov/index.cfm?sectionid=84&sectiontree=384	http://graves.house.gov/
+MO07	Billy Long	R	1541 Longworth House Office Building	202-225-6536	471-781-1041	https://longforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://long.house.gov/
+MO08	Jo Ann Emerson	R	2230 Rayburn House Office Building	202-225-4404	573-364-2455	https://forms.house.gov/emerson/webforms/contact.html	http://emerson.house.gov/
+MO09	Blaine Luetkemeyer	R	1740 Longworth House Office Building	202-225-2956	636-239-2276	http://luetkemeyer.house.gov/Contact/	http://luetkemeyer.house.gov/
+MSSR	Thad Cochran	R	113 Dirksen Senate Office Building	202-224-5054	228-867-9710	http://www.cochran.senate.gov/public/index.cfm/email-me	http://www.cochran.senate.gov/public/
+MSJR	Roger Wicker	R	555 Dirksen Senate Office Building	202-224-6253	228-762-5400	http://www.wicker.senate.gov/public/index.cfm?FuseAction=Contact.EMailSenatorWicker	http://www.wicker.senate.gov/public/
+MS01	Alan Nunnelee	R	1432 Longworth House Office Building	202-225-4306	662-841-8808	https://nunnelee.house.gov/contact-form	http://nunnelee.house.gov/
+MS02	Bennie Thompson	D	2466 Rayburn House Office Building	202-225-5876	662-335-9003	https://forms.house.gov/benniethompson/contact-form.shtml	http://benniethompson.house.gov/
+MS03	Gregg Harper	R	307 Cannon House Office Building	202-225-5031	601-693-6681	http://harper.house.gov/contact-gregg/email-gregg	http://harper.house.gov/
+MS04	Steven Palazzo	R	331 Cannon House Office Building	202-225-5772	601-582-3246	https://palazzo.house.gov/contact-me/email-me	http://palazzo.house.gov/
+MTSR	Max Baucus	D	511 Hart Senate Office Building	202-224-2651	406-365-7002	http://www.baucus.senate.gov/?p=contact	http://www.baucus.senate.gov/
+MTJR	Jon Tester	D	724 Hart Senate Office Building	202-224-2644	406-723-3277	http://www.tester.senate.gov/Contact/index.cfm	http://www.tester.senate.gov/
+MT00	Dennis Rehberg	R	2448 Rayburn House Office Building	202-225-3211	406-454-1066	https://rehbergforms.house.gov/index.cfm?sectionid=62&sectiontree=662	http://rehberg.house.gov/index.html
+NCSR	Richard Burr	R	217 Russell Senate Office Building	202-224-3154	704-833-0854	http://burr.senate.gov/public/index.cfm?FuseAction=Contact.ContactForm	http://burr.senate.gov/public/
+NCJR	Kay Hagan	D	521 Dirksen Senate Office Building	202-224-6342	704-334-2448	http://www.hagan.senate.gov/contact/	http://www.hagan.senate.gov/
+NC01	G. K. Butterfield, Jr.	D	2305 Rayburn House Office Building	202-225-3101	252-237-9816	https://butterfieldforms.house.gov/index.cfm?sectionid=68&sectiontree=368	http://butterfield.house.gov/index.html
+NC02	Renee L. Ellmers	R	1533 Longworth House Office Building	202-225-4531	910-230-1910	https://ellmersforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://ellmers.house.gov/
+NC03	Walter B. Jones, Jr.	R	2333 Rayburn House Office Building	202-225-3415	800-351-1697	https://jones.house.gov/contact-me/email-me	http://jones.house.gov/
+NC04	David Price	D	2162 Rayburn House Office Building	202-225-1784	919-688-3004	https://forms.house.gov/price/webforms/contact_form.shtml	http://price.house.gov/
+NC05	Virginia Foxx	R	1230 Longworth House Office Building	202-225-2071	336-778-0211	https://foxxforms.house.gov/email-your-concerns	http://www.foxx.house.gov/index.html
+NC06	Howard Coble	R	2188 Rayburn House Office Building	202-225-3065	336-333-5005	http://coble.house.gov/Contact/ZipCheck.htm	http://coble.house.gov/
+NC07	Mike McIntyre	D	2133 Rayburn House Office Building	202-225-2731	910-815-4959	http://mcintyreforms.house.gov/Contact/	http://mcintyre.house.gov/
+NC08	Larry Kissell	D	1632 Longworth House Office Building	202-225-3715	910-920-2070	https://forms.house.gov/kissell/contact-form.shtml	http://kissell.house.gov/
+NC09	Sue Myrick	R	230 Cannon House Office Building	202-225-1976	704-362-1060	https://myrickforms.house.gov/index.cfm?sectionid=69	http://myrick.house.gov/index.html
+NC10	Patrick McHenry	R	224 Cannon House Office Building	202-225-2576	828-765-2729	http://mchenry.house.gov/Contact/zipauth.htm	http://mchenry.house.gov/
+NC11	Heath Shuler	D	229 Cannon House Office Building	202-225-6401	828-252-1651	https://shulerforms.house.gov/contact/	http://shuler.house.gov/
+NC12	Mel Watt	D	2304 Rayburn House Office Building	202-225-1510	336-275-9950	https://forms.house.gov/watt/webforms/zipauthen_contact.shtml	http://watt.house.gov/
+NC13	Brad Miller	D	1127 Longworth House Office Building	202-225-3032	919-836-1313	https://forms.house.gov/bradmiller/webforms/zipauthen_contact.shtml	http://bradmiller.house.gov/
+NDSR	Kent Conrad	D	530 Hart Senate Office Building	202-224-2043	701-232-8030	https://www.conrad.senate.gov/contact/webform.cfm	http://www.conrad.senate.gov/
+NDJR	John Hoeven	R	120 Russell Senate Office Building	202-224-2551	701-250-4618	http://hoeven.senate.gov/public/index.cfm/contact?p=email-the-senator	http://hoeven.senate.gov/public/
+ND00	Rick Berg	R	323 Cannon House Office Building	202-225-2611	701-224-0355	https://bergforms.house.gov/email-rick	http://berg.house.gov/
+NESR	Ben Nelson	D	720 Hart Senate Office Building	202-224-6551	402-391-3411	http://bennelson.senate.gov/email-issues.cfm	http://bennelson.senate.gov/
+NEJR	Mike Johanns	R	404 Russell Senate Office Building	202-224-4224	308-236-7602	http://www.johanns.senate.gov/public/?p=EmailSenatorJohanns	http://www.johanns.senate.gov/public/index.cfm
+NE01	Jeff Fortenberry	R	1514 Longworth House Office Building	202-225-4806	402-727-0888	https://forms.house.gov/fortenberry/webforms/issue_subscribe.html	http://fortenberry.house.gov/
+NE02	Lee Terry	R	2331 Rayburn House Office Building	202-225-4155	402-397-9944	http://www.house.gov/formleeterry/IMA/issue.htm	http://leeterry.house.gov/
+NE03	Adrian Smith	R	503 Cannon House Office Building	202-225-6435	308-384-3900	https://adriansmith.house.gov/contact-me/email-me	http://adriansmith.house.gov/
+NHSR	Jeanne Shaheen	D	520 Hart Senate Office Building	202-224-2841	603-542-4872	http://www.shaheen.senate.gov/contact/	http://www.shaheen.senate.gov/
+NHJR	Kelly Ayotte	R	144 Russell Senate Office Building	202-224-3324	603-622-7979	http://www.ayotte.senate.gov/?p=contact	http://www.ayotte.senate.gov/
+NH01	Frank C. Guinta	R	1223 Longworth House Office Building	202-225-5456	603-641-9536	https://guinta.house.gov/contact-me/email-me	http://guinta.house.gov/
+NH02	Charles F. (Charlie) Bass	R	2350 Rayburn House Office Building	202-225-5206	603-226-0064	https://forms.house.gov/bass/webforms/contact-form.shtml	http://bass.house.gov/
+NJSR	Frank R. Lautenberg	D	324 Hart Senate Office Building	202-224-3224	973-639-8700	http://lautenberg.senate.gov/contact/index1.cfm	http://lautenberg.senate.gov/
+NJJR	Robert Menendez	D	528 Hart Senate Office Building	202-224-4744	973-645-3030	http://www.menendez.senate.gov/contact/	http://www.menendez.senate.gov/
+NJ01	Robert E. Andrews	D	2265 Rayburn House Office Building	202-225-6501	856-546-5100	https://andrews.house.gov/contact-me/email-me	http://andrews.house.gov/
+NJ02	Frank A. LoBiondo	R	2427 Rayburn House Office Building	202-225-6572	800-471-4450	https://lobiondo.house.gov/contact-me/email-me	http://www.house.gov/lobiondo
+NJ03	Jon Runyan	R	1239 Longworth House Office Building	202-225-4765	856-780-6436	https://runyan.house.gov/contact-me/email-me	http://runyan.house.gov/
+NJ04	Chris Smith	R	2373 Rayburn House Office Building	202-225-3765	609-585-7878	http://chrissmith.house.gov/Contact/ZipAuth.htm	http://chrissmith.house.gov/
+NJ05	Scott Garrett	R	2244 Rayburn House Office Building	202-225-4465	201-444-5454	https://garrett.house.gov/contact-me/email-me	http://garrett.house.gov/
+NJ06	Frank Pallone, Jr.	D	237 Cannon House Office Building	202-225-4671	732-249-8892	http://www.house.gov/pallone/contact.shtml	http://www.house.gov/pallone/
+NJ07	Leonard Lance	R	426 Cannon House Office Building	202-225-5361	908-788-6900	http://lance.house.gov/index.cfm?action=website.section&sectionid=125	http://lance.house.gov/index.html
+NJ08	Bill Pascrell	D	2370 Rayburn House Office Building	202-225-5751	973-523-5152	http://pascrell.house.gov/contact/	http://www.pascrell.house.gov/
+NJ09	Steve Rothman	D	2303 Rayburn House Office Building	202-225-5061	201-646-0808	https://forms.house.gov/rothman/webforms/issue_subscribe.htm	http://rothman.house.gov/
+NJ10	Vacant		2310 Rayburn House Office Building	202-225-3436	908-629-0222	N/A	N/A
+NJ11	Rodney P. Frelinghuysen	R	2369 Rayburn House Office Building	202-225-5034	973-984-0711	https://frelinghuysenforms.house.gov/index.cfm?sectionid=29&sectiontree=1029	http://frelinghuysen.house.gov/
+NJ12	Rush Holt	D	1214 Longworth House Office Building	202-225-5801	609-750-9365	https://forms.house.gov/holt/webforms/issue_subscribe.htm	http://holt.house.gov/
+NJ13	Albio Sires	D	2342 Rayburn House Office Building	202-225-7919	201-823-2900	http://sires.house.gov/contact-me/email-me	http://sires.house.gov//
+NMSR	Jeff Bingaman	D	703 Hart Senate Office Building	202-224-5521	575-523-6561	http://www.bingaman.senate.gov/contact/types/email-issue.cfm	http://www.bingaman.senate.gov/
+NMJR	Tom Udall	D	110 Hart Senate Office Building	202-224-6621	575-526-5475	http://www.tomudall.senate.gov/?p=contact	http://www.tomudall.senate.gov/?p=home
+NM01	Martin Heinrich	D	336 Cannon House Office Building	202-225-6316	505-346-6781	http://heinrich.house.gov/index.cfm?sectionid=72&sectiontree=772	http://heinrich.house.gov/index.html
+NM02	Steve Pearce	R	2432 Rayburn House Office Building	202-225-2365	855-473-2723	https://pearce.house.gov/contact-me/email-me	http://pearce.house.gov/
+NM03	Ben Ray Lujan	D	330 Cannon House Office Building	202-225-6190	505-863-0582	https://forms.house.gov/lujan/webforms/issue_subscribe.htm	http://lujan.house.gov/
+NVSR	Harry Reid	D	522 Hart Senate Office Building	202-224-3542	775-882-7343	http://www.reid.senate.gov/contact/index.cfm	http://www.reid.senate.gov/
+NVJR	Dean Heller	R	361A Russell Senate Office Building	202-224-6244	702-388-6605	http://heller.senate.gov/public/index.cfm/contact-form	http://heller.senate.gov/public/
+NV01	Shelley Berkley	D	405 Cannon House Office Building	202-225-5965	702-220-9823	http://berkley.house.gov/contact/email-me.shtml	http://berkley.house.gov/
+NV02	Mark Amodei	R	125 Cannon House Office Building	202-225-6155	775-686-5760	https://amodeiforms.house.gov/contact-us	http://amodei.house.gov/
+NV03	Joe Heck	R	132 Cannon House Office Building	202-225-3252	702-387-4941	https://heck.house.gov/contact-me/email-me	http://heck.house.gov/
+NYSR	Charles E. (Chuck) Schumer	D	322 Hart Senate Office Building	202-224-6542	607-772-6792	http://www.schumer.senate.gov/Contact/contact_chuck.cfm	http://www.schumer.senate.gov/
+NYJR	Kirsten Gillibrand	D	478 Russell Senate Office Building	202-224-4451	631-249-2825	http://www.gillibrand.senate.gov/contact/	http://www.gillibrand.senate.gov/
+NY01	Tim Bishop	D	306 Cannon House Office Building	202-225-3826	631-289-6500	http://timbishop.house.gov/index.cfm?sectionid=96&sectiontree=796	http://timbishop.house.gov/index.html
+NY02	Steve Israel	D	2457 Rayburn House Office Building	202-225-3335	631-951-2210	https://forms.house.gov/israel/webforms/webforms/zip_auth.shtm	http://israel.house.gov/
+NY03	Pete King	R	339 Cannon House Office Building	202-225-7896	516-541-4225	Pete.King@mail.house.gov	http://peteking.house.gov/
+NY04	Carolyn McCarthy	D	2346 Rayburn House Office Building	202-225-5516	516-739-3008	https://carolynmccarthyforms.house.gov/contact-form	http://carolynmccarthy.house.gov
+NY05	Gary Ackerman	D	2211 Rayburn House Office Building	202-225-2601	718-423-2154	https://ackerman-forms.house.gov/contact-gary	http://ackerman.house.gov/index.html
+NY06	Gregory W. Meeks	D	2234 Rayburn House Office Building	202-225-3461	718-327-9791	https://meeks.house.gov/contact-me/email-me	http://meeks.house.gov/
+NY07	Joseph Crowley	D	2404 Rayburn House Office Building	202-225-3965	718-779-1400	https://crowley.house.gov/contact-me/email-me	http://crowley.house.gov/
+NY08	Jerrold Nadler	D	2334 Rayburn House Office Building	202-225-5635	718-373-3198	https://jerroldnadler.house.gov/Forms/WriteYourRep/default.aspx	http://nadler.house.gov/
+NY09	Bob Turner	R	2104 Rayburn House Office Building	202-225-6616	718-426-5000	https://bobturner.house.gov/contact-me/email-me	http://bobturner.house.gov/
+NY10	Edolphus (Ed) Towns	D	2232 Rayburn House Office Building	202-225-5936	718-855-8018	https://towns.house.gov/contact-me/email-me	http://towns.house.gov/
+NY11	Yvette D. Clarke	D	1029 Longworth House Office Building	202-225-6231	718-287-1142	http://clarke.house.gov/Contact/	http://clarke.house.gov/
+NY12	Nydia M. Velazquez	D	2302 Rayburn House Office Building	202-225-2361	718-599-3658	http://velazquez.house.gov/IMA/issue_subscribe.shtml	http://velazquez.house.gov/index.shtml
+NY13	Michael Grimm	R	512 Cannon House Office Building	202-225-3371	718-351-1062	https://grimm.house.gov/contact-me/email-me	http://grimm.house.gov/
+NY14	Carolyn B. Maloney	D	2332 Rayburn House Office Building	202-225-7944	212-860-0606	https://maloney.house.gov/contact-me/email-me	http://maloney.house.gov/
+NY15	Charles B. Rangel	D	2354 Rayburn House Office Building	202-225-4365	212-663-3900	https://rangel.house.gov/contact/email-me.shtml	http://rangel.house.gov/
+NY16	Jose E. Serrano	D	2227 Rayburn House Office Building	202-225-4361	718-620-0084	https://serrano.house.gov/contact-me/email-me	http://serrano.house.gov/
+NY17	Eliot L. Engel	D	2161 Rayburn House Office Building	202-225-2464	718-796-9700	http://engel.house.gov/index.cfm?sectionid=169&sectiontree=3169	http://engel.house.gov/index.html
+NY18	Nita M. Lowey	D	2365 Rayburn House Office Building	202-225-6506	914-428-1707	https://lowey.house.gov/contact-form	http://lowey.house.gov/index.html
+NY19	Nan A. S. Hayworth	R	1440 Longworth House Office Building	202-225-5441	854-206-4000	https://hayworthforms.house.gov/contact	http://hayworth.house.gov/
+NY20	Chris Gibson	R	502 Cannon House Office Building	202-225-5614	518-743-0964	http://gibson.house.gov/Contact/	http://gibson.house.gov/
+NY21	Paul D. Tonko	D	422 Cannon House Office Building	202-225-5076	518-374-4547	http://tonko.house.gov/index.cfm?sectionid=224&sectiontree=3224	http://tonko.house.gov/
+NY22	Maurice D. Hinchey	D	2431 Rayburn House Office Building	202-225-6335	607-273-1388	https://forms.house.gov/hinchey/webforms/zip_auth.shtm	http://hinchey.house.gov/
+NY23	Bill Owens	D	431 Cannon House Office Building	202-225-4611	518-563-1406	https://owens.house.gov/Contact/default.aspx	http://owens.house.gov/
+NY24	Richard L. Hanna	R	319 Cannon House Office Building	202-225-3665	315-252-6700	https://forms.house.gov/hanna/webforms/zipauthen_contact.shtml	http://hanna.house.gov/
+NY25	Ann Marie Buerkle	R	1630 Longworth House Office Building	202-225-3701	585-336-7291	https://buerkle.house.gov/contact-me/email-me	http://buerkle.house.gov/
+NY26	Kathy Hochul	D	1711 Longworth House Office Building	202-225-5265	716-634-2324	https://hochul.house.gov/contact-me	http://hochul.house.gov/
+NY27	Brian Higgins	D	2459 Rayburn House Office Building	202-225-3306	716-852-3501	http://higgins.house.gov/contact/email-me.shtml	http://higgins.house.gov/
+NY28	Louise M. Slaughter	D	2469 Rayburn House Office Building	202-225-3615	716-282-1274	https://forms.house.gov/slaughter/webforms/zip_auth.shtm	http://www.louise.house.gov/
+NY29	Tom Reed	R	1037 Longworth House Office Building	202-225-3161	585-218-0040	https://reed.house.gov/contact-me/email-me	http://reed.house.gov/
+OHSR	Sherrod Brown	D	713 Hart Senate Office Building	202-224-2315	513-684-1021	http://www.brown.senate.gov/contact	http://www.brown.senate.gov/
+OHJR	Rob Portman	R	338 Russell Senate Office Building	202-224-3353	614-469-6774	http://portman.senate.gov/public/index.cfm/contact-form	http://portman.senate.gov/public/
+OH01	Steve Chabot	R	2351 Rayburn House Office Building	202-225-2216	513-684-2723	https://chabotforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://chabot.house.gov/index.html
+OH02	Jean Schmidt	R	2464 Rayburn House Office Building	202-225-3164	513-791-0381	http://www.house.gov/schmidt/contact.shtml	http://www.house.gov/schmidt/
+OH03	Michael R. Turner	R	2454 Longworth House Office Building	202-225-6465	937-383-8931	http://turner.house.gov/Contact/	http://turner.house.gov/
+OH04	Jim Jordan	R	1524 Longworth House Office Building	202-225-2676	419-522-5757	http://jordan.house.gov/Contact/	http://jordan.house.gov/
+OH05	Bob Latta	R	1323 Longworth House Office Building	202-225-6405	419-354-8700	http://latta.house.gov/Contact/	http://latta.house.gov/
+OH06	Bill Johnson	R	317 Cannon House Office Building	202-225-5705	740-376-0868	http://billjohnson.house.gov/Contact/	http://billjohnson.house.gov/
+OH07	Steve Austria	R	439 Cannon House Office Building	202-225-4324	740-654-5149	https://austriaforms.house.gov/index.cfm?sectionid=7&sectiontree=47	http://austria.house.gov/index.html
+OH08	John A. Boehner	R	1011 Longworth House Office Building	202-225-6205	513-779-5400	http://johnboehner.house.gov/Contact/	http://johnboehner.house.gov/
+OH09	Marcy Kaptur	D	2186 Rayburn House Office Building	202-225-4146	419-259-7500	https://forms.house.gov/kaptur/webforms/issue_subscribe.htm	http://www.kaptur.house.gov/
+OH10	Dennis J. Kucinich	D	2445 Rayburn House Office Building	202-225-5871	216-228-8850	http://kucinich.house.gov/Contact/Starter.htm	http://kucinich.house.gov/
+OH11	Marcia L. Fudge	D	1019 Longworth House Office Building	202-225-7032	216-522-4900	https://fudgeforms.house.gov/index.cfm?sectionid=214&sectiontree=204214	http://fudge.house.gov/
+OH12	Patrick J. Tiberi	R	106 Cannon House Office Building	202-225-5355	614-523-2555	https://writerep.house.gov/writerep/welcome.shtml	http://tiberi.house.gov/
+OH13	Betty Sutton	D	1519 Longworth House Office Building	202-225-3401	440-245-5350	https://sutton.house.gov/index.cfm?sectionid=79&sectiontree=479	http://sutton.house.gov/
+OH14	Steven C. LaTourette	R	2371 Rayburn House Office Building	202-225-5731	800-447-0529	http://latourette.house.gov/contact/contact-form.aspx	http://latourette.house.gov/
+OH15	Steve Stivers	R	1007 Longworth House Office Building	202-225-2015	614-771-4968	http://stivers.house.gov/Contact/	http://stivers.house.gov/
+OH16	James B. Renacci	R	130 Cannon House Office Building	202-225-3876	330-489-4414	https://renacciforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://renacci.house.gov/
+OH17	Tim Ryan	D	1421 Longworth House Office Building	202-225-5261	330-740-0193	https://timryan.house.gov/contact-me/email-me	http://timryan.house.gov/
+OH18	Bob Gibbs	R	329 Cannon House Office Building	202-225-6265	740-452-2279	https://gibbs.house.gov/contact-me/email-me	http://gibbs.house.gov/
+OKSR	James M. Inhofe	R	205 Russell Senate Office Building	202-224-4721	918-426-0933	http://www.inhofe.senate.gov/public/index.cfm?FuseAction=Contact.ContactForm	http://inhofe.senate.gov/public/
+OKJR	Tom Coburn	R	172 Russell Senate Office Building	202-224-5754	405-231-4941	http://www.coburn.senate.gov/public/index.cfm/?p=ContactForm	http://www.coburn.senate.gov/public/index.cfm/home
+OK01	John Sullivan	R	434 Cannon House Office Building	202-225-2211	918-336-6500	http://sullivan.house.gov/Contact/ZipCheck.htm	http://sullivan.house.gov/
+OK02	Dan Boren	D	2447 Rayburn House Office Building	202-225-2701	580-931-0333	http://boren.house.gov/emailsignup.shtml	http://boren.house.gov/
+OK03	Frank Lucas	R	2311 Rayburn House Office Building	202-225-5565	405-373-1958	https://lucas.house.gov/contact-me/email-me	http://lucas.house.gov/
+OK04	Tom Cole	R	2458 Rayburn House Office Building	202-225-6165	580-436-5375	https://coleforms.house.gov/Contact/	http://www.cole.house.gov/
+OK05	James Lankford	R	509 Cannon House Office Building	202-225-2132	405-234-9900	https://forms.house.gov/lankford/webforms/zipauthen_contact.shtml	http://lankford.house.gov/
+ORSR	Ron Wyden	D	221 Dirksen Senate Office Building	202-224-5244	503-326-7525	http://www.wyden.senate.gov/contact/	http://www.wyden.senate.gov/
+ORJR	Jeff Merkley	D	313 Hart Senate Office Building	202-224-3753	503-326-3386	http://www.merkley.senate.gov/contact/	http://www.merkley.senate.gov/
+OR01	Suzanne Bonamici	D	2338 Rayburn House Office Building	202-225-0855	800-422-4003	https://bonamici.house.gov/contact-me/email-me	http://bonamici.house.gov/
+OR02	Greg Walden	R	2182 Rayburn House Office Building	202-225-6730	800-533-3303	https://walden.house.gov/index.cfm?sectionid=117&sectiontree=7117	http://walden.house.gov/
+OR03	Earl Blumenauer	D	1502 Longworth House Office Building	202-225-4811	503-231-2300	https://forms.house.gov/blumenauer/webforms/issue_subscribe.html	http://blumenauer.house.gov/
+OR04	Peter A. DeFazio	D	2134 Rayburn House Office Building	202-225-6416	541-440-3523	https://forms.house.gov/defazio/IMA/contact.html	http://www.defazio.house.gov/
+OR05	Kurt Schrader	D	314 Cannon House Office Building	202-225-5711	503-557-1324	http://schrader.house.gov/index.cfm?sectionid=81	http://schrader.house.gov/index.html
+PASR	Robert P. Casey, Jr.	D	393 Russell Senate Office Building	202-224-6324	412-803-7370	http://www.casey.senate.gov/contact/	http://www.casey.senate.gov/
+PAJR	Pat Toomey	R	502 Hart Senate Office Building	202-224-4254	610-434-1444	http://www.toomey.senate.gov/?p=contact	http://www.toomey.senate.gov/
+PA01	Robert A. Brady	D	102 Cannon House Office Building	202-225-4731	610-874-7094	https://brady.house.gov/contact-me/email-me	http://brady.house.gov/
+PA02	Chaka Fattah	D	2301 Rayburn House Office Building	202-225-4001	215-871-4455	https://fattahforms.house.gov/index.cfm?sectionid=244&sectiontree=244	http://fattah.house.gov/index.html
+PA03	Mike Kelly	R	515 Cannon House Office Building	202-225-5406	814-454-8190	https://kelly.house.gov/contact-me/email-me	http://kelly.house.gov/
+PA04	Jason Altmire	D	332 Cannon House Office Building	202-225-2565	724-226-1304	https://forms.house.gov/altmire/webforms/issue_subscribe.htm	http://www.altmire.house.gov/
+PA05	Glenn (GT) Thompson	R	124 Cannon House Office Building	202-225-5121	814-827-3985	https://thompson.house.gov/contact-me/email-me	http://thompson.house.gov/
+PA06	Jim Gerlach	R	2442 Rayburn House Office Building	202-225-4315	610-409-2780	https://writerep.house.gov/writerep/welcome.shtml	http://gerlach.house.gov/
+PA07	Patrick Meehan	R	513 Cannon House Office Building	202-225-2011	610-690-7323	https://meehanforms.house.gov/email-me	http://meehan.house.gov/
+PA08	Mike Fitzpatrick	R	1224 Longworth House Office Building	202-225-4276	215-579-8102	https://fitzpatrick.house.gov/contact-me/email-me	http://fitzpatrick.house.gov/
+PA09	Bill Shuster	R	204 Cannon House Office Building	202-225-2431	814-443-3918	https://shusterforms.house.gov/contact-form	http://shuster.house.gov/
+PA10	Tom Marino	R	410 Cannon House Office Building	202-225-3731	570-322-3961	https://marino.house.gov/contact-me/email-me	http://marino.house.gov/
+PA11	Louis J. (Lou) Barletta	R	510 Cannon House Office Building	202-225-6511	570-751-0050	https://barletta.house.gov/index.cfm?sectionid=58&sectiontree=258	http://barletta.house.gov/index.html
+PA12	Mark S. Critz	D	1022 Longworth House Office Building	202-225-2065	800-289-2642	https://critz.house.gov/contact/email-me.shtml	http://critz.house.gov/
+PA13	Allyson Y. Schwartz	D	1227 Longworth House Office Building	202-225-6111	215-517-6572	http://schwartz.house.gov/issue_subscribe.shtml	http://schwartz.house.gov/
+PA14	Mike Doyle	D	401 Cannon House Office Building	202-225-2135	412-241-6055	https://doyle.house.gov/contact/email-me.shtml	http://doyle.house.gov/
+PA15	Charlie Dent	R	1009 Longworth House Office Building	202-225-6411	610-770-3490	https://dent.house.gov/?p=ContactForm	http://dent.house.gov/
+PA16	Joe Pitts	R	420 Cannon House Office Building	202-225-2411	717-393-0667	https://pitts.house.gov/contact-me/legislative-contact-form	http://pitts.house.gov/
+PA17	Tim Holden	D	2417 Rayburn House Office Building	202-225-5546	717-234-5904	https://holden.house.gov/contact-me/email-me	http://holden.house.gov/
+PA18	Tim Murphy	R	322 Cannon House Office Building	202-225-2301	724-850-7312	https://murphyforms.house.gov/index.cfm?sectionid=157	http://murphy.house.gov/index.html
+PA19	Todd Russell Platts	R	2455 Rayburn House Office Building	202-225-5836	717-249-0190	http://www.house.gov/platts/email.shtml	http://www.house.gov/platts/
+PR00	Pedro Pierluisi	D	1218 Longworth House Office Building	202-225-2615	787-723-6333	http://pierluisi.house.gov/english/contact-us.html	http://pierluisi.house.gov/
+RISR	Jack Reed	D	728 Hart Senate Office Building	202-224-4642	401-528-5200	http://www.reed.senate.gov/contact/	http://www.reed.senate.gov/
+RIJR	Sheldon Whitehouse	D	717 Hart Senate Office Building	202-224-2921	401-453-5294	http://www.whitehouse.senate.gov/contact/	http://www.whitehouse.senate.gov/
+RI01	David Cicilline	D	128 Cannon House Office Building	202-225-4911	401-729-5600	https://cicilline.house.gov/contact-me/email-me	http://cicilline.house.gov/
+RI02	Jim Langevin	D	109 Cannon House Office Building	202-225-2735	401-732-9400	https://langevin.house.gov/contact/email-me.shtml	http://langevin.house.gov/
+SCSR	Lindsey Graham	R	290 Russell Senate Office Building	202-224-5972	803-366-2828	http://lgraham.senate.gov/public/index.cfm?FuseAction=Contact.EmailSenatorGraham	http://lgraham.senate.gov/public/
+SCJR	Jim DeMint	R	167 Russell Senate Office Building	202-224-6121	843-727-4525	http://www.demint.senate.gov/public/index.cfm?p=CommentOnLegislationIssues	http://www.demint.senate.gov/public/index.cfm?p=Home
+SC01	Tim Scott	R	1117 Longworth House Office Building	202-225-3176	843-852-2222	http://timscott.house.gov/Contact/	http://timscott.house.gov/
+SC02	Joe Wilson	R	2229 Rayburn House Office Building	202-225-2452	843-521-2530	https://joewilsonforms.house.gov/Forms/WriteYourRep/default.aspx	http://www.joewilson.house.gov/
+SC03	Jeff Duncan	R	116 Cannon House Office Building	202-225-5301	803-649-5571	https://jeffduncan.house.gov/contact-me/email-me	http://jeffduncan.house.gov/
+SC04	Trey Gowdy	R	1237 Longworth House Office Building	202-225-6030	864-241-0175	http://gowdy.house.gov/Contact/	http://gowdy.house.gov/
+SC05	Mick Mulvaney	R	1004 Longworth House Office Building	202-225-5501	803-327-1114	https://forms.house.gov/mulvaney/webforms/zipauthen_contact.shtml	http://mulvaney.house.gov/
+SC06	James E. Clyburn	D	2135 Rayburn House Office Building	202-225-3315	803-854-4700	https://forms.house.gov/clyburn/zipauth.shtml	http://clyburn.house.gov/
+SDSR	Tim Johnson	D	136 Hart Senate Office Building	202-224-5842	605-332-8896	http://www.johnson.senate.gov/public/index.cfm?p=ContactForm	http://www.johnson.senate.gov/public/
+SDJR	John Thune	R	511 Dirksen Senate Office Building	202-224-2321	605-348-7551	http://www.thune.senate.gov/public/index.cfm/contact	http://www.thune.senate.gov/public/index.cfm/
+SD00	Kristi Noem	R	226 Cannon House Office Building	202-225-2801	605-275-2868	http://noem.house.gov/index.cfm/email-kristi	http://noem.house.gov/
+TNSR	Lamar Alexander	R	455 Dirksen Senate Office Building	202-224-4944	423-752-5337	http://www.alexander.senate.gov/public/index.cfm?p=OfficeLocations	http://www.alexander.senate.gov/public/index.cfm
+TNJR	Bob Corker	R	185 Dirksen Senate Office Building	202-224-3344	423-323-1252	https://www.corker.senate.gov/public/index.cfm?p=ContactMe	http://www.corker.senate.gov/public/
+TN01	Phil Roe	R	419 Cannon House Office Building	202-225-6356	423-254-1400	http://www.roe.house.gov/Contact/	http://www.roe.house.gov/
+TN02	John J. Duncan, Jr.	R	2207 Rayburn House Office Building	202-225-5435	865-523-3772	http://duncan.house.gov/services/zip-auth.shtml	http://duncan.house.gov/
+TN03	Chuck Fleischmann	R	511 Cannon House Office Building	202-225-3271	423-756-2342	https://fleischmann.house.gov/contact-me/email-me	http://fleischmann.house.gov/
+TN04	Scott DesJarlais	R	413 Cannon House Office Building	202-225-6831	931-381-9920	http://desjarlais.house.gov/Contact/	http://desjarlais.house.gov/
+TN05	Jim Cooper	D	1536 Longworth House Office Building	202-225-4311	615-736-5295	https://forms.house.gov/cooper/webforms/issue_subscribe.html	http://cooper.house.gov/
+TN06	Diane Black	R	1531 Longworth House Office Building	202-225-4231	615-896-1986	https://black.house.gov/contact-me/email-me	http://black.house.gov/
+TN07	Marsha Blackburn	R	217 Cannon House Office Building	202-225-2811	615-591-5161	https://blackburnforms.house.gov/contactform/default.aspx	http://blackburn.house.gov/
+TN08	Stephen Fincher	R	1118 Longworth House Office Building	202-225-4714	731-423-4848	https://fincher.house.gov/contact-me/email-me	http://fincher.house.gov/
+TN09	Steve Cohen	D	1005 Longworth House Office Building	202-225-3265	901-544-4131	https://cohenforms.house.gov/Forms/WriteYourRep/	http://cohen.house.gov/
+TXSR	Kay Bailey Hutchison	R	284 Russell Senate Office Building	202-224-5922	210-340-2885	http://hutchison.senate.gov/?p=email_kay	http://hutchison.senate.gov/
+TXJR	John Cornyn	R	517 Hart Senate Office Building	202-224-2934	972-239-1310	http://www.cornyn.senate.gov/public/index.cfm?p=ContactForm	http://www.cornyn.senate.gov/public/index.cfm?p=Home
+TX01	Louie Gohmert	R	2440 Rayburn House Office Building	202-225-3035	903-236-8597	http://gohmert.house.gov/Contact/	http://gohmert.house.gov/
+TX02	Ted Poe	R	430 Cannon House Office Building	202-225-6565	409-212-1997	https://forms.house.gov/poe/webforms/zipauthen_contact.shtml	http://poe.house.gov/
+TX03	Sam Johnson	R	1211 Longworth House Office Building	202-225-4201	972-470-0892	http://www.samjohnson.house.gov/Contact/	http://www.samjohnson.house.gov/
+TX04	Ralph M. Hall	R	2405 Rayburn House Office Building	202-225-6673	903-628-8309	http://writerep.house.gov/writerep/welcome.shtml	http://ralphhall.house.gov/index.html
+TX05	Jeb Hensarling	R	129 Cannon House Office Building	202-225-3484	214-349-9996	https://hensarling.house.gov/contact/email-me.shtml	http://hensarling.house.gov/
+TX06	Joe Barton	R	2109 Rayburn House Office Building	202-225-2002	936-544-8488	https://forms.house.gov/barton/webforms/zip_authen.html	http://joebarton.house.gov/
+TX07	John Culberson	R	2352 Rayburn House Office Building	202-225-2571	713-682-8828	http://culbersonforms.house.gov/Contact/ZipAuth.htm	http://culberson.house.gov/
+TX08	Kevin Brady	R	301 Cannon House Office Building	202-225-4901	409-883-4197	https://kevinbradyforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://kevinbrady.house.gov/
+TX09	Al Green	D	2201 Rayburn House Office Building	202-225-7508	713-383-9234	https://algreen.house.gov/contact-me/email-me	http://algreen.house.gov/
+TX10	Michael McCaul	R	131 Cannon House Office Building	202-225-2401	281-255-8372	http://mccaul.house.gov/index.cfm?sectionid=133&sectiontree=3133	http://mccaul.house.gov/index.html
+TX11	Mike Conaway	R	2430 Rayburn House Office Building	202-225-3605	432-687-2390	http://conaway.house.gov/contact/	http://conaway.house.gov/
+TX12	Kay Granger	R	320 Cannon House Office Building	202-225-5071	817-338-0909	http://kaygranger.house.gov/contact-kay/email-me	http://kaygranger.house.gov/
+TX13	Mac Thornberry	R	2209 Rayburn House Office Building	202-225-3706	806-371-8844	http://thornberry.house.gov/Contact/	http://www.thornberry.house.gov/
+TX14	Ron Paul	R	203 Cannon House Office Building	202-225-2831	361-576-1231	https://forms.house.gov/paul/webforms/issue_subscribe.html	http://paul.house.gov/
+TX15	Ruben Hinojosa	D	2262 Rayburn House Office Building	202-225-2531	956-682-5545	https://hinojosa.house.gov/contact-me/email-me	http://hinojosa.house.gov/
+TX16	Silvestre Reyes	D	2210 Rayburn House Office Building	202-225-4831	915-534-4400	http://reyes.house.gov/Contact/vyo.htm	http://reyes.house.gov/
+TX17	Bill Flores	R	1505 Longworth House Office Building	202-225-6105	979-703-4037	http://flores.house.gov/index.cfm?sectionid=58&sectiontree=358	http://flores.house.gov/
+TX18	Sheila Jackson Lee	D	2160 Rayburn House Office Building	202-225-3816	713-655-0050	http://www.jacksonlee.house.gov/Contact/	http://www.jacksonlee.house.gov/
+TX19	Randy Neugebauer	R	1424 Longworth House Office Building	202-225-4005	432-264-0722	https://randyforms.house.gov/index.cfm?sectionid=172	http://www.randy.house.gov/index.html
+TX20	Charles A. Gonzalez	D	1436 Longworth House Office Building	202-225-3236	210-472-6195	http://forms.house.gov/gonzalez/webforms/issue_subscribe.htm	http://www.gonzalez.house.gov/
+TX21	Lamar Smith	R	2409 Rayburn House Office Building	202-225-4236	210-821-5024	http://lamarsmith.house.gov/Contact/	http://lamarsmith.house.gov/
+TX22	Pete Olson	R	312 Cannon House Office Building	202-225-5951	281-494-2690	https://olsonforms.house.gov/index.cfm?sectionid=162	http://olson.house.gov/index.html
+TX23	Francisco R. (Quico) Canseco	R	1339 Longworth House Office Building	202-225-4511	210-922-7826	http://franciscocanseco.house.gov/contact/	http://canseco.house.gov/
+TX24	Kenny Marchant	R	1110 Longworth House Office Building	202-225-6605	972-556-0162	https://marchant.house.gov/Contact/	http://marchant.house.gov/
+TX25	Lloyd Doggett	D	201 Cannon House Office Building	202-225-4865	512-916-5921	http://forms.house.gov/doggett/webforms/issue_subscribe.htm	http://doggett.house.gov/
+TX26	Michael C. Burgess	R	2241 Rayburn House Office Building	202-225-7772	972-434-9700	https://writerep.house.gov/writerep/welcome.shtml	http://burgess.house.gov/
+TX27	Blake Farenthold	R	2110 Rayburn House Office Building	202-225-7742	956-544-8800	https://forms.house.gov/farenthold/webforms/zipauthen_contact.shtml	http://farenthold.house.gov
+TX28	Henry Cuellar	D	2463 Rayburn House Office Building	202-225-1640	956-487-5603	http://cuellar.house.gov/Contact/SendMeAnEmail.htm	http://cuellar.house.gov/
+TX29	Gene Green	D	2470 Rayburn House Office Building	202-225-1688	713-330-0761	https://green.house.gov/contact-me/email-me	http://green.house.gov/
+TX30	Eddie Bernice Johnson	D	2468 Rayburn House Office Building	202-225-8885	214-922-8885	https://ebjohnsonforms.house.gov/index.cfm?sectionid=85	http://ebjohnson.house.gov/index.html
+TX31	John R. Carter	R	409 Cannon House Office Building	202-225-3864	512-246-1600	https://carterforms.house.gov/index.cfm?sectionid=139&sectiontree=139	http://carter.house.gov/index.html
+TX32	Pete Sessions	R	2233 Rayburn House Office Building	202-225-2231	972-392-0505	https://sessions.house.gov/index.cfm/contact-form	http://sessions.house.gov/
+UTSR	Orrin G. Hatch	R	104 Hart Senate Office Building	202-224-5251	801-625-5672	http://hatch.senate.gov/public/index.cfm/email-orrin	http://hatch.senate.gov/public/index.cfm/
+UTJR	Mike Lee	R	316 Hart Senate Office Building	202-224-5444	801-524-5933	http://www.lee.senate.gov/public/index.cfm/contact-senator-lee?p=contact	http://www.lee.senate.gov/public/
+UT01	Rob Bishop	R	123 Cannon House Office Building	202-225-0453	801-625-0107	http://robbishop.house.gov/Contact/ZipAuth.htm	http://robbishop.house.gov/
+UT02	Jim Matheson	D	2434 Rayburn House Office Building	202-225-3011	435-627-0880	https://mathesonforms.house.gov/contact-form#dialog	http://matheson.house.gov/
+UT03	Jason Chaffetz	R	1032 Longworth House Office Building	202-225-7751	801-851-2500	https://chaffetz.house.gov/contact-me/email-me	http://chaffetz.house.gov/
+VASR	Jim Webb	D	248 Russell Senate Office Building	202-224-4024	804-771-2221	http://webb.senate.gov/contact.cfm	http://webb.senate.gov/
+VAJR	Mark R. Warner	D	475 Russell Senate Office Building	202-224-2023	703-442-0670	http://www.warner.senate.gov/public//index.cfm?p=ContactPage	http://www.warner.senate.gov/public/
+VA01	Rob Wittman	R	1317 Longworth House Office Building	202-225-4261	757-874-6687	https://forms.house.gov/wittman/webforms/webforms/issue_subscribe.htm	http://www.wittman.house.gov/
+VA02	Scott Rigell	R	327 Cannon House Office Building	202-225-4215	757-687-8290	http://rigell.house.gov/Contact/	http://rigell.house.gov/
+VA03	Bobby Scott	D	1201 Longworth House Office Building	202-225-8351	757-380-1000	https://writerep.house.gov/writerep/welcome.shtml	http://bobbyscott.house.gov
+VA04	J. Randy Forbes	R	2438 Rayburn House Office Building	202-225-6365	757-382-0080	http://randyforbes.house.gov/Contact/ZipAuth.htm	http://randyforbes.house.gov/
+VA05	Robert Hurt	R	1516 Longworth House Office Building	202-225-4711	434-791-2596	https://hurt.house.gov/index.cfm/email-me	http://hurt.house.gov/
+VA06	Bob Goodlatte	R	2240 Rayburn House Office Building	202-225-5431	540-885-3861	http://goodlatte.house.gov/contacts/new	http://goodlatte.house.gov/
+VA07	Eric Cantor	R	303 Cannon House Office Building	202-225-2815	804-747-4073	http://cantor.house.gov/contact/	http://cantor.house.gov/
+VA08	Jim Moran	D	2239 Rayburn House Office Building	202-225-4376	703-971-4700	https://moran.house.gov/contact-me/email-me	http://moran.house.gov/index.shtml
+VA09	Morgan Griffith	R	1108 Longworth House Office Building	202-225-3861	276-525-1405	http://morgangriffith.house.gov/Contact/	http://morgangriffith.house.gov/
+VA10	Frank R. Wolf	R	241 Cannon House Office Building	202-225-5136	800-850-3463	https://wolfforms.house.gov/index.cfm?sectionid=383	http://www.wolf.house.gov/index.html
+VA11	Gerald E. (Gerry) Connolly	D	424 Cannon House Office Building	202-225-1492	703-670-4989	https://connollyforms.house.gov/index.cfm?sectionid=132&sectiontree=3132	http://gerryconnolly.house.gov/index.html
+VI00	Donna M. Christensen	D	1510 Longworth House Office Building	202-225-1790	340-778-5900	https://donnachristensen.house.gov/contact-me/email-me	http://donnachristensen.house.gov/
+VTSR	Patrick Leahy	D	437 Russell Senate Office Building	202-224-4242	800-642-3193	http://www.leahy.senate.gov/contact/	http://www.leahy.senate.gov/
+VTJR	Bernie Sanders	I	332 Dirksen Senate Office Building	202-224-5141	802-254-8732	http://www.sanders.senate.gov/contact/contact.cfm	http://www.sanders.senate.gov/
+VT00	Peter Welch	D	1404 Longworth House Office Building	202-225-4115	802-652-2450	http://www.house.gov/formwelch/issue_subscribe.htm	http://www.welch.house.gov/
+WASR	Patty Murray	D	448 Russell Senate Office Building	202-224-2621	360-696-7797	http://www.murray.senate.gov/public/index.cfm/contactme	http://www.murray.senate.gov/public/
+WAJR	Maria Cantwell	D	311 Hart Senate Office Building	202-224-3441	206-220-6400	http://cantwell.senate.gov/contact/index.cfm	http://cantwell.senate.gov/
+WA01	Vacant		2329 Rayburn House Office Building	202-225-6311	206-361-0233	N/A	N/A
+WA02	Rick Larsen	D	108 Cannon House Office Building	202-225-2605	360-733-4500	https://larsen.house.gov/contact/email-me.shtml	http://larsen.house.gov/
+WA03	Jaime Herrera Beutler	R	1130 Longworth House Office Building	202-225-3536	360-695-6292	http://herrerabeutler.house.gov/Contact/	http://herrerabeutler.house.gov/
+WA04	Doc Hastings	R	1203 Longworth House Office Building	202-225-5816	509-452-3243	http://hastings.house.gov/Contact/	http://hastings.house.gov/
+WA05	Cathy McMorris Rodgers	R	2421 Rayburn House Office Building	202-225-2006	509-684-3481	https://mcmorrisforms.house.gov/index.cfm?sectionid=435&sectiontree=4435	http://mcmorris.house.gov
+WA06	Norm Dicks	D	2467 Rayburn House Office Building	202-225-5916	360-479-4011	http://www.house.gov/dicks/newemail.shtml	http://www.house.gov/dicks/
+WA07	Jim McDermott	D	1035 Longworth House Office Building	202-225-3106	206-553-7170	https://forms.house.gov/mcdermott/webforms/new/contact.shtml	http://mcdermott.house.gov/
+WA08	Dave Reichert	R	1730 Longworth House Office Building	202-225-7761	425-677-7414	http://reichert.house.gov/Contact/ZipAuth.htm	http://reichert.house.gov/
+WA09	Adam Smith	D	2402 Rayburn House Office Building	202-225-8901	253-593-6600	http://adamsmith.house.gov/Contact/	http://adamsmith.house.gov/
+WISR	Herb Kohl	D	330 Hart Senate Office Building	202-224-5653	715-832-8424	http://www.kohl.senate.gov/contact.cfm	http://www.kohl.senate.gov/
+WIJR	Ron Johnson	R	386 Russell Senate Office Building	202-224-5323	920-230-7250	http://www.ronjohnson.senate.gov/public/index.cfm/email-the-senator	http://www.ronjohnson.senate.gov/public/
+WI01	Paul Ryan	R	1233 Longworth House Office Building	202-225-3031	608-752-4050	https://paulryanforms.house.gov/Contact/Email.htm	http://paulryan.house.gov/
+WI02	Tammy Baldwin	D	2446 Rayburn House Office Building	202-225-2906	608-362-2800	https://tammybaldwin.house.gov/contact/email-me.shtml	http://tammybaldwin.house.gov/
+WI03	Ron Kind	D	1406 Longworth House Office Building	202-225-5506	608-782-2558	https://kindforms.house.gov/index.cfm?sectionid=146&sectiontree=18146	http://www.kind.house.gov/index.html
+WI04	Gwen Moore	D	2245 Rayburn House Office Building	202-225-4572	414-297-1140	https://gwenmoore.house.gov/contact-form	http://gwenmoore.house.gov/
+WI05	F. James (Jim) Sensenbrenner, Jr.	R	2449 Rayburn House Office Building	202-225-5101	262-784-1111	http://sensenbrenner.house.gov/email_zip.htm	http://sensenbrenner.house.gov/
+WI06	Tom Petri	R	2462 Rayburn House Office Building	202-225-2476	920-231-6333	https://petri.house.gov/contact-me/email-me	http://petri.house.gov/
+WI07	Sean Duffy	R	1208 Longworth House Office Building	202-225-3365	715-298-9344	https://duffy.house.gov/contact-me/email-me	http://duffy.house.gov/
+WI08	Reid Ribble	R	1513 Longworth House Office Building	202-225-5665	920-380-0061	https://ribble.house.gov/contact-me/email-me	http://ribble.house.gov/
+WVSR	Jay Rockefeller	D	531 Hart Senate Office Building	202-224-6472	304-367-0122	http://www.rockefeller.senate.gov/public/index.cfm/email-jay	http://www.rockefeller.senate.gov/public/
+WVJR	Joe Manchin	D	303 Hart Senate Office Building	202-224-3954	304-342-5855	http://manchin.senate.gov/public/index.cfm/contact-form	http://manchin.senate.gov/public/index.cfm/
+WV01	David McKinley	R	313 Cannon House Office Building	202-225-4172	304-232-3801	https://mckinleyforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://mckinley.house.gov/
+WV02	Shelley Moore Capito	R	2443 Rayburn House Office Building	202-225-2711	304-925-5964	https://capitoforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://capito.house.gov/
+WV03	Nick Rahall	D	2307 Rayburn House Office Building	202-225-3452	304-752-4934	https://rahall.house.gov/contact-me/email-me	http://rahall.house.gov/
+WYSR	Mike Enzi	R	379A Russell Senate Office Building	202-224-3424	307-772-2477	http://www.enzi.senate.gov/public/index.cfm/e-mail-senator-enzi	http://www.enzi.senate.gov/public/
+WYJR	John Barrasso	R	307 Dirksen Senate Office Building	202-224-6441	307-672-6456	http://barrasso.senate.gov/public/index.cfm?FuseAction=ContactUs.ContactForm	http://barrasso.senate.gov/public/
+WY00	Cynthia Lummis	R	113 Cannon House Office Building	202-225-2311	307-261-6595	http://lummis.house.gov/Contact/	http://lummis.house.gov/
