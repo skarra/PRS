@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Mon May 28 11:41:09 IST 2012
+// Last Modified : Mon May 28 18:42:32 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -88,6 +88,10 @@ function addHandlers () {
 		window.location = '/view/doctor/id/' + aData[0];
 	    });
 	}
+    });
+
+    $("#print_pat_lab").click(function() {
+	window.print();
     });
 
     $("#new_patient_form").submit(validateNewPatient);

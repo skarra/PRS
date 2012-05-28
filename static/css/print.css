@@ -57,3 +57,11 @@ body.bp .quiet {
 body.bp .hide {
   display: none;
 }
+
+header, #patient_admin, .push, #main_footer, #head_info #info {
+    display: none;
+}
+
+#content {
+    width: 100%;
+}
