@@ -8,6 +8,19 @@ sys.path = EXTRA_PATHS + sys.path
 
 import models
 
+def generate_random_allergies ():
+    choices = ['pennicilin', 'pollen', 'streptocaucus']
+    return '\n'.join(random.sample(choices, random.randint(1, len(choices))))
+
+def generate_old_diagnosis ():
+    diag = 'Ipsum Lorem Dictum scrotum'
+    num = random.randint(1, 3)
+    ret = [diag]
+    for i in range(num):
+        ret.append(diag)
+
+    return '\n'.join(ret)
+
 def add_uscongressmen_as_patients (session):
     patients_file = os.path.join(DIR_PATH, 'uscongress.txt')
 
@@ -27,8 +40,13 @@ def add_uscongressmen_as_patients (session):
                 break
 
             logging.debug('Processing %s...', fields[1])
-            names  = fields[1].split()         # To construct the Relative's Name
+            names  = fields[1].split()         # To construct Relative's Name
             gender = random.choice(['Female', 'Male'])
+            allergies = generate_random_allergies()
+            old_diag  = generate_old_diagnosis()
+            free = random.choice([True, False])
+            reg_fee = random.choice([20, 50, 100]) if free else 0
+
             pat = models.Patient(name=fields[1],
                                  age=random.randint(30, 80),
                                  gender=gender,
@@ -39,7 +57,12 @@ def add_uscongressmen_as_patients (session):
                                  relative=(random.choice(['John', 'Jill']) +
                                            ' ' + random.choice(names)),
                                 relative_phone=fields[5],
-                                relative_relation='Friend')
+                                relative_relation='Friend',
+                                free=free,
+                                reg_fee=reg_fee,
+                                allergies=allergies,
+                                old_diag=old_diag
+                )
             session.add(pat)
 
         session.commit()
