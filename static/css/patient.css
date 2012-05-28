@@ -1,4 +1,4 @@
-#head_info, #contact_info {
+#head_info, #contact_info, #prior_history {
     *zoom: 1;
     display: inline-block;
     min-height: 100%;
@@ -16,7 +16,7 @@
     vertical-align: bottom;
 }
 
-#contact_info {
+#contact_info, #prior_history {
     display: table;
 }
 
@@ -36,9 +36,23 @@
     float: right;
 }
 
-#contact_info tag {
+#contact_info tag, #prior_history tag {
     font-weight: bold;
     font-size: 110%;
+}
+
+#allergy_history {
+    display: table-column;
+    float: left;
+    position: relative;
+    width: 33%;
+}
+
+#past_diagnosis {
+    display: table-column;
+    float: right;
+    position: relative;
+    width: 67%;
 }
 
 .pat_label {
@@ -73,4 +87,8 @@
     background: #d6d6d6;
     cursor: pointer;
     color: blue;
+}
+
+#sheet li {
+    margin-top: 0;
 }

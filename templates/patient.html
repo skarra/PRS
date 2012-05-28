@@ -23,6 +23,7 @@
 <hr/>
 
 <div id="contact_info">
+  <h2>Personal Details</h2>
   <div id="personal_details">
     <tag>Age:</tag> {{ rec.age }} 
     <tag>Gender:</tag> {{ rec.gender }} <br/>
@@ -38,22 +39,41 @@
   <div id="relative">
     <tag>Relative Name:</tag> {{ rec.relative }}<br/>
     <tag>Relation:</tag> {{ rec.relative_relation }} <br/>
-    <tag>Contact Number:</tag> {{ rec.relative_phone }} <br/>
+    <tag>Phone:</tag> {{ rec.relative_phone }} <br/>
   </div>
 </div>
 
 <hr/>
 
 <div id="prior_history">
+  <h2>Prior History</h2>
   <div id="allergy_history">
+    <tag>Allergies:</tag> <br/>
+    <ul>
+    {% for a in rec.allergies.split('\n') %}
+      <li>
+      {{ a }}
+      </li>
+    {% end %}
+    </ul>
   </div>
 
   <div id="past_diagnosis">
+    <tag>Past Diagnosis:</tag> <br/>
+    <ul>
+    {% for a in rec.old_diag.split('\n') %}
+      <li>
+      {{ a }}
+      </li>
+    {% end %}
+    </ul>
   </div>
 </div>
 
+<hr/>
+
 <div id="visit_history">
-  
+  <h2>CMC Visit History</h2>
 </div>
 
 {% end block %}
