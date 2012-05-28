@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu May 24 23:36:19 IST 2012
+## Last Modified : Fri May 25 14:42:13 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -62,7 +62,7 @@ class SearchHandler(tornado.web.RequestHandler):
             elif field == 'id':
                 query = query.filter(model.id == value)
 
-        qstr = 'Role: "%-7s" Field: "%6s" Value: "%s"' % (role, field, value)
+        qstr = 'Field: "%6s" Value: "%s"' % (field, value)
         match_cnt = query.count()
 
         self.render(template, title=config.get_title(), search_query=qstr,
@@ -96,12 +96,32 @@ class ViewHandler (tornado.web.RequestHandler):
     details."""
 
     def view_doctor (self, field, value):
+        q = session().query(models.Doctor)
+        if field == 'name':
+            rec = q.filter_by(name = value).first()
+        elif field == 'id':
+            rec = q.filter_by(id = value).first()
+        else:
+            logging.error('ViewHandler:view_doctor: Unknown field type (%s)',
+                          field)
+            self.redirect('/')
+
         self.render('doctor.html', title=config.get_title(), name="Goofy",
-                    value=value)
+                    rec=rec)
 
     def view_patient (self, field, value):
+        q = session().query(models.Patient)
+        if field == 'name':
+            rec = q.filter_by(name = value).first()
+        elif field == 'id':
+            rec = q.filter_by(id = value).first()
+        else:
+            logging.error('ViewHandler:view_patient: Unknown field type (%s)',
+                          field)
+            self.redirect('/')
+
         self.render('patient.html', title=config.get_title(), name="Goofy",
-                    value=value)
+                    rec=rec)
 
     def get (self, role, field, value):
         """role is one of 'patient' or 'doctor', field will be one of Name or

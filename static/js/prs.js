@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Thu May 24 23:23:26 IST 2012
+// Last Modified : Mon May 28 11:41:09 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -8,7 +8,8 @@
 // Licensed under the GNU GPL v3
 //
 
-var srp_table;
+var pat_srp_table;
+var doc_srp_table;
 
 function validateNewPatient (event) {
     console.log('Validating new patient record...');
@@ -65,13 +66,26 @@ function addHandlers () {
 
     // The following only applies to the srp.html, but it is still
     // desirable to have all the javascipt centralized here (??)...
-    srp_table = $("#srp_table").dataTable({
+    pat_srp_table = $("#pat_srp_table").dataTable({
 	"fnDrawCallback" : function(oSettings) {
-	    $("#srp_table tbody td").click(function () {
-		var aPos = srp_table.fnGetPosition(this);
-		var aData = srp_table.fnGetData(aPos[0]);
-		console.log('Hurrah. ID selected is: ' + aData[0]);
+	    $("#pat_srp_table tbody td").click(function () {
+		var aPos  = pat_srp_table.fnGetPosition(this);
+		var aData = pat_srp_table.fnGetData(aPos[0]);
+		console.log('Hurrah. Patient ID selected is: ' + aData[0]);
 		window.location = '/view/patient/id/' + aData[0];
+	    });
+	}
+    });
+
+    // The following only applies to the srp.html, but it is still
+    // desirable to have all the javascipt centralized here (??)...
+    doc_srp_table = $("#doc_srp_table").dataTable({
+	"fnDrawCallback" : function(oSettings) {
+	    $("#doc_srp_table tbody td").click(function () {
+		var aPos  = doc_srp_table.fnGetPosition(this);
+		var aData = doc_srp_table.fnGetData(aPos[0]);
+		console.log('Hurrah. Doc ID selected is: ' + aData[0]);
+		window.location = '/view/doctor/id/' + aData[0];
 	    });
 	}
     });

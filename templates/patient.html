@@ -1,9 +1,60 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+<link href="/static/css/patient.css"        rel="stylesheet" type="text/css" />
+{% end block %}
+
 {% block content %}
 
-<h1> {{ name }} </h1>
+<div id="head_info">
+  <div id="head">
+    <h1> {{ rec.title }} {{ rec.name }} </h1>
+    <h3> {{ rec.regdate.strftime("%Y/%m/%d") }}/{{ rec.id }} </h3>
+  </div>
+
+  <div id="info">
+    <div id="delete_pat_lab" class="pat_label">Delete</div>
+    <div id="edit_pat_lab" class="pat_label">Edit</div>
+    <div id="print_pat_lab" class="pat_label">Print</div>
+  </div>
+</div>
+
+<br/>
 <hr/>
-Value: {{ value }}
+
+<div id="contact_info">
+  <div id="personal_details">
+    <tag>Age:</tag> {{ rec.age }} 
+    <tag>Gender:</tag> {{ rec.gender }} <br/>
+    <tag>Phone:</tag> {{ rec.phone }} <br/>
+    <tag>Email:</tag> {{ rec.email }}
+  </div>
+
+  <div id="address">
+    <tag>Address:</tag> <br/>
+    {{ rec.address }}
+  </div>
+
+  <div id="relative">
+    <tag>Relative Name:</tag> {{ rec.relative }}<br/>
+    <tag>Relation:</tag> {{ rec.relative_relation }} <br/>
+    <tag>Contact Number:</tag> {{ rec.relative_phone }} <br/>
+  </div>
+</div>
+
+<hr/>
+
+<div id="prior_history">
+  <div id="allergy_history">
+  </div>
+
+  <div id="past_diagnosis">
+  </div>
+</div>
+
+<div id="visit_history">
+  
+</div>
 
 {% end block %}
+

@@ -1,0 +1,76 @@
+#head_info, #contact_info {
+    *zoom: 1;
+    display: inline-block;
+    min-height: 100%;
+    width: 100%;
+}
+
+#head_info #head {
+    width: 50%;
+    float: left;
+}
+
+#head_info #info {
+    width: 50%;
+    float: right;
+    vertical-align: bottom;
+}
+
+#contact_info {
+    display: table;
+}
+
+#personal_details, #address, #relative {
+    display: table-column;
+    position: relative;
+    float: left;
+    width: 33%;
+    height: 100%;
+}
+
+#personal_details {
+    float: left;
+}
+
+#relative {
+    float: right;
+}
+
+#contact_info tag {
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.pat_label {
+    display: inline-block;
+    float: right;
+    width: 60px;
+    height: 25px;
+    position: relative;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: center;
+    color: #666;
+    background: #e6e6e6;
+
+    margin-left: 2px;
+    margin-right: 2px;
+
+    padding-top: 5px;
+
+   -moz-border-radius:    3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius:      3px;
+    -ms-border-radius:     3px;
+    -khtml-border-radius:  3px;
+    border-radius:         3px;
+    border: 1px solid #b7b7b7;
+
+    font-weight: bold;
+}
+
+.pat_label:hover {
+    background: #d6d6d6;
+    cursor: pointer;
+    color: blue;
+}
