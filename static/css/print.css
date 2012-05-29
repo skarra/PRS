@@ -3,6 +3,10 @@ body, h1, h2, h3 {
     background: #ffffff;
 }
 
+body {
+    font: 12pt;
+}
+
 header, #patient_admin, .push, #main_footer, #head_info #info {
     display: none;
 }

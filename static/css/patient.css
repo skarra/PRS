@@ -16,9 +16,10 @@
     vertical-align: bottom;
 }
 
-#contact_info, #prior_history, visit_head {
+#contact_info, #prior_history, #visit_history, visit_head {
     display: table;
     width: 100%;
+    height: 100%;
 }
 
 #personal_details, #address, #relative, .threecol {
@@ -27,6 +28,10 @@
     float: left;
     width: 33%;
     height: 100%;
+}
+
+.fullcol {
+    width: 100%;
 }
 
 #personal_details {
