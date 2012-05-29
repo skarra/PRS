@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri May 25 14:42:13 IST 2012
+## Last Modified : Tue May 29 21:29:32 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -121,7 +121,7 @@ class ViewHandler (tornado.web.RequestHandler):
             self.redirect('/')
 
         self.render('patient.html', title=config.get_title(), name="Goofy",
-                    rec=rec)
+                    rec=rec, d=session().query(models.Doctor))
 
     def get (self, role, field, value):
         """role is one of 'patient' or 'doctor', field will be one of Name or

@@ -16,11 +16,12 @@
     vertical-align: bottom;
 }
 
-#contact_info, #prior_history {
+#contact_info, #prior_history, visit_head {
     display: table;
+    width: 100%;
 }
 
-#personal_details, #address, #relative {
+#personal_details, #address, #relative, .threecol {
     display: table-column;
     position: relative;
     float: left;
@@ -36,7 +37,7 @@
     float: right;
 }
 
-#contact_info tag, #prior_history tag {
+tag {
     font-weight: bold;
     font-size: 110%;
 }

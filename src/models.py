@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Thu May 24 21:58:46 IST 2012
+## Last Modified : Tue May 29 16:53:33 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -49,7 +49,9 @@ class Patient(Base):
     allergies = Column(Text())
     old_diag  = Column(Text())
 
-    consultations = relationship("Consultation", cascade="all, delete-orphan")
+    consultations = relationship("Consultation", 
+                                 backref=backref('patient',
+                                                 cascade="all"))
 
     def __repr__(self):
         return ("<Patient(id:%d,Name:%s, age:%d)>" %
@@ -80,7 +82,9 @@ class Doctor(Base):
     address = Column(Text())
     email   = Column(Unicode(255))
 
-    consultations = relationship('Consultation', cascade="all, delete-orphan")
+    consultations = relationship('Consultation',
+                                 backref=backref('doctor',
+                                                 cascade="all"))
     slots         = relationship('Slot', secondary=doc_slot_atable,
                                  backref=backref('doctors', cascade="all"))
     hours         = relationship('Hour', backref=backref('doctor', cascade="all"))
@@ -115,7 +119,7 @@ class Consultation(Base):
     id         = Column(Integer, primary_key=True)
     patient_id = Column(Integer, ForeignKey('patient.id'))
     doctor_id  = Column(Integer, ForeignKey('doctor.id'))
-    date       = Column(DateTime(), default=now)
+    time       = Column(DateTime(), default=now)
     charge     = Column(Integer, default=0)
     notes      = Column(Text())
 

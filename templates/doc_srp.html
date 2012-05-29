@@ -22,6 +22,7 @@ Matches: {{ match_cnt }}
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
+      <th>Department</th>
       </tr>
   </thead>
 
@@ -33,6 +34,7 @@ Matches: {{ match_cnt }}
       <td> {{ res.name }}  </td>
       <td> {{ res.email }} </td>
       <td> {{ res.phone }} </td>
+      <td> {{ res.depts[0].name }} </td>
     </tr>
     {% end %}
   </tbody>

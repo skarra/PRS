@@ -163,8 +163,52 @@ def add_doc_hours (session):
 
     session.commit()
 
+def add_departments (session):
+    q = session.query(models.Doctor)
+    doc_cnt = q.count()
+    doc_ids = [doc.id for doc in q]
+
+    i = 0
+    q = session.query(models.Department)
+    while True:
+        try:
+            for dept in q:
+                doc_id = doc_ids[i]
+                p = session.query(models.Doctor)
+                doc = p.filter_by(id = doc_id).first()
+                logging.debug('i = %3d; Adding Doc (%-20s) to Dept (%s)...',
+                              i, doc.name, dept.name)
+                dept.doctors.append(doc)
+                i += 1
+        except Exception, e:
+            logging.info('Caught exception (%s) breaking.', e)
+            break
+
+    session.commit()        
+
+def add_consultations (session):
+    logging.debug('')
+    p = session.query(models.Doctor)
+    docs = [doc for doc in p]
+
+    q = session.query(models.Patient)
+    for pat in q:
+        logging.debug('Adding visits to patient: %s...', pat.name)
+        num = random.randint(1, 3)
+        for i in range(num):
+            charge = random.choice([10, 20, 30, 40, 50])
+            con = models.Consultation(charge=charge,
+                                      notes='Lorem Ipsum Gypsum zero sum')
+            doc = random.choice(docs)
+            logging.debug('\tAdded doctor ID: %3d, Name: %s...',
+                          doc.id, doc.name)
+            pat.consultations.append(con)
+            doc.consultations.append(con)
+
+    session.commit()
+
 def main ():
-    logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger().setLevel(logging.DEBUG)
 
     logging.info('Settingup schema and tables....')
     engine, session = models.setup_tables("sample.db")
@@ -183,6 +227,12 @@ def main ():
 
     logging.info('Setting up Consulting Hours...')
     add_doc_hours(session)
+
+    logging.info('Assigning Departments to doctors...')
+    add_departments(session)
+
+    logging.info('Setting up random visits...')
+    add_consultations(session)
 
 if __name__ == '__main__':
     main()
