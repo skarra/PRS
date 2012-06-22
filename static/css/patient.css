@@ -16,6 +16,28 @@
     vertical-align: bottom;
 }
 
+#head_cmc {
+    float: center;
+    text-align: center;
+}
+
+#head_cmc hr {
+    margin: auto;
+}
+
+#head_cmc .name1 {
+    font-size: 110%;
+    font-weight: bold;
+}
+
+#head_cmc .name2 {
+    font-size: 110%;
+}
+
+#head_cmc .addr {
+    font-size: 80%;
+}
+
 #contact_info, #prior_history, #visit_history, visit_head {
     display: table;
     width: 100%;

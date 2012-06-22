@@ -11,6 +11,10 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
     display: none;
 }
 
+#head_cmc {
+    display: block;
+}
+
 #content {
     width: 100%;
 }

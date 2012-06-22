@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Tue May 29 16:53:33 IST 2012
+## Last Modified : Fri Jun 22 15:58:45 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -37,17 +37,15 @@ class Patient(Base):
 
     phone   = Column(Unicode(255), nullable=False)
     address = Column(Text())
-    email   = Column(Unicode(255))
 
     relative          = Column(Unicode(255))
     relative_phone    = Column(Unicode(255))
     relative_relation = Column(Unicode(255))
 
+    occupation = Column(Unicode(255))
+
     free    = Column(Boolean, default=True)
     reg_fee = Column(Integer, default=0)
-
-    allergies = Column(Text())
-    old_diag  = Column(Text())
 
     consultations = relationship("Consultation", 
                                  backref=backref('patient',

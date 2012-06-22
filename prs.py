@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue May 29 21:29:32 IST 2012
+## Last Modified : Fri Jun 22 22:03:37 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -139,12 +139,19 @@ class NewPatientHandler(tornado.web.RequestHandler):
         print 'Got the post, buddy.'
 
         ga = self.get_argument
+        gender = ga('new_gender', 'Male')
+        title  = 'Mr.' if gender == 'Male' else 'Ms.'
         session().add(models.Patient(name=ga("new_name", ''),
+                                     title=title, gender=gender,
                                      age=ga("new_age", 0),
-                                     gender=ga('new_gender', 'Male'),
                                      regdate=ga("new_regdate", datetime.now()),
                                      phone=ga('new_phone', ''),
                                      address=ga('new_addr', ''),
+                                     occupation=ga('new_occup', ''),
+                                     relative=ga('new_relname', ''),
+                                     relative_relation=ga('new_relrel', ''),
+                                     relative_phone=ga('new_relph', ''),
+                                     reg_fee=ga('new_rfee', 0)
                                      ))
         session().commit()
         self.redirect('/')

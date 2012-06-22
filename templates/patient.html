@@ -6,10 +6,20 @@
 
 {% block content %}
 
+<div id="head_cmc">
+  <span class="name1"> Major Gen. B. N. Bhandari Charitable Medical Clinic 
+  </span> <br/>
+  <span class="name2"> Servants of the People Society </span> <br/>
+  <span class="addr"> Lajpat Bhawan, Lajpat Nagar IV, New Delhi </span> <br/>
+  <span class="addr">Tel No.: 011 2643 4175 </span>
+  <hr width="50%"/> <p/>
+</div>
+
 <div id="head_info">
   <div id="head">
-    <h1> {{ rec.title }} {{ rec.name }} </h1>
-    <h3> {{ rec.regdate.strftime("%Y/%m/%d") }}/{{ rec.id }} </h3>
+    <h1> {{ rec.name }} </h1>
+    <tag> Regn Date: </tag> {{ rec.regdate.strftime("%Y/%m/%d") }}
+    <tag> ID: </tag> {{ rec.id }}
   </div>
 
   <div id="info">
@@ -28,7 +38,6 @@
     <tag>Age:</tag> {{ rec.age }} 
     <tag>Gender:</tag> {{ rec.gender }} <br/>
     <tag>Phone:</tag> {{ rec.phone }} <br/>
-    <tag>Email:</tag> {{ rec.email }}
   </div>
 
   <div id="address">
@@ -40,33 +49,6 @@
     <tag>Relative Name:</tag> {{ rec.relative }}<br/>
     <tag>Relation:</tag> {{ rec.relative_relation }} <br/>
     <tag>Phone:</tag> {{ rec.relative_phone }} <br/>
-  </div>
-</div>
-
-<hr/>
-
-<div id="prior_history">
-  <h2>Prior History</h2>
-  <div id="allergy_history">
-    <tag>Allergies:</tag> <br/>
-    <ul>
-    {% for a in rec.allergies.split('\n') %}
-      <li>
-      {{ a }}
-      </li>
-    {% end %}
-    </ul>
-  </div>
-
-  <div id="past_diagnosis">
-    <tag>Past Diagnosis:</tag> <br/>
-    <ul>
-    {% for a in rec.old_diag.split('\n') %}
-      <li>
-      {{ a }}
-      </li>
-    {% end %}
-    </ul>
   </div>
 </div>
 

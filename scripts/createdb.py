@@ -53,15 +53,16 @@ def add_uscongressmen_as_patients (session):
                                  title='Mr.' if gender == 'Male' else 'Ms.',
                                  phone=fields[4],
                                  address=fields[3],
-                                 email=fields[6],
                                  relative=(random.choice(['John', 'Jill']) +
                                            ' ' + random.choice(names)),
                                 relative_phone=fields[5],
                                 relative_relation='Friend',
+                                occupation=random.choice(['Freelance',
+                                                          'Jobless',
+                                                          'Self Employed',
+                                                          'Govt Servant',]),
                                 free=free,
-                                reg_fee=reg_fee,
-                                allergies=allergies,
-                                old_diag=old_diag
+                                reg_fee=reg_fee
                 )
             session.add(pat)
 
