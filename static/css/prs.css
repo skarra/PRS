@@ -594,7 +594,7 @@ footer p {
 
 #sheet textarea {
   width: 95%;
-  height: 5em;
+  height: 6em;
 }
 
 #sheet textarea, #sheet input[type="text"], #sheet input[type="password"], #sheet input[type="email"], #sheet input[type="url"], #sheet select {
@@ -717,6 +717,3 @@ input[class="date"] {
     margin-top: 10px;
 }
 
-#newp_submit {
-    float: right;
-}

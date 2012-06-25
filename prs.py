@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sun Jun 24 21:37:36 IST 2012
+## Last Modified : Mon Jun 25 14:54:34 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -40,6 +40,35 @@ config      = config.Config(config_file)
 
 settings = {'debug': True, 
             'static_path': os.path.join(DIR_PATH, 'static')}
+
+##
+## All the classes that start with Ajax are ajax handler that return JSON
+##
+
+class AjaxDoctorsInDepartment(tornado.web.RequestHandler):
+    """Return an array of doctor ID and Names as 'id - name' strings. Keeping
+    in line with general good practise this is wrapped into a dictionary."""
+
+    def get (self, field, value):
+        ret   = []
+        q = session().query(models.Department)
+        if field == 'name':
+            rec = q.filter_by(name=value).first()
+        elif field == 'id':
+            rec = q.filter_by(id=value).first()
+        else:
+            rec = None
+
+        if rec:
+            docs = rec.doctors
+            for doc in docs:
+                ret.append('%-3d - %s' % (doc.id, doc.name))
+
+        self.write({"doctors" : ret})
+
+##
+## Regular UI request handlers
+##
 
 class SearchHandler(tornado.web.RequestHandler):
     def search (self, role, field, value):
@@ -125,7 +154,8 @@ class ViewHandler (tornado.web.RequestHandler):
 
     def get (self, role, field, value):
         """role is one of 'patient' or 'doctor', field will be one of Name or
-        ID (for now). value is the value to lookup for the field in the database"""
+        ID (for now). value is the value to lookup for the field in the
+        database"""
 
         if role == 'patient':
             return self.view_patient(field, value)
@@ -163,7 +193,11 @@ class NewPatientHandler(tornado.web.RequestHandler):
             print '*** NewPatientHandler: ', msg
 
     def get (self):
-        self.render('new-patient.html', title=config.get_title())
+        deptq = session().query(models.Department)
+        depts = [d.name for d in deptq]
+        depts.insert(0, '-- Select --')
+        self.render('new-patient.html', title=config.get_title(),
+                    depts=depts)
 
 class MainHandler(tornado.web.RequestHandler):
     def get (self):
@@ -188,6 +222,7 @@ application = tornado.web.Application([
     (r"/newpatient", NewPatientHandler),
     (r"/view/(.*)/(.*)/(.*)", ViewHandler),
     (r"/search/(.*)", SearchHandler),
+    (r"/ajax/doctors/department/(.*)/(.*)", AjaxDoctorsInDepartment),
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))
 

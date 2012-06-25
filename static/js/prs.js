@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Mon May 28 18:42:32 IST 2012
+// Last Modified : Mon Jun 25 14:38:13 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -19,7 +19,8 @@ function validateNewPatient (event) {
     var f_reg_date = $('#new_reg_date').val();
     var f_phone    = $('#new_phone').val();
     var f_addr     = $('#new_addr').val();
-    var f_doc      = $('#new_doc').val();
+    var f_dept     = $('#newp_dept_list').val();
+    var f_doc      = $('#newp_doc_list').val();
 
     var failed  = false;
     var errmsg  = "";
@@ -31,6 +32,14 @@ function validateNewPatient (event) {
     if (f_age === "") {
         errmsg += "Age field cannot be empty\n";
     } else {
+    }
+
+    if (f_dept == "-- Select --") {
+	errmsg += "Please Select a department from the given list\n";
+    }
+
+    if (f_doc == "-- Select --") {
+	errmsg += "Please Select a doctor from the given list\n";
     }
 
     if (f_reg_date === "") {
@@ -95,6 +104,21 @@ function addHandlers () {
     });
 
     $("#new_patient_form").submit(validateNewPatient);
+
+    $("#newp_dept_list").change(function() {
+	console.log('Value: ' + $(this).val());
+	// ajax call to fetch doctors in given department and update
+	// element for doctor list
+	docdiv = $("#newp_doc_list");
+	docdiv.html($("<option />").val("-- Select --").text("-- Select --"));
+	$.getJSON("/ajax/doctors/department/name/" + $(this).val(),
+		  function(data) {
+		      $.each(data.doctors, function() {
+			  docdiv.append($("<option />").val(this).text(this));
+		      });
+		      console.log(data.doctors);
+		  });
+    });
 }
 
 function onLoad () {
