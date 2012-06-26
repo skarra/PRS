@@ -1,0 +1,28 @@
+{% extends 'patient_base.html' %}
+
+{% block formheader %}
+New Patient Form:
+{% end block %}
+
+{% block moreforms %}
+<p/><p/>
+<h2>Doctor Details</h2>
+<div>
+  <label>Department<span class="reqd_field">*</span></label>
+  <select id="newp_dept_list">
+    {% for dname in depts %}
+    <option> {{ dname }}</option>
+      {% end %}
+  </select>
+</div>
+
+<label>Doctor<span class="reqd_field">*</span></label>
+<select id="newp_doc_list">
+  <option value="-- Select --"> -- Select -- </option>
+</select>
+{% end block %}
+
+{% block action %}
+<p/>
+<input type="submit" id="newp_submit" value="Save Patient Details &rarr;"/>
+{% end block %}

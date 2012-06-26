@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Mon Jun 25 14:38:13 IST 2012
+// Last Modified : Tue Jun 26 10:35:57 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -99,6 +99,13 @@ function addHandlers () {
 	}
     });
 
+    $("#edit_pat_lab").click(function() {
+	var url = window.location.pathname;
+	var edit_url = url.replace('/view/', '/edit/');
+	console.log('Redirecting to: ' + edit_url);
+	window.location = edit_url;
+    });
+
     $("#print_pat_lab").click(function() {
 	window.print();
     });
@@ -133,3 +140,11 @@ function onLoad () {
 }
 
 jQuery(onLoad);
+
+function temp () {
+    var url = window.location.pathname;
+    var pat_url = url.replace('/view/', '/ajax/');
+    $.getJSON(pat_url, function(data) {
+	$("#new_name").val(data[name]);
+    });
+}

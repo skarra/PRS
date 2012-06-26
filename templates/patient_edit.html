@@ -1,0 +1,42 @@
+{% extends 'patient_base.html' %}
+
+{% block morescripts %}
+<script>
+$(function() {
+    // We are essentially using a "new patient details" form and prepopulate
+    // it with existing details, so the user can just modify specific
+    // details. The rest will not be updated.
+    var url = window.location.pathname;
+    var pat_url = url.replace('/edit/', '/ajax/');
+    console.log("Fetching ajax results from URL: " + pat_url);
+    $.getJSON(pat_url, function(data) {
+        console.log("Ajax call returned: " + data);
+	$("#new_name").val(data.name);
+	$("#new_age").val(data.age);
+	$("#new_g[value=" + data.gender + "]").click();
+	$("#new_ph").val(data.phone);
+	$("#new_occup").val(data.occupation);
+	$("#new_relname").val(data.relative);
+	$("#new_relph").val(data.relative_phone);
+	$("#new_relrel").val(data.relative_relation);
+	$("#new_rfee").val(data.reg_fee);
+        var d  = new Date(Date.parse(data.regdate));
+        var da = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+	$("#new_rdate").val(da);
+	$("#new_addr").val(data.address);
+    });
+});
+</script>
+{% end block %}
+
+{% block formheader %}
+Patient Details Edit Form:
+{% end block %}
+
+{% block moreforms %}
+{% end block %}
+
+{% block action %}
+<p/>
+<input type="submit" id="editp_submit" value="Save Modifications &rarr;"/>
+{% end block %}

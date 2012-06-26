@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link rel="stylesheet" 
+      href="/static/css/pepper-grinder/jquery-ui-1.8.21.custom.css">
+{% end block %}
+
+{% block scripts %}
+<script src="/static/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
+<script>
+$(function() {
+$.datepicker.regional['en-GB'] = {
+  closeText: 'Done',
+  prevText: 'Prev',
+  nextText: 'Next',
+  currentText: 'Today',
+  monthNames: ['January','February','March','April','May','June',
+  'July','August','September','October','November','December'],
+  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 
+             'Friday', 'Saturday'],
+  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa'],
+  weekHeader: 'Wk',
+  dateFormat: 'dd/mm/yy',
+  firstDay: 1,
+  isRTL: false,
+  showMonthAfterYear: false,
+  yearSuffix: ''};
+  $.datepicker.setDefaults($.datepicker.regional['en-GB']);
+  $("#new_rdate").datepicker();
+});
+</script>
+
+{% block morescripts %}
+{% end block %}
+
+{% end block %}
+
+{% block content %}
+
+<form id="new_patient_form" method="POST">
+  <h1>
+    {% block formheader %}
+    {% end block %}
+  </h1>
+
+  <div id="col1" class="twocols">
+    <div class="ctrl">
+      <label>Full Name<span class="reqd_field">*</span></label>
+      <input type="text" id="new_name" name="new_name"/>
+    </div> <!-- .ctrl -->
+
+    <div id="newp_age_gender">
+      <div id="agectrl" class="twocols">
+	<label>Age<span class="reqd_field">*</span></label>
+	<input class="age" type="text" id="new_age" name="new_age"/>
+      </div>
+      <div id="genderctrl" class="twocols">
+	<label>Gender<span class="reqd_field">*</span></label>
+	<input type="radio" id="new_g" name="new_gender" value="Male"/> Male
+	<input type="radio" id="new_g" name="new_gender" value="Female"/> Female
+      </div>
+    </div> <!-- .ctrl -->
+
+    <div id="newp_phones">
+      <div class="twocols">
+	<label>Phone Number<span class="reqd_field">*</span></label>
+	<input type="text" id="new_ph" name="new_ph"/>
+      </div>
+      <div class="twocols">
+	<label>Occupation</label>
+	<input type="text" id="new_occup" name="new_occup"/>
+      </div>
+    </div>
+
+    <p/>
+    <h2>Emergency Contact</h2>
+    <div id="newp_rel_name_rel">
+      <div class="twocols">
+	<label>Name<span class="reqd_field">*</span></label>
+	<input type="text" id="new_relname" name="new_relname"/>
+      </div>
+      <div class="twocols">
+	<label>Phone<span class="reqd_field">*</span></label>
+	<input type="text" id="new_relph" name="new_relph"/>
+      </div>
+    </div>
+
+    <div class="twocols">
+      <label>Relation<span class="reqd_field">*</span></label>
+      <input type="text" id="new_relrel" name="new_relrel"/>
+    </div>
+  </div>
+
+  <div id="col2" class="twocols">
+    <div id="newp_regd_fee">
+      <div class="twocols">
+	<label>Regn. Fee (Rs.) </label>
+	<input class="date" type="text" id="new_rfee" name="new_rfee"/>
+      </div>
+      <div class="twocols">
+	<label>Regn. Date </label>
+	<input class="date" type="text" id="new_rdate" name="new_rdate"/>
+      </div>
+   </div> <!-- .ctrl -->
+
+    <div id="newp_addr">
+      <label>Postal Address</label>
+	<textarea id="new_addr" name="new_addr">
+	</textarea>
+    </div>      
+
+    {% block moreforms %}
+    {% end block %}
+
+    {% block action %}
+    {% end block %}
+
+  </div>
+</form>
+
+{% end block %}

@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Mon Jun 25 14:54:34 IST 2012
+## Last Modified : Tue Jun 26 12:24:30 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -21,7 +21,7 @@
 ## First up we need to fix the sys.path before we can even import stuff we
 ## want.
 
-import os, sys, webbrowser
+import os, re, sys, webbrowser
 from   datetime import datetime
 
 DIR_PATH    = os.path.abspath('')
@@ -62,9 +62,33 @@ class AjaxDoctorsInDepartment(tornado.web.RequestHandler):
         if rec:
             docs = rec.doctors
             for doc in docs:
-                ret.append('%-3d - %s' % (doc.id, doc.name))
+                ret.append('%3d - %s' % (doc.id, doc.name))
 
         self.write({"doctors" : ret})
+
+class AjaxPatientDetails(tornado.web.RequestHandler):
+    """Return the details of the patient as a dictionary"""
+
+    def get (self, patid):
+        ret   = {}
+        q = session().query(models.Patient)
+        rec = q.filter_by(id=patid).first()
+
+        if rec:
+            ret.update({'name'              : rec.name,
+                        'age'               : rec.age,
+                        'gender'            : rec.gender,
+                        'regdate'           : rec.regdate.isoformat(),
+                        'phone'             : rec.phone,
+                        'address'           : rec.address,
+                        'occupation'        : rec.occupation,
+                        'reg_fee'           : rec.reg_fee,
+                        'relative'          : rec.relative,
+                        'relative_phone'    : rec.relative_phone,
+                        'relative_relation' : rec.relative_relation,
+                        })
+
+        self.write(ret)
 
 ##
 ## Regular UI request handlers
@@ -103,8 +127,6 @@ class SearchHandler(tornado.web.RequestHandler):
         ID (for now). value is the value to lookup for the field in the
         database"""
 
-        print 'SearchHandler.get()...'
-
         name = self.get_argument('name', self.get_argument('named', None))
         id   = self.get_argument('id', self.get_argument('idd', None))
 
@@ -120,7 +142,7 @@ class SearchHandler(tornado.web.RequestHandler):
         else:
             self.redirect('/')
 
-class ViewHandler (tornado.web.RequestHandler):
+class ViewHandler(tornado.web.RequestHandler):
     """once search is done, this handler will serve up a page with all the
     details."""
 
@@ -149,7 +171,7 @@ class ViewHandler (tornado.web.RequestHandler):
                           field)
             self.redirect('/')
 
-        self.render('patient.html', title=config.get_title(), name="Goofy",
+        self.render('patient_view.html', title=config.get_title(),
                     rec=rec, d=session().query(models.Doctor))
 
     def get (self, role, field, value):
@@ -162,7 +184,62 @@ class ViewHandler (tornado.web.RequestHandler):
         elif role == 'doctor':
             return self.view_doctor(field, value)
         else:
+            ## FIXME: Need to highlight Error.
             self.redirect('/')
+
+class EditPatientHandler(tornado.web.RequestHandler):
+    """Edit the patient details. The form is pre-loaded with the current
+    personal details."""
+
+    def post (self, field, value):
+        q = session().query(models.Patient)
+        rec = q.filter_by(id=value).first()
+
+        ga = self.get_argument
+        gender = ga('new_gender', 'Male')
+        title  = 'Mr.' if gender == 'Male' else 'Ms.'
+        da = ga('new_rdate', '')
+        if da == '':
+            da = datetime.now()
+        else:
+            res = re.search('(\d\d)/(\d\d)/(\d\d\d\d)', da)
+            if not res:
+                da = datetime.now()
+            else:
+                da = datetime(int(res.group(3)), int(res.group(2)),
+                                  int(res.group(1)))
+
+        ## WE do not know which fields really were changed; let's just fetch
+        ## the whole damn thing and write to db
+        rec.name              = ga("new_name")
+        rec.title             = title
+        rec.gender            = gender
+        rec.age               = ga("new_age", 0)
+        rec.regdate           = da
+        rec.phone             = ga('new_ph', '')
+        rec.address           = ga('new_addr', '')
+        rec.occupation        = ga('new_occup', '')
+        rec.relative          = ga('new_relname', '')
+        rec.relative_relation = ga('new_relrel', '')
+        rec.relative_phone    = ga('new_relph', '')
+        rec.reg_fee           = ga('new_rfee', 0)
+
+        try:
+            session().commit()
+            self.redirect('/view/patient/id/%d' % rec.id)
+        except Exception, e:
+            ## FIXME: Erorr handling to be performed
+            print 'Exception while saving modifications for %s (%s)' % (
+                rec.name, e)
+            
+    def get (self, field, value):
+        if field != 'id':
+            ## FIXME: Error needs to be highlighted
+            return
+        q = session().query(models.Patient)
+        rec = q.filter_by(id=value).first()
+        self.render("patient_edit.html", title=config.get_title(),
+                    rec=rec)
 
 class NewPatientHandler(tornado.web.RequestHandler):
     def post (self):
@@ -171,17 +248,27 @@ class NewPatientHandler(tornado.web.RequestHandler):
         ga = self.get_argument
         gender = ga('new_gender', 'Male')
         title  = 'Mr.' if gender == 'Male' else 'Ms.'
-        pat = models.Patient(name=ga("new_name", ''),
-                             title=title, gender=gender,
-                             age=ga("new_age", 0),
-                             regdate=ga("new_regdate", datetime.now()),
-                             phone=ga('new_phone', ''),
-                             address=ga('new_addr', ''),
-                             occupation=ga('new_occup', ''),
-                             relative=ga('new_relname', ''),
-                             relative_relation=ga('new_relrel', ''),
-                             relative_phone=ga('new_relph', ''),
-                             reg_fee=ga('new_rfee', 0)
+        da = ga('new_rdate', '')
+        if da == '':
+            da = datetime.now()
+        else:
+            res = re.search('(\d\d)/(\d\d)/(\d\d\d\d)', da)
+            if not res:
+                da = datetime.now()
+            else:
+                da = datetime(int(res.group(3)), int(res.group(2)),
+                                  int(res.group(1)))
+        pat = models.Patient(name              = ga("new_name", ''),
+                             title             = title, gender=gender,
+                             age               = ga("new_age", 0),
+                             regdate           = da,
+                             phone             = ga('new_ph', ''),
+                             address           = ga('new_addr', ''),
+                             occupation        = ga('new_occup', ''),
+                             reg_fee           = ga('new_rfee', 0),
+                             relative          = ga('new_relname', ''),
+                             relative_relation = ga('new_relrel', ''),
+                             relative_phone    = ga('new_relph', '')
                              )
         try:
             session().add(pat)
@@ -196,7 +283,7 @@ class NewPatientHandler(tornado.web.RequestHandler):
         deptq = session().query(models.Department)
         depts = [d.name for d in deptq]
         depts.insert(0, '-- Select --')
-        self.render('new-patient.html', title=config.get_title(),
+        self.render('patient_new.html', title=config.get_title(),
                     depts=depts)
 
 class MainHandler(tornado.web.RequestHandler):
@@ -221,8 +308,10 @@ application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/newpatient", NewPatientHandler),
     (r"/view/(.*)/(.*)/(.*)", ViewHandler),
+    (r"/edit/patient/(.*)/(.*)", EditPatientHandler),
     (r"/search/(.*)", SearchHandler),
     (r"/ajax/doctors/department/(.*)/(.*)", AjaxDoctorsInDepartment),
+    (r"/ajax/patient/id/(.*)", AjaxPatientDetails),
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))
 
