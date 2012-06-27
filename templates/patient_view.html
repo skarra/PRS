@@ -60,8 +60,11 @@
   <visit_head>
     <div class="threecol"><tag>Date: </tag>       {{ c.date }} </div>
     <div class="threecol"><tag>Doctor: </tag> 
-      {% set doc = d.filter_by(id=c.doctor_id).one() %} 
-      {{ doc.name }} ({{ doc.depts[0].name }})
+      {% set dq = d.filter_by(id=c.doctor_id) %}
+      {% if dq.count() > 0 %}
+        {% set doc = dq.one() %} 
+        {{ doc.name }} ({{ doc.depts[0].name }})
+      {% end %}
     </div>
     <div class="threecol"><tag>Charge: </tag> Rs. {{ c.charge }} </div>
     <br/>

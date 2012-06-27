@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jun 27 16:59:38 IST 2012
+// Last Modified : Wed Jun 27 18:24:07 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -115,11 +115,9 @@ function fnGetSelected (oTableLocal) {
 function validateNewVisitForm () {
     // Validate the selections and POST a message to the server
     var dept  = $("#newv_dept_list").val();
-    var day   = $("#newv_day_list").val();
     var docid = fnGetSelected(newv_doc_table);
     var msg   = "";
 
-    console.log('selected row docid: ' + docid);
     if (docid == null) {
 	msg += "Select the doctor you want the patient to see\n";
     }
@@ -173,7 +171,7 @@ function addHandlers_new_visit () {
     });
 
     $("#new_visit_doc_table tbody").click(newvRowSelected);
-    $("#newv_submit_form").submit(validateNewVisitForm);
+    $("#new_visit_form").submit(validateNewVisitForm);
 
     // Now select the deafult day as today, this will automatically
     // trigger an updation fo the doctors table.

@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jun 27 17:28:22 IST 2012
+## Last Modified : Wed Jun 27 18:25:04 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -359,6 +359,11 @@ class NewVisitHandler(tornado.web.RequestHandler):
         url   = self.request.full_url()
         patid = int(re.search('patid=(\d+)$', url).group(1))
 
+        if not docid or docid == 'null':
+            print 'Oops. Error checking in js not up to snuff...'
+            self.redirect('/view/patient/id/%d' % patid)
+            return
+
         if not dat or dat == '':
             dat = date.today()
         else:
@@ -378,7 +383,7 @@ class NewVisitHandler(tornado.web.RequestHandler):
         except Exception, e:
             msg = 'Error saving visit details for patient %s (Msg: %s)' % (
                 patid, e)
-            print '*** NewPatientHandler: ', msg
+            print '*** NewVisitHandler: ', msg
 
     def get (self):
         s = session().query(models.Shift)
