@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Jun 22 15:58:45 IST 2012
+## Last Modified : Wed Jun 27 16:33:37 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -11,11 +11,12 @@
 ## Our database schema delcarations, and other such hair raising stuff.
 ##
 
-import datetime, logging
+import datetime, logging, re
 
 from   sqlalchemy        import orm, create_engine
 from   sqlalchemy.orm    import relationship, backref
-from   sqlalchemy.types  import Integer, Boolean, Text, DateTime, Unicode
+from   sqlalchemy.types  import Integer, Boolean, DateTime, Text, Unicode
+from   sqlalchemy.dialects.sqlite import DATE
 from   sqlalchemy.schema import Column, ForeignKey, Table
 
 from   sqlalchemy.ext.declarative import declarative_base
@@ -24,6 +25,19 @@ Base   = declarative_base()
 
 def now():
     return datetime.datetime.now()
+
+def today():
+    """Return today's date in YYYY/MM/DD format"""
+    d = datetime.date.today()
+    return "%4d/%02d/%02d" % (d.year, d.month, d.day)
+
+def today_uk():
+    """Return today's date in DD/MM/YYYY format"""
+    d = datetime.date.today()
+    return "%4d/%02d/%02d" % (d.day, d.month, d.year)
+
+myd = DATE(storage_format="%04d/%02d/%02d",
+           regexp=re.compile("(\d+)/(\d+)/(\d+)"))
 
 class Patient(Base):
     __tablename__ = 'patient'
@@ -59,22 +73,15 @@ dept_doc_atable = Table('dept_doctors', Base.metadata,
     Column('dept_id', Integer, ForeignKey('dept.id')),
     Column('doctor_id', Integer, ForeignKey('doctor.id')))
 
-doc_slot_atable = Table('doc_slots', Base.metadata,
-    Column('doctor_id', Integer, ForeignKey('doctor.id')),
-    Column('slot_id', Integer, ForeignKey('slot.id')))
-
-doc_hour_atable = Table('doc_hours', Base.metadata,
-    Column('doctor_id', Integer, ForeignKey('doctor.id')),
-    Column('hour_id', Integer, ForeignKey('hour.id')))
-
 class Doctor(Base):
     __tablename__ = 'doctor'
 
     id      = Column(Integer, primary_key=True)
-    title   = Column(Unicode(5))
+    title   = Column(Unicode(5), default=u"Dr. ")
     name    = Column(Unicode(255), nullable=False)
     regdate = Column(DateTime(), default=now)
-    quals   = Column(Text())
+    fee     = Column(Integer, default=0)   # Default per-consultation fee
+    quals   = Column(Text())               # qualifications
 
     phone   = Column(Unicode(255))
     address = Column(Text())
@@ -83,9 +90,8 @@ class Doctor(Base):
     consultations = relationship('Consultation',
                                  backref=backref('doctor',
                                                  cascade="all"))
-    slots         = relationship('Slot', secondary=doc_slot_atable,
-                                 backref=backref('doctors', cascade="all"))
-    hours         = relationship('Hour', backref=backref('doctor', cascade="all"))
+    # 'slots' through backref from Slot
+    # 'depts' through backref from Department
 
 class Department(Base):
     __tablename__ = 'dept'
@@ -95,21 +101,29 @@ class Department(Base):
     doctors = relationship('Doctor', secondary=dept_doc_atable,
                            backref=backref('depts', cascade="all"))
 
+## The proper way for us to model this is to use a separate table for the
+## working hours every day. But this is proving to be too complicated. For now
+## this database table is only used to create the sampledb.
+class Shift(Base):
+    __tablename__ = 'shift'
+
+    id    = Column(Integer, primary_key=True)
+    name  = Column(Unicode(16))                     # ['Morning', 'Afternoon']
+    start = Column(Unicode(4))
+    end   = Column(Unicode(4))
+
 class Slot(Base):
     __tablename__ = 'slot'
 
-    id    = Column(Integer, primary_key=True)
-    day   = Column(Unicode(8))
-    shift = Column(Unicode(8))
-    # doctors through backref via many-to-many doc_slots_atable
-
-class Hour(Base):
-    __tablename__ = 'hour'
-
     id         = Column(Integer, primary_key=True)
     doctor_id  = Column(Integer, ForeignKey('doctor.id'))
+    # shift_id   = Column(Integer, ForeignKey('shift.id'))
+    day        = Column(Unicode(8))       # ['Sunday', 'Monday'... 'Saturday']
+    shift      = Column(Unicode(16))      # ['Morning', 'Afternoon']
     start_time = Column(Unicode(4))
     end_time   = Column(Unicode(4))
+    doctor     = relationship('Doctor',
+                              backref=backref('slots', cascade="all"))
 
 class Consultation(Base):
     __tablename__ = 'consultation'
@@ -117,7 +131,7 @@ class Consultation(Base):
     id         = Column(Integer, primary_key=True)
     patient_id = Column(Integer, ForeignKey('patient.id'))
     doctor_id  = Column(Integer, ForeignKey('doctor.id'))
-    time       = Column(DateTime(), default=now)
+    date       = Column(myd,  default=now())
     charge     = Column(Integer, default=0)
     notes      = Column(Text())
 

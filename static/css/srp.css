@@ -18,3 +18,7 @@ h1.doctors {
 #sheet .dataTables_filter label {
     float: right;
 }
+
+#sheet .dataTables_filter {
+    width: 100%;
+}

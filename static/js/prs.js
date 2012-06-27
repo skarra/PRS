@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Jun 26 10:35:57 IST 2012
+// Last Modified : Wed Jun 27 16:59:38 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -10,6 +10,21 @@
 
 var pat_srp_table;
 var doc_srp_table;
+var newv_doc_table;
+
+function dayOfWeek (date) {
+    if (!(date instanceof Date)) {
+	d = new Date();
+	res = date.match(/(\d\d)\/(\d\d)\/(\d\d\d\d)/);
+	d.setFullYear(res[3], res[2]-1, res[1]);
+	date = d;
+    }
+        
+    var day = date.getDay();
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+                'Friday', 'Saturday']
+    return days[day];
+}
 
 function validateNewPatient (event) {
     console.log('Validating new patient record...');
@@ -52,6 +67,118 @@ function validateNewPatient (event) {
     }
 
     console.log('WTF.... f_name: ' + f_name)
+}
+
+function refreshVisitDocTable () {
+    newv_doc_table.fnClearTable();
+    var dept = $("#newv_dept_list").val();
+    var date = $("#newv_date").val();
+    var day  = dayOfWeek(date);
+
+    console.log('day of week : ' + day);
+
+    // var day   = $("#newv_day_list").val();
+    // var shift = $("#newv_shift_list").val();
+
+    var base  = "/ajax/docavailability";
+    var url   = base + "?dept=" + dept + "&day=" + day;
+
+    $.getJSON(url, function(data) {
+	console.log("Got " + data.count + " entries in ajax response.");
+	$.each(data.doctors, function(key) {
+	    var morns = data.doctors[key][day]["Morning"].join(", ");
+	    var evens = data.doctors[key][day]["Afternoon"].join(", ");
+	    newv_doc_table.dataTable().fnAddData([
+		[data.doctors[key].id, "Dr. " + key, data.doctors[key].quals,
+		 morns, evens]]);
+	});
+
+	// 
+
+    });
+}
+
+/* Get the rows which are currently selected */
+function fnGetSelected (oTableLocal) {
+    var aReturn = new Array();
+    var aTrs = oTableLocal.fnGetNodes();
+
+    for ( var i=0 ; i<aTrs.length ; i++ ) {
+	if ( $(aTrs[i]).hasClass('row_selected')) {
+	    return oTableLocal.fnGetData(aTrs[i], 0);
+	}
+    }
+
+    return null;
+}
+
+function validateNewVisitForm () {
+    // Validate the selections and POST a message to the server
+    var dept  = $("#newv_dept_list").val();
+    var day   = $("#newv_day_list").val();
+    var docid = fnGetSelected(newv_doc_table);
+    var msg   = "";
+
+    console.log('selected row docid: ' + docid);
+    if (docid == null) {
+	msg += "Select the doctor you want the patient to see\n";
+    }
+
+    if (dept == "-- Select --") {
+	msg += "Select one department from the drop down menu";
+    }
+
+    if (msg != "") {
+	alert(msg);
+	return false;
+    }
+
+    return true;
+}
+
+function newvRowSelected (event) {
+    $(newv_doc_table.fnSettings().aoData).each(function () {
+	$(this.nTr).removeClass('row_selected');
+    });
+
+    $(event.target.parentNode).addClass('row_selected');
+    var docid = fnGetSelected(newv_doc_table);
+    $("#newv_docid_hack").val(docid);
+
+    // We have to fetch the default consultation charge of the doctor
+    // and popualte the 'Charge' field. Note that it will overwrite
+    // any manual entry the user might have made before this
+
+    $.getJSON("/ajax/doctor/id/"+docid, function(data) {
+	$("#newv_charge").val(data.fee);
+    });
+}
+
+//
+// Event Handlers and stuff for the visit_new.html template.
+//
+function addHandlers_new_visit () {
+    $("#newv_dept_list").change( refreshVisitDocTable);
+    $("#newv_day_list").change(  refreshVisitDocTable);
+    $("#newv_shift_list").change(refreshVisitDocTable);
+
+    newv_doc_table = $("#new_visit_doc_table").dataTable({
+	"aoColumns": [
+            { "sWidth": "3%", "sClass": "center" },
+            { "sWidth": "50%" },
+            { "sWidth": "17%" },
+            { "sWidth": "15%", "sClass": "center"},
+            { "sWidth": "15%", "sClass": "center"}],
+	"iDisplayLength": 20
+    });
+
+    $("#new_visit_doc_table tbody").click(newvRowSelected);
+    $("#newv_submit_form").submit(validateNewVisitForm);
+
+    // Now select the deafult day as today, this will automatically
+    // trigger an updation fo the doctors table.
+    var day = dayOfWeek(new Date());
+    $("#newv_day_list").val(day);
 }
 
 function addHandlers () {
@@ -110,6 +237,15 @@ function addHandlers () {
 	window.print();
     });
 
+    $("#visit_pat_lab").click(function() {
+	var url = window.location.pathname;
+	var patid = url.match(/\/(\d+)$/)[1];
+	console.log("matched patid: " + patid);
+	var edit_url = "/newvisit?patid=" + patid;
+	console.log('Redirecting to: ' + edit_url);
+	window.location = edit_url;
+    });
+
     $("#new_patient_form").submit(validateNewPatient);
 
     $("#newp_dept_list").change(function() {
@@ -126,6 +262,8 @@ function addHandlers () {
 		      console.log(data.doctors);
 		  });
     });
+
+    addHandlers_new_visit();
 }
 
 function onLoad () {
@@ -140,11 +278,3 @@ function onLoad () {
 }
 
 jQuery(onLoad);
-
-function temp () {
-    var url = window.location.pathname;
-    var pat_url = url.replace('/view/', '/ajax/');
-    $.getJSON(pat_url, function(data) {
-	$("#new_name").val(data[name]);
-    });
-}

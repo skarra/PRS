@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jun 26 12:24:30 IST 2012
+## Last Modified : Wed Jun 27 17:28:22 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -21,8 +21,8 @@
 ## First up we need to fix the sys.path before we can even import stuff we
 ## want.
 
-import os, re, sys, webbrowser
-from   datetime import datetime
+import copy, os, re, sys, webbrowser
+from   datetime import datetime, date
 
 DIR_PATH    = os.path.abspath('')
 EXTRA_PATHS = [os.path.join(DIR_PATH, 'src'),
@@ -33,12 +33,17 @@ sys.path = EXTRA_PATHS + sys.path
 
 import   tornado.ioloop, tornado.web, tornado.options
 import   models, config
+from     sqlalchemy import and_
 
 static_path = os.path.join(DIR_PATH, 'static')
 config_file = os.path.join(DIR_PATH, 'config.json')
 config      = config.Config(config_file)
 
-settings = {'debug': True, 
+days   = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+          'Friday', 'Saturday']
+shiftns = ['Morning', 'Afternoon']
+
+settings = {'debug': True,
             'static_path': os.path.join(DIR_PATH, 'static')}
 
 ##
@@ -89,6 +94,67 @@ class AjaxPatientDetails(tornado.web.RequestHandler):
                         })
 
         self.write(ret)
+
+class AjaxDoctorDetails(tornado.web.RequestHandler):
+    """Return the details of the doctor as a dictionary"""
+
+    def get (self, docid):
+        ret = {}
+        q = session().query(models.Doctor)
+        rec = q.filter_by(id=docid).first()
+
+        if rec:
+            ret.update({'name'    : rec.name,
+                        'title'   : rec.title,
+                        'regdate' : rec.regdate.isoformat(),
+                        'phone'   : rec.phone,
+                        'fee'     : rec.fee,
+                        'email'   : rec.email,
+                        'address' : rec.address,
+                        })
+
+        self.write(ret)
+
+class AjaxDocAvailability(tornado.web.RequestHandler):
+    """Return the details of the patient as a dictionary"""
+
+    def get (self):
+        print "Yeah baby; in doc availability"
+        ret   = {}
+        dept_name = self.get_argument('dept', None)
+        if not dept_name:
+            ## FIXME: handle error
+            return
+
+        day    = self.get_argument('day', '-- Any --')
+        shiftn = self.get_argument('shift', '-- Any --')
+        print 'shiftn: ', shiftn        
+        
+        dq = session().query(models.Doctor, models.Slot)
+        dq = dq.filter(models.Doctor.depts.any(name=dept_name))
+        dq = dq.filter(models.Doctor.id == models.Slot.doctor_id)
+        if day != '-- Any --':
+            dq = dq.filter(models.Slot.day  == day)
+        if shiftn != '-- Any --':
+            dq = dq.filter(models.Slot.shift == shiftn)
+
+        docs = dq.all()
+        for doc, slot in docs:
+            if not doc.name in ret:
+                ret[doc.name] = {
+                    'id'    : doc.id,
+                    'quals' : doc.quals,
+                    }
+            slots = ret[doc.name]
+            if not slot.day in slots:
+                slots[slot.day] = {
+                    'Morning'   : [],
+                    'Afternoon' : [],
+                    }
+            slots[slot.day][slot.shift].append('%s-%s' % (slot.start_time,
+                                                          slot.end_time))
+
+        self.write({"doctors" : ret, "count" : len(ret)})
 
 ##
 ## Regular UI request handlers
@@ -243,8 +309,6 @@ class EditPatientHandler(tornado.web.RequestHandler):
 
 class NewPatientHandler(tornado.web.RequestHandler):
     def post (self):
-        print 'Got the post, buddy.'
-
         ga = self.get_argument
         gender = ga('new_gender', 'Male')
         title  = 'Mr.' if gender == 'Male' else 'Ms.'
@@ -286,6 +350,69 @@ class NewPatientHandler(tornado.web.RequestHandler):
         self.render('patient_new.html', title=config.get_title(),
                     depts=depts)
 
+class NewVisitHandler(tornado.web.RequestHandler):
+    def post (self):
+        dept  = self.get_argument("newv_dept_list", None)
+        dat   = self.get_argument("newv_date",  None)
+        docid = self.get_argument("newv_docid_hack", None)
+        charge = self.get_argument("newv_charge", None)
+        url   = self.request.full_url()
+        patid = int(re.search('patid=(\d+)$', url).group(1))
+
+        if not dat or dat == '':
+            dat = date.today()
+        else:
+            res = re.search('(\d\d)/(\d\d)/(\d\d\d\d)', dat)
+            if not res:
+                dat = date.today()
+            else:
+                dat = date(int(res.group(3)), int(res.group(2)),
+                           int(res.group(1)))
+
+        c = models.Consultation(patient_id=patid, doctor_id=docid,
+                                date=dat, charge=charge)
+        try:
+            session().add(c)
+            session().commit()
+            self.redirect('/view/patient/id/%d' % patid)
+        except Exception, e:
+            msg = 'Error saving visit details for patient %s (Msg: %s)' % (
+                patid, e)
+            print '*** NewPatientHandler: ', msg
+
+    def get (self):
+        s = session().query(models.Shift)
+        shifts = dict([(shift.name, shift) for shift in s])
+
+        patid = self.get_argument('patid', None)
+        if not patid:
+            self.redirect('/')
+            return
+
+        ## Note that not passing the patient name argument (as 'patname') will
+        ## make us performa db lookup, merely to display. So if the source
+        ## page already has the name, said name should be passed in the GET
+        ## request.
+
+        patid = int(patid)
+        patname = self.get_argument('patname', None)
+        if not patname:
+            q = session().query(models.Patient)
+            rec = q.filter_by(id=patid).first()
+            patname = rec.name
+
+        deptq = session().query(models.Department)
+        depts = [d.name for d in deptq]
+        depts.insert(0, '-- Select --')
+        d = copy.deepcopy(days)
+        d.insert(0, '-- Any --')
+
+        date = models.today_uk()
+
+        self.render('visit_new.html', title=config.get_title(), depts=depts,
+                    patid=patid, patname=patname, date=date, days=d,
+                    shifts=shifts)
+
 class MainHandler(tornado.web.RequestHandler):
     def get (self):
         self.render('index.html', title=config.get_title())
@@ -310,8 +437,11 @@ application = tornado.web.Application([
     (r"/view/(.*)/(.*)/(.*)", ViewHandler),
     (r"/edit/patient/(.*)/(.*)", EditPatientHandler),
     (r"/search/(.*)", SearchHandler),
+    (r"/newvisit", NewVisitHandler),
     (r"/ajax/doctors/department/(.*)/(.*)", AjaxDoctorsInDepartment),
     (r"/ajax/patient/id/(.*)", AjaxPatientDetails),
+    (r"/ajax/doctor/id/(.*)", AjaxDoctorDetails),
+    (r"/ajax/docavailability", AjaxDocAvailability),
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))
 

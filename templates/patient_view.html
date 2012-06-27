@@ -12,7 +12,7 @@
   <span class="name2"> Servants of the People Society </span> <br/>
   <span class="addr"> Lajpat Bhawan, Lajpat Nagar IV, New Delhi </span> <br/>
   <span class="addr">Tel No.: 011 2643 4175 </span>
-  <hr width="50%"/> <p/>
+  <hr> <p/>
 </div>
 
 <div id="head_info">
@@ -26,11 +26,11 @@
     <div id="delete_pat_lab" class="pat_label">Delete</div>
     <div id="edit_pat_lab" class="pat_label">Edit</div>
     <div id="print_pat_lab" class="pat_label">Print</div>
+    <div id="visit_pat_lab" class="pat_label">New Visit</div>
   </div>
 </div>
 
 <br/>
-<hr/>
 
 <div id="contact_info">
   <h2>Personal Details</h2>
@@ -58,7 +58,7 @@
   <h2>CMC Visit History</h2>
   {% for c in rec.consultations %}
   <visit_head>
-    <div class="threecol"><tag>Date: </tag>       {{ c.time }} </div>
+    <div class="threecol"><tag>Date: </tag>       {{ c.date }} </div>
     <div class="threecol"><tag>Doctor: </tag> 
       {% set doc = d.filter_by(id=c.doctor_id).one() %} 
       {{ doc.name }} ({{ doc.depts[0].name }})

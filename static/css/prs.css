@@ -116,7 +116,7 @@ body, select, input, textarea {
   -ms-border-bottom-right-radius: 3px;
   -khtml-border-bottom-right-radius: 3px;
   border-bottom-right-radius: 3px;
-//  padding: 0 12px;
+  padding: 0 12px;
   background: #e6e6e6;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e6e6e6), color-stop(100%, #d6d6d6));
   background-image: -webkit-linear-gradient(#e6e6e6, #d6d6d6);
@@ -600,6 +600,7 @@ footer p {
 #sheet textarea, #sheet input[type="text"], #sheet input[type="password"], #sheet input[type="email"], #sheet input[type="url"], #sheet select {
   padding: 5px;
   color: #444;
+  height: 35px;
   border: 1px solid #b7b7b7;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -664,7 +665,7 @@ li {
 
 p { 
     margin-top: 0.9em;
-//    margin-bottom: 0.9em; 
+/*    margin-bottom: 0.9em; */
 }
 
 .reqd_field {
@@ -673,7 +674,7 @@ p {
     vertical-align: super;
 }
 
-#new_patient_form, #newp_age_gender, #newp_phones, #newp_rel_name_rel {
+.col_parent, #new_patient_form, #newp_age_gender, #newp_phones, #newp_rel_name_rel {
     display: table;
     width: 100%;
     height: 100%;
@@ -689,6 +690,14 @@ p {
 
 #col2 {
     float: right;
+}
+
+.threecols {
+    display: table-column;
+    position: relative;
+    float: left;
+    width: 33.3%;
+    height: 100%;
 }
 
 #new_patient_form label {
@@ -709,11 +718,26 @@ p {
   position: relative;
 }
 
-input[class="date"] {
-  max-width: 50px;
+input[class="date"], #newv_date {
+  max-width: 70px;
 }
 
 #new_g {
     margin-top: 10px;
 }
 
+#new_visit_form label {
+    font-size: 120%;
+}
+
+#new_visit_form {
+    text-align: left;
+}
+
+#newv_charge {
+    text-align: right;
+}
+
+#newv_submit {
+    float: right;
+}

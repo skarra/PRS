@@ -97,7 +97,7 @@ def gen_random_hours ():
     E.g. 0900-1000 1500-1700 means there are two consultations on that day.
     """
 
-    values = ['0900-1000', '1000-1200', '1200-1300', '1400-1600', '1600-1730']
+    values = ['0900-1000', '1000-1200', '1200-1300', '1400-1600', '1600-1800']
 
     ret = []
     for i in range(7):
@@ -110,6 +110,8 @@ def gen_random_hours ():
 def add_doctor_names (session, doctors_file):
     ph_lower = 7000000000
     ph_upper = 9999999999
+
+    degrees = ['MBBS', 'MD', 'FRCS', 'BD', 'DO']
 
     with open(doctors_file, 'r') as f:
         line = f.readline()
@@ -130,39 +132,50 @@ def add_doctor_names (session, doctors_file):
             if res:
                 line = res.group(1)
 
+            quals = ', '.join(random.sample(degrees,
+                              random.randint(2, 3)))
             doc = models.Doctor(title='Dr.',
                                 name=line,
+                                fee=random.choice([0, 20, 30, 150]),
+                                quals=quals,
                                 phone=str(random.randint(ph_lower, ph_upper)),
                                 email=n + '@mentalasylum.in')
             session.add(doc)
 
         session.commit()
 
+def add_shifts (session):
+    m = models.Shift(name='Morning', start='0900', end='1300')
+    a = models.Shift(name='Afternoon', start='1400', end='1800')
+    session.add(m)
+    session.add(a)
+    session.commit()
+
 def add_slots (session):
-    for day in ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                'Friday', 'Saturday']:
-        for shift in ['Morning', 'Afternoon']:
-            hour = models.Slot(day=day, shift=shift)
-            session.add(hour)
+    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+                    'Friday', 'Saturday']
+    shiftns = ['Morning', 'Afternoon']
+
+    q = session.query(models.Doctor)
+    s = session.query(models.Shift)
+    for doc in q:
+        for day in random.sample(days, random.randint(1, len(days))):
+            for shift in s:
+                start, end = get_random_times(shift)
+                slot = models.Slot(doctor_id=doc.id, shift=shift.name,
+                                   day=day, start_time=start, end_time=end)
+                session.add(slot)
 
     session.commit()
 
-def get_random_times ():
-    min = 9
-    max = 17
+def get_random_times (shift):
+    min = int(shift.start)/100
+    max = int(shift.end)/100
+
     start = random.randint(min, max-1)
-    end   = random.randint(start, max)
+    end   = random.randint(start+1, max)
 
     return ('%02d00' % start), ('%02d00' % end)
-
-def add_doc_hours (session):
-    q = session.query(models.Doctor)
-    for doc in q:
-        start, end = get_random_times()
-        hour = models.Hour(doctor_id=doc.id, start_time=start, end_time=end)
-        session.add(hour)
-
-    session.commit()
 
 def add_departments (session):
     q = session.query(models.Doctor)
@@ -182,7 +195,7 @@ def add_departments (session):
                 dept.doctors.append(doc)
                 i += 1
         except Exception, e:
-            logging.info('Caught exception (%s) breaking.', e)
+            logging.info('Caught exception (%s) breaking by design.', e)
             break
 
     session.commit()        
@@ -209,7 +222,7 @@ def add_consultations (session):
     session.commit()
 
 def main ():
-    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(logging.INFO)
 
     logging.info('Settingup schema and tables....')
     engine, session = models.setup_tables("sample.db")
@@ -220,14 +233,14 @@ def main ():
     logging.info('Importing department names from file...')
     add_departments_from_file(session, 'depts.txt')
 
-    logging.info('Adding default consulting hour slots...')
-    add_slots(session)
-
     logging.info('Adding TN MLAs as doctors...')
     add_doctor_names(session, 'tnmlas.txt')
 
+    logging.info('Setting up Shifts...')
+    add_shifts(session)
+
     logging.info('Setting up Consulting Hours...')
-    add_doc_hours(session)
+    add_slots(session)
 
     logging.info('Assigning Departments to doctors...')
     add_departments(session)
