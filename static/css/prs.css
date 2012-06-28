@@ -741,3 +741,59 @@ input[class="date"], #newv_date {
 #newv_submit {
     float: right;
 }
+
+/*
+ * Error Pages
+ */
+
+#main-40x {
+  text-align: center;
+}
+
+#main-40x a, a.visited {
+    text-decoration: none;
+}
+
+#stickie-40x {
+  background-color: beige;
+  float: none;
+  display: inline-block;
+  text-align: center;
+  width: auto;
+  margin-top: 2em;
+  padding: 10px;
+}
+
+#i40x {
+  font-size: 150px;
+  font-weight: bold;
+  letter-spacing: -0.2em;
+  margin-left: -0.2em;
+}
+
+#i40x:after {
+  display: block;
+  color: #f0a40c;
+  content: "︵";
+  margin-top: -0.75em;
+}
+
+.i4 {
+  color: #df5e0e;
+  position: relative;
+}
+
+.i0 {
+  color: #f0a40c;
+  z-index: -1;
+}
+
+.i5 {
+  color: #816894;
+  position: relative;
+}
+
+#i40x-message {
+  color: #816894;
+  font-size: 125%;
+}

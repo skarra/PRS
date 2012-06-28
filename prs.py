@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jun 27 18:25:04 IST 2012
+## Last Modified : Thu Jun 28 06:43:01 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -45,6 +45,26 @@ shiftns = ['Morning', 'Afternoon']
 
 settings = {'debug': True,
             'static_path': os.path.join(DIR_PATH, 'static')}
+
+class ErrorHandler(tornado.web.RequestHandler):
+    """Generates an error response with status_code for all requests."""
+    def __init__ (self, application, request, status_code):
+        tornado.web.RequestHandler.__init__(self, application, request)
+        self.set_status(status_code)
+    
+    def get_error_html (self, status_code, **kwargs):
+        if status_code in [403, 404, 500, 503, 403]:
+            filename = '%d.html' % status_code
+            return self.render(filename, title=config.get_title())
+        return "<html><title>%(code)d: %(message)s</title>" \
+                "<body class='bodyErrorPage'>%(code)d: %(message)s</body>"\
+                "</html>" % {
+                "code": status_code,
+                "message": httplib.responses[status_code],
+                }
+    
+    def prepare (self):
+        raise tornado.web.HTTPError(self._status_code)
 
 ##
 ## All the classes that start with Ajax are ajax handler that return JSON
@@ -449,6 +469,9 @@ application = tornado.web.Application([
     (r"/ajax/docavailability", AjaxDocAvailability),
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))
+
+## override the tornado.web.ErrorHandler with our default ErrorHandler
+tornado.web.ErrorHandler = ErrorHandler
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
