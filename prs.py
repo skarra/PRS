@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu Jun 28 06:43:01 IST 2012
+## Last Modified : Thu Jun 28 12:41:45 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -53,9 +53,10 @@ class ErrorHandler(tornado.web.RequestHandler):
         self.set_status(status_code)
     
     def get_error_html (self, status_code, **kwargs):
-        if status_code in [403, 404, 500, 503, 403]:
+        if status_code in [403, 404, 500, 503]:
             filename = '%d.html' % status_code
-            return self.render(filename, title=config.get_title())
+            return self.render_string(filename, title=config.get_title())
+
         return "<html><title>%(code)d: %(message)s</title>" \
                 "<body class='bodyErrorPage'>%(code)d: %(message)s</body>"\
                 "</html>" % {
