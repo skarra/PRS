@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block styles %}
-<link href="/static/css/demo_table.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/dataTables/demo_table.css" rel="stylesheet"
+      type="text/css"/>
 <link href="/static/css/srp.css"        rel="stylesheet" type="text/css" />
 {% end block %}
 
@@ -9,9 +10,6 @@
 
 <h1 class="doctors">Search Results Summary: Doctors</h1>
 You searched for: {{ search_query }}.
-<br/>
-Total rows in database: {{ total_cnt }}
-Matches: {{ match_cnt }}
 <hr/>
 
 <table id="doc_srp_table" class="display" name="doc_srp_table">
@@ -34,7 +32,11 @@ Matches: {{ match_cnt }}
       <td> {{ res.name }}  </td>
       <td> {{ res.email }} </td>
       <td> {{ res.phone }} </td>
-      <td> {{ res.depts[0].name }} </td>
+      <td>
+	{% if len(res.depts) > 0 %}
+	  {{ res.depts[0].name }}
+        {% end %}
+      </td>
     </tr>
     {% end %}
   </tbody>
