@@ -80,15 +80,10 @@ $.datepicker.regional['en-GB'] = {
 	   style="display:none" type="text"/>
   </div> <!-- #new_visit_control -->
 
-  <p/>
-  <input type="submit" id="newv_submit" 
-	 value="Save Visit Details &rarr;"/>
-</form>
-
 <br/>
-<h2>Select Doctor for Visit:</h2>
-<hr/>
 <p/>
+<hr/>
+<h2>Doctors Available for Consultation: (Click on One):</h2>
 <table id="new_visit_doc_table" class="display">
   <thead>
     <tr>
@@ -102,4 +97,11 @@ $.datepicker.regional['en-GB'] = {
   <tbody>
   </tbody>    
 </table>
+
+  <input type="submit" id="newv_submit" 
+	 value="Save Visit Details &rarr;"/>
+  <p/> <p/><p/><p/>  
+
+</form>
+
 {% end block %}
