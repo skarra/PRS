@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+<!-- The following variables should be made avaialble by the including
+template:
+
+  * rec  - the doctor object whose availability we are viewing now
+  * days - array of strings of day names
+  * avail - a hash indexed by day containing following fields:
+    * Morning Hours: operating hrs in the morning for that day as a string
+    * Afternoon Hours: operating hours afternoon for that day as a string 
+-->
+
+{% block styles %}
+<link href="/static/css/doctor.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" 
+      href="/static/css/pepper-grinder/jquery-ui-1.8.21.custom.css">
+<link href="/static/css/dataTables/demo_table.css" rel="stylesheet"
+      type="text/css"/>
+{% end block %}
+
+{% block content %}
+
+<div id="head_cmc">
+  <span class="name1"> Major Gen. B. N. Bhandari Charitable Medical Clinic 
+  </span> <br/>
+  <span class="name2"> Servants of the People Society </span> <br/>
+  <span class="addr"> Lajpat Bhawan, Lajpat Nagar IV, New Delhi </span> <br/>
+  <span class="addr">Tel No.: 011 2643 4175 </span>
+  <hr> <p/>
+</div>
+
+<div id="head_info">
+  <div id="head">
+    <h1> 
+      {{ rec.title }} {{ rec.name }} 
+      <span class="quals"> ({{ rec.quals }}) </span> 
+    </h1>
+  </div>
+
+  <div id="info">
+    <div id="delete_doc_lab" class="pat_label">Delete</div>
+    <div id="edit_doc_lab" class="pat_label">Edit</div>
+    <div id="print_doc_lab" class="pat_label">Print</div>
+  </div>
+</div>
+
+<br/>
+
+<div>
+  <div id="doc_particulars" class="col_parent">
+    <div class="twocols">
+      <div class="myrow col_parent">
+        <div class="tagcol"> Regn Date : </div>
+        <div class="valcol"> {{ rec.regdate.strftime("%Y/%m/%d") }} </div>
+      </div>
+  
+      <div class="myrow col_parent">
+        <div class="tagcol"> ID : </div> 
+        <div class="valcol"> {{ rec.id }} </div>
+      </div>
+  
+      <div class="myrow col_parent">
+        <div class="tagcol"> Fee per Visit : </div>
+        <div class="valcol"> Rs. {{ rec.fee }} </div>
+      </div>
+
+      <div class="myrow col_parent">
+        <div class="tagcol"> Departments : </div>
+        <div class="valcol"> </div>
+      </div>
+    </div>
+  
+    <div class="twocols">
+      <div class="myrow col_parent">
+        <div class="tagcol"> Phone :</div> 
+        <div class="valcol"> {{ rec.phone }} </div>
+      </div>
+
+      <div class="myrow col_parent">
+	<div class="tagcol"> Email :</div> 
+        <div class="valcol"> {{ rec.email }} </div>
+      </div>
+
+      <div>
+	<div class="tagcol"> Address :</div>
+	<div class="valcol"> {{ rec.address }} </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<p/>
+<div id="doc_availability">
+<!--  <h2> Availability for Consultation</h2> -->
+
+  <table id="doc_avail_table" class="display">
+    <thead>
+      <th> Shift </th>
+      {% for day in days %}
+        <th> {{ day }} </th>
+      {% end %}
+   </thead>
+  
+    <tbody>
+      {% for shift in ['Morning Hours', 'Afternoon Hours'] %}
+	<tr>
+  	  <td> {{ shift }}  </td>
+  	  {% for day in days %}
+    	    <td> {{ avail[day][shift] }} </td>
+  	  {% end %}
+	</tr>
+      {% end %}
+    </tbody>
+  </table>
+</div>
+
+{% end block %}
+

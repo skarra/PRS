@@ -1,0 +1,23 @@
+{% extends 'doctor_base.html' %}
+
+{% block formheader %}
+New Doctor Form:
+{% end block %}
+
+{% block deptblock %}
+<div>
+  <h2>Department</h2>
+  <div id="newd_dept_list">
+    <select id="newd_dept1" name="newd_dept1">
+      {% for dname in depts %}
+      <option> {{ dname }}</option>
+	{% end %}
+    </select>
+  </div>
+</div>
+{% end block %}
+
+{% block action %}
+<p/>
+<input type="submit" id="newd_submit" value="Save Doctor Details &rarr;"/>
+{% end block %}

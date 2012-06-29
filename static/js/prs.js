@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jun 27 18:24:07 IST 2012
+// Last Modified : Fri Jun 29 23:39:55 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -157,7 +157,7 @@ function newvRowSelected (event) {
 //
 function addHandlers_new_visit () {
     $("#newv_dept_list").change( refreshVisitDocTable);
-    $("#newv_day_list").change(  refreshVisitDocTable);
+    $("#newv_date").change(  refreshVisitDocTable);
     $("#newv_shift_list").change(refreshVisitDocTable);
 
     newv_doc_table = $("#new_visit_doc_table").dataTable({
@@ -179,6 +179,74 @@ function addHandlers_new_visit () {
     $("#newv_day_list").val(day);
 }
 
+//
+// Event Handlers and stuff for the doctor_base.html template.
+//
+function validateNewDoctor () {
+    console.log('Validating new patient record...');
+
+    var f_name     = $('#new_name').val();
+    var f_phone    = $('#new_ph').val();
+    var f_dept     = $('#newd_dept1').val();
+
+    var errmsg  = "";
+
+    if (f_name === "") {
+        errmsg += "Name cannot be empty\n";
+    }
+
+    if (f_phone === "") {
+        errmsg += "Phone field cannot be empty\n";
+    }
+
+    if (f_dept == "-- Select --") {
+	errmsg += "Please Select a department from the given list\n";
+    }
+
+    if (errmsg != "") {
+        alert(errmsg)
+        return false;
+    }
+
+    return true;
+}
+
+function addHandlers_doctor_base () {
+    newd_avail_table = $("#newd_avail").dataTable({
+	"bFilter": false,
+	"bInfo": false,
+	"bPaginate": false,
+	"bSort" : false,
+	"aoColumns": [
+            { "sClass": "left" },
+            { "sClass": "center" },
+            { "sClass": "center" },
+            { "sClass": "center" },
+            { "sClass": "center"}],
+	"iDisplayLength": 20
+    });
+
+    $("#new_doctor_form").submit(validateNewDoctor);
+}
+
+function addHandlers_doctor_view () {
+    doc_view_avail_table = $("#doc_avail_table").dataTable({
+	"bFilter": false,
+	"bInfo": false,
+	"bPaginate": false,
+	"bSort" : false,
+	"aoColumns": [
+            { "sClass": "left" },
+            { "sClass": "center" },
+            { "sClass": "center" },
+            { "sClass": "center" },
+            { "sClass": "center" },
+            { "sClass": "center" },
+            { "sClass": "center" },
+            { "sClass": "center"}],
+    });
+}
+
 function addHandlers () {
     console.log('addFormHandlers...');
 
@@ -187,11 +255,15 @@ function addHandlers () {
     })
 
     $("#dispatch_new_p").click(function() {
-	window.location = '/newpatient';
+	window.location = '/new/patient';
     });
 
     $("#view_all_p").click(function() {
 	window.location = '/search/patient?id=all';
+    });
+
+    $("#dispatch_new_d").click(function() {
+	window.location = '/new/doctor';
     });
 
     $("#view_all_d").click(function() {
@@ -239,7 +311,7 @@ function addHandlers () {
 	var url = window.location.pathname;
 	var patid = url.match(/\/(\d+)$/)[1];
 	console.log("matched patid: " + patid);
-	var edit_url = "/newvisit?patid=" + patid;
+	var edit_url = "/new/visit?patid=" + patid;
 	console.log('Redirecting to: ' + edit_url);
 	window.location = edit_url;
     });
@@ -262,6 +334,8 @@ function addHandlers () {
     });
 
     addHandlers_new_visit();
+    addHandlers_doctor_base();
+    addHandlers_doctor_view();
 }
 
 function onLoad () {

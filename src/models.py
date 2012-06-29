@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Wed Jun 27 16:33:37 IST 2012
+## Last Modified : Fri Jun 29 23:32:30 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -79,7 +79,7 @@ class Doctor(Base):
     id      = Column(Integer, primary_key=True)
     title   = Column(Unicode(5), default=u"Dr. ")
     name    = Column(Unicode(255), nullable=False)
-    regdate = Column(DateTime(), default=now)
+    regdate = Column(myd, default=today)
     fee     = Column(Integer, default=0)   # Default per-consultation fee
     quals   = Column(Text())               # qualifications
 
@@ -101,6 +101,29 @@ class Department(Base):
     doctors = relationship('Doctor', secondary=dept_doc_atable,
                            backref=backref('depts', cascade="all"))
 
+    ## No idea if this is the right way to do this, but anyway, here goes...
+    @classmethod
+    def id_from_name (self, session, name):
+        rec = self.find_by_name(session, name)
+        if rec:
+            return rec.id
+        else:
+            return None
+
+    @classmethod
+    def find_by_name (self, session, name):
+        """Returns the first record that matches given name. Returns None if
+        there is no match."""
+
+        print 'Looking for deparment: ', name
+        q   = session().query(Department)
+        recs = q.filter_by(name=name)
+        if recs.count() > 0:
+            print '  Found something.'
+            return recs.first()
+
+        return None
+
 ## The proper way for us to model this is to use a separate table for the
 ## working hours every day. But this is proving to be too complicated. For now
 ## this database table is only used to create the sampledb.
@@ -120,8 +143,8 @@ class Slot(Base):
     # shift_id   = Column(Integer, ForeignKey('shift.id'))
     day        = Column(Unicode(8))       # ['Sunday', 'Monday'... 'Saturday']
     shift      = Column(Unicode(16))      # ['Morning', 'Afternoon']
-    start_time = Column(Unicode(4))
-    end_time   = Column(Unicode(4))
+    start_time = Column(Unicode(8))
+    end_time   = Column(Unicode(8))
     doctor     = relationship('Doctor',
                               backref=backref('slots', cascade="all"))
 

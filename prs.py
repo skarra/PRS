@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu Jun 28 12:41:45 IST 2012
+## Last Modified : Fri Jun 29 23:35:39 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -236,16 +236,32 @@ class ViewHandler(tornado.web.RequestHandler):
     def view_doctor (self, field, value):
         q = session().query(models.Doctor)
         if field == 'name':
-            rec = q.filter_by(name = value).first()
+            rec = q.filter_by(name=value).first()
         elif field == 'id':
-            rec = q.filter_by(id = value).first()
+            rec = q.filter_by(id=value).first()
         else:
             logging.error('ViewHandler:view_doctor: Unknown field type (%s)',
                           field)
             self.redirect('/')
 
-        self.render('doctor.html', title=config.get_title(), name="Goofy",
-                    rec=rec)
+        avail = {}
+        for day in days:
+            avail.update({day : {
+                'Morning Hours' : '-',
+                'Afternoon Hours' : '-',
+                }})
+
+        for slot in rec.slots:
+            shift = '%s Hours' % slot.shift
+            times = '%s-%s' % (slot.start_time, slot.end_time)
+
+            if avail[slot.day][shift] != '-':
+                times = avail[slot.day] + times
+
+            avail[slot.day].update({ shift : times })
+
+        self.render('doctor_view.html', title=config.get_title(), name="Goofy",
+                    rec=rec, days=days, avail=avail)
 
     def view_patient (self, field, value):
         q = session().query(models.Patient)
@@ -371,6 +387,80 @@ class NewPatientHandler(tornado.web.RequestHandler):
         self.render('patient_new.html', title=config.get_title(),
                     depts=depts)
 
+class NewDoctorHandler(tornado.web.RequestHandler):
+    def make_doc_from_args (self):
+        """Invoked in the context of a POST handler this routine instantiates
+        a new Doctor model object with values in the POST request and returns
+        it. It is assumed that all the input validation is done on the UI
+        side."""
+
+        ga = self.get_argument
+        da = ga('new_rdate', '')
+        if da == '':
+            da = date.today()
+        else:
+            res = re.search('(\d\d)/(\d\d)/(\d\d\d\d)', da)
+            if not res:
+                da = date.today()
+            else:
+                da = date(int(res.group(3)), int(res.group(2)),
+                          int(res.group(1)))
+        doc = models.Doctor(name              = ga("new_name", ''),
+                            title             = ga("new_title", ''),
+                            regdate           = da,
+                            fee               = ga('new_rfee', 0),
+                            quals             = ga('new_quals', ''),
+                            phone             = ga('new_ph', ''),
+                            address           = ga('new_addr', ''),
+                            email             = ga('new_em', ''))
+
+        return doc
+
+    def make_slot_from_args (self):
+        """Invoked in the context of a POST handler this routine instantiates
+        an array of Slot model objects with values in the POST request and
+        returns it. It is assumed that all the input validation is done on the
+        UI side."""
+
+        return []
+
+    def post (self):
+        ga = self.get_argument
+        doc  = self.make_doc_from_args()
+        try:
+            session().add(doc)
+            session().commit()
+        except Exception, e:
+            msg = 'Error saving details for Doctor %s (Msg: %s)' % (
+                doc.name, e)
+            print '*** NewDoctorHandler: ', msg
+            return
+
+        dept = models.Department.find_by_name(session, ga('newd_dept1', ''))
+        if dept:
+            dept.doctors.append(doc)
+            session().add(dept)
+            session().commit()
+
+        ## Now try to add the slot information
+        slot = self.make_slot_from_args()
+
+        self.redirect('/view/doctor/id/%d' % doc.id)
+
+    def get (self):
+        ## FIXME: These arrays should be generated based on the actual shift
+        ## timings from the 'Shift' table
+        mophours=["-- Select --", "09:00", "10:00", "11:00", "12:00", "13:00"]
+        aophours=["-- Select --", "14:00", "15:00", "16:00", "17:00", "18:00"]
+
+        deptq = session().query(models.Department)
+        depts = [d.name for d in deptq]
+        depts.insert(0, '-- Select --')
+
+        self.render('doctor_new.html', title=config.get_title(),
+                    depts=depts, days=days, today=models.today_uk(),
+                    mophours=mophours, aophours=aophours)
+
 class NewVisitHandler(tornado.web.RequestHandler):
     def post (self):
         dept  = self.get_argument("newv_dept_list", None)
@@ -459,15 +549,19 @@ def session (val=None):
 
 application = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/newpatient", NewPatientHandler),
-    (r"/view/(.*)/(.*)/(.*)", ViewHandler),
+    (r"/new/patient", NewPatientHandler),
+    (r"/new/doctor", NewDoctorHandler),
+    (r"/new/visit", NewVisitHandler),
+
     (r"/edit/patient/(.*)/(.*)", EditPatientHandler),
+    (r"/view/(.*)/(.*)/(.*)", ViewHandler),
     (r"/search/(.*)", SearchHandler),
-    (r"/newvisit", NewVisitHandler),
+
     (r"/ajax/doctors/department/(.*)/(.*)", AjaxDoctorsInDepartment),
     (r"/ajax/patient/id/(.*)", AjaxPatientDetails),
     (r"/ajax/doctor/id/(.*)", AjaxDoctorDetails),
     (r"/ajax/docavailability", AjaxDocAvailability),
+
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))
 
