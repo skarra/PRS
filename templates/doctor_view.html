@@ -66,7 +66,11 @@ template:
 
       <div class="myrow col_parent">
         <div class="tagcol"> Departments : </div>
-        <div class="valcol"> </div>
+        <div class="valcol">
+	  {% for dept in rec.depts %}
+	    {{ dept.name }} <br/>
+	  {% end %}
+	</div>
       </div>
     </div>
   

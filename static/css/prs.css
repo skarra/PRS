@@ -957,3 +957,7 @@ tag {
 #sheet li {
     margin-top: 0;
 }
+
+#doc_avail_table {
+    font-size: 90%;
+}
