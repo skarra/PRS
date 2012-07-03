@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Jun 29 23:32:30 IST 2012
+## Last Modified : Tue Jul 03 15:17:41 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -23,15 +23,19 @@ from   sqlalchemy.ext.declarative import declarative_base
 
 Base   = declarative_base()
 
-def now():
+def now ():
     return datetime.datetime.now()
 
-def today():
+def today ():
+    """Return today's date in YYYY/MM/DD format"""
+    return datetime.date.today()
+
+def today_s ():
     """Return today's date in YYYY/MM/DD format"""
     d = datetime.date.today()
     return "%4d/%02d/%02d" % (d.year, d.month, d.day)
 
-def today_uk():
+def today_uk ():
     """Return today's date in DD/MM/YYYY format"""
     d = datetime.date.today()
     return "%4d/%02d/%02d" % (d.day, d.month, d.year)

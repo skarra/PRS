@@ -175,7 +175,7 @@ def get_random_times (shift):
     start = random.randint(min, max-1)
     end   = random.randint(start+1, max)
 
-    return ('%02d00' % start), ('%02d00' % end)
+    return ('%02d:00' % start), ('%02d:00' % end)
 
 def add_departments (session):
     q = session.query(models.Doctor)

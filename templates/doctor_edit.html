@@ -1,0 +1,56 @@
+{% extends 'doctor_base.html' %}
+
+{% block morescripts %}
+<script>
+$(function() {
+    // We are essentially using a "new doctor details" form and prepopulate
+    // it with existing details, so the user can just modify specific
+    // details. The rest will not be updated.
+    var url = window.location.pathname;
+    var doc_url = url.replace('/edit/', '/ajax/');
+    console.log("Fetching ajax results from URL: " + doc_url);
+    $.getJSON(doc_url, function(data) {
+        console.log("Ajax call returned: " + data);
+	$("#new_title").val(data.title);
+	$("#new_name").val(data.name);
+	$("#new_quals").val(data.quals);
+	$("#new_ph").val(data.phone);
+	$("#new_em").val(data.email);
+	$("#new_rfee").val(data.fee);
+        var d  = new Date(Date.parse(data.regdate));
+        var da = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+	$("#new_rdate").val(da);
+	$("#new_addr").val(data.address);
+
+        // Now set the availability slots from the database.
+
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+                   'Friday', 'Saturday'];
+        var shiftns = ['Morning', 'Afternoon'];
+
+        for (day in data.avail) {
+          for (shift in data.avail[day]) {
+              var val = data.avail[day][shift];
+              res = val.match(/(\d\d:\d\d)-(\d\d:\d\d)/);
+              var tagf = "#newd_" + day + "_" + shift + "_from";
+              var tagt = "#newd_" + day + "_" + shift + "_to";
+              $(tagf).val(res[1]);
+              $(tagt).val(res[2]);
+          }
+        }
+    });
+});
+</script>
+{% end block %}
+
+{% block formheader %}
+Doctor Details Edit Form:
+{% end block %}
+
+{% block moreforms %}
+{% end block %}
+
+{% block action %}
+<p/>
+<input type="submit" id="editd_submit" value="Save Modifications &rarr;"/>
+{% end block %}

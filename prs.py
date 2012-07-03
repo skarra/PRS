@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jun 29 23:35:39 IST 2012
+## Last Modified : Tue Jul 03 17:32:51 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -21,7 +21,7 @@
 ## First up we need to fix the sys.path before we can even import stuff we
 ## want.
 
-import copy, os, re, sys, webbrowser
+import copy, os, re, string, sys, webbrowser
 from   datetime import datetime, date
 
 DIR_PATH    = os.path.abspath('')
@@ -124,14 +124,34 @@ class AjaxDoctorDetails(tornado.web.RequestHandler):
         q = session().query(models.Doctor)
         rec = q.filter_by(id=docid).first()
 
+        avail = {}
+
+        # FIXME: The code block below is repeated more or less verbatim in
+        # another routine... Can be refactored.
+        for slot in rec.slots:
+            h = '%s-%s' % (slot.start_time, slot.end_time)
+            if slot.day in avail:
+                if slot.shift in avail[slot.day]:
+                    oldh = avail[slot.day][slot.shift] + ', '                    
+                else:
+                    oldh = ''
+
+                avail[slot.day].update({slot.shift : (oldh + h)})
+            else:
+                avail.update({slot.day : {
+                    slot.shift : h
+                    }})                
+
         if rec:
             ret.update({'name'    : rec.name,
                         'title'   : rec.title,
+                        'quals'   : rec.quals,
                         'regdate' : rec.regdate.isoformat(),
                         'phone'   : rec.phone,
                         'fee'     : rec.fee,
                         'email'   : rec.email,
                         'address' : rec.address,
+                        'avail'   : avail,
                         })
 
         self.write(ret)
@@ -256,11 +276,11 @@ class ViewHandler(tornado.web.RequestHandler):
             times = '%s-%s' % (slot.start_time, slot.end_time)
 
             if avail[slot.day][shift] != '-':
-                times = avail[slot.day] + times
+                times = avail[slot.day][shift] + ', ' + times
 
             avail[slot.day].update({ shift : times })
 
-        self.render('doctor_view.html', title=config.get_title(), name="Goofy",
+        self.render('doctor_view.html', title=config.get_title(),
                     rec=rec, days=days, avail=avail)
 
     def view_patient (self, field, value):
@@ -387,13 +407,20 @@ class NewPatientHandler(tornado.web.RequestHandler):
         self.render('patient_new.html', title=config.get_title(),
                     depts=depts)
 
-class NewDoctorHandler(tornado.web.RequestHandler):
-    def make_doc_from_args (self):
+class DoctorHandler(tornado.web.RequestHandler):
+    ## FIXME: These arrays should be generated based on the actual shift
+    ## timings from the 'Shift' table
+    mophours=["-- Select --", "09:00", "10:00", "11:00", "12:00", "13:00"]
+    aophours=["-- Select --", "14:00", "15:00", "16:00", "17:00", "18:00"]
+
+    def make_doc_from_args (self, doc=None):
         """Invoked in the context of a POST handler this routine instantiates
         a new Doctor model object with values in the POST request and returns
         it. It is assumed that all the input validation is done on the UI
-        side."""
-
+        side.
+    
+        req should be an instance of a subclass of tornado.web.RequestHandler"""
+    
         ga = self.get_argument
         da = ga('new_rdate', '')
         if da == '':
@@ -405,25 +432,58 @@ class NewDoctorHandler(tornado.web.RequestHandler):
             else:
                 da = date(int(res.group(3)), int(res.group(2)),
                           int(res.group(1)))
-        doc = models.Doctor(name              = ga("new_name", ''),
-                            title             = ga("new_title", ''),
-                            regdate           = da,
-                            fee               = ga('new_rfee', 0),
-                            quals             = ga('new_quals', ''),
-                            phone             = ga('new_ph', ''),
-                            address           = ga('new_addr', ''),
-                            email             = ga('new_em', ''))
-
+    
+        if not doc:
+            doc = models.Doctor(name    = ga("new_name", ''),
+                                title   = ga("new_title", ''),
+                                regdate = da,
+                                fee     = ga('new_rfee', 0),
+                                quals   = ga('new_quals', ''),
+                                phone   = ga('new_ph', ''),
+                                address = ga('new_addr', ''),
+                                email   = ga('new_em', ''))
+        else:
+            doc.name    = ga("new_name", '')
+            doc.title   = ga("new_title", '')
+            doc.regdate = da
+            doc.fee     = ga('new_rfee', 0)
+            doc.quals   = ga('new_quals', '')
+            doc.phone   = ga('new_ph', '')
+            doc.address = ga('new_addr', '')
+            doc.email   = ga('new_em', '')
+    
         return doc
-
-    def make_slot_from_args (self):
+    
+    def add_slots_from_req_to_doc (self, doc):
         """Invoked in the context of a POST handler this routine instantiates
         an array of Slot model objects with values in the POST request and
         returns it. It is assumed that all the input validation is done on the
         UI side."""
+    
+        ga = self.get_argument
+        
+        # First remove any Slots in the doctor record already present.
+        [session().delete(slot) for slot in doc.slots]
+    
+        for day in days:
+            for shift in shiftns:
+                argf = string.strip(ga('newd_%s_%s_from' % (day, shift), ''))
+                argt = string.strip(ga('newd_%s_%s_to'   % (day, shift), ''))
 
-        return []
+                if argf == '' or argt == '':
+                    print 'issues with slots; argf: ', argf, '; argt: ', argt
+                    continue
 
+                # For some strange reason when nothing is selected what is
+                # returned is not -- Select -- but just the first strong
+                if argf != '--' and argt != '--':
+                    s = models.Slot(doctor_id=doc.id, day=day, shift=shift,
+                                    start_time=argf, end_time=argt)
+                    session().add(s)
+
+        session().commit()
+
+class NewDoctorHandler(DoctorHandler): 
     def post (self):
         ga = self.get_argument
         doc  = self.make_doc_from_args()
@@ -442,24 +502,55 @@ class NewDoctorHandler(tornado.web.RequestHandler):
             session().add(dept)
             session().commit()
 
-        ## Now try to add the slot information
-        slot = self.make_slot_from_args()
+        ## Now try to add the slot information and commit the changes
+        self.add_slots_from_req_to_doc(doc)
 
         self.redirect('/view/doctor/id/%d' % doc.id)
 
     def get (self):
-        ## FIXME: These arrays should be generated based on the actual shift
-        ## timings from the 'Shift' table
-        mophours=["-- Select --", "09:00", "10:00", "11:00", "12:00", "13:00"]
-        aophours=["-- Select --", "14:00", "15:00", "16:00", "17:00", "18:00"]
-
         deptq = session().query(models.Department)
         depts = [d.name for d in deptq]
         depts.insert(0, '-- Select --')
 
         self.render('doctor_new.html', title=config.get_title(),
                     depts=depts, days=days, today=models.today_uk(),
-                    mophours=mophours, aophours=aophours)
+                    mophours=self.mophours, aophours=self.aophours)
+
+class EditDoctorHandler(DoctorHandler):
+    """Edit the patient details. The form is pre-loaded with the current
+    personal details."""
+
+    def post (self, field, value):
+        if field != 'id':
+            return
+
+        q = session().query(models.Doctor)
+        d = q.filter_by(id=value).first()
+
+        ga = self.get_argument
+        rec = self.make_doc_from_args(d)
+        try:
+            session().commit()
+        except Exception, e:
+            ## FIXME: Erorr handling to be performed
+            print 'Exception while saving modifications for %s (%s)' % (
+                rec.name, e)
+            return
+
+        ## Now try to add the slot information and commit the changes
+        self.add_slots_from_req_to_doc(rec)
+        self.redirect('/view/doctor/id/%d' % rec.id)
+
+    def get (self, field, value):
+        if field != 'id':
+            ## FIXME: Error needs to be highlighted
+            return
+
+        q = session().query(models.Doctor)
+        rec = q.filter_by(id=value).first()
+        self.render("doctor_edit.html", title=config.get_title(),
+                    rec=rec, days=days,
+                    mophours=self.mophours, aophours=self.aophours)
 
 class NewVisitHandler(tornado.web.RequestHandler):
     def post (self):
@@ -554,6 +645,7 @@ application = tornado.web.Application([
     (r"/new/visit", NewVisitHandler),
 
     (r"/edit/patient/(.*)/(.*)", EditPatientHandler),
+    (r"/edit/doctor/(.*)/(.*)", EditDoctorHandler),
     (r"/view/(.*)/(.*)/(.*)", ViewHandler),
     (r"/search/(.*)", SearchHandler),
 

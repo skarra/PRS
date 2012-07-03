@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Fri Jun 29 23:39:55 IST 2012
+// Last Modified : Tue Jul 03 17:47:19 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -12,18 +12,19 @@ var pat_srp_table;
 var doc_srp_table;
 var newv_doc_table;
 
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+            'Friday', 'Saturday'];
+var shiftns = ['Morning', 'Afternoon'];
+
 function dayOfWeek (date) {
     if (!(date instanceof Date)) {
 	d = new Date();
-	res = date.match(/(\d\d)\/(\d\d)\/(\d\d\d\d)/);
+	res = date.match(/(\d+)\/(\d+)\/(\d\d\d\d)/);
 	d.setFullYear(res[3], res[2]-1, res[1]);
 	date = d;
     }
         
-    var day = date.getDay();
-    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                'Friday', 'Saturday']
-    return days[day];
+    return days[date.getDay()];
 }
 
 function validateNewPatient (event) {
@@ -65,8 +66,6 @@ function validateNewPatient (event) {
         alert(errmsg)
         return false;
     }
-
-    console.log('WTF.... f_name: ' + f_name)
 }
 
 function refreshVisitDocTable () {
@@ -247,6 +246,15 @@ function addHandlers_doctor_view () {
     });
 }
 
+function addHandlers_doctor_edit () {
+    $("#edit_doc_lab").click(function() {
+	var url = window.location.pathname;
+	var edit_url = url.replace('/view/', '/edit/');
+	console.log('Redirecting to: ' + edit_url);
+	window.location = edit_url;
+    });
+}
+
 function addHandlers () {
     console.log('addFormHandlers...');
 
@@ -336,6 +344,7 @@ function addHandlers () {
     addHandlers_new_visit();
     addHandlers_doctor_base();
     addHandlers_doctor_view();
+    addHandlers_doctor_edit();
 }
 
 function onLoad () {
