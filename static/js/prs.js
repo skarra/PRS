@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Jul 03 17:47:19 IST 2012
+// Last Modified : Tue Jul 03 23:20:20 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -186,7 +186,9 @@ function validateNewDoctor () {
 
     var f_name     = $('#new_name').val();
     var f_phone    = $('#new_ph').val();
-    var f_dept     = $('#newd_dept1').val();
+    var f_dept1    = $('#newd_dept_01').val();
+    var f_dept2    = $('#newd_dept_02').val();
+    var f_dept3    = $('#newd_dept_03').val();
 
     var errmsg  = "";
 
@@ -198,8 +200,9 @@ function validateNewDoctor () {
         errmsg += "Phone field cannot be empty\n";
     }
 
-    if (f_dept == "-- Select --") {
-	errmsg += "Please Select a department from the given list\n";
+    if (f_dept1 == "-- Select --" && f_dept2 == "-- Select --" && 
+	f_dept3 == "-- Select --") {
+	errmsg += "Please Select atleast one department from given list\n";
     }
 
     if (errmsg != "") {
@@ -226,6 +229,22 @@ function addHandlers_doctor_base () {
     });
 
     $("#new_doctor_form").submit(validateNewDoctor);
+
+    var prev_val = null;
+    $("select.deptsel").focus(function() {
+	prev_val = $(this).val();
+    }).change(function() {
+	var val = $(this).val();
+	if (prev_val != null && prev_val != '-- Select --') {
+	    $(this).siblings().find("option:[value="+prev_val+"]")
+		.removeAttr('disabled');	
+	}
+
+	if (val != '-- Select --') {
+	    $(this).siblings().find("option:[value="+val+"]")
+		.attr('disabled', 'disabled');
+	}
+    });
 }
 
 function addHandlers_doctor_view () {

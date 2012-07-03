@@ -100,13 +100,26 @@ $.datepicker.regional['en-GB'] = {
 
   <p/>
   <div>
-    <h2>Department</h2>
+    <h2>Departments</h2> (Select at least one)
     <div id="newd_dept_list">
-      <select id="newd_dept1" name="newd_dept1">
+      <select class="deptsel" id="newd_dept_01" name="newd_dept_01">
 	{% for dname in depts %}
 	<option> {{ dname }}</option>
 	{% end %}
       </select>
+
+      <select class="deptsel"  id="newd_dept_02" name="newd_dept_02">
+	{% for dname in depts %}
+	<option> {{ dname }}</option>
+	{% end %}
+      </select>
+
+      <select class="deptsel" id="newd_dept_03" name="newd_dept_03">
+	{% for dname in depts %}
+	<option> {{ dname }}</option>
+	{% end %}
+      </select>
+
     </div>
   </div>
 

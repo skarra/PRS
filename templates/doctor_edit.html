@@ -22,6 +22,11 @@ $(function() {
 	$("#new_rdate").val(da);
 	$("#new_addr").val(data.address);
 
+       // Now set the department name from the database.
+       for (var i=0; i < data.depts.length; i+=1) {
+           $("#newd_dept_0" + (i+1)).val(data.depts[i]);
+       }
+
         // Now set the availability slots from the database.
 
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',

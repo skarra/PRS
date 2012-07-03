@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jul 03 17:32:51 IST 2012
+## Last Modified : Tue Jul 03 23:53:39 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -152,6 +152,7 @@ class AjaxDoctorDetails(tornado.web.RequestHandler):
                         'email'   : rec.email,
                         'address' : rec.address,
                         'avail'   : avail,
+                        'depts'   : [d.name for d in rec.depts],
                         })
 
         self.write(ret)
@@ -413,6 +414,8 @@ class DoctorHandler(tornado.web.RequestHandler):
     mophours=["-- Select --", "09:00", "10:00", "11:00", "12:00", "13:00"]
     aophours=["-- Select --", "14:00", "15:00", "16:00", "17:00", "18:00"]
 
+    max_depts = 3
+
     def make_doc_from_args (self, doc=None):
         """Invoked in the context of a POST handler this routine instantiates
         a new Doctor model object with values in the POST request and returns
@@ -454,6 +457,23 @@ class DoctorHandler(tornado.web.RequestHandler):
     
         return doc
     
+    def add_depts_from_req_to_doc (self, doc):
+        ga = self.get_argument
+        dirty = False
+
+        # Undo department mappings if any
+        doc.depts[:] = []
+
+        for i in range(self.max_depts):
+            tag = 'newd_dept_%02d' % (i+1)
+            dept = models.Department.find_by_name(session, ga(tag, None))
+            if dept:
+                doc.depts.append(dept)
+                dirty = True
+
+        if dirty:
+            session().commit()
+
     def add_slots_from_req_to_doc (self, doc):
         """Invoked in the context of a POST handler this routine instantiates
         an array of Slot model objects with values in the POST request and
@@ -462,7 +482,8 @@ class DoctorHandler(tornado.web.RequestHandler):
     
         ga = self.get_argument
         
-        # First remove any Slots in the doctor record already present.
+        # First remove any Slots and departments in the doctor record already
+        # present
         [session().delete(slot) for slot in doc.slots]
     
         for day in days:
@@ -496,11 +517,7 @@ class NewDoctorHandler(DoctorHandler):
             print '*** NewDoctorHandler: ', msg
             return
 
-        dept = models.Department.find_by_name(session, ga('newd_dept1', ''))
-        if dept:
-            dept.doctors.append(doc)
-            session().add(dept)
-            session().commit()
+        self.add_depts_from_req_to_doc(doc)
 
         ## Now try to add the slot information and commit the changes
         self.add_slots_from_req_to_doc(doc)
@@ -537,6 +554,8 @@ class EditDoctorHandler(DoctorHandler):
                 rec.name, e)
             return
 
+        self.add_depts_from_req_to_doc(rec)
+
         ## Now try to add the slot information and commit the changes
         self.add_slots_from_req_to_doc(rec)
         self.redirect('/view/doctor/id/%d' % rec.id)
@@ -546,10 +565,14 @@ class EditDoctorHandler(DoctorHandler):
             ## FIXME: Error needs to be highlighted
             return
 
+        deptq = session().query(models.Department)
+        depts = [d.name for d in deptq]
+        depts.insert(0, '-- Select --')
+
         q = session().query(models.Doctor)
         rec = q.filter_by(id=value).first()
         self.render("doctor_edit.html", title=config.get_title(),
-                    rec=rec, days=days,
+                    rec=rec, days=days, depts=depts,
                     mophours=self.mophours, aophours=self.aophours)
 
 class NewVisitHandler(tornado.web.RequestHandler):
