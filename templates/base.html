@@ -1,7 +1,7 @@
 <!DOCTYPE HTML> 
 <!--
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Jun 26 07:39:36 IST 2012
+// Last Modified : Wed Jul 04 19:22:31 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -73,29 +73,47 @@
 
     <br/>
     <div class="panel">
-    <h2> Doctor Menu </h2>
+      <h2> Doctor Menu </h2>
 
-    <p/>
-    <input id="dispatch_new_d" class="control_label"
-           type="submit" value="Add New &rarr;"/>
+      <p/>
+      <input id="dispatch_new_d" class="control_label"
+	     type="submit" value="Add New &rarr;"/>
 
-    <input id="view_all_d" class="control_label"
-           type="submit" value="View All &rarr;"/>
-    <br/>
+      <input id="view_all_d" class="control_label"
+             type="submit" value="View All &rarr;"/>
+      <br/>
 
-    <form id="search_name_d" class="search" action="/search/doctor">
-      <input type="text" placeholder="Find doctor by name..." 
+      <form id="search_name_d" class="search" action="/search/doctor">
+	<input type="text" placeholder="Find doctor by name..." 
 	       id="name_doc_v" name="named"/>
-      <input type="submit" value="Go" id="name_doc_q"/>
-    </form>
-    <br/>
+	<input type="submit" value="Go" id="name_doc_q"/>
+      </form>
+      <br/>
     
-    <form id="search_id_d" class="search" action="/search/doctor">
-      <input type="text" placeholder="Find doctor by ID..." 
-	     id="id_doc_v" name="idd"/>
-      <input type="submit" value="Go" id="id_doc_q"/>
-    </form>
-    </div>
+      <form id="search_id_d" class="search" action="/search/doctor">
+	<input type="text" placeholder="Find doctor by ID..." 
+	       id="id_doc_v" name="idd"/>
+	<input type="submit" value="Go" id="id_doc_q"/>
+      </form>
+
+      <br/>
+
+      <!--
+	  <form id="search_dept_d" class="search" action="/search/doctor">
+	    <input type="text" placeholder="Find doctors in Department..." 
+		   id="dept_doc_v" name="deptd"/>
+	    <input type="submit" value="Go" id="dept_doc_q"/>
+	  </form>
+	  -->
+
+      <form id="search_dept_d" class="search" action="/search/doctor">
+	<select id="dept_doc_v" name="deptd">
+	  <option value="1.0">Find doctors by Dept...</option>
+	</select>
+	<input type="submit" value="Go" id="dept_doc_q"/>
+      </form>
+    </div> <!-- .panel -->
+  
   </div> <!-- .admin -->
 
   <div class="push"></div>

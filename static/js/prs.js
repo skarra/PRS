@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Jul 03 23:20:20 IST 2012
+// Last Modified : Wed Jul 04 18:14:15 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -25,6 +25,19 @@ function dayOfWeek (date) {
     }
         
     return days[date.getDay()];
+}
+
+function setupDeptNamesInControl () {
+    var url = "/ajax/departments";
+    $.getJSON(url, function(data) {
+	console.log("Got " + data.count + " entries in ajax response.");
+	$.each(data.departments, function(key) {
+	    var name = data.departments[key][0];
+	    var id   = data.departments[key][1];
+	    $("#dept_doc_v").append("<option val=" + id + ">" + name 
+				    + "</option>");
+	});
+    });
 }
 
 function validateNewPatient (event) {
@@ -91,9 +104,6 @@ function refreshVisitDocTable () {
 		[data.doctors[key].id, "Dr. " + key, data.doctors[key].quals,
 		 morns, evens]]);
 	});
-
-	// 
-
     });
 }
 
@@ -296,6 +306,8 @@ function addHandlers () {
     $("#view_all_d").click(function() {
 	window.location = '/search/doctor?id=all';
     });
+
+    setupDeptNamesInControl();
 
     // The following only applies to the srp.html, but it is still
     // desirable to have all the javascipt centralized here (??)...

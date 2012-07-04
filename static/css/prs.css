@@ -84,7 +84,7 @@ body, select, input, textarea {
   border: none;
 }
 
-.search input[type="text"] {
+.search input[type="text"], .search select {
   border: 1px solid #b7b7b7;
   
   background: white url('/static/img/search.png?1299763894') 4px center no-repeat;
@@ -98,6 +98,14 @@ body, select, input, textarea {
   border-radius: 3px;
   width: 12em;
   height: 25px;
+}
+
+.search select {
+    font-size: 14px;
+    background: white;
+    width: 16.5em;
+    height: 35px;
+    color: #666;
 }
 
 .search input[type="submit"] {
