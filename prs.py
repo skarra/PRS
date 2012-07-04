@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jul 03 23:53:39 IST 2012
+## Last Modified : Wed Jul 04 07:47:26 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -203,13 +203,34 @@ class AjaxDocAvailability(tornado.web.RequestHandler):
 ##
 
 class SearchHandler(tornado.web.RequestHandler):
+    def search_dept (self, name):
+        model     = models.Department
+        template  = 'doc_srp.html'
+        query     = session().query(model)
+        total_cnt = query.count()
+        query     = query.filter_by(name=name).first()
+        results   = query.doctors if query else []
+
+        qstr      = 'Field: "Dept" Value: "%s"' % name
+        match_cnt = len(results)
+
+        self.render(template, title=config.get_title(),
+                    search_query=qstr, search_results=results,
+                    total_cnt=total_cnt, match_cnt=match_cnt)
+        
     def search (self, role, field, value):
         if role == 'patient':
             model = models.Patient
             template = 'pat_srp.html'
         elif role == 'doctor':
-            model = models.Doctor
-            template = 'doc_srp.html'
+            if field == 'dept':
+                ## This will we handle differently from the rest - jus for
+                ## now. FIXME: for the ugliness quotient...
+                self.search_dept(value)
+                return
+            else:
+                model = models.Doctor
+                template = 'doc_srp.html'
         else:
             print 'SearchHandler:search: Invalid role: %s' % role
             return
@@ -237,13 +258,17 @@ class SearchHandler(tornado.web.RequestHandler):
 
         name = self.get_argument('name', self.get_argument('named', None))
         id   = self.get_argument('id', self.get_argument('idd', None))
+        dept = self.get_argument('name', self.get_argument('deptd', None))
 
-        if id:
+        if name:
+            field = 'name'
+            value = name
+        elif id:
             field = 'id'
             value = id
         else:
-            field = 'name'
-            value = name
+            field = 'dept'
+            value = dept
 
         if role in ['patient', 'doctor']:
             return self.search(role, field, value)
