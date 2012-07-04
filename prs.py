@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jul 04 07:47:26 IST 2012
+## Last Modified : Wed Jul 04 17:43:16 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -70,6 +70,15 @@ class ErrorHandler(tornado.web.RequestHandler):
 ##
 ## All the classes that start with Ajax are ajax handler that return JSON
 ##
+
+class AjaxDepartmentsList(tornado.web.RequestHandler):
+    def get (self):
+        ret = []
+        q = session().query(models.Department)
+        for dept in q:
+            ret.append((dept.name, dept.id))
+
+        self.write({'departments' : ret})
 
 class AjaxDoctorsInDepartment(tornado.web.RequestHandler):
     """Return an array of doctor ID and Names as 'id - name' strings. Keeping
@@ -701,6 +710,7 @@ application = tornado.web.Application([
     (r"/ajax/patient/id/(.*)", AjaxPatientDetails),
     (r"/ajax/doctor/id/(.*)", AjaxDoctorDetails),
     (r"/ajax/docavailability", AjaxDocAvailability),
+    (r"/ajax/departments", AjaxDepartmentsList),
 
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))
