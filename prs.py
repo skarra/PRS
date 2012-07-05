@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jul 04 17:43:16 IST 2012
+## Last Modified : Thu Jul 05 23:51:13 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -66,6 +66,67 @@ class ErrorHandler(tornado.web.RequestHandler):
     
     def prepare (self):
         raise tornado.web.HTTPError(self._status_code)
+
+class MiscAdminHandler(tornado.web.RequestHandler):
+    def edit_depts (self):
+        depts = session().query(models.Department)
+        self.render('department_edit.html', title=config.get_title(),
+                    depts=depts)
+
+    def process_old_depts (self):
+        dirty = False
+        depts = session().query(models.Department)
+
+        for dept in depts:
+            argn = 'dept_name_old_%d' % dept.id
+            argv = self.get_argument(argn, None)
+            if argv and dept.name != argv:
+                dept.name = argv
+                dirty = True
+
+        return dirty
+
+    def process_new_depts (self):
+        dirty = False
+        i = 1
+
+        while True:
+            argn = 'dept_name_new_%d' % i
+            argv = self.get_argument(argn, None)
+
+            if not argv:
+                break
+
+            if argv != '':
+                d = models.Department(name=argv)
+                session().add(d)
+                dirty = True
+
+            i += 1
+
+        return dirty
+
+    def save_depts (self):
+        d1 = self.process_old_depts()
+        d2 = self.process_new_depts()
+
+        if d1 or d2:
+            session().commit()
+
+    def post (self):
+        op = self.get_argument('misc_admin_s', None)
+        if op == 'dept':
+            self.save_depts()
+            self.redirect('')
+        else:
+            self.redirect('/')
+
+    def get (self):
+        op = self.get_argument('misc_admin_s', None)
+        if op == 'dept':
+            self.edit_depts()
+        else:
+            self.redirect('/')
 
 ##
 ## All the classes that start with Ajax are ajax handler that return JSON
@@ -711,6 +772,8 @@ application = tornado.web.Application([
     (r"/ajax/doctor/id/(.*)", AjaxDoctorDetails),
     (r"/ajax/docavailability", AjaxDocAvailability),
     (r"/ajax/departments", AjaxDepartmentsList),
+
+    (r"/miscadmin/", MiscAdminHandler),
 
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))

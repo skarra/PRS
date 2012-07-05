@@ -1,7 +1,7 @@
 <!DOCTYPE HTML> 
 <!--
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jul 04 19:22:31 IST 2012
+// Last Modified : Thu Jul 05 16:53:50 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -98,14 +98,6 @@
 
       <br/>
 
-      <!--
-	  <form id="search_dept_d" class="search" action="/search/doctor">
-	    <input type="text" placeholder="Find doctors in Department..." 
-		   id="dept_doc_v" name="deptd"/>
-	    <input type="submit" value="Go" id="dept_doc_q"/>
-	  </form>
-	  -->
-
       <form id="search_dept_d" class="search" action="/search/doctor">
 	<select id="dept_doc_v" name="deptd">
 	  <option value="1.0">Find doctors by Dept...</option>
@@ -113,10 +105,22 @@
 	<input type="submit" value="Go" id="dept_doc_q"/>
       </form>
     </div> <!-- .panel -->
+
+    <br/>
+    <div class="panel">
+      <h2> Misc Menu </h2>
+
+      <form id="misc_admin" class="search" method="GET" action="/miscadmin/">
+	<select id="misc_admin_s" name="misc_admin_s">
+	  <option value="none">-- Select --</option>
+	  <option value="dept">Add/Edit Department List</option>
+	</select>
+	<input type="submit" value="Go" id="dept_doc_q"/>
+      </form>
+   </div>
   
   </div> <!-- .admin -->
-
-  <div class="push"></div>
+ <div class="push"></div>
 
   <div id="content">
     <div id="sheet">

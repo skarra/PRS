@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Add / Edit Department List </h1>
+
+<form id="dept_inp_edit" method="POST">
+  <input id="dept_inp_edit" class="control_label"
+	 type="submit" value="Save"/>
+  <hr/>
+
+  <div class="col_parent">
+    <div class="twocols">
+      <h> Existing Departments </h>
+      <div class="dept_inp_row header">
+        <div class="dept_inp_id"> ID </div>
+        <div class="dept_inp_name"> Department Name </div>
+      </div>
+      
+      {% set i = 0 %}
+      
+      {% for dept in depts %}
+        {% set i = i + 1 %}
+        {% set tag = "dept_name_old_%d" % dept.id %}
+        <div class="dept_inp_row">
+          <div class="dept_inp_id"> {{ dept.id }} </div>
+          <div class="dept_inp_name">
+            <input type="text" id={{ tag }} name={{ tag }} 
+  		 value="{{ dept.name }}" />
+          </div>
+        </div>
+      {% end %}
+    </div> <!-- #existing_depts .twocols  -->
+
+    <div class="twocols">
+      <h> Add New Departments </h>
+      <div class="dept_inp_row header">
+	<div class="dept_inp_name header"> Department Name </div>
+      </div>
+
+      <div id="dept_inp_names">
+	<div class="dept_inp_name">
+	  <input type="text" id="dept_name_new_1" name="dept_name_new_1"
+		 placeholder="Enter a new department name" />
+	</div>
+      </div>
+
+      <div class="dept_inp_name">
+	<a id="dept_add_new">Insert Another</a>
+      </div>
+    </div> <!-- #new_depts .twocols  -->
+
+  
+  <div> <!-- .col_parent -->
+</form>
+
+{% end block %}
