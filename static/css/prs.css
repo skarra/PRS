@@ -317,10 +317,10 @@ body {
 header {
   *zoom: 1;
   padding: 10px 20px;
-  background: url('/static/img/paper.jpg?884184256');
+/*  background: url('/static/img/paper.jpg?884184256'); */
   border-bottom: 1px solid #afafaf;
   -moz-box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: -5px 1px 5px rgsba(0, 0, 0, 0.4);
   -o-box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
   box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
 }

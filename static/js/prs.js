@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Fri Jul 06 07:59:59 IST 2012
+// Last Modified : Fri Jul 06 15:18:26 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -305,12 +305,23 @@ function addHandlers_department_edit() {
 
     $.getJSON("/ajax/appstate", function(data) {
 	var msg;
+	var url;
+	var color;
 	if (data['environment_is_demo']) {
-	    msg = 'Switch to Production DB'
+	    msg = 'Switch to Production DB';
+	    url = 'bkg.png?881083570';
+	    color = 'beige';
 	} else {
-	    msg = 'Switch to Demo DB'
+	    msg = 'Switch to Demo DB';
+	    url = 'paper.jpg?884184256';
+	    color = '#666666';
 	}
 
+	url = 'url("/static/img/' + url + '")';
+	console.log('url: ' + url);
+	$("header").css('background-image', url);
+	$("#site-title").css('color', color);
+	$("#site-title:hover").css('color', 'blue');
 	$("#mas_db").text(msg);
     });    
 }
