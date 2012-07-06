@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Thu Jul 05 23:20:20 IST 2012
+// Last Modified : Fri Jul 06 07:59:59 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -300,6 +300,19 @@ function addHandlers_department_edit() {
 	$("#dept_inp_names").append(new_box);
 	dept_cnt += 1;
     });
+
+    // Set the right message for toggling environment
+
+    $.getJSON("/ajax/appstate", function(data) {
+	var msg;
+	if (data['environment_is_demo']) {
+	    msg = 'Switch to Production DB'
+	} else {
+	    msg = 'Switch to Demo DB'
+	}
+
+	$("#mas_db").text(msg);
+    });    
 }
 
 function addHandlers () {

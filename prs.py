@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu Jul 05 23:51:13 IST 2012
+## Last Modified : Fri Jul 06 08:03:15 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -46,15 +46,38 @@ shiftns = ['Morning', 'Afternoon']
 settings = {'debug': True,
             'static_path': os.path.join(DIR_PATH, 'static')}
 
+production = 0
+sample     = 1
+db = sample
+
+def db_env ():
+    return db
+
+def is_production (env):
+    return env == production
+
+def is_demo (env):
+    return env == sample
+
+def toggle_env ():
+    global db
+    if is_production(db_env()):
+        db = sample
+    else:
+        db = production
+
 class ErrorHandler(tornado.web.RequestHandler):
     """Generates an error response with status_code for all requests."""
     def __init__ (self, application, request, status_code):
+        print 'In ErrorHandler init'
         tornado.web.RequestHandler.__init__(self, application, request)
         self.set_status(status_code)
     
     def get_error_html (self, status_code, **kwargs):
+        print 'In get_error_html. status_code: ', status_code
         if status_code in [403, 404, 500, 503]:
             filename = '%d.html' % status_code
+            print 'rendering filename: ', filename
             return self.render_string(filename, title=config.get_title())
 
         return "<html><title>%(code)d: %(message)s</title>" \
@@ -65,6 +88,7 @@ class ErrorHandler(tornado.web.RequestHandler):
                 }
     
     def prepare (self):
+        print 'In prepare...'
         raise tornado.web.HTTPError(self._status_code)
 
 class MiscAdminHandler(tornado.web.RequestHandler):
@@ -125,12 +149,20 @@ class MiscAdminHandler(tornado.web.RequestHandler):
         op = self.get_argument('misc_admin_s', None)
         if op == 'dept':
             self.edit_depts()
+        elif op == 'mas_db':
+            toggle_env()
+            self.redirect('/')
         else:
             self.redirect('/')
 
 ##
 ## All the classes that start with Ajax are ajax handler that return JSON
 ##
+
+class AjaxAppState(tornado.web.RequestHandler):
+    def get (self):
+        self.write({'environment' : db_env(),
+                    'environment_is_demo' : is_demo(db_env())})
 
 class AjaxDepartmentsList(tornado.web.RequestHandler):
     def get (self):
@@ -231,7 +263,6 @@ class AjaxDocAvailability(tornado.web.RequestHandler):
     """Return the details of the patient as a dictionary"""
 
     def get (self):
-        print "Yeah baby; in doc availability"
         ret   = {}
         dept_name = self.get_argument('dept', None)
         if not dept_name:
@@ -240,7 +271,6 @@ class AjaxDocAvailability(tornado.web.RequestHandler):
 
         day    = self.get_argument('day', '-- Any --')
         shiftn = self.get_argument('shift', '-- Any --')
-        print 'shiftn: ', shiftn        
         
         dq = session().query(models.Doctor, models.Slot)
         dq = dq.filter(models.Doctor.depts.any(name=dept_name))
@@ -749,12 +779,11 @@ def engine (val=None):
     else:
         return _engine
 
-def session (val=None):
-    global _session
-    if val:
-        _session = val
-    else:
-        return _session
+def session ():
+    if db_env() == production:
+        return sess_p
+    elif db == sample:
+        return sess_s
 
 application = tornado.web.Application([
     (r"/", MainHandler),
@@ -772,6 +801,7 @@ application = tornado.web.Application([
     (r"/ajax/doctor/id/(.*)", AjaxDoctorDetails),
     (r"/ajax/docavailability", AjaxDocAvailability),
     (r"/ajax/departments", AjaxDepartmentsList),
+    (r"/ajax/appstate", AjaxAppState),
 
     (r"/miscadmin/", MiscAdminHandler),
 
@@ -782,12 +812,13 @@ application = tornado.web.Application([
 tornado.web.ErrorHandler = ErrorHandler
 
 if __name__ == "__main__":
+    global eng_s, sess_s, eng_p, sess_p
+
     tornado.options.parse_command_line()
 
-    eng, sess= models.setup_tables('db/sample.db')
-    engine(eng)
-    session(sess)
-    
+    eng_s, sess_s = models.setup_tables('db/sample.db')   
+    eng_p, sess_p = models.setup_tables('db/prs.db')
+
     application.listen(8888)
     ##    webbrowser.open('localhost:8888', new=2)
     tornado.ioloop.IOLoop.instance().start()
