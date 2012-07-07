@@ -819,6 +819,7 @@ if __name__ == "__main__":
     eng_s, sess_s = models.setup_tables('db/sample.db')   
     eng_p, sess_p = models.setup_tables('db/prs.db')
 
-    application.listen(8888)
-    ##    webbrowser.open('localhost:8888', new=2)
+    port = 8888
+    application.listen(port)
+    webbrowser.open('http://localhost:%d' % port, new=2)
     tornado.ioloop.IOLoop.instance().start()
