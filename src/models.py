@@ -128,6 +128,41 @@ class Department(Base):
 
         return None
 
+    @classmethod
+    def sorted_dept_names (self, session):
+        """Returns a list of department names sorted alphabetically."""
+
+        q = session().query(Department)
+        return sorted([dept.name for dept in q])
+
+    @classmethod
+    def sorted_dept_names_with_id (self, session):
+        """Returns a list of department name, id tupes, where the
+        array is sorted on the department name"""
+
+        q = session().query(Department)
+        ds = sorted([d.name for d in q])
+
+        ret = []
+        for d in ds:
+            ret.append((d, q.filter_by(name=d).first().id))
+
+        return ret
+
+    @classmethod
+    def sorted_depts (self, session):
+        """Returns a list of Department objects, such that they are
+        sorted by their name field."""
+
+        q = session().query(Department)
+        ds = sorted([d.name for d in q])
+
+        ret = []
+        for d in ds:
+            ret.append(q.filter_by(name=d).first())
+
+        return ret
+
 ## The proper way for us to model this is to use a separate table for the
 ## working hours every day. But this is proving to be too complicated. For now
 ## this database table is only used to create the sampledb.

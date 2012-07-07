@@ -166,11 +166,7 @@ class AjaxAppState(tornado.web.RequestHandler):
 
 class AjaxDepartmentsList(tornado.web.RequestHandler):
     def get (self):
-        ret = []
-        q = session().query(models.Department)
-        for dept in q:
-            ret.append((dept.name, dept.id))
-
+        ret = models.Department.sorted_dept_names_with_id(session)
         self.write({'departments' : ret})
 
 class AjaxDoctorsInDepartment(tornado.web.RequestHandler):
@@ -527,8 +523,7 @@ class NewPatientHandler(tornado.web.RequestHandler):
             print '*** NewPatientHandler: ', msg
 
     def get (self):
-        deptq = session().query(models.Department)
-        depts = [d.name for d in deptq]
+        depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')
         self.render('patient_new.html', title=config.get_title(),
                     depts=depts)
@@ -650,8 +645,7 @@ class NewDoctorHandler(DoctorHandler):
         self.redirect('/view/doctor/id/%d' % doc.id)
 
     def get (self):
-        deptq = session().query(models.Department)
-        depts = [d.name for d in deptq]
+        depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')
 
         self.render('doctor_new.html', title=config.get_title(),
@@ -756,8 +750,7 @@ class NewVisitHandler(tornado.web.RequestHandler):
             rec = q.filter_by(id=patid).first()
             patname = rec.name
 
-        deptq = session().query(models.Department)
-        depts = [d.name for d in deptq]
+        depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')
         d = copy.deepcopy(days)
         d.insert(0, '-- Any --')
@@ -821,5 +814,5 @@ if __name__ == "__main__":
 
     port = 8888
     application.listen(port)
-    webbrowser.open('http://localhost:%d' % port, new=2)
+    #webbrowser.open('http://localhost:%d' % port, new=2)
     tornado.ioloop.IOLoop.instance().start()
