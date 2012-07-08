@@ -38,7 +38,7 @@ def today_s ():
 def today_uk ():
     """Return today's date in DD/MM/YYYY format"""
     d = datetime.date.today()
-    return "%4d/%02d/%02d" % (d.day, d.month, d.year)
+    return "%02d/%02d/%04d" % (d.day, d.month, d.year)
 
 myd = DATE(storage_format="%04d/%02d/%02d",
            regexp=re.compile("(\d+)/(\d+)/(\d+)"))

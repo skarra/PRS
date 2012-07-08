@@ -484,7 +484,7 @@ class EditPatientHandler(tornado.web.RequestHandler):
         q = session().query(models.Patient)
         rec = q.filter_by(id=value).first()
         self.render("patient_edit.html", title=config.get_title(),
-                    rec=rec)
+                    rec=rec, today=models.today_uk())
 
 class NewPatientHandler(tornado.web.RequestHandler):
     def post (self):
@@ -526,7 +526,7 @@ class NewPatientHandler(tornado.web.RequestHandler):
         depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')
         self.render('patient_new.html', title=config.get_title(),
-                    depts=depts)
+                    depts=depts, today=models.today_uk())
 
 class DoctorHandler(tornado.web.RequestHandler):
     ## FIXME: These arrays should be generated based on the actual shift
