@@ -608,6 +608,7 @@ footer p {
 
 #newd_avail select, #newd_dept_list select {
     height: 20px;
+    padding: 0px;
 }
 
 #sheet textarea {
