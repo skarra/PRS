@@ -50,6 +50,9 @@ function validateNewPatient (event) {
     var f_addr     = $('#new_addr').val();
     var f_dept     = $('#newp_dept_list').val();
     var f_doc      = $('#newp_doc_list').val();
+    var f_relname  = $('#new_relname').val();
+    var f_relph    = $('#new_ph').val();
+    var f_relrel   = $('#new_relrel').val();
 
     var failed  = false;
     var errmsg  = "";
@@ -69,6 +72,18 @@ function validateNewPatient (event) {
 
     if (f_doc == "-- Select --") {
 	errmsg += "Please Select a doctor from the given list\n";
+    }
+
+    if (f_relname == "") {
+	errmsg += "Emergency Contact details (name) cannot be empty\n";
+    }
+
+    if (f_relph == "") {
+	errmsg += "Emergency Contact details (phone) cannot be empty\n";
+    }
+
+    if (f_relrel == "") {
+	errmsg += "Emergency Contact details (relation) cannot be empty\n";
     }
 
     if (f_reg_date === "") {
