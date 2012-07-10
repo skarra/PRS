@@ -67,7 +67,8 @@ $.datepicker.regional['en-GB'] = {
     <div id="newp_phones">
       <div class="twocols">
 	<label>Phone Number<span class="reqd_field">*</span></label>
-	<input type="text" id="new_ph" name="new_ph"/>
+	<input type="text" id="new_ph" name="new_ph"
+	       data-allowed-chars="+- 0123456789"/>
       </div>
       <div class="twocols">
 	<label>Occupation</label>
@@ -84,7 +85,8 @@ $.datepicker.regional['en-GB'] = {
       </div>
       <div class="twocols">
 	<label>Phone<span class="reqd_field">*</span></label>
-	<input type="text" id="new_relph" name="new_relph"/>
+	<input type="text" id="new_relph" name="new_relph"
+	       data-allowed-chars="+- 0123456789"/>
       </div>
     </div>
 
@@ -98,7 +100,8 @@ $.datepicker.regional['en-GB'] = {
     <div id="newp_regd_fee">
       <div class="twocols">
 	<label>Regn. Fee (Rs.) </label>
-	<input class="date" type="text" id="new_rfee" name="new_rfee"/>
+	<input class="date" type="text" id="new_rfee" name="new_rfee"
+	       data-allowed-chars="0123456789"/>
       </div>
       <div class="twocols">
 	<label>Date of Registration </label>
