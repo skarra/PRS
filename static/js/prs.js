@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Jul 10 07:31:09 IST 2012
+// Last Modified : Tue Jul 10 22:48:51 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -23,7 +23,7 @@ function dayOfWeek (date) {
 	d.setFullYear(res[3], res[2]-1, res[1]);
 	date = d;
     }
-        
+
     return days[date.getDay()];
 }
 
@@ -48,8 +48,6 @@ function validateNewPatient (event) {
     var f_reg_date = $('#new_reg_date').val();
     var f_phone    = $('#new_phone').val();
     var f_addr     = $('#new_addr').val();
-    var f_dept     = $('#newp_dept_list').val();
-    var f_doc      = $('#newp_doc_list').val();
     var f_relname  = $('#new_relname').val();
     var f_relph    = $('#new_ph').val();
     var f_relrel   = $('#new_relrel').val();
@@ -64,14 +62,6 @@ function validateNewPatient (event) {
     if (f_age === "") {
         errmsg += "Age field cannot be empty\n";
     } else {
-    }
-
-    if (f_dept == "-- Select --") {
-	errmsg += "Please Select a department from the given list\n";
-    }
-
-    if (f_doc == "-- Select --") {
-	errmsg += "Please Select a doctor from the given list\n";
     }
 
     if (f_relname == "") {
