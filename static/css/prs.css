@@ -789,10 +789,6 @@ input[class="date"], #newv_date {
     text-align: right;
 }
 
-#newv_submit {
-    float: right;
-}
-
 /*
  * Error Pages
  */
