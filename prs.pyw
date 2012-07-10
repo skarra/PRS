@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jul 06 08:03:15 IST 2012
+## Last Modified : Tue Jul 10 11:20:30 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -21,7 +21,7 @@
 ## First up we need to fix the sys.path before we can even import stuff we
 ## want.
 
-import copy, os, re, string, sys, webbrowser
+import copy, httplib, os, re, string, sys, webbrowser
 from   datetime import datetime, date
 
 DIR_PATH    = os.path.abspath('')
@@ -69,29 +69,40 @@ def toggle_env ():
 class ErrorHandler(tornado.web.RequestHandler):
     """Generates an error response with status_code for all requests."""
     def __init__ (self, application, request, status_code):
-        print 'In ErrorHandler init'
         tornado.web.RequestHandler.__init__(self, application, request)
         self.set_status(status_code)
     
-    def get_error_html (self, status_code, **kwargs):
-        print 'In get_error_html. status_code: ', status_code
+    def write_error (self, status_code, **kwargs):
         if status_code in [403, 404, 500, 503]:
             filename = '%d.html' % status_code
-            print 'rendering filename: ', filename
-            return self.render_string(filename, title=config.get_title())
-
-        return "<html><title>%(code)d: %(message)s</title>" \
-                "<body class='bodyErrorPage'>%(code)d: %(message)s</body>"\
-                "</html>" % {
+            self.render(filename, title=config.get_title())
+        else:
+            self.write("<html><title>%(code)d: %(message)s</title>" \
+            "<body class='bodyErrorPage'>%(code)d: %(message)s</body>"\
+            "</html>" % {
                 "code": status_code,
                 "message": httplib.responses[status_code],
-                }
-    
+            })
+
     def prepare (self):
-        print 'In prepare...'
         raise tornado.web.HTTPError(self._status_code)
 
-class MiscAdminHandler(tornado.web.RequestHandler):
+class BaseHandler(tornado.web.RequestHandler):
+    """Generates an error response with status_code for all requests."""
+
+    def write_error (self, status_code, **kwargs):
+        if status_code in [403, 404, 500, 503]:
+            filename = '%d.html' % status_code
+            self.render(filename, title=config.get_title())
+        else:
+            self.write("<html><title>%(code)d: %(message)s</title>" \
+            "<body class='bodyErrorPage'>%(code)d: %(message)s</body>"\
+            "</html>" % {
+                "code": status_code,
+                "message": httplib.responses[status_code],
+                })
+
+class MiscAdminHandler(BaseHandler):
     def edit_depts (self):
         depts = session().query(models.Department)
         self.render('department_edit.html', title=config.get_title(),
@@ -159,17 +170,17 @@ class MiscAdminHandler(tornado.web.RequestHandler):
 ## All the classes that start with Ajax are ajax handler that return JSON
 ##
 
-class AjaxAppState(tornado.web.RequestHandler):
+class AjaxAppState(BaseHandler):
     def get (self):
         self.write({'environment' : db_env(),
                     'environment_is_demo' : is_demo(db_env())})
 
-class AjaxDepartmentsList(tornado.web.RequestHandler):
+class AjaxDepartmentsList(BaseHandler):
     def get (self):
         ret = models.Department.sorted_dept_names_with_id(session)
         self.write({'departments' : ret})
 
-class AjaxDoctorsInDepartment(tornado.web.RequestHandler):
+class AjaxDoctorsInDepartment(BaseHandler):
     """Return an array of doctor ID and Names as 'id - name' strings. Keeping
     in line with general good practise this is wrapped into a dictionary."""
 
@@ -190,7 +201,7 @@ class AjaxDoctorsInDepartment(tornado.web.RequestHandler):
 
         self.write({"doctors" : ret})
 
-class AjaxPatientDetails(tornado.web.RequestHandler):
+class AjaxPatientDetails(BaseHandler):
     """Return the details of the patient as a dictionary"""
 
     def get (self, patid):
@@ -214,7 +225,7 @@ class AjaxPatientDetails(tornado.web.RequestHandler):
 
         self.write(ret)
 
-class AjaxDoctorDetails(tornado.web.RequestHandler):
+class AjaxDoctorDetails(BaseHandler):
     """Return the details of the doctor as a dictionary"""
 
     def get (self, docid):
@@ -255,7 +266,7 @@ class AjaxDoctorDetails(tornado.web.RequestHandler):
 
         self.write(ret)
 
-class AjaxDocAvailability(tornado.web.RequestHandler):
+class AjaxDocAvailability(BaseHandler):
     """Return the details of the patient as a dictionary"""
 
     def get (self):
@@ -298,7 +309,7 @@ class AjaxDocAvailability(tornado.web.RequestHandler):
 ## Regular UI request handlers
 ##
 
-class SearchHandler(tornado.web.RequestHandler):
+class SearchHandler(BaseHandler):
     def search_dept (self, name):
         model     = models.Department
         template  = 'doc_srp.html'
@@ -371,7 +382,7 @@ class SearchHandler(tornado.web.RequestHandler):
         else:
             self.redirect('/')
 
-class ViewHandler(tornado.web.RequestHandler):
+class ViewHandler(BaseHandler):
     """once search is done, this handler will serve up a page with all the
     details."""
 
@@ -432,7 +443,7 @@ class ViewHandler(tornado.web.RequestHandler):
             ## FIXME: Need to highlight Error.
             self.redirect('/')
 
-class EditPatientHandler(tornado.web.RequestHandler):
+class EditPatientHandler(BaseHandler):
     """Edit the patient details. The form is pre-loaded with the current
     personal details."""
 
@@ -486,7 +497,7 @@ class EditPatientHandler(tornado.web.RequestHandler):
         self.render("patient_edit.html", title=config.get_title(),
                     rec=rec, today=models.today_uk())
 
-class NewPatientHandler(tornado.web.RequestHandler):
+class NewPatientHandler(BaseHandler):
     def post (self):
         ga = self.get_argument
         gender = ga('new_gender', 'Male')
@@ -528,7 +539,7 @@ class NewPatientHandler(tornado.web.RequestHandler):
         self.render('patient_new.html', title=config.get_title(),
                     depts=depts, today=models.today_uk())
 
-class DoctorHandler(tornado.web.RequestHandler):
+class DoctorHandler(BaseHandler):
     ## FIXME: These arrays should be generated based on the actual shift
     ## timings from the 'Shift' table
     mophours=["-- Select --", "09:00", "10:00", "11:00", "12:00", "13:00"]
@@ -694,7 +705,7 @@ class EditDoctorHandler(DoctorHandler):
                     rec=rec, days=days, depts=depts,
                     mophours=self.mophours, aophours=self.aophours)
 
-class NewVisitHandler(tornado.web.RequestHandler):
+class NewVisitHandler(BaseHandler):
     def post (self):
         dept  = self.get_argument("newv_dept_list", None)
         dat   = self.get_argument("newv_date",  None)
@@ -761,7 +772,7 @@ class NewVisitHandler(tornado.web.RequestHandler):
                     patid=patid, patname=patname, date=date, days=d,
                     shifts=shifts)
 
-class MainHandler(tornado.web.RequestHandler):
+class MainHandler(BaseHandler):
     def get (self):
         self.render('index.html', title=config.get_title())
 
