@@ -814,5 +814,5 @@ if __name__ == "__main__":
 
     port = 8888
     application.listen(port)
-    #webbrowser.open('http://localhost:%d' % port, new=2)
+    webbrowser.open('http://localhost:%d' % port, new=2)
     tornado.ioloop.IOLoop.instance().start()
