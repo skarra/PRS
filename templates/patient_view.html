@@ -18,9 +18,8 @@
 <div id="head_info">
   <div id="head">
     <h1> {{ rec.name }} </h1>
-    <tag> Regn Date: </tag> {{ rec.regdate.strftime("%Y/%m/%d") }}
-    <tag> ID: </tag> {{ rec.id }}
-  </div>
+    {{ rec.gender }}, {{ rec.age }} Yrs.<br/>
+ </div>
 
   <div id="info">
     <div id="print_pat_lab" class="pat_label">Print</div>
@@ -32,22 +31,41 @@
 <br/>
 
 <div id="contact_info">
-  <h2>Personal Details</h2>
-  <div id="personal_details">
-    <tag>Age:</tag> {{ rec.age }} 
-    <tag>Gender:</tag> {{ rec.gender }} <br/>
-    <tag>Phone:</tag> {{ rec.phone }} <br/>
+  <div class="half">
+
+    <div class="myrow col_parent">
+      <div class="tagcol"> Regn Date : </div>
+      <div class="valcol"> {{ rec.regdate.strftime("%Y/%m/%d") }} 
+	<tag> ID : </tag> {{ rec.id }}
+      </div>
+    </div>
+
+    <div class="myrow col_parent">
+      <div class="tagcol"> Phone :</div>
+      <div class="valcol"> {{ rec.phone }} </div>
+    </div>
+
+    <div class="myrow col_parent">
+      <div class="tagcol"> Address : </div>
+      <div class="valcol"> {{ rec.address }} </div>
+    </div>
   </div>
 
-  <div id="address">
-    <tag>Address:</tag> <br/>
-    {{ rec.address }}
-  </div>
+  <div class="half">
+    <div class="myrow col_parent">
+      <div class="tagcol"> Contact : </div>
+      <div class="valcol"> {{ rec.relative }} </div>
+    </div>
 
-  <div id="relative">
-    <tag>Relative Name:</tag> {{ rec.relative }}<br/>
-    <tag>Relation:</tag> {{ rec.relative_relation }} <br/>
-    <tag>Phone:</tag> {{ rec.relative_phone }} <br/>
+    <div class="myrow col_parent">
+      <div class="tagcol"> Relation :</div>
+      <div class="valcol"> {{ rec.relative_relation }} </div>
+    </div>
+
+    <div class="myrow col_parent">
+      <div class="tagcol"> Phone :</div> 
+      <div class="valcol"> {{ rec.relative_phone }} </div>
+    </div>
   </div>
 </div>
 

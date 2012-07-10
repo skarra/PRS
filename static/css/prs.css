@@ -899,7 +899,7 @@ input[class="date"], #newv_date {
     height: 100%;
 }
 
-#personal_details, #address, #relative, .threecol {
+#address, #relative, .threecol {
     display: table-column;
     position: relative;
     float: left;
