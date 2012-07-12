@@ -216,6 +216,7 @@ def add_consultations (session):
             doc = random.choice(docs)
             logging.debug('\tAdded doctor ID: %3d, Name: %s...',
                           doc.id, doc.name)
+            con.dept_id = doc.depts[0].id
             pat.consultations.append(con)
             doc.consultations.append(con)
 
@@ -225,7 +226,7 @@ def main ():
     logging.getLogger().setLevel(logging.INFO)
 
     logging.info('Settingup schema and tables....')
-    engine, session = models.setup_tables("sample.db")
+    engine, session = models.setup_tables("../db/sample.db")
 
     logging.info('Importing US Congressmen as Patients...')
     add_uscongressmen_as_patients(session)

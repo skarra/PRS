@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Tue Jul 03 15:17:41 IST 2012
+## Last Modified : Fri Jul 13 00:36:40 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -193,6 +193,7 @@ class Consultation(Base):
     id         = Column(Integer, primary_key=True)
     patient_id = Column(Integer, ForeignKey('patient.id'))
     doctor_id  = Column(Integer, ForeignKey('doctor.id'))
+    dept_id    = Column(Integer, ForeignKey('dept.id'))
     date       = Column(myd,  default=now())
     charge     = Column(Integer, default=0)
     notes      = Column(Text())
