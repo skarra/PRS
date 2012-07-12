@@ -1,6 +1,7 @@
+## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jul 10 11:20:30 IST 2012
+## Last Modified : Thu Jul 12 18:22:19 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -173,7 +174,8 @@ class MiscAdminHandler(BaseHandler):
 class AjaxAppState(BaseHandler):
     def get (self):
         self.write({'environment' : db_env(),
-                    'environment_is_demo' : is_demo(db_env())})
+                    'environment_is_demo' : is_demo(db_env()),
+                    'config' : config.get_config()})
 
 class AjaxDepartmentsList(BaseHandler):
     def get (self):
