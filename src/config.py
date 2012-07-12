@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri May 18 08:21:00 IST 2012
+## Last Modified : Thu Jul 12 18:22:13 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -77,6 +77,11 @@ class Config:
     ## for 'sync_state'
     ##
 
+    def get_config (self):
+        """Return the full configuration as read from the config.json file"""
+
+        return self.state
+
     def get_title (self):
         return self._get_prop('title')    
 
@@ -106,6 +111,3 @@ class Config:
     def save_config (self, fn=None):
         logging.debug(' ==== Alert - trying to save config.json ==== ')
         return
-
-        json = demjson.encode(self.state['config'], compactly=False)
-        self._save(fn if fn else self.confn, json)
