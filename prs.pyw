@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu Jul 12 18:22:19 IST 2012
+## Last Modified : Thu Jul 12 19:27:05 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -72,7 +72,7 @@ class ErrorHandler(tornado.web.RequestHandler):
     def __init__ (self, application, request, status_code):
         tornado.web.RequestHandler.__init__(self, application, request)
         self.set_status(status_code)
-    
+
     def write_error (self, status_code, **kwargs):
         if status_code in [403, 404, 500, 503]:
             filename = '%d.html' % status_code
@@ -243,7 +243,7 @@ class AjaxDoctorDetails(BaseHandler):
             h = '%s-%s' % (slot.start_time, slot.end_time)
             if slot.day in avail:
                 if slot.shift in avail[slot.day]:
-                    oldh = avail[slot.day][slot.shift] + ', '                    
+                    oldh = avail[slot.day][slot.shift] + ', '
                 else:
                     oldh = ''
 
@@ -251,7 +251,7 @@ class AjaxDoctorDetails(BaseHandler):
             else:
                 avail.update({slot.day : {
                     slot.shift : h
-                    }})                
+                    }})
 
         if rec:
             ret.update({'name'    : rec.name,
@@ -280,7 +280,7 @@ class AjaxDocAvailability(BaseHandler):
 
         day    = self.get_argument('day', '-- Any --')
         shiftn = self.get_argument('shift', '-- Any --')
-        
+
         dq = session().query(models.Doctor, models.Slot)
         dq = dq.filter(models.Doctor.depts.any(name=dept_name))
         dq = dq.filter(models.Doctor.id == models.Slot.doctor_id)
@@ -326,7 +326,7 @@ class SearchHandler(BaseHandler):
         self.render(template, title=config.get_title(),
                     search_query=qstr, search_results=results,
                     total_cnt=total_cnt, match_cnt=match_cnt)
-        
+
     def search (self, role, field, value):
         if role == 'patient':
             model = models.Patient
@@ -379,6 +379,8 @@ class SearchHandler(BaseHandler):
             field = 'dept'
             value = dept
 
+        print 'Field: ', field
+        print 'value: ', value
         if role in ['patient', 'doctor']:
             return self.search(role, field, value)
         else:
@@ -489,7 +491,7 @@ class EditPatientHandler(BaseHandler):
             ## FIXME: Erorr handling to be performed
             print 'Exception while saving modifications for %s (%s)' % (
                 rec.name, e)
-            
+
     def get (self, field, value):
         if field != 'id':
             ## FIXME: Error needs to be highlighted
@@ -554,9 +556,9 @@ class DoctorHandler(BaseHandler):
         a new Doctor model object with values in the POST request and returns
         it. It is assumed that all the input validation is done on the UI
         side.
-    
+
         req should be an instance of a subclass of tornado.web.RequestHandler"""
-    
+
         ga = self.get_argument
         da = ga('new_rdate', '')
         if da == '':
@@ -568,7 +570,7 @@ class DoctorHandler(BaseHandler):
             else:
                 da = date(int(res.group(3)), int(res.group(2)),
                           int(res.group(1)))
-    
+
         if not doc:
             doc = models.Doctor(name    = ga("new_name", ''),
                                 title   = ga("new_title", ''),
@@ -587,9 +589,9 @@ class DoctorHandler(BaseHandler):
             doc.phone   = ga('new_ph', '')
             doc.address = ga('new_addr', '')
             doc.email   = ga('new_em', '')
-    
+
         return doc
-    
+
     def add_depts_from_req_to_doc (self, doc):
         ga = self.get_argument
         dirty = False
@@ -612,13 +614,13 @@ class DoctorHandler(BaseHandler):
         an array of Slot model objects with values in the POST request and
         returns it. It is assumed that all the input validation is done on the
         UI side."""
-    
+
         ga = self.get_argument
-        
+
         # First remove any Slots and departments in the doctor record already
         # present
         [session().delete(slot) for slot in doc.slots]
-    
+
         for day in days:
             for shift in shiftns:
                 argf = string.strip(ga('newd_%s_%s_from' % (day, shift), ''))
@@ -637,7 +639,7 @@ class DoctorHandler(BaseHandler):
 
         session().commit()
 
-class NewDoctorHandler(DoctorHandler): 
+class NewDoctorHandler(DoctorHandler):
     def post (self):
         ga = self.get_argument
         doc  = self.make_doc_from_args()
@@ -822,7 +824,7 @@ if __name__ == "__main__":
 
     tornado.options.parse_command_line()
 
-    eng_s, sess_s = models.setup_tables('db/sample.db')   
+    eng_s, sess_s = models.setup_tables('db/sample.db')
     eng_p, sess_p = models.setup_tables('db/prs.db')
 
     port = 8888
