@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Thu Jul 12 18:22:13 IST 2012
+## Last Modified : Thu Jul 12 19:04:02 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -81,6 +81,9 @@ class Config:
         """Return the full configuration as read from the config.json file"""
 
         return self.state
+
+    def get_trial_db (self):
+        return self._get_prop('trial_db')
 
     def get_title (self):
         return self._get_prop('title')    

@@ -1,7 +1,7 @@
 // -*- javascript -*-
 //
 // Created       : Mon May 14 22:55:45 IST 2012
-// Last Modified : Wed Jun 13 15:43:19 IST 2012
+// Last Modified : Thu Jul 12 15:18:00 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 //
@@ -10,4 +10,12 @@
 
 {
     'title' : 'Major Gen. B. N. Bhandari Charitable Medical Clinic',
+
+    // If this is true, there will be two databases - there will be a
+    // production database (initially empty) and a sample database
+    // populated with some random patient, doctor, department, and
+    // visit information. This reduces the effort of setting up some
+    // data that is needed to explore all the functionality of the
+    // software.
+    'trial_db' : false,
 }
