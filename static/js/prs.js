@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Jul 10 22:48:51 IST 2012
+// Last Modified : Fri Jul 13 08:09:15 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -37,6 +37,11 @@ function setupDeptNamesInControl () {
 	    $("#dept_doc_v").append("<option val=" + id + ">" + name 
 				    + "</option>");
 	});
+    });
+
+    $("#dept_doc_v").change(function() {
+	console.log('val: ' + $(this).val());
+	$("#search_dept_d").submit();
     });
 }
 
@@ -170,8 +175,8 @@ function newvRowSelected (event) {
 // Event Handlers and stuff for the visit_new.html template.
 //
 function addHandlers_new_visit () {
-    $("#newv_dept_list").change( refreshVisitDocTable);
-    $("#newv_date").change(  refreshVisitDocTable);
+    $("#newv_dept_list").change(refreshVisitDocTable);
+    $("#newv_date").change(refreshVisitDocTable);
     $("#newv_shift_list").change(refreshVisitDocTable);
 
     newv_doc_table = $("#new_visit_doc_table").dataTable({
