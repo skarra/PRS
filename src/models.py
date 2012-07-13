@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Jul 13 00:36:40 IST 2012
+## Last Modified : Fri Jul 13 00:47:53 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -115,15 +115,33 @@ class Department(Base):
             return None
 
     @classmethod
+    def name_from_id (self, session, id):
+        rec = self.find_by_id(session, id)
+        if rec:
+            return rec.name
+        else:
+            return None        
+
+    @classmethod
     def find_by_name (self, session, name):
         """Returns the first record that matches given name. Returns None if
         there is no match."""
 
-        print 'Looking for deparment: ', name
         q   = session().query(Department)
         recs = q.filter_by(name=name)
         if recs.count() > 0:
-            print '  Found something.'
+            return recs.first()
+
+        return None
+
+    @classmethod
+    def find_by_id (self, session, did):
+        """Returns the record that matches given id. Returns None if
+        there is no match."""
+
+        q   = session().query(Department)
+        recs = q.filter_by(id=did)
+        if recs.count() > 0:
             return recs.first()
 
         return None
