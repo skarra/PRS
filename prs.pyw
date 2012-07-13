@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jul 13 23:20:56 IST 2012
+## Last Modified : Sat Jul 14 00:13:48 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -550,7 +550,10 @@ class DoctorHandler(BaseHandler):
     mophours=["-- Select --", "09:00", "10:00", "11:00", "12:00", "13:00"]
     aophours=["-- Select --", "14:00", "15:00", "16:00", "17:00", "18:00"]
 
-    max_depts = 3
+    # FIXME: This should ideally go into a config file, and the template in
+    # doctor_base.html should programmatically display the correct number of
+    # select elements.
+    max_depts = 2
 
     def make_doc_from_args (self, doc=None):
         """Invoked in the context of a POST handler this routine instantiates
