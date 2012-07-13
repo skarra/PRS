@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Fri Jul 13 19:49:42 IST 2012
+// Last Modified : Sat Jul 14 00:06:46 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -296,7 +296,7 @@ function addHandlers_doctor_edit () {
 
 var dept_cnt;
 
-function addHandlers_department_edit() {
+function addHandlers_department_edit () {
     var new_box0 = '<div class="dept_inp_name"> <input type="text" ';
     var new_box1;
     var new_box2 = ' placeholder="Enter a new department name" /> </div>';
@@ -310,7 +310,9 @@ function addHandlers_department_edit() {
 	$("#dept_inp_names").append(new_box);
 	dept_cnt += 1;
     });
+}
 
+function addHandlers_db_toggle () {
     // Set the right message for toggling environment if the config
     // allows the usage of a trial database in addition to the
     // production database.
@@ -337,6 +339,17 @@ function addHandlers_department_edit() {
 	} else {
 	    $("#mas_db").remove();
 	}
+    });
+}
+
+function addHandlers_misc_menu () {
+    // Set up the elements of the drop down "Misc Menu"
+    addHandlers_department_edit();
+    addHandlers_db_toggle();
+
+    // Set up an event handler for a change event
+    $("#misc_admin_s").change(function() {
+	$("#misc_admin").submit();
     });
 }
 
@@ -532,7 +545,7 @@ function addHandlers () {
     addHandlers_doctor_base();
     addHandlers_doctor_view();
     addHandlers_doctor_edit();
-    addHandlers_department_edit()
+    addHandlers_misc_menu()
 
     addTextFilters();
 }
