@@ -19,7 +19,21 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
     width: 100%;
 }
 
-* {
-    border: 0;
-    shadow: 0;
+#sheet {
+    width: 100%;
+    float: none;
+    border: none;
+    border-bottom: none;
+    margin: 0;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -o-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -khtml-border-radius: 0px;
+
+    border-radius: 0px;
+    -moz-box-shadow: 0;
+    -webkit-box-shadow: 0;
+    -o-box-shadow: 0;
+    box-shadow: 0;
 }
