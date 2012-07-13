@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Fri Jul 13 08:09:15 IST 2012
+// Last Modified : Fri Jul 13 19:49:42 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -311,29 +311,33 @@ function addHandlers_department_edit() {
 	dept_cnt += 1;
     });
 
-    // Set the right message for toggling environment
+    // Set the right message for toggling environment if the config
+    // allows the usage of a trial database in addition to the
+    // production database.
 
     $.getJSON("/ajax/appstate", function(data) {
-	var msg;
-	var url;
-	var color;
-	if (data['environment_is_demo']) {
-	    msg = 'Switch to Production DB';
-	    url = 'bkg.png?881083570';
-	    color = 'beige';
-	} else {
-	    msg = 'Switch to Demo DB';
-	    url = 'paper.jpg?884184256';
-	    color = '#666666';
-	}
+	var msg, url, color;
+	if (data['config']['trial_db']) {
+	    if (data['environment_is_demo']) {
+		msg = 'Switch to Production DB';
+		url = 'bkg.png?881083570';
+		color = 'beige';
+	    } else {
+		msg = 'Switch to Demo DB';
+		url = 'paper.jpg?884184256';
+		color = '#666666';
+	    }
 
-	url = 'url("/static/img/' + url + '")';
-	console.log('url: ' + url);
-	$("header").css('background-image', url);
-	$("#site-title").css('color', color);
-	$("#site-title:hover").css('color', 'blue');
-	$("#mas_db").text(msg);
-    });    
+	    url = 'url("/static/img/' + url + '")';
+	    console.log('url: ' + url);
+	    $("header").css('background-image', url);
+	    $("#site-title").css('color', color);
+	    $("#site-title:hover").css('color', 'blue');
+	    $("#mas_db").text(msg);
+	} else {
+	    $("#mas_db").remove();
+	}
+    });
 }
 
 // The following function addTextFilters() is taken verbatim from

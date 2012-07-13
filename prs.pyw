@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jul 13 08:13:14 IST 2012
+## Last Modified : Fri Jul 13 19:40:57 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -50,6 +50,7 @@ settings = {'debug': True,
 production = 0
 sample     = 1
 db = sample
+#db = production
 
 def db_env ():
     return db
