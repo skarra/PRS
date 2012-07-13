@@ -69,27 +69,56 @@
   </div>
 </div>
 
-<hr/>
-
+<p/>
 <div id="visit_history">
-  <h2>CMC Visit History</h2>
-  {% for c in rec.consultations %}
-  <visit_head>
-    <div class="threecol"><tag>Date: </tag>       {{ c.date }} </div>
-    <div class="threecol"><tag>Doctor: </tag> 
-      {% set dq = d.filter_by(id=c.doctor_id) %}
-      {% if dq.count() > 0 %}
-        {% set doc = dq.one() %} 
-        {{ doc.name }} ({{ doc.depts[0].name }})
-      {% end %}
+  <div class="hide-in-print">
+    <h2>CMC Visit History: </h2>
+  </div>
+  <div class="show-only-in-print">
+    <h2>Visit Details: </h2>
+  </div>
+
+  {% set max = len(rec.consultations) - 1 %}
+
+  {% for i, c in enumerate(rec.consultations) %}
+    {% set print_class = "hide-in-print" if (i != max) else "show" %}
+    <div class={{ print_class }}>
+      <div class="col_parent">
+        <div class="half">
+	  <div class="myrow col_parent">
+	    <div class="tagcol">Date : </div>
+	    <div class="valcol">{{ c.date }} </div>
+	  </div>
+          <div class="myrow col_parent">
+	    <div class="tagcol">Charge : </div>
+	    <div class="valcol">Rs. {{ c.charge }} </div>
+	    </div>
+	</div>
+
+        <div class="half">
+	  <div class="myrow col_parent">
+            {% set dq = d.filter_by(id=c.doctor_id) %}
+            {% if dq.count() > 0 %}
+  	    <div class="tagcol">Doctor : </div>
+  	    <div class="valcol">
+              {% set doc = dq.one() %} 
+              {{ doc.name }} 
+  	    </div>
+      	    <br>
+      	    <div class="tagcol"> Department : </div>
+      	    <div class="valcol"> {{ doc.depts[0].name }} </div>
+            {% end %}
+	  </div>
+        </div>
+      </div>
+      <br/>
+<!--
+      <div class='fullcol'><tag>Comments: </tag> {{ c.notes }} </div>
+-->
     </div>
-    <div class="threecol"><tag>Charge: </tag> Rs. {{ c.charge }} </div>
-    <br/>
-  </visit_head>
-  <div class='fullcol'><tag>Comments: </tag> {{ c.notes }} </div>
-  <br/>
   {% end %}
 </div>
 
-{% end block %}
+<hr/>
 
+{% end block %}

@@ -1009,3 +1009,7 @@ tag {
     cursor: pointer;
     color: blue;
 }
+
+.show-only-in-print {
+    display: none;
+}

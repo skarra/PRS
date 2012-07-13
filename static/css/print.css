@@ -37,3 +37,11 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
     -o-box-shadow: 0;
     box-shadow: 0;
 }
+
+.hide-in-print {
+    display: none;
+}
+
+.show-only-in-print {
+    display: block;
+}
