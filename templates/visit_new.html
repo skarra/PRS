@@ -33,6 +33,14 @@ $.datepicker.regional['en-GB'] = {
   yearSuffix: ''};
   $.datepicker.setDefaults($.datepicker.regional['en-GB']);
   $("#newv_date").datepicker();
+
+  // For revisit patients, the department and doctor should be
+  // preselected. For that to happen, we should at least refresh the
+  // doctor availability table
+  var dept = $("#newv_dept_list").val();
+  if ((dept != "") && (dept != null)) {
+	refreshVisitDocTable();
+  }
 });
 </script>
 {% end block %}
@@ -43,45 +51,51 @@ $.datepicker.regional['en-GB'] = {
 
 <form id="new_visit_form" method="POST">
   <input type="submit" id="newv_submit" 
-	 value="Save Visit Details &rarr;"/>
+         value="Save Visit Details &rarr;"/>
   <p/>
 
   <div id="new_visit_control" class="col_parent">
     <div class="threecols">
-	 <label>Department</label><br/>
-	 <select id="newv_dept_list" name="newv_dept_list">
-	   {% for dname in depts %}
-	   <option> {{ dname }} </option>
-	   {% end %}
-	 </select>
+         <label>Department</label><br/>
+         <select id="newv_dept_list" name="newv_dept_list">
+           {% for dname in depts %}
+             {% if dname == last_deptn %}
+             <option selected="selected">
+               {{ dname }} 
+             </option>
+             {% else %}
+               <option> {{ dname }} </option>
+             {% end %}
+           {% end %}
+         </select>
     </div>
 
     <div class="threecols">
       <label>Date</label><br/>
       <input type="text" class="date" id="newv_date" name="newv_date"
-	     value={{ date }} />
+             value={{ date }} />
     </div>
 
     <!-- <div class="threecols"> -->
     <!--   <label>Date</label><br/> -->
     <!--   <select id="newv_day_list" name="newv_day_list"> -->
-    <!-- 	{% for day in days %} -->
-    <!-- 	<option> {{ day }} </option> -->
-    <!-- 	{% end %} -->
+    <!--        {% for day in days %} -->
+    <!--        <option> {{ day }} </option> -->
+    <!--        {% end %} -->
     <!--   </select> -->
     <!-- </div> -->
  
     <div class="threecols">
       <label> Charge: </label><br/>
       <input type="text" class="date" id="newv_charge" name="newv_charge"
-	     value="0" data-allowed-chars="0123456789"/>
+             value="0" data-allowed-chars="0123456789"/>
    </div>
 
     <!-- the jquery table click handler will populate this input element with the
-	 docid that the user selects, and the server will get value through the
-	 POST request. Don't know of a cleaner way to do this... :) -->
+         docid that the user selects, and the server will get value through the
+         POST request. Don't know of a cleaner way to do this... :) -->
     <input name="newv_docid_hack" id="newv_docid_hack" 
-	   style="display:none" type="text"/>
+           style="display:none" type="text"/>
   </div> <!-- #new_visit_control -->
 
 <br/>

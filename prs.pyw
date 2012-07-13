@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu Jul 12 19:27:05 IST 2012
+## Last Modified : Fri Jul 13 08:13:14 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -714,6 +714,7 @@ class NewVisitHandler(BaseHandler):
         dept  = self.get_argument("newv_dept_list", None)
         dat   = self.get_argument("newv_date",  None)
         docid = self.get_argument("newv_docid_hack", None)
+        deptn = self.get_argument("newv_dept_list", None)
         charge = self.get_argument("newv_charge", None)
         url   = self.request.full_url()
         patid = int(re.search('patid=(\d+)$', url).group(1))
@@ -722,6 +723,11 @@ class NewVisitHandler(BaseHandler):
             print 'Oops. Error checking in js not up to snuff...'
             self.redirect('/view/patient/id/%d' % patid)
             return
+
+        if deptn:
+            deptid = models.Department.id_from_name(session, deptn)
+        else:
+            deptid = None
 
         if not dat or dat == '':
             dat = date.today()
@@ -734,7 +740,7 @@ class NewVisitHandler(BaseHandler):
                            int(res.group(1)))
 
         c = models.Consultation(patient_id=patid, doctor_id=docid,
-                                date=dat, charge=charge)
+                                dept_id=deptid, date=dat, charge=charge)
         try:
             session().add(c)
             session().commit()
@@ -760,10 +766,25 @@ class NewVisitHandler(BaseHandler):
 
         patid = int(patid)
         patname = self.get_argument('patname', None)
-        if not patname:
+
+        if patid:
             q = session().query(models.Patient)
             rec = q.filter_by(id=patid).first()
             patname = rec.name
+        else:
+            q = session().query(models.Patient)
+            rec = q.filter_by(name=patname).first()
+            patid = rec.id
+
+        numc = len(rec.consultations)
+        print numc
+        if numc > 0:
+            lv = rec.consultations[numc-1]
+            last_docid = lv.doctor_id
+            last_deptn = models.Department.name_from_id(session, lv.dept_id)
+        else:
+            last_docid = None
+            last_deptn = None        
 
         depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')
@@ -774,7 +795,7 @@ class NewVisitHandler(BaseHandler):
 
         self.render('visit_new.html', title=config.get_title(), depts=depts,
                     patid=patid, patname=patname, date=date, days=d,
-                    shifts=shifts)
+                    shifts=shifts, docid=last_docid, last_deptn=last_deptn)
 
 class MainHandler(BaseHandler):
     def get (self):
