@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Thu Jul 12 19:04:02 IST 2012
+## Last Modified : Fri Jul 13 23:20:21 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -84,6 +84,9 @@ class Config:
 
     def get_trial_db (self):
         return self._get_prop('trial_db')
+
+    def get_http_port (self):
+        return self._get_prop('http_port')
 
     def get_title (self):
         return self._get_prop('title')    

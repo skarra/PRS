@@ -1,7 +1,7 @@
 // -*- javascript -*-
 //
 // Created       : Mon May 14 22:55:45 IST 2012
-// Last Modified : Thu Jul 12 15:18:00 IST 2012
+// Last Modified : Fri Jul 13 23:21:57 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 //
@@ -10,6 +10,9 @@
 
 {
     'title' : 'Major Gen. B. N. Bhandari Charitable Medical Clinic',
+
+    // HTTP Port where the application will be hosted
+    'http_port' : 8765,
 
     // If this is true, there will be two databases - there will be a
     // production database (initially empty) and a sample database

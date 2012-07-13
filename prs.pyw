@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jul 13 19:40:57 IST 2012
+## Last Modified : Fri Jul 13 23:20:56 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -849,7 +849,7 @@ if __name__ == "__main__":
     eng_s, sess_s = models.setup_tables('db/sample.db')
     eng_p, sess_p = models.setup_tables('db/prs.db')
 
-    port = 8888
+    port = config.get_http_port()
     application.listen(port)
     webbrowser.open('http://localhost:%d' % port, new=2)
     tornado.ioloop.IOLoop.instance().start()
