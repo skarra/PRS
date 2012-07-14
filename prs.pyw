@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Jul 14 00:13:48 IST 2012
+## Last Modified : Sat Jul 14 16:51:06 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -22,7 +22,7 @@
 ## First up we need to fix the sys.path before we can even import stuff we
 ## want.
 
-import copy, httplib, os, re, string, sys, webbrowser
+import copy, httplib, os, re, socket, string, sys, webbrowser
 from   datetime import datetime, date
 
 DIR_PATH    = os.path.abspath('')
@@ -844,6 +844,10 @@ application = tornado.web.Application([
 ## override the tornado.web.ErrorHandler with our default ErrorHandler
 tornado.web.ErrorHandler = ErrorHandler
 
+def start_browser ():
+    port = config.get_http_port()
+    webbrowser.open('http://localhost:%d' % port, new=2)
+
 if __name__ == "__main__":
     global eng_s, sess_s, eng_p, sess_p
 
@@ -852,7 +856,13 @@ if __name__ == "__main__":
     eng_s, sess_s = models.setup_tables('db/sample.db')
     eng_p, sess_p = models.setup_tables('db/prs.db')
 
-    port = config.get_http_port()
-    application.listen(port)
-    webbrowser.open('http://localhost:%d' % port, new=2)
+    try:
+        application.listen(config.get_http_port())
+    except socket.error, e:
+        # This happens if an instance is already running on the said port.
+        print 'Program already running. Just starting a browser session.'
+        start_browser()
+        sys.exit(0)
+
+    start_browser()
     tornado.ioloop.IOLoop.instance().start()
