@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sat Jul 14 00:39:30 IST 2012
+// Last Modified : Sat Jul 14 22:25:50 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -349,7 +349,19 @@ function addHandlers_misc_menu () {
 
     // Set up an event handler for a change event
     $("#misc_admin_s").change(function() {
-	$("#misc_admin").submit();
+	var val = $("#misc_admin_s").val();
+	if (val == 'mas_exit') {
+	    $.get('/miscadmin/',
+		  {'misc_admin_s' : val},
+		  function(data) {
+		      window.close();
+		  }).error(function() {
+		      alert('Thank you for using CMC Patient Record System');
+		      window.close(); 
+		  });
+	} else {
+	    $("#misc_admin").submit();
+	}
     });
 }
 

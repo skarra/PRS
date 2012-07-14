@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Jul 14 16:51:06 IST 2012
+## Last Modified : Sat Jul 14 22:36:43 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -23,7 +23,8 @@
 ## want.
 
 import copy, httplib, os, re, socket, string, sys, webbrowser
-from   datetime import datetime, date
+from   datetime  import datetime, date
+from   threading import Thread
 
 DIR_PATH    = os.path.abspath('')
 EXTRA_PATHS = [os.path.join(DIR_PATH, 'src'),
@@ -160,11 +161,14 @@ class MiscAdminHandler(BaseHandler):
 
     def get (self):
         op = self.get_argument('misc_admin_s', None)
+
         if op == 'dept':
             self.edit_depts()
         elif op == 'mas_db':
             toggle_env()
             self.redirect('/')
+        elif op == 'mas_exit':
+            sys.exit(0)
         else:
             self.redirect('/')
 
