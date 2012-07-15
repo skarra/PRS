@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Jul 13 00:47:53 IST 2012
+## Last Modified : Sun Jul 15 20:00:34 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -15,33 +15,37 @@ import datetime, logging, re
 
 from   sqlalchemy        import orm, create_engine
 from   sqlalchemy.orm    import relationship, backref
-from   sqlalchemy.types  import Integer, Boolean, DateTime, Text, Unicode
-from   sqlalchemy.dialects.sqlite import DATE
+from   sqlalchemy.types  import Integer, Boolean, Date, Text, Unicode
 from   sqlalchemy.schema import Column, ForeignKey, Table
 
 from   sqlalchemy.ext.declarative import declarative_base
 
 Base   = declarative_base()
 
-def now ():
-    return datetime.datetime.now()
+class MyT: 
+    @classmethod
+    def today (self):
+        """Return today's date in YYYY-MM-DD format"""
+        return datetime.date.today()
+    
+    @classmethod
+    def today_s (self):
+        """Return today's date in YYYY-MM-DD format"""
+        d = datetime.date.today()
+        return "%4d-%02d-%02d" % (d.year, d.month, d.day)
+    
+    @classmethod
+    def today_uk (self):
+        """Return today's date in DD-MM-YYYY format"""
+        d = datetime.date.today()
+        return "%02d-%02d-%04d" % (d.day, d.month, d.year)
 
-def today ():
-    """Return today's date in YYYY/MM/DD format"""
-    return datetime.date.today()
-
-def today_s ():
-    """Return today's date in YYYY/MM/DD format"""
-    d = datetime.date.today()
-    return "%4d/%02d/%02d" % (d.year, d.month, d.day)
-
-def today_uk ():
-    """Return today's date in DD/MM/YYYY format"""
-    d = datetime.date.today()
-    return "%02d/%02d/%04d" % (d.day, d.month, d.year)
-
-myd = DATE(storage_format="%04d/%02d/%02d",
-           regexp=re.compile("(\d+)/(\d+)/(\d+)"))
+    @classmethod
+    def date_from_uk (self, value):
+        """Return a Python datetime.date object from a string formatted as a
+        UK date string DD-MM-YYYY."""
+        dt = datetime.datetime.strptime(value, '%d-%m-%Y')
+        return datetime.date(year=dt.year, month=dt.month, day=dt.day)
 
 class Patient(Base):
     __tablename__ = 'patient'
@@ -49,7 +53,7 @@ class Patient(Base):
     id      = Column(Integer, primary_key=True)
     title   = Column(Unicode(5))
     name    = Column(Unicode(255), nullable=False)
-    regdate = Column(DateTime(), default=now)
+    regdate = Column(Date(), default=MyT.today())
     age     = Column(Integer, nullable=False)
     gender  = Column(Unicode(6), nullable=False)
 
@@ -83,7 +87,7 @@ class Doctor(Base):
     id      = Column(Integer, primary_key=True)
     title   = Column(Unicode(5), default=u"Dr. ")
     name    = Column(Unicode(255), nullable=False)
-    regdate = Column(myd, default=today)
+    regdate = Column(Date(), default=MyT.today())
     fee     = Column(Integer, default=0)   # Default per-consultation fee
     quals   = Column(Text())               # qualifications
 
@@ -96,6 +100,35 @@ class Doctor(Base):
                                                  cascade="all"))
     # 'slots' through backref from Slot
     # 'depts' through backref from Department
+
+    @classmethod
+    def sorted_doc_names_with_id (self, session):
+        """Returns all the doctors in the system as (id, name) tuples, sorted
+        by name"""
+
+        q = session().query(Doctor).order_by(Doctor.name)
+        ret = [(d.id, d.name) for d in q]
+        return ret
+
+    @classmethod
+    def sorted_doc_names_with_id_in_dept_id (self, session, id):
+        """Returns the doctors in the specified department. An array of (ID,
+        name) tuples is returned such that it is sorted on the name."""
+
+        q = session().query(Doctor)
+        q = q.filter(Doctor.depts.any(Department.id==id))
+        ret = [(d.id, d.name) for d in q]
+        return ret
+
+    @classmethod
+    def sorted_doc_names_with_id_in_dept_name (self, session, name):
+        """Returns the doctors in the specified department. An array of (ID,
+        name) tuples is returned such that it is sorted on the name."""
+
+        q = session().query(Doctor)
+        q = q.filter(Doctor.depts.any(Department.name==name))
+        ret = [(d.id, d.name) for d in q]
+        return ret
 
 class Department(Base):
     __tablename__ = 'dept'
@@ -163,7 +196,7 @@ class Department(Base):
 
         ret = []
         for d in ds:
-            ret.append((d, q.filter_by(name=d).first().id))
+            ret.append((q.filter_by(name=d).first().id, d))
 
         return ret
 
@@ -212,7 +245,7 @@ class Consultation(Base):
     patient_id = Column(Integer, ForeignKey('patient.id'))
     doctor_id  = Column(Integer, ForeignKey('doctor.id'))
     dept_id    = Column(Integer, ForeignKey('dept.id'))
-    date       = Column(myd,  default=now())
+    date       = Column(Date(),  default=MyT.today())
     charge     = Column(Integer, default=0)
     notes      = Column(Text())
 

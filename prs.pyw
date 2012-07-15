@@ -474,7 +474,7 @@ class EditPatientHandler(BaseHandler):
         if da == '':
             da = datetime.now()
         else:
-            res = re.search('(\d\d)/(\d\d)/(\d\d\d\d)', da)
+            res = re.search('(\d\d)-(\d\d)-(\d\d\d\d)', da)
             if not res:
                 da = datetime.now()
             else:
@@ -511,7 +511,7 @@ class EditPatientHandler(BaseHandler):
         q = session().query(models.Patient)
         rec = q.filter_by(id=value).first()
         self.render("patient_edit.html", title=config.get_title(),
-                    rec=rec, today=models.today_uk())
+                    rec=rec, today=models.MyT.today_uk())
 
 class NewPatientHandler(BaseHandler):
     def post (self):
@@ -522,7 +522,7 @@ class NewPatientHandler(BaseHandler):
         if da == '':
             da = datetime.now()
         else:
-            res = re.search('(\d\d)/(\d\d)/(\d\d\d\d)', da)
+            res = re.search('(\d\d)-(\d\d)-(\d\d\d\d)', da)
             if not res:
                 da = datetime.now()
             else:
@@ -553,7 +553,7 @@ class NewPatientHandler(BaseHandler):
         depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')
         self.render('patient_new.html', title=config.get_title(),
-                    depts=depts, today=models.today_uk())
+                    depts=depts, today=models.MyT.today_uk())
 
 class DoctorHandler(BaseHandler):
     ## FIXME: These arrays should be generated based on the actual shift
@@ -579,7 +579,7 @@ class DoctorHandler(BaseHandler):
         if da == '':
             da = date.today()
         else:
-            res = re.search('(\d\d)/(\d\d)/(\d\d\d\d)', da)
+            res = re.search('(\d\d)-(\d\d)-(\d\d\d\d)', da)
             if not res:
                 da = date.today()
             else:
@@ -679,7 +679,7 @@ class NewDoctorHandler(DoctorHandler):
         depts.insert(0, '-- Select --')
 
         self.render('doctor_new.html', title=config.get_title(),
-                    depts=depts, days=days, today=models.today_uk(),
+                    depts=depts, days=days, today=models.MyT.today_uk(),
                     mophours=self.mophours, aophours=self.aophours)
 
 class EditDoctorHandler(DoctorHandler):
@@ -747,7 +747,7 @@ class NewVisitHandler(BaseHandler):
         if not dat or dat == '':
             dat = date.today()
         else:
-            res = re.search('(\d\d)/(\d\d)/(\d\d\d\d)', dat)
+            res = re.search('(\d\d)-(\d\d)-(\d\d\d\d)', dat)
             if not res:
                 dat = date.today()
             else:
@@ -806,7 +806,7 @@ class NewVisitHandler(BaseHandler):
         d = copy.deepcopy(days)
         d.insert(0, '-- Any --')
 
-        date = models.today_uk()
+        date = models.MyT.today_uk()
 
         self.render('visit_new.html', title=config.get_title(), depts=depts,
                     patid=patid, patname=patname, date=date, days=d,

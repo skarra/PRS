@@ -9,31 +9,8 @@
 {% end block %}
 
 {% block scripts %}
-<script src="/static/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
 <script>
 $(function() {
-$.datepicker.regional['en-GB'] = {
-  closeText: 'Done',
-  prevText: 'Prev',
-  nextText: 'Next',
-  currentText: 'Today',
-  monthNames: ['January','February','March','April','May','June',
-  'July','August','September','October','November','December'],
-  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 
-             'Friday', 'Saturday'],
-  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa'],
-  weekHeader: 'Wk',
-  dateFormat: 'dd/mm/yy',
-  firstDay: 1,
-  isRTL: false,
-  showMonthAfterYear: false,
-  yearSuffix: ''};
-  $.datepicker.setDefaults($.datepicker.regional['en-GB']);
-  $("#newv_date").datepicker();
-
   // For revisit patients, the department and doctor should be
   // preselected. For that to happen, we should at least refresh the
   // doctor availability table
@@ -72,8 +49,8 @@ $.datepicker.regional['en-GB'] = {
 
     <div class="threecols">
       <label>Date</label><br/>
-      <input type="text" class="date" id="newv_date" name="newv_date"
-             value={{ date }} />
+      <input type="text" class="date date-field" id="newv_date" 
+	     name="newv_date" value={{ date }} />
     </div>
 
     <!-- <div class="threecols"> -->

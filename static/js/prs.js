@@ -19,12 +19,42 @@ var shiftns = ['Morning', 'Afternoon'];
 function dayOfWeek (date) {
     if (!(date instanceof Date)) {
 	d = new Date();
-	res = date.match(/(\d+)\/(\d+)\/(\d\d\d\d)/);
+	res = date.match(/(\d+)\-(\d+)\-(\d\d\d\d)/);
 	d.setFullYear(res[3], res[2]-1, res[1]);
 	date = d;
     }
 
     return days[date.getDay()];
+}
+
+function setupDateLocale () {
+    $.datepicker.regional['en-GB'] = {
+	closeText: 'Done',
+	prevText: 'Prev',
+	nextText: 'Next',
+	currentText: 'Today',
+	monthNames: ['January','February','March', 'April',
+		     'May','June', 'July', 'August',
+		     'September','October','November','December'],
+	monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+			  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+	dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 
+		   'Friday', 'Saturday'],
+	dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+	dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa'],
+	weekHeader: 'Wk',
+	dateFormat: 'dd-mm-yy',
+	firstDay: 1,
+	isRTL: false,
+	showMonthAfterYear: false,
+	yearSuffix: ''};
+
+    $.datepicker.setDefaults($.datepicker.regional['en-GB']);
+
+    // Now bind all elements marked as date-field as date pickers.
+    $(".date-field").each(function() {
+	$(this).datepicker();
+    });
 }
 
 function setupDeptNamesInControl () {
@@ -483,6 +513,8 @@ function addHandlers_visit_stats () {
 
 function addHandlers () {
     console.log('addFormHandlers...');
+
+    setupDateLocale();
 
     $("#site-title").click(function() {
 	window.location = "/";
