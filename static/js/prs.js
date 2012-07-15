@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sat Jul 14 22:25:50 IST 2012
+// Last Modified : Sun Jul 15 07:48:11 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -465,6 +465,22 @@ function addTextFilters () {
     }
 }
 
+function addHandlers_visit_stats () {
+    $("#vs_dept_list").change(function() {
+	// ajax call to fetch doctors in given department and update
+	// element for doctor list
+	docdiv = $("#vs_doc_list");
+	docdiv.html($("<option />").val("All").text("All"));
+	$.getJSON("/ajax/doctors/department/name/" + $(this).val(),
+		  function(data) {
+		      $.each(data.doctors, function() {
+			  docdiv.append($("<option />").val(this).text(this));
+		      });
+		      console.log(data.doctors);
+		  });
+    });
+}
+
 function addHandlers () {
     console.log('addFormHandlers...');
 
@@ -538,26 +554,12 @@ function addHandlers () {
 
     $("#new_patient_form").submit(validateNewPatient);
 
-    $("#newp_dept_list").change(function() {
-	console.log('Value: ' + $(this).val());
-	// ajax call to fetch doctors in given department and update
-	// element for doctor list
-	docdiv = $("#newp_doc_list");
-	docdiv.html($("<option />").val("-- Select --").text("-- Select --"));
-	$.getJSON("/ajax/doctors/department/name/" + $(this).val(),
-		  function(data) {
-		      $.each(data.doctors, function() {
-			  docdiv.append($("<option />").val(this).text(this));
-		      });
-		      console.log(data.doctors);
-		  });
-    });
-
     addHandlers_new_visit();
     addHandlers_doctor_base();
     addHandlers_doctor_view();
     addHandlers_doctor_edit();
     addHandlers_misc_menu()
+    addHandlers_visit_stats();
 
     addTextFilters();
 }

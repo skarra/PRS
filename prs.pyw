@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Jul 14 22:36:43 IST 2012
+## Last Modified : Sun Jul 15 08:01:18 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -151,6 +151,11 @@ class MiscAdminHandler(BaseHandler):
         if d1 or d2:
             session().commit()
 
+    def visit_stats (self):
+        depts = models.Department.sorted_dept_names(session)
+        self.render('visit_stats.html', title=config.get_title(),
+                    depts=depts)
+
     def post (self):
         op = self.get_argument('misc_admin_s', None)
         if op == 'dept':
@@ -169,6 +174,8 @@ class MiscAdminHandler(BaseHandler):
             self.redirect('/')
         elif op == 'mas_exit':
             sys.exit(0)
+        elif op == 'mas_vs':
+            self.visit_stats()
         else:
             self.redirect('/')
 

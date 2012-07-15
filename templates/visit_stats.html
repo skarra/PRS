@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link href="/static/css/dataTables/demo_table.css" rel="stylesheet"
+      type="text/css"/>
+<link href="/static/css/srp.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" 
+      href="/static/css/pepper-grinder/jquery-ui-1.8.21.custom.css">
+{% end block %}
+
+{% block scripts %}
+<script src="/static/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
+<script>
+$(function() {
+$.datepicker.regional['en-GB'] = {
+  closeText: 'Done',
+  prevText: 'Prev',
+  nextText: 'Next',
+  currentText: 'Today',
+  monthNames: ['January','February','March','April','May','June',
+  'July','August','September','October','November','December'],
+  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 
+             'Friday', 'Saturday'],
+  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa'],
+  weekHeader: 'Wk',
+  dateFormat: 'dd/mm/yy',
+  firstDay: 1,
+  isRTL: false,
+  showMonthAfterYear: false,
+  yearSuffix: ''};
+  $.datepicker.setDefaults($.datepicker.regional['en-GB']);
+  $(".date-field").datepicker();
+});
+</script>
+{% end block %}
+
+{% block content %}
+<h1>Visit Statistics</h1>
+<p/>
+<div>
+  <label>From:</label>
+  <input type="text" class="date date-field " id="vs_from" name="vs_from"/>
+
+  <label>To:</label>
+  <input type="text" class="date date-field " id="vs_to" name="vs_to"/>
+
+  <label>Dept.:</label>
+  <select id="vs_dept_list" name="vs_dept_list">
+      <option value="All"> All </option>
+    {% for d in depts %}
+      <option value={{ d }}> {{ d }} </option>
+    {% end %}
+  </select>
+
+  <label>Doctor:</label>
+  <select id="vs_doc_list">
+  </select>
+
+</div>
+
+{% end block %}

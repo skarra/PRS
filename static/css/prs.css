@@ -769,7 +769,7 @@ div.twocols h {
   position: relative;
 }
 
-input[class="date"], #newv_date {
+input[class="date"], #newv_date, .date-field {
   max-width: 70px;
 }
 
@@ -777,7 +777,7 @@ input[class="date"], #newv_date {
     margin-top: 10px;
 }
 
-#new_visit_form label {
+label {
     font-size: 120%;
 }
 
