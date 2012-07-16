@@ -50,12 +50,9 @@ template:
     <div class="twocols">
       <div class="myrow col_parent">
         <div class="tagcol"> Regn Date : </div>
-        <div class="valcol"> {{ rec.regdate.strftime("%Y/%m/%d") }} </div>
-      </div>
-  
-      <div class="myrow col_parent">
-        <div class="tagcol"> ID : </div> 
-        <div class="valcol"> {{ rec.id }} </div>
+        <div class="valcol"> {{ rec.regdate.strftime("%Y/%m/%d") }} 
+	  <tag> ID : </tag> {{ rec.id }}
+	</div>
       </div>
   
       <div class="myrow col_parent">
