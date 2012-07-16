@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Sun Jul 15 20:00:34 IST 2012
+## Last Modified : Sun Jul 15 22:00:53 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -129,6 +129,20 @@ class Doctor(Base):
         q = q.filter(Doctor.depts.any(Department.name==name))
         ret = [(d.id, d.name) for d in q]
         return ret
+
+    @classmethod
+    def name_from_id (self, session, id):
+        rec = self.find_by_id(session, id)
+        return rec.name if rec else None
+
+    @classmethod
+    def find_by_id (self, session, did):
+        """Returns the record that matches given id. Returns None if
+        there is no match."""
+
+        q   = session().query(Doctor)
+        recs = q.filter_by(id=did)
+        return recs.first() if recs.count() > 0 else None
 
 class Department(Base):
     __tablename__ = 'dept'
