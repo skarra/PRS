@@ -386,8 +386,15 @@ function addHandlers_misc_menu () {
 		  function(data) {
 		      window.close();
 		  }).error(function() {
-		      alert('Thank you for using CMC Patient Record System');
-		      window.close(); 
+		      try {
+			  console.log('Message 1');
+			  alert('Thank you for using CMC Patient Record System');
+			  window.close();
+			  console.log('Message 3');
+		      } catch (err) {
+			  console.log('Message 2: ' + err);
+			  window.close();
+		      }
 		  });
 	} else {
 	    $("#misc_admin").submit();
