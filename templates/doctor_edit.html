@@ -18,7 +18,7 @@ $(function() {
 	$("#new_em").val(data.email);
 	$("#new_rfee").val(data.fee);
         var d  = new Date(Date.parse(data.regdate));
-        var da = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+        var da = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
 	$("#new_rdate").val(da);
 	$("#new_addr").val(data.address);
 

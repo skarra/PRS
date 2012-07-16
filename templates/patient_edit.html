@@ -19,9 +19,9 @@ $(function() {
 	$("#new_relname").val(data.relative);
 	$("#new_relph").val(data.relative_phone);
 	$("#new_relrel").val(data.relative_relation);
-	$("#new_rfee").val(data.reg_fee);
+	// $("#new_rfee").val(data.reg_fee);
         var d  = new Date(Date.parse(data.regdate));
-        var da = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+        var da = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
 	$("#new_rdate").val(da);
 	$("#new_addr").val(data.address);
     });
