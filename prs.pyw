@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sun Jul 15 08:01:18 IST 2012
+## Last Modified : Sun Jul 15 23:03:44 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -36,6 +36,7 @@ sys.path = EXTRA_PATHS + sys.path
 import   tornado.ioloop, tornado.web, tornado.options
 import   models, config
 from     sqlalchemy import and_
+from     sqlalchemy.types import Date
 
 static_path = os.path.join(DIR_PATH, 'static')
 config_file = os.path.join(DIR_PATH, 'config.json')
@@ -105,6 +106,72 @@ class BaseHandler(tornado.web.RequestHandler):
                 "message": httplib.responses[status_code],
                 })
 
+class StatsHandler(BaseHandler):
+    def post (self, what):
+        from_d = models.MyT.date_from_uk(self.get_argument('vs_from', None))
+        to_d   = models.MyT.date_from_uk(self.get_argument('vs_to',   None))
+
+        from_d = from_d.strftime("%Y-%m-%d")
+        to_d   = to_d.strftime("%Y-%m-%d")
+
+        ## The following code is commented out and left here for future
+        ## reference. It enables the filtering out of visits that pertain to a
+        ## specified department or doctor. This feature may be provided in the
+        ## future. For now we will only provide summary statistics by
+        ## department and doctor.
+
+        # docid  = self.get_argument('vs_doc_list',  'All')
+        # deptid = self.get_argument('vs_dept_list', 'All')
+
+        # visits = session().query(models.Consultation)
+        # if docid == 'All':
+        #     if deptid != 'All':
+        #         visits = visits.filter_by(dept_id=deptid)
+        # else:
+        #     visits = visits.filter_by(doctor_id=docid)
+        #     if deptid != 'All':
+        #         visits = visits.filter_by(dept_id=deptid)
+
+        # depts = models.Department.sorted_dept_names_with_id(session)
+        # docs  = models.Doctor.sorted_doc_names_with_id(session)
+        # self.render('visit_stats.html', title=config.get_title(),
+        #             depts=depts, docs=docs, show=True, visits=visits)
+
+        visits = session().query(models.Consultation)
+        visits = visits.filter(and_(models.Consultation.date >= from_d,
+                                    models.Consultation.date <= to_d))
+
+        depsu = {}
+        docsu = {}
+        for visit in visits:
+            if not visit.doctor_id in docsu:
+                docsu.update({visit.doctor_id : {
+                    'name' : models.Doctor.name_from_id(session,
+                                                        visit.doctor_id),
+                    'patcnt' : 1,
+                    'fee'    : visit.charge,}
+                    })
+            else:
+                val = docsu[visit.doctor_id]
+                val['patcnt'] += 1
+                val['fee'] += visit.charge
+                docsu.update({visit.doctor_id : val})
+
+        summary = {'doc' : docsu,
+                   'dept' : depsu}
+
+        depts = models.Department.sorted_dept_names_with_id(session)
+        docs  = models.Doctor.sorted_doc_names_with_id(session)
+        self.render('visit_stats.html', title=config.get_title(),
+                    depts=depts, docs=docs, summary=summary)
+
+    def get (self, what):
+        if what == 'visits':
+            depts = models.Department.sorted_dept_names_with_id(session)
+            docs  = models.Doctor.sorted_doc_names_with_id(session)
+            self.render('visit_stats.html', title=config.get_title(),
+                        depts=depts, docs=docs, summary=None)
+
 class MiscAdminHandler(BaseHandler):
     def edit_depts (self):
         depts = session().query(models.Department)
@@ -151,11 +218,6 @@ class MiscAdminHandler(BaseHandler):
         if d1 or d2:
             session().commit()
 
-    def visit_stats (self):
-        depts = models.Department.sorted_dept_names(session)
-        self.render('visit_stats.html', title=config.get_title(),
-                    depts=depts)
-
     def post (self):
         op = self.get_argument('misc_admin_s', None)
         if op == 'dept':
@@ -175,7 +237,7 @@ class MiscAdminHandler(BaseHandler):
         elif op == 'mas_exit':
             sys.exit(0)
         elif op == 'mas_vs':
-            self.visit_stats()
+            self.redirect('/stats/visits')
         else:
             self.redirect('/')
 
@@ -195,23 +257,24 @@ class AjaxDepartmentsList(BaseHandler):
         self.write({'departments' : ret})
 
 class AjaxDoctorsInDepartment(BaseHandler):
-    """Return an array of doctor ID and Names as 'id - name' strings. Keeping
-    in line with general good practise this is wrapped into a dictionary."""
+    """Return an array of (ID, Name) tuples of Doctors in the
+    Department. Keeping in line with general good practise this is wrapped
+    into a dictionary."""
 
     def get (self, field, value):
         ret   = []
-        q = session().query(models.Department)
-        if field == 'name':
-            rec = q.filter_by(name=value).first()
-        elif field == 'id':
-            rec = q.filter_by(id=value).first()
-        else:
-            rec = None
 
-        if rec:
-            docs = rec.doctors
-            for doc in docs:
-                ret.append('%3d - %s' % (doc.id, doc.name))
+        if value == 'All':
+            q = session().query(models.Doctor)
+            ret = [(doc.id, doc.name) for doc in q]
+        else:
+            q = session().query(models.Department)
+            if field == 'name':
+                ret = models.Doctor.sorted_doc_names_with_id_in_dept_name(
+                    session, value)
+            elif field == 'id':
+                ret = models.Doctor.sorted_doc_names_with_id_in_dept_id(
+                    session, value)
 
         self.write({"doctors" : ret})
 
@@ -848,6 +911,7 @@ application = tornado.web.Application([
     (r"/ajax/appstate", AjaxAppState),
 
     (r"/miscadmin/", MiscAdminHandler),
+    (r"/stats/(.*)", StatsHandler),
 
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))

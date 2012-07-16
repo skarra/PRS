@@ -9,31 +9,146 @@
 {% end block %}
 
 {% block scripts %}
+<script>
+function setUpTable (elemid) {
+    $(elemid).dataTable({
+	"bFilter": false,
+        "bPaginate" : false,
+        "bInfo" : false,
 
+	"aoColumns": [
+            { "sClass": "right",},
+            { "sClass": "left", },
+            { "sClass": "right",},
+            { "sClass": "right",}],
+
+	"fnFooterCallback": function (nRow, aaData, iStart, iEnd, aiDisplay) {
+	    /*
+	     * Calculate the total visit count and net fee for all
+	     * elements displayed in this page
+	     */
+	    var iTotalVisit = 0;
+	    var iTotalFee   = 0;
+	    for (var i=0 ; i<aaData.length ; i++ ) {
+		iTotalVisit += aaData[i][2]*1;
+		iTotalFee += aaData[i][3]*1;
+	    }
+
+	    /* Calculate the market share for browsers on this page */
+	    var iPageVisit = 0;
+	    var iPageFee   = 0;
+	    for (var i=iStart; i<iEnd ; i++) {
+		iPageVisit += aaData[aiDisplay[i]][2]*1;
+		iPageFee   += aaData[aiDisplay[i]][3]*1;
+	    }
+      
+	    /* Modify the footer row to match what we want */
+	    var nCells = nRow.getElementsByTagName('th');
+	    nCells[1].innerHTML = parseInt(iPageVisit) + '/' +
+				      parseInt(iTotalVisit);
+	    nCells[2].innerHTML = parseInt(iPageFee);
+	}
+    });
+}
+
+$(function() {
+    setUpTable("#vs_dept_table");
+    setUpTable("#vs_doc_table");
+});
+
+</script>
 {% end block %}
 
 {% block content %}
 <h1>Visit Statistics</h1>
 <p/>
-<div>
+
+<form id="vs_form" method="POST">
+<!-- Filtering by Department and Doctor is not enabled for now. We may come back to his at a later time.
+ <label>Dept.:</label>
+  <select id="vs_dept_list" name="vs_dept_list">
+    <option value="All"> All </option>
+    {% for d in depts %}
+      <option value={{ d[0] }}> {{ d[1] }} </option>
+    {% end %}
+  </select>
+
+  <label>Doctor:</label>
+  <select id="vs_doc_list" name="vs_doc_list">
+    <option value="All"> All </option>
+    {% for d in docs %}
+      <option value={{ d[0] }}> {{ d[1] }} </option>
+    {% end %}
+  </select>
+
+  <p/>
+-->
   <label>From:</label>
   <input type="text" class="date date-field " id="vs_from" name="vs_from"/>
 
   <label>To:</label>
   <input type="text" class="date date-field " id="vs_to" name="vs_to"/>
 
-  <label>Dept.:</label>
-  <select id="vs_dept_list" name="vs_dept_list">
-      <option value="All"> All </option>
-    {% for d in depts %}
-      <option value={{ d }}> {{ d }} </option>
-    {% end %}
-  </select>
+  <input type="submit" value="Go" id="vs_submit"/>
+</form>
 
-  <label>Doctor:</label>
-  <select id="vs_doc_list">
-  </select>
+<hr/>
 
-</div>
+{% if summary %}
+
+  Total Patients Visited: 
+
+  <div class="col_parent">
+    <div class="half">
+      <table id="vs_doc_table" class="display" name="vs_doc_table">
+        <thead>
+            <th>ID </th>
+            <th>Doctor</th>
+            <th>Visits </th>
+            <th>Charge </th>
+        </thead>
+
+        <tfoot>
+            <th style="text-align:right" colspan="2"> Total: </th>
+            <th> </th>
+            <th> </th>
+        </tfoot>
+
+        <tbody>
+            {% for key, docv in summary['doc'].iteritems() %}
+	    <tr>
+	      <th> {{ key }} </th>
+	      <th> {{ docv['name']   }} </th>
+	      <th> {{ docv['patcnt'] }} </th>
+	      <th> {{ docv['fee']    }} </th>
+	    </tr>
+            {% end %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="half">
+      <table id="vs_dept_table" class="display">
+        <thead>
+            <th>ID </th>
+            <th>Department </th>
+            <th>Visits </th>
+            <th>Charge </th>
+        </thead>
+
+        <tfoot>
+            <th style="text-align:right" colspan="2"> Total: </th>
+            <th> </th>
+            <th> </th>
+        </tfoot>
+
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+{% end %}
 
 {% end block %}

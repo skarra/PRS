@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sun Jul 15 07:48:11 IST 2012
+// Last Modified : Mon Jul 16 07:58:22 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -502,20 +502,55 @@ function addTextFilters () {
     }
 }
 
+//
+// Event Handlers and validations for visit_stats.html 
+//
+
+function validateVisitStatsSubmit () {
+    var from = $("#vs_from").val();
+    var to   = $("#vs_to").val();
+    var msg  = '';
+
+    if (from == '') {
+	msg += 'From date cannot be empty.\n';
+    }
+
+    if (to == '') {
+	msg += 'To date cannot be empty.\n';
+    }
+
+    if (msg == '' && (from == to)) {
+	msg += 'From has to be an earlier date than .\n';
+    }
+
+    // FIXME: Dates need to be validated. The following does not work.
+
+    if (msg == '' && (from > to)) {
+	msg += 'From has to be an earlier date than .\n';
+    }
+
+    if (msg != '') {
+ 	alert(msg);
+ 	return false;
+    }
+}
+
 function addHandlers_visit_stats () {
     $("#vs_dept_list").change(function() {
 	// ajax call to fetch doctors in given department and update
 	// element for doctor list
 	docdiv = $("#vs_doc_list");
 	docdiv.html($("<option />").val("All").text("All"));
-	$.getJSON("/ajax/doctors/department/name/" + $(this).val(),
+	$.getJSON("/ajax/doctors/department/id/" + $(this).val(),
 		  function(data) {
 		      $.each(data.doctors, function() {
-			  docdiv.append($("<option />").val(this).text(this));
+			  docdiv.append($("<option />")
+					.val(this[0]).text(this[1]));
 		      });
-		      console.log(data.doctors);
 		  });
     });
+
+    $("#vs_form").submit(validateVisitStatsSubmit);
 }
 
 function addHandlers () {

@@ -173,11 +173,17 @@ table.display td {
 	padding: 3px 10px;
 }
 
+table.display td.left {
+	text-align: left;
+}
+
 table.display td.center {
 	text-align: center;
 }
 
-
+table.display td.right {
+    text-align: right;
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables sorting
