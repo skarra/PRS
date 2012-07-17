@@ -193,7 +193,7 @@ small {
   font-size: 85%;
 }
 
-strong, th {
+strong {
   font-weight: bold;
 }
 
@@ -1012,4 +1012,21 @@ tag {
 
 .show-only-in-print {
     display: none;
+}
+
+.vs_table_header {
+    width: 100%;
+    text-align: center;
+    color: blue;
+    font-size: 125%;
+}
+
+#vs_doc_table_length label select, #vs_dept_table_length label select {
+    height: 20px;
+    padding: 0px;
+}
+
+.relative {
+    float: right;
+    position: relative;
 }

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+>{% extends 'base.html' %}
 
 {% block styles %}
 <link href="/static/css/dataTables/demo_table.css" rel="stylesheet"
@@ -12,9 +12,7 @@
 <script>
 function setUpTable (elemid) {
     $(elemid).dataTable({
-	"bFilter": false,
-        "bPaginate" : false,
-        "bInfo" : false,
+       "bInfo" : false,
 
 	"aoColumns": [
             { "sClass": "right",},
@@ -34,6 +32,9 @@ function setUpTable (elemid) {
 		iTotalFee += aaData[i][3]*1;
 	    }
 
+            $("#vs_total_visits").html(iTotalVisit);
+            $("#vs_total_fee").html(iTotalFee);
+
 	    /* Calculate the market share for browsers on this page */
 	    var iPageVisit = 0;
 	    var iPageFee   = 0;
@@ -44,8 +45,7 @@ function setUpTable (elemid) {
       
 	    /* Modify the footer row to match what we want */
 	    var nCells = nRow.getElementsByTagName('th');
-	    nCells[1].innerHTML = parseInt(iPageVisit) + '/' +
-				      parseInt(iTotalVisit);
+	    nCells[1].innerHTML = parseInt(iPageVisit);
 	    nCells[2].innerHTML = parseInt(iPageFee);
 	}
     });
@@ -84,10 +84,14 @@ $(function() {
   <p/>
 -->
   <label>From:</label>
-  <input type="text" class="date date-field " id="vs_from" name="vs_from"/>
+  <input type="text" class="date date-field " id="vs_from" name="vs_from"
+	 value={{ summary['from'] if summary else " " }} 
+	 />
 
   <label>To:</label>
-  <input type="text" class="date date-field " id="vs_to" name="vs_to"/>
+  <input type="text" class="date date-field " id="vs_to" name="vs_to"
+	 value={{ summary['to'] if summary else " " }} 
+	 />
 
   <input type="submit" value="Go" id="vs_submit"/>
 </form>
@@ -95,11 +99,22 @@ $(function() {
 <hr/>
 
 {% if summary %}
-
-  Total Patients Visited: 
+  <div style="width: 25%;"> Total Patients Visited : 
+    <div id="vs_total_visits" class="relative"> </div> 
+  </div>
+  <div style="width: 25%;">
+    Total Fee Collected :  
+    <div id="vs_total_fee" class="relative"> </div>
+  </div>
+  <hr/>
 
   <div class="col_parent">
     <div class="half">
+      <div class="vs_table_header">
+	<strong> Statistics by Doctor: </strong>
+      </div>
+
+      <p/>
       <table id="vs_doc_table" class="display" name="vs_doc_table">
         <thead>
             <th>ID </th>
@@ -117,10 +132,10 @@ $(function() {
         <tbody>
             {% for key, docv in summary['doc'].iteritems() %}
 	    <tr>
-	      <th> {{ key }} </th>
-	      <th> {{ docv['name']   }} </th>
-	      <th> {{ docv['patcnt'] }} </th>
-	      <th> {{ docv['fee']    }} </th>
+	      <td> {{ key }}            </td>
+	      <td> {{ docv['name']   }} </td>
+	      <td> {{ docv['patcnt'] }} </td>
+	      <td> {{ docv['fee']    }} </td>
 	    </tr>
             {% end %}
         </tbody>
@@ -128,6 +143,10 @@ $(function() {
     </div>
 
     <div class="half">
+      <div class="vs_table_header">
+	<strong> Statistics by Department: </strong>
+      </div>
+      <p/>
       <table id="vs_dept_table" class="display">
         <thead>
             <th>ID </th>
@@ -138,8 +157,8 @@ $(function() {
 
         <tfoot>
             <th style="text-align:right" colspan="2"> Total: </th>
-            <th> </th>
-            <th> </th>
+            <th style="text-align:right"> </th>
+            <th style="text-align:right"> </th>
         </tfoot>
 
         <tbody>

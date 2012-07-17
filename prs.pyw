@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sun Jul 15 23:03:44 IST 2012
+## Last Modified : Tue Jul 17 17:27:04 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -108,8 +108,11 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class StatsHandler(BaseHandler):
     def post (self, what):
-        from_d = models.MyT.date_from_uk(self.get_argument('vs_from', None))
-        to_d   = models.MyT.date_from_uk(self.get_argument('vs_to',   None))
+        inp_from = self.get_argument('vs_from', None)
+        inp_to   = self.get_argument('vs_to',   None)
+
+        from_d = models.MyT.date_from_uk(inp_from)
+        to_d   = models.MyT.date_from_uk(inp_to)
 
         from_d = from_d.strftime("%Y-%m-%d")
         to_d   = to_d.strftime("%Y-%m-%d")
@@ -157,8 +160,10 @@ class StatsHandler(BaseHandler):
                 val['fee'] += visit.charge
                 docsu.update({visit.doctor_id : val})
 
-        summary = {'doc' : docsu,
-                   'dept' : depsu}
+        summary = {'doc'  : docsu,
+                   'dept' : depsu,
+                   'from' : inp_from,
+                   'to'   : inp_to}
 
         depts = models.Department.sorted_dept_names_with_id(session)
         docs  = models.Doctor.sorted_doc_names_with_id(session)
