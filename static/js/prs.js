@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Mon Jul 16 07:58:22 IST 2012
+// Last Modified : Tue Jul 17 23:09:25 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -372,6 +372,48 @@ function addHandlers_db_toggle () {
     });
 }
 
+function exit () {
+    // The guy really wants to exit. Do the needful.
+    $.get('/miscadmin/',
+	  {'misc_admin_s' : 'mas_exit'},
+	  function(data) {
+	      console.log('Message 3');
+	      window.close();
+	  }).error(function() {
+	      try {
+		  console.log('Message 1');
+		  window.close();
+	      } catch (err) {
+		  console.log('Message 2: ' + err);
+		  window.close();
+	      }
+	  });
+}
+
+function setUpExitHandlerDialog () {
+    $("#exit-dialog-confirm" ).dialog({
+	autoOpen: false,
+	resizable: false,
+	height: 160,
+	width: 500,
+	modal: true,
+	buttons: {
+	    "Yes, I want to Exit": function() {
+		$(this).dialog("close");
+		exit();
+	    },
+	    Cancel: function() {
+		$(this).dialog("close");
+		window.location = '/';
+	    }
+	}
+    });
+}
+
+function handleExit () {
+    $("#exit-dialog-confirm").dialog("open");
+}
+
 function addHandlers_misc_menu () {
     // Set up the elements of the drop down "Misc Menu"
     addHandlers_department_edit();
@@ -381,21 +423,7 @@ function addHandlers_misc_menu () {
     $("#misc_admin_s").change(function() {
 	var val = $("#misc_admin_s").val();
 	if (val == 'mas_exit') {
-	    $.get('/miscadmin/',
-		  {'misc_admin_s' : val},
-		  function(data) {
-		      window.close();
-		  }).error(function() {
-		      try {
-			  console.log('Message 1');
-			  alert('Thank you for using CMC Patient Record System');
-			  window.close();
-			  console.log('Message 3');
-		      } catch (err) {
-			  console.log('Message 2: ' + err);
-			  window.close();
-		      }
-		  });
+	    handleExit(val);
 	} else {
 	    $("#misc_admin").submit();
 	}
@@ -557,6 +585,7 @@ function addHandlers () {
     console.log('addFormHandlers...');
 
     setupDateLocale();
+    setUpExitHandlerDialog();
 
     $("#site-title").click(function() {
 	window.location = "/";
