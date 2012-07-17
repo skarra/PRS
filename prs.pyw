@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jul 17 17:27:04 IST 2012
+## Last Modified : Tue Jul 17 21:50:10 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -159,6 +159,19 @@ class StatsHandler(BaseHandler):
                 val['patcnt'] += 1
                 val['fee'] += visit.charge
                 docsu.update({visit.doctor_id : val})
+
+            try:
+                dep = depsu[visit.dept_id]
+                dep['patcnt'] += 1
+                dep['fee']    += visit.charge
+            except KeyError, e:
+                # It's not there, so we are going to insert it first up.
+                depsu[visit.dept_id] = {
+                    'name' : models.Department.name_from_id(session,
+                                                            visit.dept_id),
+                    'patcnt' : 1,
+                    'fee'    : visit.charge,
+                    }
 
         summary = {'doc'  : docsu,
                    'dept' : depsu,

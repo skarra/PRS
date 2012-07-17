@@ -71,6 +71,10 @@
     margin-bottom: 0;
 }
 
+table.display tfoot th {
+    padding-right: 9px;
+}
+
 #sheet .dataTables_filter label {
     float: right;
     margin-right: 15px;

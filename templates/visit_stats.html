@@ -12,7 +12,7 @@
 <script>
 function setUpTable (elemid) {
     $(elemid).dataTable({
-       "bInfo" : false,
+//       "bInfo" : false,
 
 	"aoColumns": [
             { "sClass": "right",},
@@ -33,7 +33,7 @@ function setUpTable (elemid) {
 	    }
 
             $("#vs_total_visits").html(iTotalVisit);
-            $("#vs_total_fee").html(iTotalFee);
+            $("#vs_total_fee").html('Rs. ' + iTotalFee);
 
 	    /* Calculate the market share for browsers on this page */
 	    var iPageVisit = 0;
@@ -46,7 +46,7 @@ function setUpTable (elemid) {
 	    /* Modify the footer row to match what we want */
 	    var nCells = nRow.getElementsByTagName('th');
 	    nCells[1].innerHTML = parseInt(iPageVisit);
-	    nCells[2].innerHTML = parseInt(iPageFee);
+	    nCells[2].innerHTML = 'Rs. ' + parseInt(iPageFee);
 	}
     });
 }
@@ -99,10 +99,10 @@ $(function() {
 <hr/>
 
 {% if summary %}
-  <div style="width: 25%;"> Total Patients Visited : 
+  <div style="width: 27%;"> Total Patients Visited : 
     <div id="vs_total_visits" class="relative"> </div> 
   </div>
-  <div style="width: 25%;">
+  <div style="width: 27%;">
     Total Fee Collected :  
     <div id="vs_total_fee" class="relative"> </div>
   </div>
@@ -125,8 +125,8 @@ $(function() {
 
         <tfoot>
             <th style="text-align:right" colspan="2"> Total: </th>
-            <th> </th>
-            <th> </th>
+            <th style="text-align:right"> </th>
+            <th style="text-align:right"> </th>
         </tfoot>
 
         <tbody>
@@ -162,6 +162,14 @@ $(function() {
         </tfoot>
 
         <tbody>
+            {% for key, depv in summary['dept'].iteritems() %}
+	    <tr>
+	      <td> {{ key }}            </td>
+	      <td> {{ depv['name']   }} </td>
+	      <td> {{ depv['patcnt'] }} </td>
+	      <td> {{ depv['fee']    }} </td>
+	    </tr>
+            {% end %}
         </tbody>
       </table>
     </div>
