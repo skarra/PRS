@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Jul 17 23:09:25 IST 2012
+// Last Modified : Tue Jul 17 23:16:49 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -62,8 +62,8 @@ function setupDeptNamesInControl () {
     $.getJSON(url, function(data) {
 	console.log("Got " + data.count + " entries in ajax response.");
 	$.each(data.departments, function(key) {
-	    var name = data.departments[key][0];
-	    var id   = data.departments[key][1];
+	    var name = data.departments[key][1];
+	    var id   = data.departments[key][0];
 	    $("#dept_doc_v").append("<option val=" + id + ">" + name 
 				    + "</option>");
 	});
