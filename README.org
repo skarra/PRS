@@ -1,5 +1,5 @@
 Created       : Tue May 08 17:03:44 IST 2012
-Last Modified : Mon May 14 20:20:32 IST 2012
+Last Modified : Mon Jul 23 15:54:34 IST 2012
 
 * Introduction
 
@@ -12,15 +12,55 @@ Last Modified : Mon May 14 20:20:32 IST 2012
   It is designed to run from within a browser, but without an internet
   connection. Broad features will include:
 
-  - Patient Contat information, visit and case history tracking
-  - Doctor database and availability database
+  - Patient Contact information, visit history tracking
+  - Doctor contact and availability database
   - Invoice generation for paying patients.
+
+
+* How to Run
+
+  At the moment the only way to run the program is to download the source and
+  execute the python program. There is a way to build windows executables
+  using py2exe; we plan to provide pre-built binary bundles for major
+  releases. In the mean time:
+
+  1. Download and Install python 
+  2. Clone the repository
+
+  On Unix / Windows:
+  3. python prs.pyw &
+
+  or on windows:
+  3. Double click on the file 'prs.pyw' from windows explorer.
+
+  You should automatically see a tab in your default browser open up pointing to
+  "http://localhost:8765/"
+
+  If Google Chrome is already your default browser, you should be able use the
+  program, otherwise, just close your browser tab, fire up chrome and point to
+  http://localhost:8765/
 
 * Dependencies
 
-  Tornado v2.2.1 and SQLAlchemy 0.7.7 are included in their entirety. You will
-  of course need Python 2.7 if you want to run on Unix or Mac. The Windows
-  release bundles do away with this requirement as well.
+** Google Chrome or Safari
+
+   PRS has been tested only on Chrome. It should also work reasonably well on
+   Safari. It most definitely will not work on IE (any version). This may be
+   fixed some time in the future, but it is not very high priority now.
+
+** Tornado
+
+   Tornado is included as a git submodule. So be sure to fetch the submodule
+   when you clone the git repository.
+
+** SQLAlchemy
+
+   SQLAlchemy v0.7.7 is included in its entirety in the libs/ directory.
+
+** Python 2.7
+
+   You will of course need Python 2.7 if you want to run on Unix or Mac. The
+   Windows release bundles do away with this requirement as well.
 
 * Some history
 
