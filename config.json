@@ -1,7 +1,7 @@
 // -*- javascript -*-
 //
 // Created       : Mon May 14 22:55:45 IST 2012
-// Last Modified : Fri Jul 13 23:21:57 IST 2012
+// Last Modified : Mon Jul 23 17:38:19 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 //
@@ -20,5 +20,5 @@
     // visit information. This reduces the effort of setting up some
     // data that is needed to explore all the functionality of the
     // software.
-    'trial_db' : false,
+    'trial_db' : true,
 }

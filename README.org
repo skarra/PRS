@@ -1,5 +1,5 @@
 Created       : Tue May 08 17:03:44 IST 2012
-Last Modified : Mon Jul 23 15:54:34 IST 2012
+Last Modified : Mon Jul 23 17:41:58 IST 2012
 
 * Introduction
 
@@ -39,6 +39,18 @@ Last Modified : Mon Jul 23 15:54:34 IST 2012
   If Google Chrome is already your default browser, you should be able use the
   program, otherwise, just close your browser tab, fire up chrome and point to
   http://localhost:8765/
+
+** Sample Data
+
+  There is a script that will generate some random data to populate the
+  tables, so you can play with the software. To get this sample data, do the
+  following:
+
+  1. cd scripts
+  2. python createdb.py
+
+  Now you should have a db/sample.db sqlite database in the db/ directory
+  which can be accessed through the program.
 
 * Dependencies
 
