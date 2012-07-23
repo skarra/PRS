@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jul 17 21:50:10 IST 2012
+## Last Modified : Mon Jul 23 17:12:49 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -16,7 +16,7 @@
 ## FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public
 ## License for more details.
 ##
-## You should have a copy of the license in the doc/ directory of PRS.  If
+## You should have a copy of the license in the base directory of PRS.  If
 ## not, see <http://www.gnu.org/licenses/>.
 
 ## First up we need to fix the sys.path before we can even import stuff we

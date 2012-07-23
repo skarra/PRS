@@ -1,10 +1,23 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Jul 13 23:20:21 IST 2012
+## Last Modified : Mon Jul 23 17:16:37 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
-## Licensed under the GNU AGPL v3
+## This file is part of PRS
+##
+## PRS is free software: you can redistribute it and/or modify it under
+## the terms of the GNU Affero General Public License as published by the
+## Free Software Foundation, version 3 of the License
+##
+## PRS is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public
+## License for more details.
+##
+## You should have a copy of the license in the base directory of PRS.  If
+## not, see <http://www.gnu.org/licenses/>.
+##
 
 import demjson, logging, os
 
