@@ -50,7 +50,7 @@ input, select {
 body {
     height: 100%;
     font: 13px/1.231 sans-serif;
-/*  *font-size: small;*/
+    display: inline-block;
 }
 
 select, input, textarea, button {
@@ -353,7 +353,7 @@ header #sections li {
 }
 
 .control {
-    float: left;
+    display: table-cell;
     -moz-transition-property: background-color;
     -webkit-transition-property: background-color;
     -o-transition-property: background-color;
@@ -364,7 +364,7 @@ header #sections li {
     transition-duration: 0.5s;
 
     position: relative;
-    display: inline-block;
+
     vertical-align: top;
     padding: 15px 20px;
     margin: 20px 20px;
@@ -413,16 +413,12 @@ header #sections li {
 }
 
 #container {
-//    clear: both;
-//    height: 90%;
-//    width: 100%;
-
+    width: 100%;
+    display: inline-block;
     margin-bottom: 5px;
-    padding-bottom: 6px;
 }
 
 #container #main_footer {
-//  height: 40px;
 }
 
 footer {
@@ -452,21 +448,22 @@ footer p {
 }
 
 #content {
-    float: right;
-    width: 70%;
-    margin-top: 20px;
+    display:table;
+    height: 100%;
+    margin: 0px;
+    border-spacing: 20px;
 }
 
 #sheet {
+    border-spacing: 0px;
+    line-height: 1.5;
+    display: table-cell;
+    width: 100%;
+
     *zoom: 1;
     background: white;
-    min-height: 100%;
-
-    margin-bottom: 2em;
-    padding: 1em 1em;
 
     font-size: 13px;
-    line-height: 150%;
 
     border: 1px solid #afafaf;
     -moz-border-radius: 4px;
@@ -485,21 +482,15 @@ footer p {
 
 #sheet .section {
     *zoom: 1;
-  padding: 1em 1em;
-  vertical-align: top;
-  
+    padding: 15px 2em;
+    padding-bottom: 2em;
+    vertical-align: top;
 }
 
 #sheet p.post-date {
   margin-top: 0.5em;
   font-size: 80%;
   color: #666;
-}
-
-#sheet {
-  max-width: 90%;
-  line-height: 1.5;
-  padding-right: 1em;
 }
 
 #sheet form div.field {
@@ -612,8 +603,8 @@ footer p {
 }
 
 #sheet textarea {
-  width: 93%;
-  height: 6em;
+    width: 93%;
+    height: 6em;
 }
 
 #sheet textarea, #sheet input[type="text"], #sheet input[type="password"], #sheet input[type="email"], #sheet input[type="url"] {
@@ -684,6 +675,13 @@ p {
 .col_parent, #new_patient_form, #newp_age_gender, #newp_phones, #newp_rel_name_rel {
     display: table;
     width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.col_child {
+    display: table-column;
+    float: left;
     height: 100%;
 }
 

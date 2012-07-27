@@ -1,7 +1,7 @@
 <!DOCTYPE HTML> 
 <!--
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Jul 17 22:53:06 IST 2012
+// Last Modified : Fri Jul 27 22:23:39 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -48,6 +48,7 @@
     </div>
   </header>
 
+  <div id="content">
   <div id="patient_admin" class="control">
     <div class="panel first">
     <h2> Patient Menu </h2>
@@ -113,32 +114,29 @@
 	  <option id="mas_db" value="mas_db"></option>
 	</select>
       </form>
-   </div>
+    </div>
   
-  </div> <!-- .admin -->
- <div class="push"></div>
+  </div> <!-- #patient_admin -->
 
-  <div id="content">
-    <div id="sheet">
-      <div class="section">
-	{% block content %}
-	You should never see this message because the handlers should render
-	only pages dervived from this which should overwrite this with
-	something more meaningful.
-	{% end block %}
-      </div>
+  <div id="sheet">
+    <div class="section">
+      {% block content %}
+      You should never see this message because the handlers should render
+      only pages dervived from this which should overwrite this with
+      something more meaningful.
+      {% end block %}
+    </div>
 
-      <div class="demo" id="exit-dialog-confirm" title="Exit?">
-	<p>
-	  <span class="ui-icon ui-icon-alert" 
-		style="float:left; margin:0 7px 20px 0;">
-	  </span>
-	  You will now exit the Patient Record System. Are you sure?
-	</p>
-      </div>
+    <div class="demo" id="exit-dialog-confirm" title="Exit?">
+      <p>
+	<span class="ui-icon ui-icon-alert" 
+	      style="float:left; margin:0 7px 20px 0;">
+	</span>
+	You will now exit the Patient Record System. Are you sure?
+      </p>
     </div>
   </div>
-  <div id="main_footer"></div>
+  </div>
 </div> <!-- Container -->
 
 <!--
