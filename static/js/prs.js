@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Mon Jul 23 17:15:14 IST 2012
+// Last Modified : Sat Nov 17 23:55:03 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -92,14 +92,16 @@ function validateNewPatient (event) {
     var f_name     = $('#new_name').val();
     var f_age      = $('#new_age').val();
     var f_reg_date = $('#new_reg_date').val();
-    var f_phone    = $('#new_phone').val();
+    var f_phone    = $('#new_ph').val();
     var f_addr     = $('#new_addr').val();
     var f_relname  = $('#new_relname').val();
-    var f_relph    = $('#new_ph').val();
+    var f_relph    = $('#new_relph').val();
     var f_relrel   = $('#new_relrel').val();
 
     var failed  = false;
     var errmsg  = "";
+    // When set, we do not save, but no alert is presented to the user
+    var silent_err = false;
 
     if (f_name === "") {
         errmsg += "Name cannot be empty\n";
@@ -110,12 +112,24 @@ function validateNewPatient (event) {
     } else {
     }
 
+    if (f_phone == "") {
+	errmsg += "Your phone number cannot be empty\n";
+    } else {
+	if (!isValidPhoneNumber(f_phone, "Phone number")) {
+	    silent_err = true;
+	}
+    }
+
     if (f_relname == "") {
 	errmsg += "Emergency Contact details (name) cannot be empty\n";
     }
 
     if (f_relph == "") {
 	errmsg += "Emergency Contact details (phone) cannot be empty\n";
+    } else {
+	if (!isValidPhoneNumber(f_relph, "Relative's Phone number")) {
+	    silent_err = true;
+	}
     }
 
     if (f_relrel == "") {
@@ -129,6 +143,10 @@ function validateNewPatient (event) {
     if (errmsg != "") {
         alert(errmsg)
         return false;
+    }
+
+    if (silent_err) {
+	return false;
     }
 }
 
@@ -252,6 +270,7 @@ function validateNewDoctor () {
     var f_dept3    = $('#newd_dept_03').val();
 
     var errmsg  = "";
+    var silent_err = false;
 
     if (f_name === "") {
         errmsg += "Name cannot be empty\n";
@@ -259,6 +278,10 @@ function validateNewDoctor () {
 
     if (f_phone === "") {
         errmsg += "Phone field cannot be empty\n";
+    } else {
+	if (!isValidPhoneNumber(f_phone, "Phone number")) {
+	    silent_err = true;
+	}
     }
 
     if (f_dept1 == "-- Select --" && f_dept2 == "-- Select --" && 
@@ -269,6 +292,10 @@ function validateNewDoctor () {
     if (errmsg != "") {
         alert(errmsg)
         return false;
+    }
+
+    if (silent_err) {
+	return false;
     }
 
     return true;
@@ -538,6 +565,50 @@ function addTextFilters () {
 
         // If all the characters were legal, hide the message if there is one.
         if (messageElement) messageElement.style.visibility = "hidden";
+    }
+}
+
+//
+// Ensure the number we got is actually valid. This method returns
+// true if valid and false otherwise. In the process of parsing it may
+// check with the user about a doubtful number, and return true if the
+// user confirms
+//
+
+function isValidPhoneNumber (phoneNumber, text) {
+    var regionCode = 'IN';
+    var output = new goog.string.StringBuffer();
+    var isNumberValid    = false;
+    var isValidForRegion = false;
+    var isPossibleNumber = false;
+
+    try {
+	var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
+	var number = phoneUtil.parseAndKeepRawInput(phoneNumber, regionCode);
+
+	// output.append(goog.json.serialize(new goog.proto2.ObjectSerializer(
+        //     goog.proto2.ObjectSerializer.KeyOption.NAME).serialize(number)));
+
+	isNumberValid = phoneUtil.isValidNumber(number);
+	isValidForRegion = phoneUtil.isValidNumberForRegion(number, regionCode);
+	isPossibleNumber = phoneUtil.isPossibleNumber(number);
+
+	if (isValidForRegion) {
+	    return true;
+	}
+
+	if (isPossibleNumber) {
+	    // We need to ask for a confirmation here
+	    if (confirm(text + " (" + phoneNumber + ") " +
+			"may be invalid. Are you sure it is correct?")) {
+		return true;
+	    }
+	}
+
+	return false;
+    } catch (e) {
+	alert('Exception while parsing number (' + phoneNumber + '): '  + e);
+	return false;
     }
 }
 

@@ -10,6 +10,20 @@
 {% block morescripts %}
 {% end block %}
 
+<script src="http://closure-library.googlecode.com/svn/trunk/closure/goog/base.js">
+</script>
+<script>
+  goog.require('goog.dom');
+  goog.require('goog.json');
+  goog.require('goog.proto2.ObjectSerializer');
+  goog.require('goog.string.StringBuffer');
+</script>
+
+<script src="/static/js/libs/phonemetadata.pb.js"></script>
+<script src="/static/js/libs/phonenumber.pb.js"></script>
+<script src="/static/js/libs/metadata.js"></script>
+<script src="/static/js/libs/phonenumberutil.js"></script>
+
 {% end block %}
 
 {% block content %}
