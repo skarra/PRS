@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Mon Jul 23 17:12:49 IST 2012
+## Last Modified : Sat Nov 17 14:48:12 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -25,6 +25,9 @@
 import copy, httplib, os, re, socket, string, sys, webbrowser
 from   datetime  import datetime, date
 from   threading import Thread
+
+## Some Global Variables to get started
+prs_ver = 'v0.4.0+'
 
 DIR_PATH    = os.path.abspath('')
 EXTRA_PATHS = [os.path.join(DIR_PATH, 'src'),
