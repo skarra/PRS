@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Nov 17 16:21:49 IST 2012
+## Last Modified : Sat Nov 17 18:41:13 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -353,6 +353,7 @@ class AjaxDoctorDetails(BaseHandler):
 
         if rec:
             ret.update({'name'    : rec.name,
+                        'active'  : rec.active,
                         'title'   : rec.title,
                         'quals'   : rec.quals,
                         'regdate' : rec.regdate.isoformat(),
@@ -483,8 +484,6 @@ class SearchHandler(BaseHandler):
             field = 'dept'
             value = dept
 
-        print 'Field: ', field
-        print 'value: ', value
         if role in ['patient', 'doctor']:
             return self.search(role, field, value)
         else:
@@ -680,6 +679,7 @@ class DoctorHandler(BaseHandler):
 
         if not doc:
             doc = models.Doctor(name    = ga("new_name", ''),
+                                active  = ga("new_active", True),
                                 title   = ga("new_title", ''),
                                 regdate = da,
                                 fee     = ga('new_rfee', 0),
@@ -689,6 +689,7 @@ class DoctorHandler(BaseHandler):
                                 email   = ga('new_em', ''))
         else:
             doc.name    = ga("new_name", '')
+            doc.active  = True if ga("new_active", None) == 'active' else False
             doc.title   = ga("new_title", '')
             doc.regdate = da
             doc.fee     = ga('new_rfee', 0)
@@ -785,7 +786,6 @@ class EditDoctorHandler(DoctorHandler):
         q = session().query(models.Doctor)
         d = q.filter_by(id=value).first()
 
-        ga = self.get_argument
         rec = self.make_doc_from_args(d)
         try:
             session().commit()

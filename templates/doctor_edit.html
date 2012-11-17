@@ -10,8 +10,9 @@ $(function() {
     var doc_url = url.replace('/edit/', '/ajax/');
     console.log("Fetching ajax results from URL: " + doc_url);
     $.getJSON(doc_url, function(data) {
-        console.log("Ajax call returned: " + data);
+        console.log("Ajax call returned: " + data.active);
 	$("#new_title").val(data.title);
+	$("#new_active").attr('checked', data.active);
 	$("#new_name").val(data.name);
 	$("#new_quals").val(data.quals);
 	$("#new_ph").val(data.phone);

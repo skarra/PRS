@@ -243,7 +243,7 @@ input[type="checkbox"] {
   vertical-align: text-bottom;
 }
 
-label, input[type=button], input[type=submit], button {
+input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
@@ -730,7 +730,7 @@ div.twocols h {
     display: table-column;
     position: relative;
     float: left;
-    width: 66%;
+    width: 65%;
     height: 100%;
 }
 
@@ -1023,4 +1023,16 @@ tag {
 .relative {
     float: right;
     position: relative;
+}
+
+.rt {
+    float: right;
+}
+
+.rl {
+    float: relative;
+}
+
+.red {
+    color: red;
 }
