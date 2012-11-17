@@ -1,6 +1,6 @@
 ##
 ## Created       : Sat Nov 17 14:46:20 IST 2012
-## Last Modified : Sat Nov 17 20:04:41 IST 2012
+## Last Modified : Sat Nov 17 20:09:50 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -84,7 +84,7 @@ ifeq ($(strip ${REL}),)
 endif
 	@echo
 	@echo ==== Replacing version identifier in ${src}...
-	sed -i .bak "s/^prs_ver = \'.*\'/$prs_ver = \'${REL}\'/" ${src}
+	sed -i .bak "s/^prs_ver = \'.*\'/prs_ver = \'${REL}\'/" ${src}
 
 	@echo ==== Comitting change to repository...
 	git add ${src}
@@ -114,6 +114,9 @@ endif
 	ls -ldh /tmp/${basename}-${REL}*
 
 install:
+ifeq ($(strip ${REL}),)
+	$(error "Have to specify a release. Usage: 'make REL=<rel>'")
+endif
 	@echo
 	@echo ==== Pushing release changes with tags upstream...
 	git push --tags
