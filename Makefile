@@ -1,6 +1,6 @@
 ##
 ## Created       : Sat Nov 17 14:46:20 IST 2012
-## Last Modified : Sat Nov 17 15:05:41 IST 2012
+## Last Modified : Sat Nov 17 16:03:08 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -56,7 +56,7 @@
 ## target. There is nothing to clean up at this stage.
 ##
 
-src = ../asynk.py
+src = ../prs.pyw
 basename = cmc
 
 default: bundle
@@ -84,32 +84,26 @@ ifeq ($(strip ${REL}),)
 endif
 	@echo
 	@echo ==== Replacing version identifier in ${src}...
-	sed -i .bak "s/^asynk_ver = \'.*\'/asynk_ver = \'${REL}\'/" ${src}
+	sed -i .bak "s/^prs_ver = \'.*\'/$prs_ver = \'${REL}\'/" ${src}
 
 	@echo ==== Comitting change to repository...
 	git add ${src}
-	cd .. && git commit -m 'Bumping up version to ${REL} for release'
+	git commit -m 'Bumping up version to ${REL} for release'
 
 	@echo
 	@echo ==== Tagging release with ${REL}...
-	cd .. && git tag -a -m 'Release ${REL}' ${REL}
+	git tag -a -m 'Release ${REL}' ${REL}
 
 	@echo
 	@echo ==== Cloning temp repository for ${REL}
-	rm -rf /tmp/asynk-${REL}
-	cd .. && git clone . /tmp/asynk-${REL}
-	rm -rf /tmp/asynk-${REL}/.git
-
-	@echo
-	@echo ==== Building documentation...
-	cd /tmp/asynk-${REL}/doc/ && make
+	rm -rf /tmp/${basename}-${REL}
+	git clone --recursive . /tmp/${basename}-${REL}
+	rm -rf /tmp/${basename}-${REL}/.git
 
 	@echo
 	@echo ==== Creating bundles
-	rm -f /tmp/asynk-${REL}.tar*
-	rm -f /tmp/asynk-${REL}.zip
-	cd /tmp && tar -cvf asynk-${REL}.tar.gz -z  asynk-${REL} > /dev/null 2>&1
-	cd /tmp && zip -q -r asynk-${REL}.zip asynk-${REL}
+	rm -f /tmp/${basename}-${REL}.zip
+	cd /tmp && zip -q -r ${basename}-${REL}.zip ${basename}-${REL}
 
 	@echo
 	@echo "**********************"
@@ -117,7 +111,7 @@ endif
 	@echo 
 	@echo Bundles available here:
 	@echo
-	ls -ldh /tmp/asynk-${REL}*
+	ls -ldh /tmp/${basename}-${REL}*
 
 install:
 	@echo
@@ -126,7 +120,7 @@ install:
 
 	@echo
 	@echo ==== Replacing version identifier in ${src} to dev ver...
-	sed -i .bak "s/^asynk_ver = \'.*\'/asynk_ver = \'${REL}+\'/" ${src}
+	sed -i .bak "s/^prs_ver = \'.*\'/prs_ver = \'${REL}+\'/" ${src}
 
 	@echo ==== Comitting change to repository...
 	git add ${src}
