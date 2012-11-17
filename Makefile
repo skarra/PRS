@@ -1,6 +1,6 @@
 ##
 ## Created       : Sat Nov 17 14:46:20 IST 2012
-## Last Modified : Sat Nov 17 16:03:08 IST 2012
+## Last Modified : Sat Nov 17 20:04:41 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -56,7 +56,7 @@
 ## target. There is nothing to clean up at this stage.
 ##
 
-src = ../prs.pyw
+src = prs.pyw
 basename = cmc
 
 default: bundle
@@ -116,7 +116,7 @@ endif
 install:
 	@echo
 	@echo ==== Pushing release changes with tags upstream...
-	cd .. && git push --tags
+	git push --tags
 
 	@echo
 	@echo ==== Replacing version identifier in ${src} to dev ver...
@@ -124,4 +124,4 @@ install:
 
 	@echo ==== Comitting change to repository...
 	git add ${src}
-	cd .. && git commit -m 'Bumping up version to ${REL}+ for development'
+	git commit -m 'Bumping up version to ${REL}+ for development'
