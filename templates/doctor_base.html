@@ -118,7 +118,7 @@
 	    <td>
 	      {% set tagid = 'newd_' + day + '_Morning_from' %}
 	      <select id= {{ tagid }} name={{ tagid }}>
-		{% for ophour in mophours %}
+		{% for ophour in mophours[:-1] %}
 	          <option value={{ ophour }}> {{ ophour }} </option>
 		{% end %}
 	      </select>
@@ -127,7 +127,7 @@
 	    <td>
 	      {% set tagid = 'newd_' + day + '_Morning_to' %}
 	      <select id={{ tagid }} name={{ tagid }}>
-		{% for ophour in mophours %}
+		{% for ophour in [mophours[0]] + mophours[2:] %}
 	          <option value={{ ophour }}> {{ ophour }} </option>
 		{% end %}
 	      </select>
@@ -136,7 +136,7 @@
 	    <td>
 	      {% set tagid = 'newd_' + day + '_Afternoon_from' %}
 	      <select id={{ tagid }} name={{ tagid }}>
-		{% for ophour in aophours %}
+		{% for ophour in aophours[:-1] %}
 	          <option value={{ ophour }}> {{ ophour }} </option>
 		{% end %}
 	      </select>
@@ -145,7 +145,7 @@
 	    <td>
 	      {% set tagid = 'newd_' + day + '_Afternoon_to' %}
 	      <select id={{ tagid }} name={{ tagid }}>
-		{% for ophour in aophours %}
+		{% for ophour in [aophours[0]] + aophours[2:] %}
 	          <option value={{ ophour }}> {{ ophour }} </option>
 		{% end %}
 	      </select>
