@@ -675,7 +675,6 @@ p {
 .col_parent, #new_patient_form, #newp_age_gender, #newp_phones, #newp_rel_name_rel {
     display: table;
     width: 100%;
-    height: 100%;
     position: relative;
 }
 
@@ -690,7 +689,6 @@ p {
     position: relative;
     float: left;
     width: 10%;
-    height: 100%;
 }
 
 #newd_name {
@@ -698,7 +696,6 @@ p {
     position: relative;
     float: right;
     width: 85%;
-    height: 100%;
 }
 
 #col2 {
@@ -719,7 +716,6 @@ div.twocols h {
     position: relative;
     float: left;
     width: 49%;
-    height: 100%;
 }
 
 .threecols, .third, .tagcol {
