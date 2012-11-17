@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Nov 17 18:41:13 IST 2012
+## Last Modified : Sat Nov 17 20:09:26 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -27,7 +27,7 @@ from   datetime  import datetime, date
 from   threading import Thread
 
 ## Some Global Variables to get started
-rs_ver = 'v0.6'
+prs_ver = 'v0.6+'
 
 DIR_PATH    = os.path.abspath('')
 EXTRA_PATHS = [os.path.join(DIR_PATH, 'src'),
