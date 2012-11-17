@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Mon Jul 23 17:17:03 IST 2012
+## Last Modified : Sat Nov 17 16:12:45 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -156,6 +156,7 @@ def add_doctor_names (session, doctors_file):
             quals = ', '.join(random.sample(degrees,
                               random.randint(2, 3)))
             doc = models.Doctor(title='Dr.',
+                                active=random.choice([True, False]),
                                 name=line,
                                 fee=random.choice([0, 20, 30, 150]),
                                 quals=quals,

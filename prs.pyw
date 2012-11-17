@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Nov 17 15:30:19 IST 2012
+## Last Modified : Sat Nov 17 16:21:49 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -287,6 +287,8 @@ class AjaxDoctorsInDepartment(BaseHandler):
 
         if value == 'All':
             q = session().query(models.Doctor)
+            ## FIXME: Do we have to limit to only 'active' doctors based on
+            ## some argument?
             ret = [(doc.id, doc.name) for doc in q]
         else:
             q = session().query(models.Department)
@@ -365,7 +367,12 @@ class AjaxDoctorDetails(BaseHandler):
         self.write(ret)
 
 class AjaxDocAvailability(BaseHandler):
-    """Return the details of the patient as a dictionary"""
+    """FIXME: Insert complete documentation.
+
+    Returns details of all available doctors for a given set of constraints
+    including department, day and shift. Inactive doctors are not considered
+    while checking availability.
+    """
 
     def get (self):
         ret   = {}
@@ -378,6 +385,7 @@ class AjaxDocAvailability(BaseHandler):
         shiftn = self.get_argument('shift', '-- Any --')
 
         dq = session().query(models.Doctor, models.Slot)
+        dq = dq.filter(models.Doctor.active == True)
         dq = dq.filter(models.Doctor.depts.any(name=dept_name))
         dq = dq.filter(models.Doctor.id == models.Slot.doctor_id)
         if day != '-- Any --':

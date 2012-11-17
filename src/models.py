@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Mon Jul 23 17:15:55 IST 2012
+## Last Modified : Sat Nov 17 16:08:08 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -97,6 +97,8 @@ class Doctor(Base):
     __tablename__ = 'doctor'
 
     id      = Column(Integer, primary_key=True)
+    active  = Column(Boolean, default=True)
+
     title   = Column(Unicode(5), default=u"Dr. ")
     name    = Column(Unicode(255), nullable=False)
     regdate = Column(Date(), default=MyT.today())
