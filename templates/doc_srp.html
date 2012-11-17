@@ -16,6 +16,7 @@ You searched for: {{ search_query }}.
   <thead>
     <tr>
       <th>ID</th>
+      <th>Active</th>
       <th>Title</th>
       <th>Name</th>
       <th>Email</th>
@@ -28,6 +29,7 @@ You searched for: {{ search_query }}.
     {% for res in search_results %}
     <tr>
       <td> {{ res.id }}    </td>
+      <td> {{ res.active }} </td>
       <td> {{ res.title }} </td>
       <td> {{ res.name }}  </td>
       <td> {{ res.email }} </td>
