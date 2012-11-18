@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Nov 17 22:32:48 IST 2012
+## Last Modified : Sun Nov 18 10:48:49 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -535,7 +535,8 @@ class ViewHandler(BaseHandler):
             self.redirect('/')
 
         self.render('patient_view.html', title=config.get_title(),
-                    rec=rec, d=session().query(models.Doctor))
+                    rec=rec, d=session().query(models.Doctor),
+                    session=session)
 
     def get (self, role, field, value):
         """role is one of 'patient' or 'doctor', field will be one of Name or

@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sat Nov 17 23:55:03 IST 2012
+// Last Modified : Sun Nov 18 11:28:57 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -21,6 +21,7 @@
 
 var pat_srp_table;
 var doc_srp_table;
+var pat_visits_table;
 var newv_doc_table;
 
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
@@ -715,6 +716,21 @@ function addHandlers () {
 		window.location = '/view/doctor/id/' + aData[0];
 	    });
 	}
+    });
+
+    // The following only applies to the patient_view.html, but it is still
+    // desirable to have all the javascipt centralized here (??)...
+    pat_visits_table = $("#pat_visits_table").dataTable({
+	"bFilter": false,
+	"bInfo": false,
+	"bPaginate": false,
+	"bSort" : false,
+	"aoColumns": [
+            { "sClass": "center" },
+            { "sClass": "left" },
+            { "sClass": "left" },
+            { "sClass": "left" },
+            { "sClass": "right" },],
     });
 
     $("#edit_pat_lab").click(function() {

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block styles %}
-<link href="/static/css/patient.css"        rel="stylesheet" type="text/css" />
+<link href="/static/css/patient.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/dataTables/demo_table.css" rel="stylesheet" 
+      type="text/css"/>
+<link href="/static/css/srp.css" rel="stylesheet" type="text/css" />
+
 {% end block %}
 
 {% block content %}
@@ -15,6 +19,9 @@
   <hr> <p/>
 </div>
 
+{% from models import Doctor %}
+{% from models import Department %}
+
 <div id="head_info">
   <div id="head">
     <h1> {{ rec.name }} </h1>
@@ -26,7 +33,7 @@
     <div id="edit_pat_lab" class="pat_label">Edit </div>
     <div id="visit_pat_lab" class="pat_label">New Visit</div>
   </div>
-</div>
+</div> <!-- #head_info -->
 
 <br/>
 
@@ -49,7 +56,7 @@
       <div class="tagcol"> Address : </div>
       <div class="valcol"> {{ rec.address }} </div>
     </div>
-  </div>
+  </div> <!-- .half -->
 
   <div class="half">
     <div class="myrow col_parent">
@@ -67,7 +74,7 @@
       <div class="valcol"> {{ rec.relative_phone }} </div>
     </div>
   </div>
-</div>
+</div> <!-- #contact_info -->
 
 <p/>
 <div id="visit_history">
@@ -75,50 +82,38 @@
     <h2>CMC Visit History: </h2>
   </div>
   <div class="show-only-in-print">
-    <h2>Visit Details: </h2>
+    <h2>Past Visits: </h2>
   </div>
 
-  {% set max = len(rec.consultations) - 1 %}
+  <table id="pat_visits_table" class="display" name="pat_visits_table">
+    <thead>
+      <tr>
+	<th>S. No.</th>
+	<th>Date</th>
+	<th>Department</th>
+	<th>Consultant</th>
+	<th>Charge</th>
+      </tr>
+    </thead>
 
-  {% for i, c in enumerate(rec.consultations) %}
-    {% set print_class = "hide-in-print" if (i != max) else "show" %}
-    <div class={{ print_class }}>
-      <div class="col_parent">
-        <div class="half">
-	  <div class="myrow col_parent">
-	    <div class="tagcol">Date : </div>
-	    <div class="valcol">{{ c.date }} </div>
-	  </div>
-          <div class="myrow col_parent">
-	    <div class="tagcol">Charge : </div>
-	    <div class="valcol">Rs. {{ c.charge }} </div>
-	    </div>
-	</div>
+    <tbody>
+      {% for i, c in enumerate(rec.consultations) %}
+        {% set dept= Department.find_by_id(session, c.dept_id) %}
+        {% set doc= Doctor.find_by_id(session, c.doctor_id) %}
 
-        <div class="half">
-	  <div class="myrow col_parent">
-            {% set dq = d.filter_by(id=c.doctor_id) %}
-            {% if dq.count() > 0 %}
-  	    <div class="tagcol">Doctor : </div>
-  	    <div class="valcol">
-              {% set doc = dq.one() %} 
-              {{ doc.name }} 
-  	    </div>
-      	    <br>
-      	    <div class="tagcol"> Department : </div>
-      	    <div class="valcol"> {{ doc.depts[0].name }} </div>
-            {% end %}
-	  </div>
-        </div>
-      </div>
-      <br/>
-<!--
-      <div class='fullcol'><tag>Comments: </tag> {{ c.notes }} </div>
--->
-    </div>
-  {% end %}
+        <tr>
+	  <td> {{ i }}    </td>
+	  <td> {{ c.date }} </td>
+	  <td> {{ dept.name }}  </td>
+	  <td> {{ doc.title + " " + doc.name }} </td>
+	  <td> {{ c.charge }} </td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table> <!-- #pat_visits-table -->
+
 </div>
 
 <hr/>
 
-{% end block %}
+{% end block %} <!-- block content -->
