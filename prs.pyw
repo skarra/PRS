@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sun Nov 18 10:48:49 IST 2012
+## Last Modified : Sun Dec 23 16:37:03 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -40,6 +40,7 @@ import   tornado.ioloop, tornado.web, tornado.options
 import   models, config
 from     sqlalchemy import and_
 from     sqlalchemy.types import Date
+from     sqlalchemy.ext.serializer import loads, dumps
 
 static_path = os.path.join(DIR_PATH, 'static')
 config_file = os.path.join(DIR_PATH, 'config.json')
@@ -108,6 +109,35 @@ class BaseHandler(tornado.web.RequestHandler):
                 "code": status_code,
                 "message": httplib.responses[status_code],
                 })
+
+class BackupHandler(BaseHandler):
+    def create (self):
+        basedir = self.get_argument('basedir', 'db')
+        bupdir  = self.get_argument('bupdir', 'backups')
+        bupdb   = self.get_argument('bupdb', 'dev')
+
+        d = os.path.join(os.path.abspath(basedir), bupdir)
+        if not os.path.exists(d):
+            print 'Directory ' + d + ' not there. Creating...'
+            os.makedirs(d)
+
+        tables = models.tables()
+        for table in tables:
+            q = session(env=bupdb).query(table)
+            serialized_data = dumps(q.all())
+            fn = os.path.join(d, table.__tablename__)
+            print '** Filename : ' , fn, ' ****************'
+            with open(fn, "w+b") as f:
+                f.write(serialized_data)
+
+    def get (self, op):
+        if op == 'create':
+            self.create()
+            print 'success'
+        elif op == 'restore':
+            self.restore()
+        else:
+            raise Exception('Unknown backup operation: %s' % op)
 
 class StatsHandler(BaseHandler):
     def post (self, what):
@@ -918,10 +948,10 @@ def engine (val=None):
     else:
         return _engine
 
-def session ():
-    if db_env() == production:
+def session (env=None):
+    if env == 'pdn' or db_env() == production:
         return sess_p
-    elif db == sample:
+    else:
         return sess_s
 
 application = tornado.web.Application([
@@ -943,6 +973,7 @@ application = tornado.web.Application([
     (r"/ajax/appstate", AjaxAppState),
 
     (r"/miscadmin/", MiscAdminHandler),
+    (r"/backup/(.*)", BackupHandler),
     (r"/stats/(.*)", StatsHandler),
 
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})

@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sun Nov 18 11:28:57 IST 2012
+// Last Modified : Wed Nov 21 20:30:36 IST 2012
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -372,6 +372,8 @@ function addHandlers_department_edit () {
     var d = 'dept_name_new_';
 
     dept_cnt = 2;
+
+    console.log('Registering a call back for the add another shit...');
 
     $("#dept_add_new").click(function() {
 	new_box1 = ' id="' + d + dept_cnt + '" name="' + d + dept_cnt + '"';

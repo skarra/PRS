@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Sat Nov 17 16:08:08 IST 2012
+## Last Modified : Mon Nov 19 07:11:10 IST 2012
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -300,3 +300,8 @@ def setup_tables (dbfile):
                                                   bind=engine))
 
     return engine, session
+
+def tables ():
+    """Returns an array of all the database tables used by the app."""
+
+    return [Patient, Doctor, Department, Shift, Slot, Consultation]
