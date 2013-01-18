@@ -29,7 +29,7 @@ You searched for: {{ search_query }}.
     {% for res in search_results %}
     <tr>
       <td> {{ res.id }}    </td>
-      <td> {{ res.active }} </td>
+      <td> {{ "Yes" if res.active else "No" }} </td>
       <td> {{ res.title }} </td>
       <td> {{ res.name }}  </td>
       <td> {{ res.email }} </td>
