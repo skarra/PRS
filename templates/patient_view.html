@@ -81,14 +81,11 @@
   <div class="hide-in-print">
     <h2>CMC Visit History: </h2>
   </div>
-  <div class="show-only-in-print">
-    <h2>Past Visits: </h2>
-  </div>
 
   <table id="pat_visits_table" class="display" name="pat_visits_table">
     <thead>
       <tr>
-	<th>S. No.</th>
+	<th class='hide-in-print'>S. No.</th>
 	<th>Date</th>
 	<th>Department</th>
 	<th>Consultant</th>
@@ -97,12 +94,16 @@
     </thead>
 
     <tbody>
+      {% set l = len(rec.consultations) %}
       {% for i, c in enumerate(rec.consultations) %}
         {% set dept= Department.find_by_id(session, c.dept_id) %}
         {% set doc= Doctor.find_by_id(session, c.doctor_id) %}
 
-        <tr>
-	  <td> {{ i }}    </td>
+         <!-- Only the latest visit details will be printed out -->
+         {% set cls = "hide-in-print" if i != l-1 else "" %}
+
+         <tr class='{{ cls }}'>
+	  <td class='hide-in-print'> {{ i }}    </td>
 	  <td> {{ c.date }} </td>
 	  <td> {{ dept.name }}  </td>
 	  <td> {{ doc.title + " " + doc.name }} </td>
