@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Mon Nov 19 07:11:10 IST 2012
+## Last Modified : Fri Jan 18 14:01:08 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -33,6 +33,9 @@ from   sqlalchemy.schema import Column, ForeignKey, Table
 from   sqlalchemy.ext.declarative import declarative_base
 
 Base   = declarative_base()
+days   = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+          'Friday', 'Saturday']
+shiftns = ['Morning', 'Afternoon']
 
 class MyT: 
     @classmethod
@@ -114,6 +117,26 @@ class Doctor(Base):
                                                  cascade="all"))
     # 'slots' through backref from Slot
     # 'depts' through backref from Department
+
+    def get_availability (self):
+        avail = {}
+        for day in days:
+            avail.update({day : {
+                'Morning Hours' : '-',
+                'Afternoon Hours' : '-',
+                }})
+
+        for slot in self.slots:
+            shift = '%s Hours' % slot.shift
+            times = '%s-%s' % (slot.start_time, slot.end_time)
+
+            if avail[slot.day][shift] != '-':
+                times = avail[slot.day][shift] + ', ' + times
+
+            avail[slot.day].update({ shift : times })
+
+        return avail
+
 
     @classmethod
     def sorted_doc_names_with_id (self, session):

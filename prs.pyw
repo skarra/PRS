@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sun Dec 23 16:37:03 IST 2012
+## Last Modified : Fri Jan 18 14:02:44 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -38,6 +38,8 @@ sys.path = EXTRA_PATHS + sys.path
 
 import   tornado.ioloop, tornado.web, tornado.options
 import   models, config
+from     models     import days    as days
+from     models     import shiftns as shiftns
 from     sqlalchemy import and_
 from     sqlalchemy.types import Date
 from     sqlalchemy.ext.serializer import loads, dumps
@@ -45,10 +47,6 @@ from     sqlalchemy.ext.serializer import loads, dumps
 static_path = os.path.join(DIR_PATH, 'static')
 config_file = os.path.join(DIR_PATH, 'config.json')
 config      = config.Config(config_file)
-
-days   = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-          'Friday', 'Saturday']
-shiftns = ['Morning', 'Afternoon']
 
 settings = {'debug': True,
             'static_path': os.path.join(DIR_PATH, 'static')}
@@ -363,24 +361,6 @@ class AjaxDoctorDetails(BaseHandler):
         q = session().query(models.Doctor)
         rec = q.filter_by(id=docid).first()
 
-        avail = {}
-
-        # FIXME: The code block below is repeated more or less verbatim in
-        # another routine... Can be refactored.
-        for slot in rec.slots:
-            h = '%s-%s' % (slot.start_time, slot.end_time)
-            if slot.day in avail:
-                if slot.shift in avail[slot.day]:
-                    oldh = avail[slot.day][slot.shift] + ', '
-                else:
-                    oldh = ''
-
-                avail[slot.day].update({slot.shift : (oldh + h)})
-            else:
-                avail.update({slot.day : {
-                    slot.shift : h
-                    }})
-
         if rec:
             ret.update({'name'    : rec.name,
                         'active'  : rec.active,
@@ -391,7 +371,7 @@ class AjaxDoctorDetails(BaseHandler):
                         'fee'     : rec.fee,
                         'email'   : rec.email,
                         'address' : rec.address,
-                        'avail'   : avail,
+                        'avail'   : rec.get_availability(),
                         'depts'   : [d.name for d in rec.depts],
                         })
 
@@ -534,24 +514,8 @@ class ViewHandler(BaseHandler):
                           field)
             self.redirect('/')
 
-        avail = {}
-        for day in days:
-            avail.update({day : {
-                'Morning Hours' : '-',
-                'Afternoon Hours' : '-',
-                }})
-
-        for slot in rec.slots:
-            shift = '%s Hours' % slot.shift
-            times = '%s-%s' % (slot.start_time, slot.end_time)
-
-            if avail[slot.day][shift] != '-':
-                times = avail[slot.day][shift] + ', ' + times
-
-            avail[slot.day].update({ shift : times })
-
         self.render('doctor_view.html', title=config.get_title(),
-                    rec=rec, days=days, avail=avail)
+                    rec=rec, days=days, avail=rec.get_availability())
 
     def view_patient (self, field, value):
         q = session().query(models.Patient)
