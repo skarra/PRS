@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Jan 18 14:01:08 IST 2013
+## Last Modified : Fri Jan 18 22:07:18 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -122,12 +122,12 @@ class Doctor(Base):
         avail = {}
         for day in days:
             avail.update({day : {
-                'Morning Hours' : '-',
-                'Afternoon Hours' : '-',
+                'Morning' : '-',
+                'Afternoon' : '-',
                 }})
 
         for slot in self.slots:
-            shift = '%s Hours' % slot.shift
+            shift = '%s' % slot.shift
             times = '%s-%s' % (slot.start_time, slot.end_time)
 
             if avail[slot.day][shift] != '-':

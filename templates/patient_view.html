@@ -126,7 +126,7 @@
    </thead>
   
     <tbody class="smaller">
-      {% for shift in [x + ' Hours' for x in shiftns] %}
+      {% for shift in shiftns %}
 	<tr>
   	  <td> {{ shift }}  </td>
   	  {% for day in days %}

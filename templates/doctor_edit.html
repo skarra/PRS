@@ -40,8 +40,12 @@ $(function() {
               res = val.match(/(\d\d:\d\d)-(\d\d:\d\d)/);
               var tagf = "#newd_" + day + "_" + shift + "_from";
               var tagt = "#newd_" + day + "_" + shift + "_to";
-              $(tagf).val(res[1]);
-              $(tagt).val(res[2]);
+              try {
+                  $(tagf).val(res[1]);
+                  $(tagt).val(res[2]);
+              } catch (e) {
+                  console.log('Exception trying to set the doctor timings: ' + e);
+              }
           }
         }
     });

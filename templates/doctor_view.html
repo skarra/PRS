@@ -6,8 +6,8 @@ template:
   * rec  - the doctor object whose availability we are viewing now
   * days - array of strings of day names
   * avail - a hash indexed by day containing following fields:
-    * Morning Hours: operating hrs in the morning for that day as a string
-    * Afternoon Hours: operating hours afternoon for that day as a string 
+    * Morning: operating hrs in the morning for that day as a string
+    * Afternoon: operating hours afternoon for that day as a string 
 -->
 
 {% block styles %}
@@ -106,7 +106,7 @@ template:
    </thead>
   
     <tbody>
-      {% for shift in ['Morning Hours', 'Afternoon Hours'] %}
+      {% for shift in ['Morning', 'Afternoon'] %}
 	<tr>
   	  <td> {{ shift }}  </td>
   	  {% for day in days %}
