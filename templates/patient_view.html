@@ -112,7 +112,30 @@
       {% end %}
     </tbody>
   </table> <!-- #pat_visits-table -->
+</div>
 
+<p/>
+<div id="doc_availability" class="show-only-in-print">
+<!--  The patient would like to have the data avaialble in the print out -->
+  <table id="doc_avail_table" class="display">
+    <thead>
+      <th> Shift </th>
+      {% for day in days %}
+        <th> {{ day }} </th>
+      {% end %}
+   </thead>
+  
+    <tbody class="smaller">
+      {% for shift in [x + ' Hours' for x in shiftns] %}
+	<tr>
+  	  <td> {{ shift }}  </td>
+  	  {% for day in days %}
+    	    <td> {{ avail[day][shift] }} </td>
+  	  {% end %}
+	</tr>
+      {% end %}
+    </tbody>
+  </table>
 </div>
 
 <hr/>

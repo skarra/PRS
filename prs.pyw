@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jan 18 14:02:44 IST 2013
+## Last Modified : Fri Jan 18 14:16:18 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -528,9 +528,12 @@ class ViewHandler(BaseHandler):
                           field)
             self.redirect('/')
 
+        ldoc = models.Doctor.find_by_id(session, rec.consultations[-1].doctor_id)
+
         self.render('patient_view.html', title=config.get_title(),
                     rec=rec, d=session().query(models.Doctor),
-                    session=session)
+                    session=session, avail=ldoc.get_availability(),
+                    days=days, shiftns=shiftns)
 
     def get (self, role, field, value):
         """role is one of 'patient' or 'doctor', field will be one of Name or

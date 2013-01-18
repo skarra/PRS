@@ -1036,3 +1036,7 @@ tag {
 .red {
     color: red;
 }
+
+.smaller {
+    font-size: 80%;
+}

@@ -22,6 +22,9 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
 #sheet {
     width: 100%;
     float: none;
+
+    line-height: 1;
+
     border: none;
     border-bottom: none;
     margin: 0;
@@ -31,11 +34,10 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
     -ms-border-radius: 0px;
     -khtml-border-radius: 0px;
 
-    border-radius: 0px;
-    -moz-box-shadow: 0;
-    -webkit-box-shadow: 0;
-    -o-box-shadow: 0;
-    box-shadow: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
 }
 
 .hide-in-print {
@@ -44,4 +46,8 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
 
 .show-only-in-print {
     display: block;
+}
+
+#sheet .section {
+    padding: 0px;
 }
