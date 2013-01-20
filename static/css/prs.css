@@ -154,6 +154,7 @@ body, select, input, textarea {
 h1 {
   font-size: 175%;
   color: #df5e0e;
+  display: inline;
 }
 
 h2 {
