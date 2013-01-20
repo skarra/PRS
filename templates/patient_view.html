@@ -10,7 +10,7 @@
 
 {% block content %}
 
-<div id="head_cmc">
+<div id="head_cmc" class="show-only-in-print">
   <span class="name1"> Major Gen. B. N. Bhandari Charitable Medical Clinic 
   </span> <br/>
   <span class="name2"> Servants of the People Society </span> <br/>
@@ -22,31 +22,31 @@
 {% from models import Doctor %}
 {% from models import Department %}
 
+<div class="nav hide-in-print">
+  <div id="info">
+    <div id="print_pat_lab" class="navElem">Print</div>
+    <div id="edit_pat_lab" class="navElem">Edit </div>
+    <div id="visit_pat_lab" class="navElem">New Visit</div>
+  </div>
+</div>
+
 <div id="head_info">
   <div id="head">
     <h1> {{ rec.name }} </h1>
+    <span>
     {{ rec.gender }}, {{ rec.age }} Yrs.<br/>
+    </span>
  </div>
 
-  <div id="info">
-    <div id="print_pat_lab" class="pat_label">Print</div>
-    <div id="edit_pat_lab" class="pat_label">Edit </div>
-    <div id="visit_pat_lab" class="pat_label">New Visit</div>
-  </div>
+ <div class="rt">
+   <tag> Regn Date : </tag>
+   {{ rec.regdate.strftime("%Y/%m/%d") }} 
+     <tag> ID : </tag> {{ rec.id }}
+ </div>
 </div> <!-- #head_info -->
-
-<br/>
 
 <div id="contact_info">
   <div class="half">
-
-    <div class="myrow col_parent">
-      <div class="tagcol"> Regn Date : </div>
-      <div class="valcol"> {{ rec.regdate.strftime("%Y/%m/%d") }} 
-	<tag> ID : </tag> {{ rec.id }}
-      </div>
-    </div>
-
     <div class="myrow col_parent">
       <div class="tagcol"> Phone :</div>
       <div class="valcol"> {{ rec.phone }} </div>
@@ -56,24 +56,40 @@
       <div class="tagcol"> Address : </div>
       <div class="valcol"> {{ rec.address }} </div>
     </div>
-  </div> <!-- .half -->
 
-  <div class="half">
     <div class="myrow col_parent">
-      <div class="tagcol"> Contact : </div>
-      <div class="valcol"> {{ rec.relative }} </div>
+      <div class="tagcol"> Contact Person : </div>
+      <div class="valcol"> {{ rec.relative }} ({{ rec.relative_relation }})</div>
     </div>
 
     <div class="myrow col_parent">
-      <div class="tagcol"> Relation :</div>
-      <div class="valcol"> {{ rec.relative_relation }} </div>
-    </div>
-
-    <div class="myrow col_parent">
-      <div class="tagcol"> Phone :</div> 
+      <div class="tagcol"> Number :</div> 
       <div class="valcol"> {{ rec.relative_phone }} </div>
     </div>
-  </div>
+  </div> <!-- .half -->
+
+  <div class="half show-only-in-print">
+    {% set dept = Department.find_by_id(session, lvisit.dept_id) %}
+    <div class="myrow col_parent">
+      <div class="tagcol"> Visit Date :</div> 
+      <div class="valcol"> {{ lvisit.date }} </div>
+    </div>
+
+    <div class="myrow col_parent">
+      <div class="tagcol"> Department :</div> 
+      <div class="valcol"> {{ dept.name }} </div>
+    </div>
+
+    <div class="myrow col_parent">
+      <div class="tagcol"> Doctor :</div> 
+      <div class="valcol"> {{ ldoc.title + " " + ldoc.name }} </div>
+    </div>
+
+    <div class="myrow col_parent">
+      <div class="tagcol"> Availability :</div> 
+      <div class="valcol"> {{ ldoc.get_availability_pretty() }} </div>
+    </div>
+ </div>
 </div> <!-- #contact_info -->
 
 <p/>
@@ -82,10 +98,11 @@
     <h2>CMC Visit History: </h2>
   </div>
 
-  <table id="pat_visits_table" class="display" name="pat_visits_table">
+  <table id="pat_visits_table" class="display hide-in-print" 
+	 name="pat_visits_table">
     <thead>
       <tr>
-	<th class='hide-in-print'>S. No.</th>
+	<th>S. No.</th>
 	<th>Date</th>
 	<th>Department</th>
 	<th>Consultant</th>
@@ -114,9 +131,12 @@
   </table> <!-- #pat_visits-table -->
 </div>
 
+<!-- The following code prints the availability table in a neat format. But
+in the interest of space this is being commented out, and the table is printed
+in a far more compressed format at the top itself. The following code results
+in a far more usable systm, but oh well.
 <p/>
 <div id="doc_availability" class="show-only-in-print">
-<!--  The patient would like to have the data avaialble in the print out -->
   <table id="doc_avail_table" class="display">
     <thead>
       <th> Shift </th>
@@ -127,17 +147,17 @@
   
     <tbody class="smaller">
       {% for shift in shiftns %}
-	<tr>
-  	  <td> {{ shift }}  </td>
-  	  {% for day in days %}
-    	    <td> {{ avail[day][shift] }} </td>
-  	  {% end %}
-	</tr>
+       <tr>
+         <td> {{ shift }}  </td>
+         {% for day in days %}
+           <td> {{ avail[day][shift] }} </td>
+         {% end %}
+       </tr>
       {% end %}
     </tbody>
   </table>
 </div>
-
+-->
 <hr/>
 
 {% end block %} <!-- block content -->

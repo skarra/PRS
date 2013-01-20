@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Jan 18 22:07:18 IST 2013
+## Last Modified : Sun Jan 20 22:44:50 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -119,6 +119,9 @@ class Doctor(Base):
     # 'depts' through backref from Department
 
     def get_availability (self):
+        """REturns the present doctor's consulting hours in as much detail as
+        available. The format is a dictionary with the name of day as key."""
+
         avail = {}
         for day in days:
             avail.update({day : {
@@ -137,6 +140,33 @@ class Doctor(Base):
 
         return avail
 
+    def get_availability_pretty (self):
+        """Get the current doctor's availability as a compressed string that
+        can be easily printed out on a single line (if possible)."""
+
+        day_map = {"Monday"    : 0,
+                   "Tuesday"   : 1,
+                   "Wednesday" : 2,
+                   "Thursday"  : 3,
+                   "Friday"    : 4,
+                   "Saturday"  : 5,
+                   "Sunday"    : 6,
+                   }
+        days = ['M', 'T', 'W', 'Th', 'F', 'Sa', 'Su']
+        avail = {}
+
+        for slot in self.slots:
+            times = '%s-%s' % (slot.start_time, slot.end_time)
+            if times in avail:
+                avail[times].append(day_map[slot.day])
+            else:
+                avail[times] = [day_map[slot.day]]
+
+        ret = []
+        for k, v in avail.iteritems():
+            ret.append(','.join([days[x] for x in sorted(v)]) + ": " + k)
+
+        return ';'.join(ret)
 
     @classmethod
     def sorted_doc_names_with_id (self, session):

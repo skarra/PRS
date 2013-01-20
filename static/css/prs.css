@@ -737,7 +737,7 @@ div.twocols h {
 .tagcol {
     text-align: right;
     font-weight: bold;
-    font-size: 110%;
+    padding-top: 2.5px;
 }
 
 .valcol {
@@ -1020,6 +1020,42 @@ tag {
     padding: 0px;
 }
 
+.navElem {
+    padding-right: 20px;
+    position: center;
+    text-decoration: none;
+    margin-top: 0.5em; 
+    vertical-align: baseline;
+    background: transparent;
+    color: #888888;
+    display: inline;
+}
+
+.navElem:hover {
+    color: blue;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.nav {
+    font-size: 105%;
+    line-height: 1.5;
+
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    background-color: #fcfce1;
+    border-color: #fc0;
+    border-top-color: #fc0;
+    border-bottom-color: #fc0;
+
+    padding: 10px 20px;
+    margin: 20px 0px;
+}
+
+/*
+ * Generic stuff
+ */
+
 .relative {
     float: right;
     position: relative;
@@ -1040,3 +1076,4 @@ tag {
 .smaller {
     font-size: 80%;
 }
+
