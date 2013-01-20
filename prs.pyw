@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jan 18 14:16:18 IST 2013
+## Last Modified : Sun Jan 20 10:17:25 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -138,9 +138,9 @@ class BackupHandler(BaseHandler):
             raise Exception('Unknown backup operation: %s' % op)
 
 class StatsHandler(BaseHandler):
-    def post (self, what):
-        inp_from = self.get_argument('vs_from', None)
-        inp_to   = self.get_argument('vs_to',   None)
+    def get (self, what):
+        inp_from = self.get_argument('vs_from', models.MyT.today_uk())
+        inp_to   = self.get_argument('vs_to',   models.MyT.today_uk())
 
         from_d = models.MyT.date_from_uk(inp_from)
         to_d   = models.MyT.date_from_uk(inp_to)
@@ -214,12 +214,6 @@ class StatsHandler(BaseHandler):
         self.render('visit_stats.html', title=config.get_title(),
                     depts=depts, docs=docs, summary=summary)
 
-    def get (self, what):
-        if what == 'visits':
-            depts = models.Department.sorted_dept_names_with_id(session)
-            docs  = models.Doctor.sorted_doc_names_with_id(session)
-            self.render('visit_stats.html', title=config.get_title(),
-                        depts=depts, docs=docs, summary=None)
 
 class MiscAdminHandler(BaseHandler):
     def edit_depts (self):

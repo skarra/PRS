@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Nov 21 20:30:36 IST 2012
+// Last Modified : Fri Jan 18 14:45:48 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -632,8 +632,8 @@ function validateVisitStatsSubmit () {
 	msg += 'To date cannot be empty.\n';
     }
 
-    if (msg == '' && (from == to)) {
-	msg += 'From has to be an earlier date than .\n';
+    if (msg == '' && (from > to)) {
+	msg += 'From has to be an earlier than or same as To date.\n';
     }
 
     // FIXME: Dates need to be validated. The following does not work.
