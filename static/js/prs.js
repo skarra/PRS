@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Fri Jan 18 14:45:48 IST 2013
+// Last Modified : Mon Jan 21 12:24:07 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -23,6 +23,8 @@ var pat_srp_table;
 var doc_srp_table;
 var pat_visits_table;
 var newv_doc_table;
+var last_docid = null;
+var last_deptn = null;
 
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
             'Friday', 'Saturday'];
@@ -178,13 +180,13 @@ function refreshVisitDocTable () {
 }
 
 /* Get the rows which are currently selected */
-function fnGetSelected (oTableLocal) {
+function fnGetSelected (oTableLocal, col) {
     var aReturn = new Array();
     var aTrs = oTableLocal.fnGetNodes();
 
     for ( var i=0 ; i<aTrs.length ; i++ ) {
 	if ( $(aTrs[i]).hasClass('row_selected')) {
-	    return oTableLocal.fnGetData(aTrs[i], 0);
+	    return oTableLocal.fnGetData(aTrs[i], col);
 	}
     }
 
@@ -194,7 +196,7 @@ function fnGetSelected (oTableLocal) {
 function validateNewVisitForm () {
     // Validate the selections and POST a message to the server
     var dept  = $("#newv_dept_list").val();
-    var docid = fnGetSelected(newv_doc_table);
+    var docid = fnGetSelected(newv_doc_table, 0);
     var msg   = "";
 
     if (docid == null) {
@@ -219,7 +221,7 @@ function newvRowSelected (event) {
     });
 
     $(event.target.parentNode).addClass('row_selected');
-    var docid = fnGetSelected(newv_doc_table);
+    var docid = fnGetSelected(newv_doc_table, 0);
     $("#newv_docid_hack").val(docid);
 
     // We have to fetch the default consultation charge of the doctor
@@ -666,6 +668,64 @@ function addHandlers_visit_stats () {
     $("#vs_form").submit(validateVisitStatsSubmit);
 }
 
+//
+// Handlers for the stuff in patient_view.html
+//
+
+function newpvRowSelected (event) {
+    $(pat_visits_table.fnSettings().aoData).each(function () {
+	$(this.nTr).removeClass('row_selected');
+    });
+
+    $(event.target.parentNode).addClass('row_selected');
+    last_docid = fnGetSelected(pat_visits_table, 4);
+    last_deptn = fnGetSelected(pat_visits_table, 1);
+}
+
+function addHandlers_patient_view () {
+    pat_visits_table = $("#pat_visits_table").dataTable({
+	"bFilter": false,
+	"bInfo": false,
+	"bPaginate": false,
+	"bSort" : false,
+	"aoColumns": [
+            { "sClass": "left" },
+            { "sClass": "left" },
+            { "sClass": "left" },
+            { "sClass": "right" },
+            { "sClass": "right" }
+	    ,],
+    });
+
+    $("#pat_visits_table tbody").click(newpvRowSelected);
+
+    $("#edit_pat_lab").click(function() {
+	var url = window.location.pathname;
+	var edit_url = url.replace('/view/', '/edit/');
+	console.log('Redirecting to: ' + edit_url);
+	window.location = edit_url;
+    });
+
+    $("#print_pat_lab").click(function() {
+	window.print();
+    });
+
+    $("#visit_pat_lab").click(function() {
+	var url = window.location.pathname;
+	var patid = url.match(/\/(\d+)$/)[1];
+	console.log("matched patid: " + patid);
+	var edit_url = "/new/visit?patid=" + patid;
+	if (last_docid) {
+	    edit_url += '&last_docid=' + last_docid;
+	}
+	if (last_deptn) {
+	    edit_url += '&last_deptn=' + last_deptn;
+	}
+	console.log('Redirecting to: ' + edit_url);
+	window.location = edit_url;
+    });
+}
+
 function addHandlers () {
     console.log('addFormHandlers...');
 
@@ -720,41 +780,6 @@ function addHandlers () {
 	}
     });
 
-    // The following only applies to the patient_view.html, but it is still
-    // desirable to have all the javascipt centralized here (??)...
-    pat_visits_table = $("#pat_visits_table").dataTable({
-	"bFilter": false,
-	"bInfo": false,
-	"bPaginate": false,
-	"bSort" : false,
-	"aoColumns": [
-            { "sClass": "center" },
-            { "sClass": "left" },
-            { "sClass": "left" },
-            { "sClass": "left" },
-            { "sClass": "right" },],
-    });
-
-    $("#edit_pat_lab").click(function() {
-	var url = window.location.pathname;
-	var edit_url = url.replace('/view/', '/edit/');
-	console.log('Redirecting to: ' + edit_url);
-	window.location = edit_url;
-    });
-
-    $("#print_pat_lab").click(function() {
-	window.print();
-    });
-
-    $("#visit_pat_lab").click(function() {
-	var url = window.location.pathname;
-	var patid = url.match(/\/(\d+)$/)[1];
-	console.log("matched patid: " + patid);
-	var edit_url = "/new/visit?patid=" + patid;
-	console.log('Redirecting to: ' + edit_url);
-	window.location = edit_url;
-    });
-
     $("#new_patient_form").submit(validateNewPatient);
 
     addHandlers_new_visit();
@@ -763,6 +788,7 @@ function addHandlers () {
     addHandlers_doctor_edit();
     addHandlers_misc_menu()
     addHandlers_visit_stats();
+    addHandlers_patient_view();
 
     addTextFilters();
 }

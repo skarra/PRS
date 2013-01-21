@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sun Jan 20 22:16:55 IST 2013
+## Last Modified : Mon Jan 21 12:24:54 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -879,15 +879,15 @@ class NewVisitHandler(BaseHandler):
             rec = q.filter_by(name=patname).first()
             patid = rec.id
 
-        numc = len(rec.consultations)
-        print numc
-        if numc > 0:
-            lv = rec.consultations[numc-1]
-            last_docid = lv.doctor_id
-            last_deptn = models.Department.name_from_id(session, lv.dept_id)
-        else:
-            last_docid = None
-            last_deptn = None        
+        last_docid = self.get_argument('last_docid', None)
+        last_deptn = self.get_argument('last_deptn', None)
+        if not last_docid or not last_deptn:
+            numc = len(rec.consultations)
+            print numc
+            if numc > 0:
+                lv = rec.consultations[numc-1]
+                last_docid = lv.doctor_id
+                last_deptn = models.Department.name_from_id(session, lv.dept_id)
 
         depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')

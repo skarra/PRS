@@ -106,6 +106,7 @@
 	<th>Department</th>
 	<th>Consultant</th>
 	<th>Charge</th>
+	<th class='hidden'>Docid</th>
       </tr>
     </thead>
 
@@ -123,6 +124,7 @@
 	   <td> {{ dept.name }}  </td>
 	   <td> {{ doc.title + " " + doc.name }} </td>
 	   <td> {{ c.charge }} </td>
+	   <td class='hidden'> {{ c.doctor_id }} </td>
          </tr>
       {% end %}
     </tbody>
