@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jan 23 12:15:17 IST 2013
+// Last Modified : Wed Jan 23 12:32:04 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -428,6 +428,8 @@ function exit () {
 	  });
 }
 
+var mainDialogCB;
+
 function setUpExitHandlerDialog () {
     $("#main-dialog").dialog({
 	autoOpen: false,
@@ -438,7 +440,7 @@ function setUpExitHandlerDialog () {
 	buttons: {
 	    "Yes, I know what I am doing": function() {
 		$(this).dialog("close");
-		exit();
+		mainDialogCB();
 	    },
 	    Cancel: function() {
 		$(this).dialog("close");
@@ -449,8 +451,18 @@ function setUpExitHandlerDialog () {
 
 function handleExit () {
     $("#main-dialog-text").text("You will exit the System. Are you sure?");
+    mainDialogCB = exit;
     $("#main-dialog").dialog("open");
 }
+
+function handleSwitchDB () {
+    $("#main-dialog-text").text("Are you sure you want to change the database?");
+    mainDialogCB = function () {
+	$("#misc_admin").submit();
+    }
+    $("#main-dialog").dialog("open");
+}
+
 
 function addHandlers_misc_menu () {
     // Set up the elements of the drop down "Misc Menu"
@@ -462,6 +474,8 @@ function addHandlers_misc_menu () {
 	var val = $("#misc_admin_s").val();
 	if (val == 'mas_exit') {
 	    handleExit(val);
+	} else if (val == 'mas_db') {
+	    handleSwitchDB();
 	} else {
 	    $("#misc_admin").submit();
 	}
