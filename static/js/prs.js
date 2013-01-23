@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jan 23 12:01:23 IST 2013
+// Last Modified : Wed Jan 23 12:15:17 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -429,14 +429,14 @@ function exit () {
 }
 
 function setUpExitHandlerDialog () {
-    $("#exit-dialog-confirm" ).dialog({
+    $("#main-dialog").dialog({
 	autoOpen: false,
 	resizable: false,
 	height: 160,
 	width: 500,
 	modal: true,
 	buttons: {
-	    "Yes, I want to Exit": function() {
+	    "Yes, I know what I am doing": function() {
 		$(this).dialog("close");
 		exit();
 	    },
@@ -448,7 +448,8 @@ function setUpExitHandlerDialog () {
 }
 
 function handleExit () {
-    $("#exit-dialog-confirm").dialog("open");
+    $("#main-dialog-text").text("You will exit the System. Are you sure?");
+    $("#main-dialog").dialog("open");
 }
 
 function addHandlers_misc_menu () {
