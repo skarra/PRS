@@ -318,7 +318,7 @@ body {
 header {
   *zoom: 1;
   padding: 10px 20px;
-/*  background: url('/static/img/paper.jpg?884184256'); */
+  background: url('/static/img/paper.jpg?884184256');
   border-bottom: 1px solid #afafaf;
   -moz-box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: -5px 1px 5px rgsba(0, 0, 0, 0.4);
@@ -1065,6 +1065,10 @@ tag {
     float: right;
 }
 
+.taCenter {
+    text-align: center;
+}
+
 .rl {
     float: relative;
 }
@@ -1077,3 +1081,26 @@ tag {
     font-size: 80%;
 }
 
+.mla {
+    margin-left: auto;
+}
+
+.mra {
+    margin-right: auto;
+}
+
+.maxWidth {
+    width: 100%;
+}
+
+@-webkit-keyframes blink {  
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+
+blink {
+  -webkit-animation-name: blink;  
+  -webkit-animation-iteration-count: infinite;  
+  -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  -webkit-animation-duration: 1s; 
+}

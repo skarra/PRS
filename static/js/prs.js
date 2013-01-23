@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Mon Jan 21 12:24:07 IST 2013
+// Last Modified : Wed Jan 23 08:51:03 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -391,23 +391,18 @@ function addHandlers_db_toggle () {
     // production database.
 
     $.getJSON("/ajax/appstate", function(data) {
-	var msg, url, color;
+	var msg, disp;
 	if (data['config']['trial_db']) {
 	    if (data['environment_is_demo']) {
 		msg = 'Switch to Production DB';
-		url = 'bkg.png?881083570';
-		color = 'beige';
+		disp = 'block';
 	    } else {
 		msg = 'Switch to Demo DB';
-		url = 'paper.jpg?884184256';
-		color = '#666666';
+		disp = 'none';
 	    }
 
-	    url = 'url("/static/img/' + url + '")';
-	    console.log('url: ' + url);
-	    $("header").css('background-image', url);
-	    $("#site-title").css('color', color);
 	    $("#site-title:hover").css('color', 'blue');
+	    $("#demo_db_warn").css('display', disp);
 	    $("#mas_db").text(msg);
 	} else {
 	    $("#mas_db").remove();
