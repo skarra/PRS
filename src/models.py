@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Sun Jan 20 22:44:50 IST 2013
+## Last Modified : Wed Jan 23 22:39:28 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -36,6 +36,7 @@ Base   = declarative_base()
 days   = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
           'Friday', 'Saturday']
 shiftns = ['Morning', 'Afternoon']
+
 
 class MyT: 
     @classmethod
@@ -105,7 +106,8 @@ class Doctor(Base):
     title   = Column(Unicode(5), default=u"Dr. ")
     name    = Column(Unicode(255), nullable=False)
     regdate = Column(Date(), default=MyT.today())
-    fee     = Column(Integer, default=0)   # Default per-consultation fee
+    fee_newp = Column(Integer, default=0)     # Fee per visit for new patients
+    fee_oldp = Column(Integer, default=0)     # Fee per visit for old patients
     quals   = Column(Text())               # qualifications
 
     phone   = Column(Unicode(255))
