@@ -1056,6 +1056,10 @@ tag {
  * Generic stuff
  */
 
+.bl {
+    display: block;
+}
+
 .relative {
     float: right;
     position: relative;

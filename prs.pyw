@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Mon Jan 21 12:24:54 IST 2013
+## Last Modified : Wed Jan 23 23:05:14 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -362,7 +362,8 @@ class AjaxDoctorDetails(BaseHandler):
                         'quals'   : rec.quals,
                         'regdate' : rec.regdate.isoformat(),
                         'phone'   : rec.phone,
-                        'fee'     : rec.fee,
+                        'fee_newp': rec.fee_newp,
+                        'fee_oldp': rec.fee_oldp,
                         'email'   : rec.email,
                         'address' : rec.address,
                         'avail'   : rec.get_availability(),
@@ -675,10 +676,11 @@ class DoctorHandler(BaseHandler):
 
         if not doc:
             doc = models.Doctor(name    = ga("new_name", ''),
-                                active  = ga("new_active", True),
+                                active  = True if ga("new_active", None) == 'active' else False,
                                 title   = ga("new_title", ''),
                                 regdate = da,
-                                fee     = ga('new_rfee', 0),
+                                fee_newp = ga('new_rfee_n', 0),
+                                fee_oldp = ga('new_rfee_o', 0),
                                 quals   = ga('new_quals', ''),
                                 phone   = ga('new_ph', ''),
                                 address = ga('new_addr', ''),
@@ -688,7 +690,8 @@ class DoctorHandler(BaseHandler):
             doc.active  = True if ga("new_active", None) == 'active' else False
             doc.title   = ga("new_title", '')
             doc.regdate = da
-            doc.fee     = ga('new_rfee', 0)
+            doc.fee_newp = ga('new_rfee_n', 0)
+            doc.fee_oldp = ga('new_rfee_o', 0)
             doc.quals   = ga('new_quals', '')
             doc.phone   = ga('new_ph', '')
             doc.address = ga('new_addr', '')

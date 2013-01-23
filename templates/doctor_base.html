@@ -31,7 +31,7 @@
 {% block content %}
 
 <form id="new_doctor_form" class="col_parent" method="POST">
-  <h1>
+  <h1 class="bl">
     {% block formheader %}
     {% end block %}
   </h1>
@@ -61,12 +61,17 @@
     </div>
 
     <div id="newd_regd_fee" class="col_parent">
-      <div class="twocols">
-	<label>Consultation Fee </label>
-	<input class="date" type="text" id="new_rfee" name="new_rfee"
+      <div class="third">
+	<label>Fee (New Visit)</label>
+	<input class="date" type="text" id="new_rfee_n" name="new_rfee_n"
 	       data-allowed-chars="0123456789"/>
       </div>
-      <div class="twocols">
+      <div class="third">
+	<label>Fee (Revisit)</label>
+	<input class="date" type="text" id="new_rfee_o" name="new_rfee_o"
+	       data-allowed-chars="0123456789"/>
+      </div>
+      <div class="third">
 	<label>Regn. Date </label>
 	<input class="date date-field" type="text" id="new_rdate" 
 	       name="new_rdate"/>

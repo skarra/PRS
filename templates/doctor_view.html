@@ -59,8 +59,10 @@ template:
       </div>
   
       <div class="myrow col_parent">
-        <div class="tagcol"> Fee per Visit : </div>
-        <div class="valcol"> Rs. {{ rec.fee }} </div>
+        <div class="tagcol"> Consultation Fee : </div>
+        <div class="valcol">
+	  First Visit: <b> Rs. {{ rec.fee_newp }}. </b>
+	  Revisit: <b> Rs. {{ rec.fee_oldp }} </b> </div>
       </div>
 
       <div class="myrow col_parent">
