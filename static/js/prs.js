@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jan 23 08:51:03 IST 2013
+// Last Modified : Wed Jan 23 12:01:23 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -442,7 +442,6 @@ function setUpExitHandlerDialog () {
 	    },
 	    Cancel: function() {
 		$(this).dialog("close");
-		window.location = '/';
 	    }
 	}
     });
