@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Nov 17 16:12:45 IST 2012
+## Last Modified : Wed Jan 23 22:41:23 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -158,7 +158,8 @@ def add_doctor_names (session, doctors_file):
             doc = models.Doctor(title='Dr.',
                                 active=random.choice([True, False]),
                                 name=line,
-                                fee=random.choice([0, 20, 30, 150]),
+                                fee_newp=random.choice([0, 20, 30, 50]),
+                                fee_oldp=random.choice([0, 20, 30, 50]),
                                 quals=quals,
                                 phone=str(random.randint(ph_lower, ph_upper)),
                                 email=n + '@mentalasylum.in')
