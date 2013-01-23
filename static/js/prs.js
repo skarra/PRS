@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jan 23 12:32:04 IST 2013
+// Last Modified : Wed Jan 23 23:10:48 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -229,7 +229,7 @@ function newvRowSelected (event) {
     // any manual entry the user might have made before this
 
     $.getJSON("/ajax/doctor/id/"+docid, function(data) {
-	$("#newv_charge").val(data.fee);
+	$("#newv_charge").val(data.fee_oldp);
     });
 }
 
