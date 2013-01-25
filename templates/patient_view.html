@@ -69,6 +69,7 @@
   </div> <!-- .half -->
 
   <div class="half show-only-in-print">
+    {% if lvisit %}
     {% set dept = Department.find_by_id(session, lvisit.dept_id) %}
     <div class="myrow col_parent">
       <div class="tagcol"> Visit S.No :</div> 
@@ -89,7 +90,8 @@
       <div class="tagcol"> Availability :</div> 
       <div class="valcol"> {{ ldoc.get_availability_pretty() }} </div>
     </div>
- </div>
+    {% end %}
+  </div>
 </div> <!-- #contact_info -->
 
 <p/>
@@ -150,7 +152,7 @@ in a far more usable systm, but oh well.
        <tr>
          <td> {{ shift }}  </td>
          {% for day in days %}
-           <td> {{ avail[day][shift] }} </td>
+           <td> { avail[day][shift] } </td>
          {% end %}
        </tr>
       {% end %}

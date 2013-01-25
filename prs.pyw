@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jan 25 18:53:57 IST 2013
+## Last Modified : Fri Jan 25 23:41:27 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -523,13 +523,18 @@ class ViewHandler(BaseHandler):
                           field)
             self.redirect('/')
 
-        lvisit = rec.consultations[-1]
-        ldoc = models.Doctor.find_by_id(session, lvisit.doctor_id)
+        if len(rec.consultations) > 0:
+            lvisit = rec.consultations[-1]
+            ldoc = models.Doctor.find_by_id(session, lvisit.doctor_id)
+            avail = ldoc.get_availability()
+        else:
+            lvisit = None
+            ldoc   = None
+            avail  = None
 
         self.render('patient_view.html', title=config.get_title(),
                     rec=rec, d=session().query(models.Doctor),
-                    session=session, avail=ldoc.get_availability(),
-                    lvisit=lvisit,
+                    session=session, avail=avail, lvisit=lvisit,
                     days=days, shiftns=shiftns, ldoc=ldoc)
 
     def get (self, role, field, value):
