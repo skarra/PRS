@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Wed Jan 23 22:39:28 IST 2013
+## Last Modified : Fri Jan 25 18:51:45 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -26,9 +26,10 @@
 import datetime, logging, re
 
 from   sqlalchemy        import orm, create_engine
-from   sqlalchemy.orm    import relationship, backref
+from   sqlalchemy.orm    import relationship, backref, column_property
 from   sqlalchemy.types  import Integer, Boolean, Date, Text, Unicode
 from   sqlalchemy.schema import Column, ForeignKey, Table
+from   sqlalchemy.ext.hybrid import hybrid_property
 
 from   sqlalchemy.ext.declarative import declarative_base
 
@@ -332,7 +333,12 @@ class Consultation(Base):
     charge     = Column(Integer, default=0)
     notes      = Column(Text())
 
+    @hybrid_property
+    def cid (self):
+        return '%s/%05d' % (self.date, self.id)
+
     ## backrefs from patient and doctor
+
 
 def setup_tables (dbfile):
     """dbfile has to be relative to APP ROOT"""

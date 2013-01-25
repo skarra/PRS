@@ -71,8 +71,8 @@
   <div class="half show-only-in-print">
     {% set dept = Department.find_by_id(session, lvisit.dept_id) %}
     <div class="myrow col_parent">
-      <div class="tagcol"> Visit Date :</div> 
-      <div class="valcol"> {{ lvisit.date }} </div>
+      <div class="tagcol"> Visit S.No :</div> 
+      <div class="valcol"> {{ lvisit.cid }} </div>
     </div>
 
     <div class="myrow col_parent">
@@ -102,7 +102,7 @@
 	 name="pat_visits_table">
     <thead>
       <tr>
-	<th>Date</th>
+	<th>Date & S.No.</th>
 	<th>Department</th>
 	<th>Consultant</th>
 	<th>Charge</th>
@@ -120,7 +120,7 @@
          {% set cls = "hide-in-print" if i != l-1 else "" %}
 
          <tr class='{{ cls }}'>
-	   <td> {{ c.date }} </td>
+	   <td> {{ c.cid }} </td>
 	   <td> {{ dept.name }}  </td>
 	   <td> {{ doc.title + " " + doc.name }} </td>
 	   <td> {{ c.charge }} </td>
