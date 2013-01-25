@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jan 23 23:10:48 IST 2013
+// Last Modified : Fri Jan 25 23:56:58 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -127,13 +127,16 @@ function validateNewPatient (event) {
 	errmsg += "Emergency Contact details (name) cannot be empty\n";
     }
 
-    if (f_relph == "") {
-	errmsg += "Emergency Contact details (phone) cannot be empty\n";
-    } else {
-	if (!isValidPhoneNumber(f_relph, "Relative's Phone number")) {
-	    silent_err = true;
-	}
-    }
+    // Commenting this out as it is requested that the emergency
+    // contact number is not made mandatory
+
+    // if (f_relph == "") {
+    // 	errmsg += "Emergency Contact details (phone) cannot be empty\n";
+    // } else {
+    // 	if (!isValidPhoneNumber(f_relph, "Relative's Phone number")) {
+    // 	    silent_err = true;
+    // 	}
+    // }
 
     if (f_relrel == "") {
 	errmsg += "Emergency Contact details (relation) cannot be empty\n";
