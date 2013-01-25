@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jan 23 23:05:14 IST 2013
+## Last Modified : Fri Jan 25 18:53:57 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -823,7 +823,7 @@ class NewVisitHandler(BaseHandler):
         deptn = self.get_argument("newv_dept_list", None)
         charge = self.get_argument("newv_charge", None)
         url   = self.request.full_url()
-        patid = int(re.search('patid=(\d+)$', url).group(1))
+        patid = int(re.search('patid=(\d+)', url).group(1))
 
         if not docid or docid == 'null':
             print 'Oops. Error checking in js not up to snuff...'
