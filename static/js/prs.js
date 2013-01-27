@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Fri Jan 25 23:56:58 IST 2013
+// Last Modified : Sat Jan 26 00:03:41 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -355,7 +355,7 @@ function addHandlers_doctor_view () {
             { "sClass": "center" },
             { "sClass": "center" },
             { "sClass": "center" },
-            { "sClass": "center"}],
+            { "sClass": "center"}]
     });
 }
 
@@ -705,8 +705,7 @@ function addHandlers_patient_view () {
             { "sClass": "left" },
             { "sClass": "left" },
             { "sClass": "right" },
-            { "sClass": "right" }
-	    ,],
+            { "sClass": "right" }]
     });
 
     $("#pat_visits_table tbody").click(newpvRowSelected);
