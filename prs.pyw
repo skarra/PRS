@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Jan 25 23:41:27 IST 2013
+## Last Modified : Mon Jan 28 13:02:22 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -399,12 +399,17 @@ class AjaxDocAvailability(BaseHandler):
         if shiftn != '-- Any --':
             dq = dq.filter(models.Slot.shift == shiftn)
 
+        ## FIXME: There is some amount of duplication with the
+        ## Doctor.get_availablity() method. That method should be refactored
+        ## to return what is requested.
         docs = dq.all()
         for doc, slot in docs:
             if not doc.name in ret:
                 ret[doc.name] = {
                     'id'    : doc.id,
                     'quals' : doc.quals,
+                    'fee_newp' : doc.fee_newp,
+                    'fee_oldp' : doc.fee_oldp,
                     }
             slots = ret[doc.name]
             if not slot.day in slots:

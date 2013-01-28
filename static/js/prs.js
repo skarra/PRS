@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sat Jan 26 00:03:41 IST 2013
+// Last Modified : Mon Jan 28 12:54:01 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -177,7 +177,8 @@ function refreshVisitDocTable () {
 	    var evens = data.doctors[key][day]["Afternoon"].join(", ");
 	    newv_doc_table.dataTable().fnAddData([
 		[data.doctors[key].id, "Dr. " + key, data.doctors[key].quals,
-		 morns, evens]]);
+		 morns, evens, data.doctors[key].fee_newp, 
+		 data.doctors[key].fee_oldp]]);
 	});
     });
 }
@@ -250,7 +251,9 @@ function addHandlers_new_visit () {
             { "sWidth": "50%" },
             { "sWidth": "17%" },
             { "sWidth": "15%", "sClass": "center"},
-            { "sWidth": "15%", "sClass": "center"}],
+            { "sWidth": "15%", "sClass": "center"},
+	    { "sClass": "right"},
+	    { "sClass": "right"}],
 	"iDisplayLength": 20
     });
 
@@ -377,8 +380,6 @@ function addHandlers_department_edit () {
     var d = 'dept_name_new_';
 
     dept_cnt = 2;
-
-    console.log('Registering a call back for the add another shit...');
 
     $("#dept_add_new").click(function() {
 	new_box1 = ' id="' + d + dept_cnt + '" name="' + d + dept_cnt + '"';
