@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jan 29 15:55:25 IST 2013
+## Last Modified : Tue Jan 29 16:55:55 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -22,7 +22,7 @@
 ## First up we need to fix the sys.path before we can even import stuff we
 ## want.
 
-import copy, httplib, os, re, socket, string, sys, webbrowser
+import copy, httplib, logging, os, re, socket, string, sys, webbrowser
 from   datetime  import datetime, date
 from   threading import Thread
 
@@ -961,9 +961,12 @@ tornado.web.ErrorHandler = ErrorHandler
 def get_demo_db_name ():
     return os.path.join('db', 'sample.db')
 
+def get_pdn_dir ():
+    return os.path.join('..', 'PRS-Production')
+
 def get_pdn_db_name ():
-    f = os.path.join('..', 'PRS-Production', 'prs.db')
-    d = os.path.dirname(f)
+    d = get_pdn_dir()
+    f = os.path.join(d, 'prs.db')
 
     if not os.path.exists(d):
         print 'Creating production database directory (%s)..' % d
@@ -975,8 +978,26 @@ def start_browser ():
     port = config.get_http_port()
     webbrowser.open('http://localhost:%d' % port, new=2)
 
-if __name__ == "__main__":
+MAX_LOGSIZE  = 1024*1024*20                # 20 MB
+MAX_LOGFILES = 5                           # 5 files with rotation total 100MB.
+
+def setup_logging ():
+    f = os.path.join(get_pdn_dir(), 'prs.log')
+
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    ch = logging.handlers.RotatingFileHandler(f, maxBytes=MAX_LOGSIZE,
+                                              backupCount=MAX_LOGFILES)
+    fo = logging.Formatter('%(asctime)s - [%(levelname)8s]: %(message)s')
+    ch.setFormatter(fo)
+    logger.addHandler(ch)
+
+
+def main ():
     global eng_s, sess_s, eng_p, sess_p
+
+    setup_logging()
+    logging.info('Well, well. Just opened the log file. Hurrah!')
 
     tornado.options.parse_command_line()
 
@@ -993,3 +1014,7 @@ if __name__ == "__main__":
 
     start_browser()
     tornado.ioloop.IOLoop.instance().start()
+
+
+if __name__ == "__main__":
+    main()
