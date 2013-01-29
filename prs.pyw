@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Mon Jan 28 13:02:22 IST 2013
+## Last Modified : Tue Jan 29 15:55:25 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -958,6 +958,19 @@ application = tornado.web.Application([
 ## override the tornado.web.ErrorHandler with our default ErrorHandler
 tornado.web.ErrorHandler = ErrorHandler
 
+def get_demo_db_name ():
+    return os.path.join('db', 'sample.db')
+
+def get_pdn_db_name ():
+    f = os.path.join('..', 'PRS-Production', 'prs.db')
+    d = os.path.dirname(f)
+
+    if not os.path.exists(d):
+        print 'Creating production database directory (%s)..' % d
+        os.makedirs(d)
+
+    return f
+
 def start_browser ():
     port = config.get_http_port()
     webbrowser.open('http://localhost:%d' % port, new=2)
@@ -967,8 +980,8 @@ if __name__ == "__main__":
 
     tornado.options.parse_command_line()
 
-    eng_s, sess_s = models.setup_tables('db/sample.db')
-    eng_p, sess_p = models.setup_tables('db/prs.db')
+    eng_s, sess_s = models.setup_tables(get_demo_db_name())
+    eng_p, sess_p = models.setup_tables(get_pdn_db_name())
 
     try:
         application.listen(config.get_http_port())
