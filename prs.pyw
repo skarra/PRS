@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jan 29 16:55:55 IST 2013
+## Last Modified : Tue Jan 29 17:06:04 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -116,7 +116,7 @@ class BackupHandler(BaseHandler):
 
         d = os.path.join(os.path.abspath(basedir), bupdir)
         if not os.path.exists(d):
-            print 'Directory ' + d + ' not there. Creating...'
+            logging.info('Directory %s not there. Creating...', d)
             os.makedirs(d)
 
         tables = models.tables()
@@ -124,14 +124,13 @@ class BackupHandler(BaseHandler):
             q = session(env=bupdb).query(table)
             serialized_data = dumps(q.all())
             fn = os.path.join(d, table.__tablename__)
-            print '** Filename : ' , fn, ' ****************'
+            logging.debug('** Filename : %s ****************', fn)
             with open(fn, "w+b") as f:
                 f.write(serialized_data)
 
     def get (self, op):
         if op == 'create':
             self.create()
-            print 'success'
         elif op == 'restore':
             self.restore()
         else:
@@ -456,7 +455,7 @@ class SearchHandler(BaseHandler):
                 model = models.Doctor
                 template = 'doc_srp.html'
         else:
-            print 'SearchHandler:search: Invalid role: %s' % role
+            logging.info('SearchHandler:search: Invalid role: %s', role)
             return
 
         query = session().query(model)
@@ -597,8 +596,8 @@ class EditPatientHandler(BaseHandler):
             self.redirect('/view/patient/id/%d' % rec.id)
         except Exception, e:
             ## FIXME: Erorr handling to be performed
-            print 'Exception while saving modifications for %s (%s)' % (
-                rec.name, e)
+            logging.error('Exception while saving modifications for %s (%s)',
+                          rec.name, e)
 
     def get (self, field, value):
         if field != 'id':
@@ -643,7 +642,7 @@ class NewPatientHandler(BaseHandler):
         except Exception, e:
             msg = 'Error saving details for patient %s (Msg: %s)' % (
                 pat.name, e)
-            print '*** NewPatientHandler: ', msg
+            logging.error('NewPatientHandler.post(): %s', msg)
 
     def get (self):
         depts = models.Department.sorted_dept_names(session)
@@ -744,7 +743,7 @@ class DoctorHandler(BaseHandler):
                 argt = string.strip(ga('newd_%s_%s_to'   % (day, shift), ''))
 
                 if argf == '' or argt == '':
-                    print 'issues with slots; argf: ', argf, '; argt: ', argt
+                    logging.info('issues with slots; argf: %s; %s', argf, argt)
                     continue
 
                 # For some strange reason when nothing is selected what is
@@ -766,7 +765,7 @@ class NewDoctorHandler(DoctorHandler):
         except Exception, e:
             msg = 'Error saving details for Doctor %s (Msg: %s)' % (
                 doc.name, e)
-            print '*** NewDoctorHandler: ', msg
+            logging.error('NewDoctorHandler: %s', msg)
             return
 
         self.add_depts_from_req_to_doc(doc)
@@ -800,8 +799,8 @@ class EditDoctorHandler(DoctorHandler):
             session().commit()
         except Exception, e:
             ## FIXME: Erorr handling to be performed
-            print 'Exception while saving modifications for %s (%s)' % (
-                rec.name, e)
+            logging.error('Exception while saving modifications for %s (%s)',
+                          rec.name, e)
             return
 
         self.add_depts_from_req_to_doc(rec)
@@ -836,7 +835,7 @@ class NewVisitHandler(BaseHandler):
         patid = int(re.search('patid=(\d+)', url).group(1))
 
         if not docid or docid == 'null':
-            print 'Oops. Error checking in js not up to snuff...'
+            logging.error('NewVisitHandler.post(): Oops. JS Error checking fail')
             self.redirect('/view/patient/id/%d' % patid)
             return
 
@@ -864,7 +863,7 @@ class NewVisitHandler(BaseHandler):
         except Exception, e:
             msg = 'Error saving visit details for patient %s (Msg: %s)' % (
                 patid, e)
-            print '*** NewVisitHandler: ', msg
+            logging.error('NewVisitHandler.post(): %s', msg)
 
     def get (self):
         s = session().query(models.Shift)
@@ -896,7 +895,6 @@ class NewVisitHandler(BaseHandler):
         last_deptn = self.get_argument('last_deptn', None)
         if not last_docid or not last_deptn:
             numc = len(rec.consultations)
-            print numc
             if numc > 0:
                 lv = rec.consultations[numc-1]
                 last_docid = lv.doctor_id
@@ -969,7 +967,7 @@ def get_pdn_db_name ():
     f = os.path.join(d, 'prs.db')
 
     if not os.path.exists(d):
-        print 'Creating production database directory (%s)..' % d
+        logging.info('Creating production database directory (%s)..', d)
         os.makedirs(d)
 
     return f
@@ -1008,7 +1006,7 @@ def main ():
         application.listen(config.get_http_port())
     except socket.error, e:
         # This happens if an instance is already running on the said port.
-        print 'Program already running. Just starting a browser session.'
+        logging.info('Program already running. Just starting a browser session.')
         start_browser()
         sys.exit(0)
 

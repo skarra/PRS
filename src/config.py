@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Mon Jul 23 17:16:37 IST 2012
+## Last Modified : Tue Jan 29 17:06:55 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -36,8 +36,6 @@ class Config:
 
         stc = confi.read()
         self.state = demjson.decode(stc)
-
-        print 'self.state: ', self.state
 
         confi.close()
 
