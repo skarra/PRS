@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Jan 29 17:06:04 IST 2013
+## Last Modified : Wed Jan 30 07:49:50 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -280,6 +280,8 @@ class MiscAdminHandler(BaseHandler):
             sys.exit(0)
         elif op == 'mas_vs':
             self.redirect('/stats/visits')
+        elif op == 'mas_vl':
+            self.redirect('/logs')
         else:
             self.redirect('/')
 
@@ -498,6 +500,12 @@ class SearchHandler(BaseHandler):
         else:
             self.redirect('/')
 
+class LogsHandler(BaseHandler):
+    def get (self):
+        logf = open(get_logfile_name(), 'r')
+        self.render('logs_view.html', logf=logf, title=config.get_title()) 
+        logf.close()
+
 class ViewHandler(BaseHandler):
     """once search is done, this handler will serve up a page with all the
     details."""
@@ -551,7 +559,7 @@ class ViewHandler(BaseHandler):
         elif role == 'doctor':
             return self.view_doctor(field, value)
         else:
-            ## FIXME: Need to highlight Error.
+            logging.error('Invalid role (%s) for View operation', role)
             self.redirect('/')
 
 class EditPatientHandler(BaseHandler):
@@ -949,6 +957,7 @@ application = tornado.web.Application([
     (r"/miscadmin/", MiscAdminHandler),
     (r"/backup/(.*)", BackupHandler),
     (r"/stats/(.*)", StatsHandler),
+    (r"/logs", LogsHandler),
 
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})
 ], debug=True, template_path=os.path.join(DIR_PATH, 'templates'))
@@ -979,8 +988,11 @@ def start_browser ():
 MAX_LOGSIZE  = 1024*1024*20                # 20 MB
 MAX_LOGFILES = 5                           # 5 files with rotation total 100MB.
 
+def get_logfile_name ():
+    return os.path.join(get_pdn_dir(), 'prs.log')
+
 def setup_logging ():
-    f = os.path.join(get_pdn_dir(), 'prs.log')
+    f = get_logfile_name()
 
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)

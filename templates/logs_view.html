@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+{% end block %}
+
+{% block content %}
+  <div class='mono log'>
+  {% for line in logf.readlines() %}
+    <pre class='log'> {{ line.strip() }} </pre>
+  {% end %}
+  </div>
+{% end block %}
