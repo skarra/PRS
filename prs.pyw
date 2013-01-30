@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jan 30 11:56:52 IST 2013
+## Last Modified : Wed Jan 30 17:05:02 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -281,6 +281,7 @@ class MiscAdminHandler(BaseHandler):
         elif op == 'mas_vs':
             self.redirect('/stats/visits')
         elif op == 'mas_vl':
+            logging.info('%s', self.get_argument('misc_admin_params', 'N/A'))
             self.redirect('/logs#vl_bottom')
         else:
             self.redirect('/')

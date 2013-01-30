@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Jan 30 15:56:59 IST 2013
+// Last Modified : Wed Jan 30 17:02:50 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -484,6 +484,12 @@ function addHandlers_misc_menu () {
 	} else if (val == 'mas_db') {
 	    handleSwitchDB();
 	} else {
+	    if (val == 'mas_vl') {
+		var msg = 'Browser: ' + BrowserDetect.browser;
+		msg += ' Version: ' + BrowserDetect.version;
+		msg += '. OS: ' + BrowserDetect.OS;
+		$("#misc_admin_params").val(msg);
+	    }
 	    $("#misc_admin").submit();
 	}
     });
