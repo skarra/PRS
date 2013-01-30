@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     font-family: "Trebuchet MS", Trebuchet, Verdana, Arial;
+    z-index: 5;
 }
 
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, pre,
@@ -330,6 +331,9 @@ header {
   -webkit-box-shadow: -5px 1px 5px rgsba(0, 0, 0, 0.4);
   -o-box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
   box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 header:after {
@@ -360,21 +364,13 @@ header #sections li {
 }
 
 .control {
+    z-index: 9;
+    background: url('/static/img/canvas.jpg?881083570');
     display: table-cell;
-    -moz-transition-property: background-color;
-    -webkit-transition-property: background-color;
-    -o-transition-property: background-color;
-    transition-property: background-color;
-    -moz-transition-duration: 0.5s;
-    -webkit-transition-duration: 0.5s;
-    -o-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-
-    position: relative;
+    position: fixed;
 
     vertical-align: top;
-    padding: 15px 20px;
-    margin: 20px 20px;
+    padding: 20px 20px;
 
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -457,18 +453,18 @@ footer p {
 #content {
     display:table;
     height: 100%;
-    margin: 0px;
+    margin: 73px 0 0 0;
     border-spacing: 20px;
 }
 
 #sheet {
     border-spacing: 0px;
-    display: table-cell;
+    margin-left: 300px;
     width: 100%;
+    max-width: 860px;
 
     *zoom: 1;
     background: white;
-
     font-size: 13px;
 
     border: 1px solid #afafaf;
@@ -483,7 +479,6 @@ footer p {
     -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.1) inset;
     -o-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.1) inset;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.1) inset;
-/* Form elements */
 }
 
 #sheet .section {
