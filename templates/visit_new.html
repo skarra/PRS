@@ -9,17 +9,7 @@
 {% end block %}
 
 {% block scripts %}
-<script>
-$(function() {
-  // For revisit patients, the department and doctor should be
-  // preselected. For that to happen, we should at least refresh the
-  // doctor availability table
-  var dept = $("#newv_dept_list").val();
-  if ((dept != "") && (dept != null)) {
-	refreshVisitDocTable();
-  }
-});
-</script>
+<script src="/static/js/visit_new.js"> </script>
 {% end block %}
 
 {% block content %}
