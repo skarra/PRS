@@ -17,6 +17,7 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
 
 #content {
     width: 100%;
+    margin:0;
 }
 
 #sheet {
@@ -28,6 +29,7 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
     border: none;
     border-bottom: none;
     margin: 0;
+    padding:0;
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
     -o-border-radius: 0px;
