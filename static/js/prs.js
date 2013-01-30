@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Mon Jan 28 12:54:01 IST 2013
+// Last Modified : Wed Jan 30 15:56:59 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -23,8 +23,11 @@ var pat_srp_table;
 var doc_srp_table;
 var pat_visits_table;
 var newv_doc_table;
-var last_docid = null;
+var last_cid   = null;
 var last_deptn = null;
+var last_docn  = null;
+var last_docid = null;
+var last_avail = null;
 
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
             'Friday', 'Saturday'];
@@ -691,8 +694,16 @@ function newpvRowSelected (event) {
     });
 
     $(event.target.parentNode).addClass('row_selected');
-    last_docid = fnGetSelected(pat_visits_table, 4);
+    last_cid   = fnGetSelected(pat_visits_table, 0);
     last_deptn = fnGetSelected(pat_visits_table, 1);
+    last_docn  = fnGetSelected(pat_visits_table, 2);
+    last_docid = fnGetSelected(pat_visits_table, 4);
+    last_avail = fnGetSelected(pat_visits_table, 5);
+
+    $("#lvisit_cid").text(last_cid);
+    $("#lvisit_dname").text(last_deptn);
+    $("#lvisit_docn").text(last_docn);
+    $("#lvisit_davail").text(last_avail);
 }
 
 function addHandlers_patient_view () {
@@ -706,7 +717,8 @@ function addHandlers_patient_view () {
             { "sClass": "left" },
             { "sClass": "left" },
             { "sClass": "right" },
-            { "sClass": "right" }]
+            { "sClass": "right" },
+	    { "sClass": "right" }]
     });
 
     $("#pat_visits_table tbody").click(newpvRowSelected);
