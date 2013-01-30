@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jan 30 17:05:02 IST 2013
+## Last Modified : Wed Jan 30 18:16:56 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -333,6 +333,17 @@ class AjaxPatientDetails(BaseHandler):
         q = session().query(models.Patient)
         rec = q.filter_by(id=patid).first()
 
+        visits = []
+        for visit in rec.consultations:
+            visits.append({'cid'   : visit.cid,
+                           'patient_id' : visit.patient_id,
+                           'doctor_id'  : visit.doctor_id,
+                           'dept_id'    : visit.dept_id,
+                           'date'       : ('%s' % visit.date),
+                           'charge'     : visit.charge,
+                           'notes'      : visit.notes,
+                           })
+
         if rec:
             ret.update({'name'              : rec.name,
                         'age'               : rec.age,
@@ -345,6 +356,7 @@ class AjaxPatientDetails(BaseHandler):
                         'relative'          : rec.relative,
                         'relative_phone'    : rec.relative_phone,
                         'relative_relation' : rec.relative_relation,
+                        'visits'            : visits,
                         })
 
         self.write(ret)
