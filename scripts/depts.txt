@@ -1,10 +1,9 @@
 Name
-Gynaecology
-Rheymotology
-Haemotology
+Gynecology
+Rheumatology
+Haematology
 Surgery
-Nerurology
-Endochronology
+Neurology
 Orthopedics
 Pediatrics
 Medicine
@@ -12,4 +11,4 @@ Immunology
 Pyschiatry
 ENT
 Cardiology
-Eye
+Opthalmology
