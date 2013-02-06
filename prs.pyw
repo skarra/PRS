@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jan 30 18:16:56 IST 2013
+## Last Modified : Wed Feb 06 13:07:33 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -55,6 +55,19 @@ production = 0
 sample     = 1
 db = sample
 #db = production
+
+def auto_ver (resource):
+    """Intended to be invoked from inside tornado templates, given a resource
+    names such as /static/ctl.js this will return something like
+    /static/ctl.css?v=201211010141551 to version it."""
+
+    absname   = os.path.abspath(resource[1:])
+    d         = datetime.fromtimestamp(os.path.getmtime(absname))
+    timestamp = d.strftime("%Y%m%d%H%M%S")
+
+    res = re.match('(.*\.)([a-zA-Z]*$)', resource)
+    return ''.join([resource, '?v=', timestamp])
+
 
 def db_env ():
     return db
