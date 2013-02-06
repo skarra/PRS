@@ -11,11 +11,12 @@ template:
 -->
 
 {% block styles %}
-<link href="/static/css/doctor.css" rel="stylesheet" type="text/css" />
+<link href={{ auto_ver("/static/css/doctor.css") }} rel="stylesheet"
+      type="text/css" />
 <link rel="stylesheet" 
       href="/static/css/pepper-grinder/jquery-ui-1.8.21.custom.css">
-<link href="/static/css/dataTables/demo_table.css" rel="stylesheet"
-      type="text/css"/>
+<link href={{ auto_ver("/static/css/dataTables/demo_table.css") }}
+      rel="stylesheet" type="text/css"/>
 {% end block %}
 
 {% block content %}

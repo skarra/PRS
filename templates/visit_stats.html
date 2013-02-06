@@ -1,9 +1,10 @@
->{% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block styles %}
-<link href="/static/css/dataTables/demo_table.css" rel="stylesheet"
-      type="text/css"/>
-<link href="/static/css/srp.css" rel="stylesheet" type="text/css" />
+<link href={{ auto_ver("/static/css/dataTables/demo_table.css") }} 
+      rel="stylesheet" type="text/css"/>
+<link href={{ auto_ver("/static/css/srp.css") }} rel="stylesheet" 
+      type="text/css" />
 <link rel="stylesheet" 
       href="/static/css/pepper-grinder/jquery-ui-1.8.21.custom.css">
 {% end block %}

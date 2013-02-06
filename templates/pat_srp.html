@@ -2,9 +2,10 @@
 
 {% block styles %}
 
-<link href="/static/css/dataTables/demo_table.css" rel="stylesheet"
-      type="text/css"/>
-<link href="/static/css/srp.css" rel="stylesheet" type="text/css" />
+<link href={{ auto_ver("/static/css/dataTables/demo_table.css") }}
+      rel="stylesheet" type="text/css"/>
+<link href={{ auto_ver("/static/css/srp.css") }} rel="stylesheet" 
+      type="text/css" />
 
 {% end block %}
 
