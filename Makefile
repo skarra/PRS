@@ -1,6 +1,6 @@
 ##
 ## Created       : Sat Nov 17 14:46:20 IST 2012
-## Last Modified : Sat Nov 17 20:09:50 IST 2012
+## Last Modified : Wed Feb 06 11:56:36 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -60,6 +60,12 @@ src = prs.pyw
 basename = cmc
 
 default: bundle
+
+clean:
+	rm -f db/sample.db
+
+demodb: clean
+	cd scripts && time python createdb.py
 
 bundle:
 ifeq ($(strip ${TAG}),)
