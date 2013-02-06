@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     font-family: "Trebuchet MS", Trebuchet, Verdana, Arial;
-    z-index: 5;
+    z-index: inherit;
 }
 
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, pre,
@@ -479,6 +479,7 @@ footer p {
     -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.1) inset;
     -o-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.1) inset;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.1) inset;
+    z-index: 0;
 }
 
 #sheet .section {
