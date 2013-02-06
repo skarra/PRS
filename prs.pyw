@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Feb 06 13:07:33 IST 2013
+## Last Modified : Wed Feb 06 13:19:50 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -85,41 +85,57 @@ def toggle_env ():
     else:
         db = production
 
+class BaseHandler(tornado.web.RequestHandler):
+    """Generates an error response with status_code for all requests."""
+
+    base_kwargs = {
+        'auto_ver' : auto_ver,
+        'title' : config.get_title(),
+        }
+
+    ## FIXME: For reasons beyond my understanding the write_error method needs
+    ## to be here as well in order to catch some 500s. Without this method
+    ## here, a 404 is properly handled by the ErrorHandler class. It's quite
+    ## frustrating not to understand what's really goign on, but life is short
+    ## and one has to move on.
+    def write_error (self, status_code, **kwargs):
+        if status_code in [403, 404, 500, 503]:
+            filename = '%d.html' % status_code
+            self.render(filename, **self.base_kwargs)
+        else:
+            self.write("<html><title>%(code)d: %(message)s</title>" \
+            "<body class='bodyErrorPage'>%(code)d: %(message)s</body>"\
+            "</html>" % {
+                "code": status_code,
+                "auto_ver" : auto_ver,
+                "message": httplib.responses[status_code],
+            })
+
 class ErrorHandler(tornado.web.RequestHandler):
     """Generates an error response with status_code for all requests."""
     def __init__ (self, application, request, status_code):
         tornado.web.RequestHandler.__init__(self, application, request)
+        self.base_kwargs = {
+            'auto_ver' : auto_ver,
+            'title' : config.get_title(),
+            }
         self.set_status(status_code)
 
     def write_error (self, status_code, **kwargs):
         if status_code in [403, 404, 500, 503]:
             filename = '%d.html' % status_code
-            self.render(filename, title=config.get_title())
+            self.render(filename, **self.base_kwargs)
         else:
             self.write("<html><title>%(code)d: %(message)s</title>" \
             "<body class='bodyErrorPage'>%(code)d: %(message)s</body>"\
             "</html>" % {
                 "code": status_code,
+                "auto_ver" : auto_ver,
                 "message": httplib.responses[status_code],
             })
 
     def prepare (self):
         raise tornado.web.HTTPError(self._status_code)
-
-class BaseHandler(tornado.web.RequestHandler):
-    """Generates an error response with status_code for all requests."""
-
-    def write_error (self, status_code, **kwargs):
-        if status_code in [403, 404, 500, 503]:
-            filename = '%d.html' % status_code
-            self.render(filename, title=config.get_title())
-        else:
-            self.write("<html><title>%(code)d: %(message)s</title>" \
-            "<body class='bodyErrorPage'>%(code)d: %(message)s</body>"\
-            "</html>" % {
-                "code": status_code,
-                "message": httplib.responses[status_code],
-                })
 
 class BackupHandler(BaseHandler):
     def create (self):
@@ -223,15 +239,14 @@ class StatsHandler(BaseHandler):
 
         depts = models.Department.sorted_dept_names_with_id(session)
         docs  = models.Doctor.sorted_doc_names_with_id(session)
-        self.render('visit_stats.html', title=config.get_title(),
-                    depts=depts, docs=docs, summary=summary)
+        self.render('visit_stats.html', depts=depts, docs=docs,
+                    summary=summary, **self.base_kwargs)
 
 
 class MiscAdminHandler(BaseHandler):
     def edit_depts (self):
         depts = session().query(models.Department)
-        self.render('department_edit.html', title=config.get_title(),
-                    depts=depts)
+        self.render('department_edit.html', depts=depts, **self.base_kwargs)
 
     def process_old_depts (self):
         dirty = False
@@ -318,7 +333,6 @@ class AjaxDoctorsInDepartment(BaseHandler):
     """Return an array of (ID, Name) tuples of Doctors in the
     Department. Keeping in line with general good practise this is wrapped
     into a dictionary."""
-
     def get (self, field, value):
         ret   = []
 
@@ -465,9 +479,8 @@ class SearchHandler(BaseHandler):
         qstr      = 'Field: "Dept" Value: "%s"' % name
         match_cnt = len(results)
 
-        self.render(template, title=config.get_title(),
-                    search_query=qstr, search_results=results,
-                    total_cnt=total_cnt, match_cnt=match_cnt)
+        self.render(template, search_query=qstr, search_results=results,
+                    total_cnt=total_cnt, match_cnt=match_cnt, **self.base_kwargs)
 
     def search (self, role, field, value):
         if role == 'patient':
@@ -498,9 +511,9 @@ class SearchHandler(BaseHandler):
         qstr = 'Field: "%6s" Value: "%s"' % (field, value)
         match_cnt = query.count()
 
-        self.render(template, title=config.get_title(), search_query=qstr,
+        self.render(template, search_query=qstr,
                     search_results=query.order_by(model.id), total_cnt=total_cnt,
-                    match_cnt=match_cnt)
+                    match_cnt=match_cnt, **self.base_kwargs)
 
     def get (self, role):
         """role is one of 'patient' or 'doctor', field will be one of Name or
@@ -529,7 +542,7 @@ class SearchHandler(BaseHandler):
 class LogsHandler(BaseHandler):
     def get (self):
         logf = open(get_logfile_name(), 'r')
-        self.render('logs_view.html', logf=logf, title=config.get_title()) 
+        self.render('logs_view.html', logf=logf, **self.base_kwargs) 
         logf.close()
 
 class ViewHandler(BaseHandler):
@@ -547,8 +560,8 @@ class ViewHandler(BaseHandler):
                           field)
             self.redirect('/')
 
-        self.render('doctor_view.html', title=config.get_title(),
-                    rec=rec, days=days, avail=rec.get_availability())
+        self.render('doctor_view.html', rec=rec, days=days,
+                    avail=rec.get_availability(), **self.base_kwargs)
 
     def view_patient (self, field, value):
         q = session().query(models.Patient)
@@ -570,10 +583,10 @@ class ViewHandler(BaseHandler):
             ldoc   = None
             avail  = None
 
-        self.render('patient_view.html', title=config.get_title(),
-                    rec=rec, d=session().query(models.Doctor),
-                    session=session, avail=avail, lvisit=lvisit,
-                    days=days, shiftns=shiftns, ldoc=ldoc)
+        self.render('patient_view.html', rec=rec,
+                    d=session().query(models.Doctor), session=session,
+                    avail=avail, lvisit=lvisit, days=days, shiftns=shiftns,
+                    ldoc=ldoc, **self.base_kwargs)
 
     def get (self, role, field, value):
         """role is one of 'patient' or 'doctor', field will be one of Name or
@@ -635,12 +648,12 @@ class EditPatientHandler(BaseHandler):
 
     def get (self, field, value):
         if field != 'id':
-            ## FIXME: Error needs to be highlighted
+            logging.error('EditPatientHandler:get(): unknown field: %s', field)
             return
         q = session().query(models.Patient)
         rec = q.filter_by(id=value).first()
-        self.render("patient_edit.html", title=config.get_title(),
-                    rec=rec, today=models.MyT.today_uk())
+        self.render("patient_edit.html", rec=rec, today=models.MyT.today_uk(),
+                    **self.base_kwargs)
 
 class NewPatientHandler(BaseHandler):
     def post (self):
@@ -681,8 +694,8 @@ class NewPatientHandler(BaseHandler):
     def get (self):
         depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')
-        self.render('patient_new.html', title=config.get_title(),
-                    depts=depts, today=models.MyT.today_uk())
+        self.render('patient_new.html', depts=depts,
+                    today=models.MyT.today_uk(), **self.base_kwargs)
 
 class DoctorHandler(BaseHandler):
     ## FIXME: These arrays should be generated based on the actual shift
@@ -813,9 +826,9 @@ class NewDoctorHandler(DoctorHandler):
         depts = models.Department.sorted_dept_names(session)
         depts.insert(0, '-- Select --')
 
-        self.render('doctor_new.html', title=config.get_title(),
-                    depts=depts, days=days, today=models.MyT.today_uk(),
-                    mophours=self.mophours, aophours=self.aophours)
+        self.render('doctor_new.html', depts=depts, days=days,
+                    today=models.MyT.today_uk(), mophours=self.mophours,
+                    aophours=self.aophours, **self.base_kwargs)
 
 class EditDoctorHandler(DoctorHandler):
     """Edit the patient details. The form is pre-loaded with the current
@@ -854,9 +867,9 @@ class EditDoctorHandler(DoctorHandler):
 
         q = session().query(models.Doctor)
         rec = q.filter_by(id=value).first()
-        self.render("doctor_edit.html", title=config.get_title(),
-                    rec=rec, days=days, depts=depts,
-                    mophours=self.mophours, aophours=self.aophours)
+        self.render("doctor_edit.html", rec=rec, days=days, depts=depts,
+                    mophours=self.mophours, aophours=self.aophours,
+                    **self.base_kwargs)
 
 class NewVisitHandler(BaseHandler):
     def post (self):
@@ -942,13 +955,14 @@ class NewVisitHandler(BaseHandler):
 
         date = models.MyT.today_uk()
 
-        self.render('visit_new.html', title=config.get_title(), depts=depts,
+        self.render('visit_new.html', depts=depts,
                     patid=patid, patname=patname, date=date, days=d,
-                    shifts=shifts, docid=last_docid, last_deptn=last_deptn)
+                    shifts=shifts, docid=last_docid, last_deptn=last_deptn,
+                    **self.base_kwargs)
 
 class MainHandler(BaseHandler):
     def get (self):
-        self.render('index.html', title=config.get_title())
+        self.render('index.html', **self.base_kwargs)
 
 def engine (val=None):
     global _engine
