@@ -72,7 +72,9 @@
     {% if lvisit %}
     {% set dept = Department.find_by_id(session, lvisit.dept_id) %}
     <div class="myrow col_parent">
-      <div class="tagcol"> Visit S.No :</div> 
+      <div class="tagcol"> Visit Date :</div> 
+      <div class="valcol" id='lvisit_date'> {{ lvisit.date }} </div>
+      <div class="tagcol"> S.No :</div>
       <div class="valcol" id='lvisit_cid'> {{ lvisit.cid }} </div>
     </div>
 
@@ -84,12 +86,12 @@
     <div class="myrow col_parent">
       <div class="tagcol"> Doctor :</div> 
       <div class="valcol" id="lvisit_docn"> 
-	{{ ldoc.title + " " + ldoc.name }}
+	{{ ldoc.title + " " + ldoc.name + "(" + ldoc.quals + ")" }}
       </div>
     </div>
 
     <div class="myrow col_parent">
-      <div class="tagcol"> Availability :</div> 
+      <div class="tagcol"> OPD Days :</div> 
       <div class="valcol" id="lvisit_davail"> 
 	{{ ldoc.get_availability_pretty() }} 
       </div>
@@ -108,7 +110,8 @@
 	 name="pat_visits_table">
     <thead>
       <tr>
-	<th>Date & S.No.</th>
+	<th>Date</th>
+	<th>S.No.</th>
 	<th>Department</th>
 	<th>Consultant</th>
 	<th>Charge</th>
@@ -127,6 +130,7 @@
          {% set cls = "hide-in-print" if i != l-1 else "" %}
 
          <tr class='{{ cls }}'>
+	   <td> {{ c.date }} </td>
 	   <td> {{ c.cid }} </td>
 	   <td> {{ dept.name }}  </td>
 	   <td> {{ doc.title + " " + doc.name }} </td>

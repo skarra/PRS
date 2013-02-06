@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Jan 23 22:41:23 IST 2013
+## Last Modified : Wed Feb 06 11:55:00 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -234,7 +234,10 @@ def add_consultations (session):
         num = random.randint(1, 3)
         for i in range(num):
             charge = random.choice([10, 20, 30, 40, 50])
-            con = models.Consultation(charge=charge,
+            date_str = "%d-01-2013" % (random.randint(1, 31))
+            dat = models.MyT.date_from_uk(date_str)
+            cid = models.Consultation.num_in_day(session, dat) + 1
+            con = models.Consultation(charge=charge, cid=cid, date=dat,
                                       notes='Lorem Ipsum Gypsum zero sum')
             doc = random.choice(docs)
             logging.debug('\tAdded doctor ID: %3d, Name: %s...',

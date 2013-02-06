@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Jan 25 18:51:45 IST 2013
+## Last Modified : Tue Feb 05 17:58:17 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -332,12 +332,17 @@ class Consultation(Base):
     date       = Column(Date(),  default=MyT.today())
     charge     = Column(Integer, default=0)
     notes      = Column(Text())
-
-    @hybrid_property
-    def cid (self):
-        return '%s/%05d' % (self.date, self.id)
+    cid        = Column(Integer, default=0)   # Visit No. in day.
 
     ## backrefs from patient and doctor
+
+    @classmethod
+    def num_in_day (self, session, date):
+        """Returns the number of consultations that have been registered on
+        specified date."""
+
+        q = session().query(Consultation)
+        return q.filter_by(date=date).count()
 
 
 def setup_tables (dbfile):

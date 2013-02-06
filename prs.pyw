@@ -875,7 +875,8 @@ class NewVisitHandler(BaseHandler):
                 dat = date(int(res.group(3)), int(res.group(2)),
                            int(res.group(1)))
 
-        c = models.Consultation(patient_id=patid, doctor_id=docid,
+        cid = models.Consultation.num_in_day(session(), dat) + 1
+        c = models.Consultation(patient_id=patid, doctor_id=docid, cid=cid,
                                 dept_id=deptid, date=dat, charge=charge)
         try:
             session().add(c)

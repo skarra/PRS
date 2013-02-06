@@ -704,12 +704,14 @@ function newpvRowSelected (event) {
     });
 
     $(event.target.parentNode).addClass('row_selected');
-    last_cid   = fnGetSelected(pat_visits_table, 0);
-    last_deptn = fnGetSelected(pat_visits_table, 1);
-    last_docn  = fnGetSelected(pat_visits_table, 2);
-    last_docid = fnGetSelected(pat_visits_table, 4);
-    last_avail = fnGetSelected(pat_visits_table, 5);
+    last_date  = fnGetSelected(pat_visits_table, 0);
+    last_cid   = fnGetSelected(pat_visits_table, 1);
+    last_deptn = fnGetSelected(pat_visits_table, 2);
+    last_docn  = fnGetSelected(pat_visits_table, 3);
+    last_docid = fnGetSelected(pat_visits_table, 5);
+    last_avail = fnGetSelected(pat_visits_table, 6);
 
+    $("#lvisit_date").text(last_date);
     $("#lvisit_cid").text(last_cid);
     $("#lvisit_dname").text(last_deptn);
     $("#lvisit_docn").text(last_docn);
@@ -724,6 +726,7 @@ function addHandlers_patient_view () {
 	"bSort" : false,
 	"aoColumns": [
             { "sClass": "left" },
+            { "sClass": "right" },
             { "sClass": "left" },
             { "sClass": "left" },
             { "sClass": "right" },
