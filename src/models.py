@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Tue Feb 05 17:58:17 IST 2013
+## Last Modified : Thu Feb 07 18:10:34 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -25,8 +25,13 @@
 
 import datetime, logging, re
 
+## FIXME: This is related to using apsw for database backup
+# from   pysqlite2 import dbapi2 as s3
+# import apsw
+
 from   sqlalchemy        import orm, create_engine
 from   sqlalchemy.orm    import relationship, backref, column_property
+from   sqlalchemy.pool   import SingletonThreadPool as STP
 from   sqlalchemy.types  import Integer, Boolean, Date, Text, Unicode
 from   sqlalchemy.schema import Column, ForeignKey, Table
 from   sqlalchemy.ext.hybrid import hybrid_property
@@ -350,9 +355,17 @@ def setup_tables (dbfile):
 
     logging.debug('setup_tables with dbfile: %s', dbfile)
 
+    ## FIXME: This is related to using apsw for database backup
+    # _connection = apsw.Connection(dbfile)
+    # connection = s3.connect(_connection)
+
     logging.debug('Creating engine...')
     engine = create_engine('sqlite:///%s' % dbfile, echo=False)
     logging.debug('Creating engine...done (%s)', engine)
+
+    ## FIXME: This is related to using apsw for database backup
+    # _pool = STP(lambda: s3.connect(_connection))
+    # engine = create_engine('sqlite://', echo=False, pool=_pool)
 
     # Set up the session
     logging.debug('Setting up tables...')
