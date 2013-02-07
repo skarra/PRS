@@ -72,6 +72,16 @@ def auto_ver (resource):
 def db_env ():
     return db
 
+def env_name (inpdb=None):
+    """Return a string representation of the database environment current
+    active or the specfied"""
+
+    db = inpdb if inpdb else db_env()
+    if is_production(db):
+        return 'production'
+    else:
+        return 'dev'
+
 def is_production (env):
     return env == production
 
@@ -139,13 +149,28 @@ class ErrorHandler(tornado.web.RequestHandler):
 
 class BackupHandler(BaseHandler):
     def create (self):
-        basedir = self.get_argument('basedir', 'db')
-        bupdir  = self.get_argument('bupdir', 'backups')
-        bupdb   = self.get_argument('bupdb', 'dev')
+        logging.info('BackupHandler:create()... Starting backup')
+        basedir = self.get_argument('basedir', None)
+        bupdir  = self.get_argument('bupdir',  None)
+        bupdb   = self.get_argument('bupdb',   db_env())
 
-        d = os.path.join(os.path.abspath(basedir), bupdir)
+        if not basedir:
+            basedir = get_backups_basedir()
+        else:
+            ## FIXME: We may have to url-decode the string here
+            logging.debug('BackupHandler.create(): basedir: %s', basedir)
+            pass
+
+        if not bupdir:
+            bupdir = gen_backup_instance_name()
+        else:
+            ## FIXME: We may have to url-decode the string here
+            logging.debug('BackupHandler.create(): bupdir: %s', bupdir)
+            pass
+
+        d = os.path.join(basedir, env_name(bupdb), bupdir)
         if not os.path.exists(d):
-            logging.info('Directory %s not there. Creating...', d)
+            logging.info('Backups directory %s not there. Creating...', d)
             os.makedirs(d)
 
         tables = models.tables()
@@ -311,6 +336,8 @@ class MiscAdminHandler(BaseHandler):
         elif op == 'mas_vl':
             logging.info('%s', self.get_argument('misc_admin_params', 'N/A'))
             self.redirect('/logs#vl_bottom')
+        elif op == 'mas_ba':
+            self.redirect('/backup')
         else:
             self.redirect('/')
 
@@ -972,7 +999,7 @@ def engine (val=None):
         return _engine
 
 def session (env=None):
-    if env == 'pdn' or db_env() == production:
+    if env == production or db_env() == production:
         return sess_p
     else:
         return sess_s
@@ -996,6 +1023,7 @@ application = tornado.web.Application([
     (r"/ajax/appstate", AjaxAppState),
 
     (r"/miscadmin/", MiscAdminHandler),
+    (r"/backup", BackupHandler),
     (r"/backup/(.*)", BackupHandler),
     (r"/stats/(.*)", StatsHandler),
     (r"/logs", LogsHandler),
@@ -1007,20 +1035,41 @@ application = tornado.web.Application([
 tornado.web.ErrorHandler = ErrorHandler
 
 def get_demo_db_name ():
+    ## FIXME: We should really be returning an absolute path
     return os.path.join('db', 'sample.db')
 
 def get_pdn_dir ():
-    return os.path.join('..', 'PRS-Production')
+    """Return the path of the directory containing some of the production
+    datbase, log files, backups etc. If the directory is not present it is
+    first created and the name of the directory is returned. The full
+    absolute path is returned"""
 
-def get_pdn_db_name ():
-    d = get_pdn_dir()
-    f = os.path.join(d, 'prs.db')
+    d = os.path.abspath(os.path.join('..', 'PRS-Production'))
 
     if not os.path.exists(d):
         logging.info('Creating production database directory (%s)..', d)
         os.makedirs(d)
 
-    return f
+    return d
+
+def get_pdn_db_name (abspath=True):
+    """Returns the full qualified name of the database file."""
+
+    f = 'prs.db'
+    return os.path.join(get_pdn_dir(), f) if abspath else f
+
+def get_backups_basedir ():
+    """Returns an absolute path of a directory where all backups are stored by
+    default. Default is the directory containing the database itself."""
+
+    return os.path.join(get_pdn_dir(), 'backups')
+
+def gen_backup_instance_name ():
+    """Return a unique name for a directory that will contain new backup
+    files. For now it will just the time stamp in yyyy-mm-dd-hh-mm-ss
+    format."""
+
+    return datetime.now().strftime('%Y-%m-%d-%H%M%S')
 
 def start_browser ():
     port = config.get_http_port()
