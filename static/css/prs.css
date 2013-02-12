@@ -885,7 +885,6 @@ label {
 }
 
 #contact_info, #prior_history, #visit_history, visit_head {
-    display: table;
     width: 100%;
     height: 100%;
 }
