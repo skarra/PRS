@@ -29,6 +29,8 @@ template:
   <hr> <p/>
 </div>
 
+{% from models import MyT %}
+
 <div class="nav hide-in-print">
   <div id="info">
     <div id="print_doc_lab" class="navElem printElem">Print</div>
@@ -55,7 +57,7 @@ template:
     <div class="twocols">
       <div class="myrow col_parent">
         <div class="tagcol"> Regn Date : </div>
-        <div class="valcol"> {{ rec.regdate.strftime("%Y/%m/%d") }} 
+        <div class="valcol"> {{ MyT.date_to_uk(rec.regdate) }} 
 	  <tag> ID : </tag> {{ rec.id }}
 	</div>
       </div>

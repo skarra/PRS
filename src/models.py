@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Tue Feb 12 11:40:01 IST 2013
+## Last Modified : Tue Feb 12 15:37:14 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -68,6 +68,10 @@ class MyT:
         UK date string DD-MM-YYYY."""
         dt = datetime.datetime.strptime(value, '%d-%m-%Y')
         return datetime.date(year=dt.year, month=dt.month, day=dt.day)
+
+    @classmethod
+    def date_to_uk (self, d):
+        return d.strftime("%d-%m-%Y")
 
 class Patient(Base):
     __tablename__ = 'patient'
