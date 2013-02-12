@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Feb 06 13:19:50 IST 2013
+## Last Modified : Tue Feb 12 11:26:04 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -22,7 +22,7 @@
 ## First up we need to fix the sys.path before we can even import stuff we
 ## want.
 
-import copy, httplib, logging, os, re, socket, string, sys, webbrowser
+import copy, httplib, logging, os, re, socket, string, sys, urllib, webbrowser
 from   datetime  import datetime, date
 from   threading import Thread
 
@@ -182,13 +182,15 @@ class BackupHandler(BaseHandler):
             with open(fn, "w+b") as f:
                 f.write(serialized_data)
 
-    def get (self, op):
+        logging.info('BackupHandler:create()... Completed backup')
+
+    def get (self, op=None):
         if op == 'create':
             self.create()
         elif op == 'restore':
             self.restore()
-        else:
-            raise Exception('Unknown backup operation: %s' % op)
+
+        self.render('backups.html', **self.base_kwargs)
 
 class StatsHandler(BaseHandler):
     def get (self, what):
@@ -344,6 +346,30 @@ class MiscAdminHandler(BaseHandler):
 ##
 ## All the classes that start with Ajax are ajax handler that return JSON
 ##
+
+class AjaxFileTree(BaseHandler):
+    def post (self):
+        logging.info('Inside jqueryFileTree ajax call.')
+        s1 = '<li class="directory collapsed"><a href="#" rel="%s/">%s</a></li>'
+        s2 = '<li class="file ext_%s"><a href="#" rel="%s">%s</a></li>'
+        try:
+            r = ['<ul class="jqueryFileTree" style="display: none;">']
+            d = urllib.unquote(self.get_argument('dir','/'))
+    
+            for f in os.listdir(d):
+                ff = os.path.join(d, f)
+                if os.path.isdir(ff):
+                    r.append(s1 % (ff, f))
+                else:
+                    e=os.path.splitext(f)[1][1:] # get .ext and remove dot
+                    r.append(s2 % (e, ff, f))
+                r.append('</ul>')
+        except Exception,e:
+            logging.error('Could not load directory: %s', str(e))
+    
+        r.append('</ul>')
+        self.write(''.join(r))
+
 
 class AjaxAppState(BaseHandler):
     def get (self):
@@ -1021,6 +1047,7 @@ application = tornado.web.Application([
     (r"/ajax/docavailability", AjaxDocAvailability),
     (r"/ajax/departments", AjaxDepartmentsList),
     (r"/ajax/appstate", AjaxAppState),
+    (r"/ajax/jqueryFileTree", AjaxFileTree),
 
     (r"/miscadmin/", MiscAdminHandler),
     (r"/backup", BackupHandler),
