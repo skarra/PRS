@@ -17,19 +17,20 @@ header, #patient_admin, .push, #main_footer, #head_info #info {
 
 #content {
     width: 100%;
+    max-width: 100%;
     margin:0;
+    padding:0;
 }
 
 #sheet {
     width: 100%;
-    max-width: 100%;
-    float: none;
+    max-width: 150%;
 
     line-height: 1;
 
     border: none;
     border-bottom: none;
-    margin: 0;
+    margin-left: 0px;
     padding:0;
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
