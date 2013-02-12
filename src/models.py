@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Thu Feb 07 18:10:34 IST 2013
+## Last Modified : Tue Feb 12 11:40:01 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -326,6 +326,10 @@ class Slot(Base):
     end_time   = Column(Unicode(8))
     doctor     = relationship('Doctor',
                               backref=backref('slots', cascade="all"))
+
+## The following was suggested by someone on bangpypers, but it does not work.
+# def gen_cid (context):
+#     return Consultation.query.filter_by(date=context.current_parameters['date']).count() + 1
 
 class Consultation(Base):
     __tablename__ = 'consultation'
