@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link href={{ auto_ver("/static/css/patient.css") }} rel="stylesheet" 
+      type="text/css" />
+<link href={{ auto_ver("/static/css/dataTables/demo_table.css") }} 
+      rel="stylesheet" type="text/css"/>
+<link href={{ auto_ver("/static/css/srp.css" ) }}rel="stylesheet" 
+      type="text/css" />
+{% end block %}
+
+{% block scripts %}
+<script src="/static/js/libs/jqueryFileTree/jqueryFileTree.js"></script>
+<script src={{ auto_ver("/static/js/backups.js") }}></script>
+{% end block %}
+
+{% block content %}
+
+<input id="backups_create" class="control_label" type="submit" 
+       value="Backup Now"/>
+<p/>
+
+<h1> Existing Backups </h1> <p/>
+
+The following backups are available in the standard backup location: </p>
+
+<div id="backups_ftree">
+
+</div>
+
+{% end block %} <!-- block content -->
