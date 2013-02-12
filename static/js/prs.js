@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Feb 06 11:42:05 IST 2013
+// Last Modified : Tue Feb 12 14:48:52 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -261,6 +261,8 @@ function addHandlers_new_visit () {
             { "sWidth": "15%", "sClass": "center"},
 	    { "sClass": "right"},
 	    { "sClass": "right"}],
+	"aLengthMenu": [[10, 25, 50, 100, 200, -1],
+			[10, 25, 50, 100, 200, "All"]],
 	"iDisplayLength": 20
     });
 
@@ -329,6 +331,8 @@ function addHandlers_doctor_base () {
             { "sClass": "center" },
             { "sClass": "center" },
             { "sClass": "center"}],
+	"aLengthMenu": [[10, 25, 50, 100, 200, -1],
+			[10, 25, 50, 100, 200, "All"]],
 	"iDisplayLength": 20
     });
 
@@ -357,6 +361,8 @@ function addHandlers_doctor_view () {
 	"bInfo": false,
 	"bPaginate": false,
 	"bSort" : false,
+	"aLengthMenu": [[10, 25, 50, 100, 200, -1],
+			[10, 25, 50, 100, 200, "All"]],
 	"aoColumns": [
             { "sClass": "left" },
             { "sClass": "center" },
@@ -724,6 +730,10 @@ function addHandlers_patient_view () {
 	"bInfo": false,
 	"bPaginate": false,
 	"bSort" : false,
+
+	"aLengthMenu": [[10, 25, 50, 100, 200, -1],
+			[10, 25, 50, 100, 200, "All"]],
+
 	"aoColumns": [
             { "sClass": "left" },
             { "sClass": "right" },
@@ -794,6 +804,9 @@ function addHandlers () {
     // The following only applies to the srp.html, but it is still
     // desirable to have all the javascipt centralized here (??)...
     pat_srp_table = $("#pat_srp_table").dataTable({
+	"aLengthMenu": [[10, 25, 50, 100, 200, -1],
+			[10, 25, 50, 100, 200, "All"]],
+
 	"fnDrawCallback" : function(oSettings) {
 	    $("#pat_srp_table tbody td").click(function () {
 		var aPos  = pat_srp_table.fnGetPosition(this);
@@ -807,6 +820,8 @@ function addHandlers () {
     // The following only applies to the srp.html, but it is still
     // desirable to have all the javascipt centralized here (??)...
     doc_srp_table = $("#doc_srp_table").dataTable({
+	"aLengthMenu": [[10, 25, 50, 100, 200, -1],
+			[10, 25, 50, 100, 200, "All"]],
 	"fnDrawCallback" : function(oSettings) {
 	    $("#doc_srp_table tbody td").click(function () {
 		var aPos  = doc_srp_table.fnGetPosition(this);
