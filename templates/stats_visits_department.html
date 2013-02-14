@@ -1,0 +1,29 @@
+{% extends 'stats_visits_base.html' %}
+
+{% block vs_content %}
+<table id="vs_dept_table" class="display">
+  <thead>
+    <th> ID           </th>
+    <th> Department   </th>
+    <th> Visit Count  </th>
+    <th> Total Charge </th>
+  </thead>
+
+  <tfoot>
+    <th style="text-align:right" colspan="2"> Total: </th>
+    <th style="text-align:right"> </th>
+    <th style="text-align:right"> </th>
+  </tfoot>
+
+  <tbody>
+    {% for key, depv in summary['dept'].iteritems() %}
+    <tr>
+      <td> {{ key }}            </td>
+      <td> {{ depv['name']   }} </td>
+      <td> {{ depv['patcnt'] }} </td>
+      <td> {{ depv['fee']    }} </td>
+    </tr>
+    {% end %}
+  </tbody>
+</table>
+{% end block %}

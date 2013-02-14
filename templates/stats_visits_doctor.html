@@ -1,0 +1,33 @@
+{% extends 'stats_visits_base.html' %}
+
+{% block vs_content %}
+<table id="vs_doc_table" class="display" name="vs_doc_table">
+  <thead>
+    <th> ID       </th>
+    <th> Title   </th>
+    <th> Doctor   </th>
+    <th> Qualifications   </th>
+    <th> Visit Count   </th>
+    <th> Total Charge   </th>
+  </thead>
+
+  <tfoot>
+    <th style="text-align:right" colspan="4"> Total: </th>
+    <th style="text-align:right"> </th>
+    <th style="text-align:right"> </th>
+  </tfoot>
+
+  <tbody>
+    {% for key, docv in summary['doc'].iteritems() %}
+    <tr>
+      <td> {{ key }}               </td>
+      <td> {{ docv['doc'].title }} </td>
+      <td> {{ docv['doc'].name  }} </td>
+      <td> {{ docv['doc'].quals }} </td>
+      <td> {{ docv['patcnt']    }} </td>
+      <td> {{ docv['fee']       }} </td>
+    </tr>
+    {% end %}
+  </tbody>
+</table>
+{% end block %}

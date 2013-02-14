@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link href={{ auto_ver("/static/css/dataTables/demo_table.css") }} 
+      rel="stylesheet" type="text/css"/>
+<link href={{ auto_ver("/static/css/srp.css") }} rel="stylesheet" 
+      type="text/css" />
+<link rel="stylesheet" 
+      href="/static/css/pepper-grinder/jquery-ui-1.8.21.custom.css">
+{% end block %}
+
+{% block scripts %}
+  <script src={{ auto_ver("/static/js/visit_stats.js") }}> </script>
+{% end block %}
+
+{% block content %}
+
+<div class="nav hide-in-print">
+  <div id="info">
+    <a href="/stats/visits/doctor?vs_from={{ summary['from'] }}&vs_to={{ summary['to'] }}" id="vs_doc_opt" class="navElem">
+      By Doctor</a>
+    <a href="/stats/visits/department?vs_from={{ summary['from'] }}&vs_to={{ summary['to'] }}" id="vs_dept_opt" class="navElem">
+      By Department</a>
+    <div id="vs_print_opt" class="navElem printElem">Print</div>
+  </div>
+</div>
+
+<h1>Visit Statistics <span class="blue"> by {{ by }} </span></h1>
+
+<form id="vs_form" method="GET">
+ <label>From:</label>
+  <input type="text" class="date date-field " id="vs_from" name="vs_from"
+	 value={{ summary['from'] if summary else " " }} 
+	 />
+
+  <label>To:</label>
+  <input type="text" class="date date-field " id="vs_to" name="vs_to"
+	 value={{ summary['to'] if summary else " " }} 
+	 />
+
+  <input type="submit" value="Go" id="vs_submit" class="submit_but"/>
+</form>
+
+<hr/>
+
+{% if summary %}
+  <div style="width: 27%;"> Total Patients Visited : 
+    <div id="vs_total_visits" class="relative"> </div> 
+  </div>
+  <div style="width: 27%;">
+    Total Fee Collected :  
+    <div id="vs_total_fee" class="relative"> </div>
+  </div>
+  <hr/>
+
+  {% block vs_content %}
+  {% end block %}
+{% end %}
+
+{% end block %}

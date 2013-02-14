@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Feb 12 11:26:04 IST 2013
+## Last Modified : Thu Feb 14 15:14:19 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -193,15 +193,21 @@ class BackupHandler(BaseHandler):
         self.render('backups.html', **self.base_kwargs)
 
 class StatsHandler(BaseHandler):
-    def get (self, what):
+    def get (self, what, by='doctor'):
         inp_from = self.get_argument('vs_from', models.MyT.today_uk())
         inp_to   = self.get_argument('vs_to',   models.MyT.today_uk())
 
-        from_d = models.MyT.date_from_uk(inp_from)
-        to_d   = models.MyT.date_from_uk(inp_to)
-
-        from_d = from_d.strftime("%Y-%m-%d")
-        to_d   = to_d.strftime("%Y-%m-%d")
+        if what == 'visits':
+            if by =='doctor':
+                self.get_visits_doc(inp_from, inp_to)
+            elif by == 'department':
+                self.get_visits_dept(inp_from, inp_to)
+            else:
+                logging.error('StatsHandler:get(): Unknown "by": %s', by)
+                self.get_visits_doc(inp_from, inp_to)
+        else:
+            logging.error('StatsHandler:get(): Unknown "what": %s', what)
+            self.get_visits_doc(inp_from, inp_to)
 
         ## The following code is commented out and left here for future
         ## reference. It enables the filtering out of visits that pertain to a
@@ -226,17 +232,23 @@ class StatsHandler(BaseHandler):
         # self.render('visit_stats.html', title=config.get_title(),
         #             depts=depts, docs=docs, show=True, visits=visits)
 
+    def get_visits_doc (self, inp_from, inp_to):
+        from_d = models.MyT.date_from_uk(inp_from)
+        to_d   = models.MyT.date_from_uk(inp_to)
+
+        from_d = from_d.strftime("%Y-%m-%d")
+        to_d   = to_d.strftime("%Y-%m-%d")
+
         visits = session().query(models.Consultation)
         visits = visits.filter(and_(models.Consultation.date >= from_d,
                                     models.Consultation.date <= to_d))
 
-        depsu = {}
         docsu = {}
         for visit in visits:
             if not visit.doctor_id in docsu:
                 docsu.update({visit.doctor_id : {
-                    'name' : models.Doctor.name_from_id(session,
-                                                        visit.doctor_id),
+                    'doc'  : models.Doctor.find_by_id(session,
+                                                      visit.doctor_id),
                     'patcnt' : 1,
                     'fee'    : visit.charge,}
                     })
@@ -246,6 +258,27 @@ class StatsHandler(BaseHandler):
                 val['fee'] += visit.charge
                 docsu.update({visit.doctor_id : val})
 
+        summary = {'doc'  : docsu,
+                   'from' : inp_from,
+                   'to'   : inp_to}
+
+        docs  = models.Doctor.sorted_doc_names_with_id(session)
+        self.render('stats_visits_doctor.html', docs=docs, by='Doctor',
+                    summary=summary, **self.base_kwargs)
+
+    def get_visits_dept (self, inp_from, inp_to):
+        from_d = models.MyT.date_from_uk(inp_from)
+        to_d   = models.MyT.date_from_uk(inp_to)
+
+        from_d = from_d.strftime("%Y-%m-%d")
+        to_d   = to_d.strftime("%Y-%m-%d")
+
+        visits = session().query(models.Consultation)
+        visits = visits.filter(and_(models.Consultation.date >= from_d,
+                                    models.Consultation.date <= to_d))
+
+        depsu = {}
+        for visit in visits:
             try:
                 dep = depsu[visit.dept_id]
                 dep['patcnt'] += 1
@@ -259,16 +292,13 @@ class StatsHandler(BaseHandler):
                     'fee'    : visit.charge,
                     }
 
-        summary = {'doc'  : docsu,
-                   'dept' : depsu,
+        summary = {'dept' : depsu,
                    'from' : inp_from,
                    'to'   : inp_to}
 
         depts = models.Department.sorted_dept_names_with_id(session)
-        docs  = models.Doctor.sorted_doc_names_with_id(session)
-        self.render('visit_stats.html', depts=depts, docs=docs,
+        self.render('stats_visits_department.html', depts=depts, by='Department',
                     summary=summary, **self.base_kwargs)
-
 
 class MiscAdminHandler(BaseHandler):
     def edit_depts (self):
@@ -334,7 +364,7 @@ class MiscAdminHandler(BaseHandler):
         elif op == 'mas_exit':
             sys.exit(0)
         elif op == 'mas_vs':
-            self.redirect('/stats/visits')
+            self.redirect('/stats/visits/doctor')
         elif op == 'mas_vl':
             logging.info('%s', self.get_argument('misc_admin_params', 'N/A'))
             self.redirect('/logs#vl_bottom')
@@ -1052,7 +1082,7 @@ application = tornado.web.Application([
     (r"/miscadmin/", MiscAdminHandler),
     (r"/backup", BackupHandler),
     (r"/backup/(.*)", BackupHandler),
-    (r"/stats/(.*)", StatsHandler),
+    (r"/stats/(.*)/(.*)", StatsHandler),
     (r"/logs", LogsHandler),
 
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path})

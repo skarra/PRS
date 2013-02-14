@@ -623,7 +623,7 @@ footer p {
   positive: relative;
 }
 
-#sheet input[type="submit"], #guide input[type="submit"] {
+#guide input[type="submit"] {
     position: relative;
   height: 27px;
   border: 1px solid #b7b7b7;
@@ -1015,6 +1015,10 @@ tag {
     font-size: 125%;
 }
 
+.blue {
+    color: blue;
+}
+
 #vs_doc_table_length label select, #vs_dept_table_length label select {
     height: 20px;
     padding: 0px;
@@ -1107,4 +1111,35 @@ blink {
   -webkit-animation-iteration-count: infinite;  
   -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
   -webkit-animation-duration: 1s; 
+}
+
+#vs_form {
+    margin-top: 10px;
+}
+
+.submit_but {
+    position: relative;
+    border: 1px solid #b7b7b7;
+    font-family: ff-meta-web-pro-1, ff-meta-web-pro-2, MetaPlus, arial, sans-serif;
+    font-size: 14px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #444;
+    background: #d6d6d6;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d6d6d6), color-stop(100%, #c6c6c6));
+    background-image: -webkit-linear-gradient(#d6d6d6, #c6c6c6);
+    background-image: -moz-linear-gradient(#d6d6d6, #c6c6c6);
+    background-image: -o-linear-gradient(#d6d6d6, #c6c6c6);
+    background-image: -ms-linear-gradient(#d6d6d6, #c6c6c6);
+    background-image: linear-gradient(#d6d6d6, #c6c6c6);
+    height: 32px;
+    margin: 0px;
+    padding: 0 12px;
+    margin-bottom: 5px;
+    vertical-align: middle;
 }

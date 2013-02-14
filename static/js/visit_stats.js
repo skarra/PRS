@@ -1,6 +1,6 @@
 //
 // Created       : Wed Jan 30 18:07:03 IST 2013
-// Last Modified : Tue Feb 12 14:41:47 IST 2013
+// Last Modified : Thu Feb 14 15:20:58 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -23,7 +23,8 @@
 // This file is loaded only inside the visit_stats.html template when
 // the user clicks on 'Visit Stats' link in the main navigation bar to the left.
 
-function setUpTable (elemid) {
+function setUpTable (elemid, aoColumns) {
+    var cols = aoColumns.length;
     $(elemid).dataTable({
 	//       "bInfo" : false,
 
@@ -32,11 +33,7 @@ function setUpTable (elemid) {
 
 	"iDisplayLength" : -1,
 
-	"aoColumns": [
-            { "sClass": "right",},
-            { "sClass": "left", },
-            { "sClass": "right",},
-            { "sClass": "right",}],
+	"aoColumns": aoColumns,
 
 	"fnFooterCallback": function (nRow, aaData, iStart, iEnd, aiDisplay) {
 	    /*
@@ -46,8 +43,8 @@ function setUpTable (elemid) {
 	    var iTotalVisit = 0;
 	    var iTotalFee   = 0;
 	    for (var i=0 ; i<aaData.length ; i++ ) {
-		iTotalVisit += aaData[i][2]*1;
-		iTotalFee += aaData[i][3]*1;
+		iTotalVisit += aaData[i][cols-2]*1;
+		iTotalFee   += aaData[i][cols-1]*1;
 	    }
 
             $("#vs_total_visits").html(iTotalVisit);
@@ -57,8 +54,8 @@ function setUpTable (elemid) {
 	    var iPageVisit = 0;
 	    var iPageFee   = 0;
 	    for (var i=iStart; i<iEnd ; i++) {
-		iPageVisit += aaData[aiDisplay[i]][2]*1;
-		iPageFee   += aaData[aiDisplay[i]][3]*1;
+		iPageVisit += aaData[aiDisplay[i]][cols-2]*1;
+		iPageFee   += aaData[aiDisplay[i]][cols-1]*1;
 	    }
       
 	    /* Modify the footer row to match what we want */
@@ -70,6 +67,16 @@ function setUpTable (elemid) {
 }
 
 jQuery(function() {
-    setUpTable("#vs_dept_table");
-    setUpTable("#vs_doc_table");
+    setUpTable("#vs_dept_table", 
+	       [{ "sClass": "center",},  // S. No
+		{ "sClass": "left", },   // Department Name
+		{ "sClass": "right",},
+		{ "sClass": "right"}]);
+    setUpTable("#vs_doc_table", 
+	       [{ "sClass": "center",},  // S. No
+		{ "sClass": "center", }, // Title
+		{ "sClass": "left", },   // Name
+		{ "sClass": "left", },   // Qualifications
+		{ "sClass": "right",},
+		{ "sClass": "right"}]);
 });
