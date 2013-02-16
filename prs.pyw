@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Feb 16 15:28:30 IST 2013
+## Last Modified : Sat Feb 16 15:36:26 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -1170,6 +1170,9 @@ def main ():
         logging.info('Program already running. Just starting a browser session.')
         start_browser()
         sys.exit(0)
+
+    logging.info('** On Startup: Using PRS Version: %s', prs_ver)
+    logging.info('** On Startup: Schema Version: %s', models.schema_ver)
 
     start_browser()
     tornado.ioloop.IOLoop.instance().start()
