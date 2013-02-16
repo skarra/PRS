@@ -65,7 +65,7 @@ def auto_ver (resource):
 
 
 def db_env ():
-    return models.db
+    return models.db_env()
 
 def env_name (inpdb=None):
     return models.env_name(inpdb)
