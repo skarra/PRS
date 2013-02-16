@@ -45,6 +45,46 @@ days   = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
           'Friday', 'Saturday']
 shiftns = ['Morning', 'Afternoon']
 
+production = 0
+sample     = 1
+db = sample
+#db = production
+sess_p = None
+sess_s = None
+eng_s  = None
+eng_p  = None
+
+def session (env=None):
+    if env == production or db_env() == production:
+        return sess_p
+    else:
+        return sess_s
+
+def db_env ():
+    return db
+
+def env_name (inpdb=None):
+    """Return a string representation of the database environment current
+    active or the specfied"""
+
+    db = inpdb if inpdb else db_env()
+    if is_production(db):
+        return 'production'
+    else:
+        return 'dev'
+
+def is_production (env):
+    return env == production
+
+def is_demo (env):
+    return env == sample
+
+def toggle_env ():
+    global db
+    if is_production(db_env()):
+        db = sample
+    else:
+        db = production
 
 class MyT: 
     @classmethod

@@ -51,11 +51,6 @@ config      = config.Config(config_file)
 settings = {'debug': True,
             'static_path': os.path.join(DIR_PATH, 'static')}
 
-production = 0
-sample     = 1
-db = sample
-#db = production
-
 def auto_ver (resource):
     """Intended to be invoked from inside tornado templates, given a resource
     names such as /static/ctl.js this will return something like
@@ -70,30 +65,22 @@ def auto_ver (resource):
 
 
 def db_env ():
-    return db
+    return models.db
 
 def env_name (inpdb=None):
-    """Return a string representation of the database environment current
-    active or the specfied"""
-
-    db = inpdb if inpdb else db_env()
-    if is_production(db):
-        return 'production'
-    else:
-        return 'dev'
+    return models.env_name(inpdb)
 
 def is_production (env):
-    return env == production
+    return models.is_production(env)
 
 def is_demo (env):
-    return env == sample
+    return models.is_demo(env)
 
 def toggle_env ():
-    global db
-    if is_production(db_env()):
-        db = sample
-    else:
-        db = production
+    models.toggle_env()
+
+def session (env=None):
+    return models.session(env)
 
 class BaseHandler(tornado.web.RequestHandler):
     """Generates an error response with status_code for all requests."""
@@ -1056,12 +1043,6 @@ def engine (val=None):
     else:
         return _engine
 
-def session (env=None):
-    if env == production or db_env() == production:
-        return sess_p
-    else:
-        return sess_s
-
 application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/new/patient", NewPatientHandler),
@@ -1153,15 +1134,13 @@ def setup_logging ():
 
 
 def main ():
-    global eng_s, sess_s, eng_p, sess_p
-
     setup_logging()
     logging.info('Well, well. Just opened the log file. Hurrah!')
 
     tornado.options.parse_command_line()
 
-    eng_s, sess_s = models.setup_tables(get_demo_db_name())
-    eng_p, sess_p = models.setup_tables(get_pdn_db_name())
+    models.eng_s, models.sess_s = models.setup_tables(get_demo_db_name())
+    models.eng_p, models.sess_p = models.setup_tables(get_pdn_db_name())
 
     try:
         application.listen(config.get_http_port())
