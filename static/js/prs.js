@@ -657,6 +657,7 @@ function validateVisitStatsSubmit () {
     var from = $("#vs_from").val();
     var to   = $("#vs_to").val();
     var msg  = '';
+    var res = null;
 
     if (from == '') {
 	msg += 'From date cannot be empty.\n';
@@ -665,6 +666,14 @@ function validateVisitStatsSubmit () {
     if (to == '') {
 	msg += 'To date cannot be empty.\n';
     }
+
+    res  = from.match(/(\d+)\-(\d+)\-(\d\d\d\d)/);
+    from = new Date(res[3], res[2]-1, res[1]);
+    res  = to.match(/(\d+)\-(\d+)\-(\d\d\d\d)/);
+    to   = new Date(res[3], res[2]-1, res[1]);
+
+    console.log('res: ' + res);
+    console.log('From: ' + from + '; to: ' + to);
 
     if (msg == '' && (from > to)) {
 	msg += 'From has to be an earlier than or same as To date.\n';
