@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Tue Feb 12 15:10:49 IST 2013
+// Last Modified : Sat Feb 16 14:34:56 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -437,7 +437,7 @@ function exit () {
 	  }).error(function() {
 	      try {
 		  console.log('Message 1');
-		  window.location = '/';
+		  window.location = '//www.google.com';
 	      } catch (err) {
 		  console.log('Message 2: ' + err);
 		  window.close();
