@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Tue Feb 12 15:37:14 IST 2013
+## Last Modified : Sat Feb 16 15:29:10 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -37,6 +37,8 @@ from   sqlalchemy.schema import Column, ForeignKey, Table
 from   sqlalchemy.ext.hybrid import hybrid_property
 
 from   sqlalchemy.ext.declarative import declarative_base
+
+schema_ver = 1
 
 Base   = declarative_base()
 days   = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',

@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu Feb 14 15:14:19 IST 2013
+## Last Modified : Sat Feb 16 15:28:30 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -366,7 +366,9 @@ class MiscAdminHandler(BaseHandler):
         elif op == 'mas_vs':
             self.redirect('/stats/visits/doctor')
         elif op == 'mas_vl':
-            logging.info('%s', self.get_argument('misc_admin_params', 'N/A'))
+            logging.info('** Using PRS Version: %s', prs_ver)
+            logging.info('** Schema Version: %s', models.schema_ver)
+            logging.info('** %s', self.get_argument('misc_admin_params', 'N/A'))
             self.redirect('/logs#vl_bottom')
         elif op == 'mas_ba':
             self.redirect('/backup')
