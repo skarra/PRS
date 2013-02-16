@@ -1,6 +1,6 @@
 ##
 ## Created       : Sat Nov 17 14:46:20 IST 2012
-## Last Modified : Wed Feb 06 11:56:36 IST 2013
+## Last Modified : Sat Feb 16 13:02:14 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -104,7 +104,7 @@ endif
 	@echo ==== Cloning temp repository for ${REL}
 	rm -rf /tmp/${basename}-${REL}
 	git clone --recursive . /tmp/${basename}-${REL}
-	rm -rf /tmp/${basename}-${REL}/.git
+	find /tmp/${basename}-${REL} -name .git -print | xargs rm -rf
 
 	@echo
 	@echo ==== Creating bundles
