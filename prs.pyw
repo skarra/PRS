@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Feb 16 15:36:26 IST 2013
+## Last Modified : Tue Feb 19 18:31:57 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -232,16 +232,21 @@ class StatsHandler(BaseHandler):
 
         docsu = {}
         for visit in visits:
+            new_incr = 1 if visit.first_doc_visit == True else 0
+            old_incr = 1 - new_incr
+
             if not visit.doctor_id in docsu:
                 docsu.update({visit.doctor_id : {
                     'doc'  : models.Doctor.find_by_id(session,
                                                       visit.doctor_id),
-                    'patcnt' : 1,
+                    'patcnt_old' : old_incr,
+                    'patcnt_new' : new_incr,
                     'fee'    : visit.charge,}
                     })
             else:
                 val = docsu[visit.doctor_id]
-                val['patcnt'] += 1
+                val['patcnt_old'] += old_incr
+                val['patcnt_new'] += new_incr
                 val['fee'] += visit.charge
                 docsu.update({visit.doctor_id : val})
 
@@ -266,16 +271,21 @@ class StatsHandler(BaseHandler):
 
         depsu = {}
         for visit in visits:
+            new_incr = 1 if visit.first_dept_visit == True else 0
+            old_incr = 1 - new_incr
+
             try:
                 dep = depsu[visit.dept_id]
-                dep['patcnt'] += 1
+                dep['patcnt_new'] += new_incr
+                dep['patcnt_old'] += old_incr
                 dep['fee']    += visit.charge
             except KeyError, e:
                 # It's not there, so we are going to insert it first up.
                 depsu[visit.dept_id] = {
                     'name' : models.Department.name_from_id(session,
                                                             visit.dept_id),
-                    'patcnt' : 1,
+                    'patcnt_new' : new_incr,
+                    'patcnt_old' : old_incr,
                     'fee'    : visit.charge,
                     }
 

@@ -1,6 +1,6 @@
 //
 // Created       : Wed Jan 30 18:07:03 IST 2013
-// Last Modified : Thu Feb 14 15:20:58 IST 2013
+// Last Modified : Wed Feb 20 07:47:06 IST 2013
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -40,28 +40,31 @@ function setUpTable (elemid, aoColumns) {
 	     * Calculate the total visit count and net fee for all
 	     * elements displayed in this page
 	     */
-	    var iTotalVisit = 0;
-	    var iTotalFee   = 0;
+	    var iTotalVisitN = 0, iTotalVisitO = 0;
+	    var iTotalFee    = 0;
 	    for (var i=0 ; i<aaData.length ; i++ ) {
-		iTotalVisit += aaData[i][cols-2]*1;
-		iTotalFee   += aaData[i][cols-1]*1;
+		iTotalVisitN += aaData[i][cols-3]*1;
+		iTotalVisitO += aaData[i][cols-2]*1;
+		iTotalFee    += aaData[i][cols-1]*1;
 	    }
 
-            $("#vs_total_visits").html(iTotalVisit);
+            $("#vs_total_visits").html(iTotalVisitN+iTotalVisitO);
             $("#vs_total_fee").html('Rs. ' + iTotalFee);
 
 	    /* Calculate the market share for browsers on this page */
-	    var iPageVisit = 0;
-	    var iPageFee   = 0;
+	    var iPageVisitN = 0, iPageVisitO = 0;
+	    var iPageFee    = 0;
 	    for (var i=iStart; i<iEnd ; i++) {
-		iPageVisit += aaData[aiDisplay[i]][cols-2]*1;
-		iPageFee   += aaData[aiDisplay[i]][cols-1]*1;
+		iPageVisitN += aaData[aiDisplay[i]][cols-3]*1;
+		iPageVisitO += aaData[aiDisplay[i]][cols-2]*1;
+		iPageFee    += aaData[aiDisplay[i]][cols-1]*1;
 	    }
       
 	    /* Modify the footer row to match what we want */
 	    var nCells = nRow.getElementsByTagName('th');
-	    nCells[1].innerHTML = parseInt(iPageVisit);
-	    nCells[2].innerHTML = 'Rs. ' + parseInt(iPageFee);
+	    nCells[1].innerHTML = parseInt(iPageVisitN);
+	    nCells[2].innerHTML = parseInt(iPageVisitO);
+	    nCells[3].innerHTML = 'Rs. ' + parseInt(iPageFee);
 	}
     });
 }
@@ -71,12 +74,14 @@ jQuery(function() {
 	       [{ "sClass": "center",},  // S. No
 		{ "sClass": "left", },   // Department Name
 		{ "sClass": "right",},
+		{ "sClass": "right",},
 		{ "sClass": "right"}]);
     setUpTable("#vs_doc_table", 
 	       [{ "sClass": "center",},  // S. No
 		{ "sClass": "center", }, // Title
 		{ "sClass": "left", },   // Name
 		{ "sClass": "left", },   // Qualifications
+		{ "sClass": "right",},
 		{ "sClass": "right",},
 		{ "sClass": "right"}]);
 });

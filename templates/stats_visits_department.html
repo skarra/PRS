@@ -1,11 +1,24 @@
 {% extends 'stats_visits_base.html' %}
 
 {% block vs_content %}
+
+<strong class="blue">Note:</strong>
+
+<b>First Visit</b> is when a particular patient comes to the department for the
+first time. Note that this patient could have consulted another department
+earlier, and as such an old 'registration'.  <p/>
+
+<b>Revisit</b> is when a particular patient comes to a department that he or
+she has visited in the past.
+
+<p/>
+
 <table id="vs_dept_table" class="display">
   <thead>
     <th> ID           </th>
     <th> Department   </th>
-    <th> Visit Count  </th>
+    <th> First Visits </th>
+    <th> Revisits     </th>
     <th> Total Charge </th>
   </thead>
 
@@ -13,15 +26,17 @@
     <th style="text-align:right" colspan="2"> Total: </th>
     <th style="text-align:right"> </th>
     <th style="text-align:right"> </th>
+    <th style="text-align:right"> </th>
   </tfoot>
 
   <tbody>
     {% for key, depv in summary['dept'].iteritems() %}
     <tr>
-      <td> {{ key }}            </td>
-      <td> {{ depv['name']   }} </td>
-      <td> {{ depv['patcnt'] }} </td>
-      <td> {{ depv['fee']    }} </td>
+      <td> {{ key                }} </td>
+      <td> {{ depv['name']       }} </td>
+      <td> {{ depv['patcnt_new'] }} </td>
+      <td> {{ depv['patcnt_old'] }} </td>
+      <td> {{ depv['fee']        }} </td>
     </tr>
     {% end %}
   </tbody>

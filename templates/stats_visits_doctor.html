@@ -1,13 +1,26 @@
 {% extends 'stats_visits_base.html' %}
 
 {% block vs_content %}
+
+<strong class="blue">Note:</strong>
+
+<b>First Visit</b> is when a particular patient comes to the doctor for the
+first time. Note that this patient could have consulted another doctor (even
+in the same department) earlier, and as such an old 'registration'.  <p/>
+
+<b>Revisit</b> is when a particular patient comes to a doctor that he or
+she has visited in the past.
+
+<p/>
+
 <table id="vs_doc_table" class="display" name="vs_doc_table">
   <thead>
     <th> ID       </th>
-    <th> Title   </th>
+    <th> Title    </th>
     <th> Doctor   </th>
-    <th> Qualifications   </th>
-    <th> Visit Count   </th>
+    <th> Qualifications </th>
+    <th> First Visits   </th>
+    <th> Revisits       </th>
     <th> Total Charge   </th>
   </thead>
 
@@ -15,17 +28,19 @@
     <th style="text-align:right" colspan="4"> Total: </th>
     <th style="text-align:right"> </th>
     <th style="text-align:right"> </th>
+    <th style="text-align:right"> </th>
   </tfoot>
 
   <tbody>
     {% for key, docv in summary['doc'].iteritems() %}
     <tr>
-      <td> {{ key }}               </td>
-      <td> {{ docv['doc'].title }} </td>
-      <td> {{ docv['doc'].name  }} </td>
-      <td> {{ docv['doc'].quals }} </td>
-      <td> {{ docv['patcnt']    }} </td>
-      <td> {{ docv['fee']       }} </td>
+      <td> {{ key }}                </td>
+      <td> {{ docv['doc'].title  }} </td>
+      <td> {{ docv['doc'].name   }} </td>
+      <td> {{ docv['doc'].quals  }} </td>
+      <td> {{ docv['patcnt_new'] }} </td>
+      <td> {{ docv['patcnt_old'] }} </td>
+      <td> {{ docv['fee']        }} </td>
     </tr>
     {% end %}
   </tbody>
