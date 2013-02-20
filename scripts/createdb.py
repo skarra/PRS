@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Feb 06 11:55:00 IST 2013
+## Last Modified : Mon Feb 18 11:07:41 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -253,6 +253,7 @@ def main ():
 
     logging.info('Settingup schema and tables....')
     engine, session = models.setup_tables("../db/sample.db")
+    models.sess_s = session
 
     logging.info('Importing US Congressmen as Patients...')
     add_uscongressmen_as_patients(session)

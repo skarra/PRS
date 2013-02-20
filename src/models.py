@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Sat Feb 16 15:29:10 IST 2013
+## Last Modified : Tue Feb 19 18:28:48 IST 2013
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -30,7 +30,7 @@ import datetime, logging, re
 # import apsw
 
 from   sqlalchemy        import orm, create_engine
-from   sqlalchemy.orm    import relationship, backref, column_property
+from   sqlalchemy.orm    import relationship, backref, column_property, validates
 from   sqlalchemy.pool   import SingletonThreadPool as STP
 from   sqlalchemy.types  import Integer, Boolean, Date, Text, Unicode
 from   sqlalchemy.schema import Column, ForeignKey, Table
@@ -140,6 +140,25 @@ class Patient(Base):
     consultations = relationship("Consultation", 
                                  backref=backref('patient',
                                                  cascade="all"))
+
+    @classmethod
+    def find_by_id (self, session, did):
+        """Returns the record that matches given id. Returns None if
+        there is no match."""
+
+        q   = session().query(Patient)
+        recs = q.filter_by(id=did)
+        return recs.first() if recs.count() > 0 else None
+
+    def earliest_visit_id (self, session):
+        """Returns the ID of this patient's earliest visit. For now this is
+        estimated as the visit done on the earliest date. If there is more
+        than one visit on that day, the visit with the lowest ID is
+        returned. FIXME: This stuff is way too slow to work in practise. to
+        generate statistics"""
+
+        q = session().query(Consultation).filter_by(patient_id=self.id).order_by(Consultation.date).order_by(Consultation.cid)
+        return q.first().id if q.count() > 0 else None
 
     def __repr__(self):
         return ("<Patient(id:%d,Name:%s, age:%d)>" %
@@ -377,6 +396,36 @@ class Slot(Base):
 # def gen_cid (context):
 #     return Consultation.query.filter_by(date=context.current_parameters['date']).count() + 1
 
+def first_doc_visit (context):
+    try:
+        pat_id = context.current_parameters['patient_id']
+        doc_id = context.current_parameters['doctor_id']
+    except KeyError, e:
+        ## We are not updating the patient record. 
+        return False
+
+    p = Patient.find_by_id(session, pat_id)
+    for con in p.consultations:
+        if con.doctor_id == doc_id:
+            return False
+
+    return True
+
+def first_dept_visit (context):
+    try:
+        pat_id = context.current_parameters['patient_id']
+        dept_id = context.current_parameters['dept_id']
+    except KeyError, e:
+        ## We are not updating the patient record. 
+        return False
+
+    p = Patient.find_by_id(session, pat_id)
+    for con in p.consultations:
+        if con.dept_id == dept_id:
+            return False
+
+    return True
+
 class Consultation(Base):
     __tablename__ = 'consultation'
 
@@ -388,8 +437,55 @@ class Consultation(Base):
     charge     = Column(Integer, default=0)
     notes      = Column(Text())
     cid        = Column(Integer, default=0)   # Visit No. in day.
+    first_doc_visit  = Column(Boolean(), default=None)
+    first_dept_visit = Column(Boolean(), default=None)
 
     ## backrefs from patient and doctor
+
+    @validates('doctor_id', 'dept_id', 'patient_id')
+    def set_first_visit (self, key, value):
+        if key == 'doctor_id':
+            if not self.patient_id or not self.dept_id:
+                return value
+            docid = int(value)
+            patid = self.patient_id
+            depid = self.dept_id
+
+        if key == 'patient_id':
+            if not self.doctor_id or not self.dept_id:
+                return value
+            docid = self.doctor_id
+            patid = int(value)
+            depid = self.dept_id
+
+        if key == 'dept_id':
+            if not self.patient_id or not self.doctor_id:
+                return value
+            docid = self.doctor_id
+            patid = self.patient_id
+            depid = int(value)
+
+        ## Now we are confident that of the 3 attributes we are interested in,
+        ## only one remains to be set, and that is the last value.
+
+        first_docv = True
+        first_depv = True
+
+        p = Patient.find_by_id(session, patid)
+        for con in p.consultations:
+            if con.doctor_id == docid:
+                first_docv = False
+                break
+
+        for con in p.consultations:
+            if con.dept_id == depid:
+                first_depv = False
+                break
+    
+        self.first_doc_visit  = first_docv
+        self.first_dept_visit = first_depv
+
+        return value
 
     @classmethod
     def num_in_day (self, session, date):
