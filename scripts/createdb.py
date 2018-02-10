@@ -3,7 +3,7 @@
 ## Created       : Mon May 14 18:10:41 IST 2012
 ## Last Modified : Mon Feb 18 11:07:41 IST 2013
 ##
-## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
+## Copyright (C) 2012-18 Sriram Karra <karra.etc@gmail.com>
 ##
 ## This file is part of PRS
 ##
@@ -251,7 +251,10 @@ def add_consultations (session):
 def main ():
     logging.getLogger().setLevel(logging.INFO)
 
-    logging.info('Settingup schema and tables....')
+    logging.info('Setting up empty database with approved schema and tables....')
+    engine, session = models.setup_tables("../db/empty.db")
+
+    logging.info('Setting up schema and tables....')
     engine, session = models.setup_tables("../db/sample.db")
     models.sess_s = session
 
