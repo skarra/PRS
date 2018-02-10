@@ -49,7 +49,7 @@ endif
 	@echo ==== Creating bundles
 	rm -f /tmp/cmc-${TAG}.zip
 	cd /tmp && zip -q -r cmc-${TAG}.zip cmc-${TAG}
-	mv /tmp/cmc-${TAG}.zip /Users/sriramkarra/dropbox/Nalini_Sriram/
+	mv /tmp/cmc-${TAG}.zip ${HOME}/Dropbox/Nalini_Sriram/PrS/
 
 	@echo
 	@echo "**********************"
@@ -57,4 +57,4 @@ endif
 	@echo 
 	@echo Bundles available here:
 	@echo
-	ls -ldh /Users/sriramkarra/dropbox/Nalini_Sriram/cmc*
+	ls -ldh ${HOME}/Dropbox/Nalini_Sriram/PrS/cmc*
