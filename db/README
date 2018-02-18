@@ -1,1 +1,3 @@
 Directory for databases.
+
+If you want to use an empty database for demo, copy empty.db and rename the copy to sample.db
