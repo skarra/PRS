@@ -34,7 +34,7 @@ endif
 	@echo
 	@echo ==== Cloning temp repository for ${TAG}
 	rm -rf /tmp/cmc-${TAG}
-	cd .. && git clone . /tmp/cmc-${TAG}
+	cd .. && git clone --recursive . /tmp/cmc-${TAG}
 
 	@echo
 	@echo ==== Checking out TAG ${TAG} ...
