@@ -104,44 +104,44 @@ function validateNewPatient (event) {
     var f_relph    = $('#new_relph').val();
     var f_relrel   = $('#new_relrel').val();
 
-    var failed  = false;
-    var errmsg  = "";
-    // When set, we do not save, but no alert is presented to the user
-    var silent_err = false;
+    var error  = false;
+    var warning = false;
+    var errmsg  = "Error!!\n\n";
+    var warningmsg = "Warning!!\n\n";
 
     if (f_name === "") {
+	error = true;
         errmsg += "Name cannot be empty\n";
     }
 
     if (f_age === "") {
+	error = true;
         errmsg += "Age field cannot be empty\n";
     } else {
     }
 
     if (f_phone == "") {
-	errmsg += "Your phone number cannot be empty\n";
-    } else {
-	if (!isValidPhoneNumber(f_phone, "Phone number")) {
-	    silent_err = true;
-	}
+	warning = true
+	warningmsg += "We recommend providing a Patient phone number. You can provide it later.\n";
+    } else if (!isValidPhoneNumber(f_phone, "Phone number")) {
+	warning = true;
+	warningmsg += "Patient phone number does not look valid.\n";
     }
 
     if (f_relname == "") {
 	errmsg += "Emergency Contact details (name) cannot be empty\n";
     }
 
-    // Commenting this out as it is requested that the emergency
-    // contact number is not made mandatory
-
-    // if (f_relph == "") {
-    // 	errmsg += "Emergency Contact details (phone) cannot be empty\n";
-    // } else {
-    // 	if (!isValidPhoneNumber(f_relph, "Relative's Phone number")) {
-    // 	    silent_err = true;
-    // 	}
-    // }
+    if (f_relph == "") {
+	error = true;
+	errmsg += "Emergency Contact details (phone) cannot be empty\n";
+    } else if (!isValidPhoneNumber(f_relph, "Relative's Phone number")) {
+	warning = true;
+	warningmsg += "Emergency Contact phone number does not appear valid\n";
+    }
 
     if (f_relrel == "") {
+	error = true;
 	errmsg += "Emergency Contact details (relation) cannot be empty\n";
     }
 
@@ -149,13 +149,13 @@ function validateNewPatient (event) {
         f_reg_date = new Date();
     }
 
-    if (errmsg != "") {
-        alert(errmsg)
+    if (error) {
+        alert(errmsg);
         return false;
     }
 
-    if (silent_err) {
-	return false;
+    if (warning) {
+	alert(warningmsg);
     }
 }
 
