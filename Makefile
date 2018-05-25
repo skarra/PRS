@@ -18,6 +18,8 @@
 ## You should have a copy of the license in the base directory of PRS.  If
 ## not, see <http://www.gnu.org/licenses/>.
 
+## TODO: 2018-04-07: What is the difference between the release and bundle targets?
+
 ##
 ## You do not need to use this Makefile to run the program. If all you
 ## want to do is to use PRS, there is nothing here.
