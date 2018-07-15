@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Tue Feb 19 18:31:57 IST 2013
+## Last Modified : Sun Jul 15 12:50:24 PDT 2018
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -782,9 +782,12 @@ class NewPatientHandler(BaseHandler):
 class DoctorHandler(BaseHandler):
     ## FIXME: These arrays should be generated based on the actual shift
     ## timings from the 'Shift' table
-    mophours=["-- Select --", "09:00", "09:30", "10:00", "10:30",
-              "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00"]
-    aophours=["-- Select --", "14:00", "14:30", "15:00", "15:30",
+    mophours=["-- Select --",
+              "08:00", "08:30", "09:00", "09:30",
+              "10:00", "10:30", "11:00", "11:30",
+              "12:00", "12:30", "13:00", "13:30", "14:00"]
+    aophours=["-- Select --",
+              "14:00", "14:30", "15:00", "15:30",
               "16:00", "16:30", "17:00", "17:30", "18:00"]
 
     # FIXME: This should ideally go into a config file, and the template in
