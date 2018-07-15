@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Mon Feb 18 11:07:41 IST 2013
+## Last Modified : Sun Jul 15 12:58:53 PDT 2018
 ##
 ## Copyright (C) 2012-18 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -162,7 +162,7 @@ def add_doctor_names (session, doctors_file):
                                 fee_oldp=random.choice([0, 20, 30, 50]),
                                 quals=quals,
                                 phone=str(random.randint(ph_lower, ph_upper)),
-                                email=n + '@mentalasylum.in')
+                                email=n + '@kilpauk.edu')
             session.add(doc)
 
         session.commit()
