@@ -1094,6 +1094,8 @@ def get_pdn_dir ():
     first created and the name of the directory is returned. The full
     absolute path is returned"""
 
+    ## TODO: Make this a config variable part of config.json and read
+    ## in via config.py
     d = os.path.abspath(os.path.join('..', 'PRS-Production'))
 
     if not os.path.exists(d):
