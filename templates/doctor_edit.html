@@ -45,7 +45,7 @@ $(function() {
                   $(tagf).val(res[1]);
                   $(tagt).val(res[2]);
               } catch (e) {
-                  console.log('Exception trying to set the doctor timings: ' + e);
+		  // This is expected for shifts the doctor currently does not work.
               }
           }
         }

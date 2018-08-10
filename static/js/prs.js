@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sat Feb 16 14:34:56 IST 2013
+// Last Modified : Thu Aug 09 21:46:03 PDT 2018
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -338,18 +338,25 @@ function addHandlers_doctor_base () {
 
     $("#new_doctor_form").submit(validateNewDoctor);
 
+    // In the department dropdowns, any time the user selects one of the
+    // options, we want to mark such elements as not available in the other
+    // sibling dropddowns, so that we get unique department names.
     var prev_val = null;
     $("select.deptsel").focus(function() {
 	prev_val = $(this).val();
+	if (prev_val != '-- Select --') {
+	    $(this).siblings().find("option:[value='"+prev_val+"']")
+		.attr('disabled', 'disabled');
+	}
     }).change(function() {
 	var val = $(this).val();
-	if (prev_val != null && prev_val != '-- Select --') {
-	    $(this).siblings().find("option:[value="+prev_val+"]")
+        if (prev_val != null && prev_val != '-- Select --') {
+	    $(this).siblings().find("option:[value='"+prev_val+"']")
 		.removeAttr('disabled');	
 	}
 
 	if (val != '-- Select --') {
-	    $(this).siblings().find("option:[value="+val+"]")
+	    $(this).siblings().find("option:[value='"+val+"']")
 		.attr('disabled', 'disabled');
 	}
     });
