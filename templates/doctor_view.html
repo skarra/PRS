@@ -42,7 +42,7 @@ template:
   <div id="head">
     <h1> 
       {{ rec.title }} {{ rec.name }} 
-      <span class="quals"> ({{ rec.quals }}) </span>
+      <span class="quals"> {{ rec.quals }} </span>
       {% if not rec.active %}
         <span class="red"> (Inactive)</span>
       {% end %}
