@@ -1,6 +1,6 @@
 ##
 ## Created       : Sat Nov 17 14:46:20 IST 2012
-## Last Modified : Sat Feb 16 13:02:14 IST 2013
+## Last Modified : Fri Aug 10 23:02:01 PDT 2018
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -23,6 +23,15 @@
 ##
 ## You do not need to use this Makefile to run the program. If all you
 ## want to do is to use PRS, there is nothing here.
+##
+##
+## Releasing a new version
+## =======================
+##
+## $ make REL=v0.20
+##
+## General Info
+## ============
 ##
 ## This Makefile automates some of the steps in the release
 ## process. Ideally we want to automate all of the following setps
