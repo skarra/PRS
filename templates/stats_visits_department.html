@@ -17,13 +17,17 @@ she has visited in the past.
   <thead>
     <th> ID           </th>
     <th> Department   </th>
-    <th> First Visits </th>
-    <th> Revisits     </th>
+    <th> New Patients </th>
+    <th> New Patients - Charge </th>
+    <th> Returning Patients </th>
+    <th> Returning Patients - Charge</th>
     <th> Total Charge </th>
   </thead>
 
   <tfoot>
     <th style="text-align:right" colspan="2"> Total: </th>
+    <th style="text-align:right"> </th>
+    <th style="text-align:right"> </th>
     <th style="text-align:right"> </th>
     <th style="text-align:right"> </th>
     <th style="text-align:right"> </th>
@@ -35,8 +39,10 @@ she has visited in the past.
       <td> {{ key                }} </td>
       <td> {{ depv['name']       }} </td>
       <td> {{ depv['patcnt_new'] }} </td>
+      <td> {{ depv['fee_new']    }} </td>
       <td> {{ depv['patcnt_old'] }} </td>
-      <td> {{ depv['fee']        }} </td>
+      <td> {{ depv['fee_old']    }} </td>
+      <td> {{ depv['fee_total']  }} </td>
     </tr>
     {% end %}
   </tbody>

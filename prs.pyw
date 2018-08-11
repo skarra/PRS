@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sun Jul 15 17:16:54 PDT 2018
+## Last Modified : Thu Aug 09 23:19:09 PDT 2018
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -232,23 +232,35 @@ class StatsHandler(BaseHandler):
 
         docsu = {}
         for visit in visits:
-            new_incr = 1 if visit.first_doc_visit == True else 0
-            old_incr = 1 - new_incr
+            if visit.first_doc_visit:
+                new_incr   = 1
+                new_charge = visit.charge
+                old_incr   = 0
+                old_charge = 0
+            else:
+                new_incr   = 0
+                new_charge = 0
+                old_incr   = 1
+                old_charge = visit.charge
 
-            if not visit.doctor_id in docsu:
+            if visit.doctor_id in docsu:
+                val = docsu[visit.doctor_id]
+                val['patcnt_old'] += old_incr
+                val['patcnt_new'] += new_incr
+                val['fee_old']    += old_charge
+                val['fee_new']    += new_charge
+                val['fee_total']  += visit.charge
+                docsu.update({visit.doctor_id : val})
+            else:
                 docsu.update({visit.doctor_id : {
                     'doc'  : models.Doctor.find_by_id(session,
                                                       visit.doctor_id),
                     'patcnt_old' : old_incr,
+                    'fee_old'    : old_charge,
+                    'fee_new'    : new_charge,
                     'patcnt_new' : new_incr,
-                    'fee'    : visit.charge,}
+                    'fee_total'  : visit.charge,}
                     })
-            else:
-                val = docsu[visit.doctor_id]
-                val['patcnt_old'] += old_incr
-                val['patcnt_new'] += new_incr
-                val['fee'] += visit.charge
-                docsu.update({visit.doctor_id : val})
 
         summary = {'doc'  : docsu,
                    'from' : inp_from,
@@ -271,14 +283,24 @@ class StatsHandler(BaseHandler):
 
         depsu = {}
         for visit in visits:
-            new_incr = 1 if visit.first_dept_visit == True else 0
-            old_incr = 1 - new_incr
+            if visit.first_doc_visit:
+                new_incr   = 1
+                new_charge = visit.charge
+                old_incr   = 0
+                old_charge = 0
+            else:
+                new_incr   = 0
+                new_charge = 0
+                old_incr   = 1
+                old_charge = visit.charge
 
             try:
                 dep = depsu[visit.dept_id]
                 dep['patcnt_new'] += new_incr
                 dep['patcnt_old'] += old_incr
-                dep['fee']    += visit.charge
+                dep['fee_old']    += old_charge
+                dep['fee_new']    += new_charge
+                dep['fee_total']  += visit.charge
             except KeyError, e:
                 # It's not there, so we are going to insert it first up.
                 depsu[visit.dept_id] = {
@@ -286,7 +308,9 @@ class StatsHandler(BaseHandler):
                                                             visit.dept_id),
                     'patcnt_new' : new_incr,
                     'patcnt_old' : old_incr,
-                    'fee'    : visit.charge,
+                    'fee_old'    : old_charge,
+                    'fee_new'    : new_charge,
+                    'fee_total'  : visit.charge,
                     }
 
         summary = {'dept' : depsu,

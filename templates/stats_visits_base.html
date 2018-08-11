@@ -44,17 +44,17 @@
 <hr/>
 
 {% if summary %}
-  <div style="width: 27%;"> Total Patients Visited : 
-    <div id="vs_total_visits" class="relative"> </div> 
-  </div>
-  <div style="width: 27%;">
-    Total Fee Collected :  
-    <div id="vs_total_fee" class="relative"> </div>
-  </div>
+  <div> New Patients Visited : <span id="vs_new_visits"> </span> </div>
+  <div> Old Patients Visited : <span id="vs_old_visits"> </span> </div>
+  <div> Total Patients Visited : <span id="vs_total_visits"> </span> </div>
+  <div> New Patients Fee Collected : <span id="vs_new_fee"> </span> </div>
+  <div> Old Patients Fee Collected : <span id="vs_old_fee"> </span> </div>
+  <div> Total Fee Collected : <span id="vs_total_fee"> </span> </div>
   <hr/>
 
   {% block vs_content %}
   {% end block %}
+
 {% end %}
 
 {% end block %}

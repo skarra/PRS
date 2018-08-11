@@ -20,12 +20,16 @@ she has visited in the past.
     <th> Doctor   </th>
     <th> Qualifications </th>
     <th> First Visits   </th>
+    <th> First Visits - Charge  </th>
     <th> Revisits       </th>
+    <th> Revisits - Charge     </th>
     <th> Total Charge   </th>
   </thead>
 
   <tfoot>
     <th style="text-align:right" colspan="4"> Total: </th>
+    <th style="text-align:right"> </th>
+    <th style="text-align:right"> </th>
     <th style="text-align:right"> </th>
     <th style="text-align:right"> </th>
     <th style="text-align:right"> </th>
@@ -39,8 +43,10 @@ she has visited in the past.
       <td> {{ docv['doc'].name   }} </td>
       <td> {{ docv['doc'].quals  }} </td>
       <td> {{ docv['patcnt_new'] }} </td>
+      <td> {{ docv['fee_new']    }} </td>
       <td> {{ docv['patcnt_old'] }} </td>
-      <td> {{ docv['fee']        }} </td>
+      <td> {{ docv['fee_old']    }} </td>
+      <td> {{ docv['fee_total']  }} </td>
     </tr>
     {% end %}
   </tbody>
