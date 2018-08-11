@@ -95,7 +95,7 @@
     <div class="myrow col_parent">
       <div class="tagcol"> OPD Days :</div> 
       <div class="valcol" id="lvisit_davail"> 
-	{{ ldoc.get_availability_pretty() }} 
+	{{ ldoc.get_availability_pretty() }}
       </div>
     </div>
     {% end %}
@@ -173,5 +173,12 @@ in a far more usable systm, but oh well.
 </div>
 -->
 <hr/>
+{% if lvisit %}
+<div id="visit_receipt" class="show-only-in-print">
+  <span> <strong>Receipt</strong> Received with thanks from Shri/Smt {{
+  rec.name }} Rs. <span id=lvisit_charge>{{ lvisit.charge }} </span> </span>
+  <hr/>
+</div>
+{% end %}
 
 {% end block %} <!-- block content -->

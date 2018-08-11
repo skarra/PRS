@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Thu Aug 09 21:46:03 PDT 2018
+// Last Modified : Fri Aug 10 22:30:00 PDT 2018
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -730,6 +730,7 @@ function newpvRowSelected (event) {
     last_cid   = fnGetSelected(pat_visits_table, 1);
     last_deptn = fnGetSelected(pat_visits_table, 2);
     last_docn  = fnGetSelected(pat_visits_table, 3);
+    last_charge= fnGetSelected(pat_visits_table, 4);
     last_docid = fnGetSelected(pat_visits_table, 5);
     last_avail = fnGetSelected(pat_visits_table, 6);
 
@@ -738,6 +739,13 @@ function newpvRowSelected (event) {
     $("#lvisit_dname").text(last_deptn);
     $("#lvisit_docn").text(last_docn);
     $("#lvisit_davail").text(last_avail);
+
+    if (last_charge == 0) {
+        $("#visit_receipt").hide();
+    } else {
+        $("#visit_receipt").show();
+        $("#lvisit_charge").text(last_charge);
+    }
 }
 
 function addHandlers_patient_view () {
