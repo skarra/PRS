@@ -88,7 +88,7 @@
     <div class="myrow col_parent">
       <div class="tagcol"> Doctor :</div> 
       <div class="valcol" id="lvisit_docn"> 
-	{{ ldoc.title + " " + ldoc.name + "(" + ldoc.quals + ")" }}
+	{{ ldoc.title + " " + ldoc.name + " " + ldoc.quals }}
       </div>
     </div>
 
@@ -135,7 +135,7 @@
 	   <td> {{ MyT.date_to_uk(c.date) }} </td>
 	   <td> {{ c.cid }} </td>
 	   <td> {{ dept.name }}  </td>
-	   <td> {{ doc.title + " " + doc.name + " (" + doc.quals + ")"}} </td>
+	   <td> {{ doc.title + " " + doc.name + " " + doc.quals }} </td>
 	   <td> {{ c.charge }} </td>
 	   <td class='hidden'> {{ c.doctor_id }} </td>
 	   <td class='hidden'> {{ doc.get_availability_pretty() }} </td>
@@ -175,8 +175,9 @@ in a far more usable systm, but oh well.
 <hr/>
 {% if lvisit %}
 <div id="visit_receipt" class="show-only-in-print">
-  <span> <strong>Receipt</strong> Received with thanks from Shri/Smt {{
-  rec.name }} Rs. <span id=lvisit_charge>{{ lvisit.charge }} </span> </span>
+  <span> Received with thanks from Shri/Smt {{
+  rec.name }} Rs. <span id=lvisit_charge>{{ lvisit.charge }} </span> towards
+  registration fee for {{ visit_type }} visit.</span>
   <hr/>
 </div>
 {% end %}

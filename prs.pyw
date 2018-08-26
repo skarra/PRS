@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Thu Aug 09 23:19:09 PDT 2018
+## Last Modified : Wed Aug 15 07:48:40 PDT 2018
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -684,14 +684,17 @@ class ViewHandler(BaseHandler):
             lvisit = rec.consultations[-1]
             ldoc = models.Doctor.find_by_id(session, lvisit.doctor_id)
             avail = ldoc.get_availability()
+            visit_type = "new" if len(rec.consultations) == 1 else "old"
         else:
             lvisit = None
             ldoc   = None
             avail  = None
+            visit_type = None
 
         self.render('patient_view.html', rec=rec,
                     d=session().query(models.Doctor), session=session,
-                    avail=avail, lvisit=lvisit, days=days, shiftns=shiftns,
+                    avail=avail, lvisit=lvisit, visit_type=visit_type,
+                    days=days, shiftns=shiftns,
                     ldoc=ldoc, **self.base_kwargs)
 
     def get (self, role, field, value):
