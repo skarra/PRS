@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Wed Aug 15 07:48:40 PDT 2018
+## Last Modified : Sat Aug 25 23:08:30 PDT 2018
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -1157,8 +1157,13 @@ def start_browser ():
     port = config.get_http_port()
     webbrowser.open('http://localhost:%d' % port, new=2)
 
+## FIXME: This should all be in config.json and be configurable there.
+SIZE = 0
+TIME = 1
+LOG_ROTATION_TYPE = SIZE
+DAYS_PER_LOGFILE = 30
 MAX_LOGSIZE  = 1024*1024*20                # 20 MB
-MAX_LOGFILES = 5                           # 5 files with rotation total 100MB.
+MAX_LOGFILES = 5
 
 def get_logfile_name ():
     return os.path.join(get_pdn_dir(), 'prs.log')
@@ -1168,8 +1173,14 @@ def setup_logging ():
 
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
-    ch = logging.handlers.RotatingFileHandler(f, maxBytes=MAX_LOGSIZE,
-                                              backupCount=MAX_LOGFILES)
+
+    if LOG_ROTATION_TYPE == SIZE:
+        ch = logging.handlers.RotatingFileHandler(f, maxBytes=MAX_LOGSIZE,
+                                                  backupCount=MAX_LOGFILES)
+    else:
+        ch = logging.handlers.TimedRotatingFileHandler(f, when='d',
+                                                       interval=DAYS_PER_LOGFILE,
+                                                       backupCount=MAX_LOGFILES)
     fo = logging.Formatter('%(asctime)s - [%(levelname)8s]: %(message)s')
     ch.setFormatter(fo)
     logger.addHandler(ch)
