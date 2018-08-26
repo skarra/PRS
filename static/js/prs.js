@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sun Aug 26 00:16:34 PDT 2018
+// Last Modified : Sun Aug 26 00:41:38 PDT 2018
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -176,14 +176,21 @@ function refreshVisitDocTable () {
 
     $.getJSON(url, function(data) {
 	console.log("Got " + data.count + " entries in ajax response.");
-	$.each(data.doctors, function(key) {
-	    var morns = data.doctors[key][day]["Morning"].join(", ");
-	    var evens = data.doctors[key][day]["Afternoon"].join(", ");
-	    newv_doc_table.dataTable().fnAddData([
-		[data.doctors[key].id, "Dr. " + key, data.doctors[key].quals,
-		 morns, evens, data.doctors[key].fee_newp, 
-		 data.doctors[key].fee_oldp]]);
-	});
+        if (data.count == 0) {
+            $("#new_visit_doc_div").hide();
+            $("#new_visit_doc_warning").show();
+        } else {
+            $("#new_visit_doc_div").show();
+            $("#new_visit_doc_warning").hide();
+            $.each(data.doctors, function(key) {
+                var morns = data.doctors[key][day]["Morning"].join(", ");
+                var evens = data.doctors[key][day]["Afternoon"].join(", ");
+                newv_doc_table.dataTable().fnAddData(
+                    [[data.doctors[key].id, "Dr. " + key, data.doctors[key].quals,
+                      morns, evens, data.doctors[key].fee_newp, 
+                      data.doctors[key].fee_oldp]]);
+                });
+        }
     });
 }
 

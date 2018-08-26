@@ -1147,3 +1147,18 @@ blink {
     margin-bottom: 5px;
     vertical-align: middle;
 }
+
+.warning_box {
+  padding: 5px 5px;
+  font-size: 14px;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -o-border-radius: 0;
+  -ms-border-radius: 0;
+  -khtml-border-radius: 0;
+  border-radius: 3px;
+  border: 1px solid #b7b7b7;
+  border-color: #df5e0e;
+  background-color: blanchedalmond;
+  color: #df5e0e;
+}
