@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Fri Aug 10 22:30:00 PDT 2018
+// Last Modified : Sun Aug 26 00:16:34 PDT 2018
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -171,7 +171,8 @@ function refreshVisitDocTable () {
     // var shift = $("#newv_shift_list").val();
 
     var base  = "/ajax/docavailability";
-    var url   = base + "?dept=" + dept + "&day=" + day;
+    var params = "?dept=" + encodeURIComponent(dept) + "&day=" + encodeURIComponent(day);
+    var url   = base + params;
 
     $.getJSON(url, function(data) {
 	console.log("Got " + data.count + " entries in ajax response.");
@@ -790,7 +791,7 @@ function addHandlers_patient_view () {
 	    edit_url += '&last_docid=' + last_docid;
 	}
 	if (last_deptn) {
-	    edit_url += '&last_deptn=' + last_deptn;
+	    edit_url += '&last_deptn=' + encodeURIComponent(last_deptn);
 	}
 	console.log('Redirecting to: ' + edit_url);
 	window.location = edit_url;
