@@ -841,6 +841,10 @@ label {
     font-size: 125%;
 }
 
+.dataTable tbody tr {
+    cursor: pointer;
+}
+
 /* 
  * For use with the Doctor and Patient View templates
  */
