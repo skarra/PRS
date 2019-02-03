@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Tue Feb 19 18:28:48 IST 2013
+## Last Modified : Sun Feb 03 01:00:19 PST 2019
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -396,35 +396,40 @@ class Slot(Base):
 # def gen_cid (context):
 #     return Consultation.query.filter_by(date=context.current_parameters['date']).count() + 1
 
-def first_doc_visit (context):
-    try:
-        pat_id = context.current_parameters['patient_id']
-        doc_id = context.current_parameters['doctor_id']
-    except KeyError, e:
-        ## We are not updating the patient record. 
-        return False
-
-    p = Patient.find_by_id(session, pat_id)
-    for con in p.consultations:
-        if con.doctor_id == doc_id:
-            return False
-
-    return True
-
-def first_dept_visit (context):
-    try:
-        pat_id = context.current_parameters['patient_id']
-        dept_id = context.current_parameters['dept_id']
-    except KeyError, e:
-        ## We are not updating the patient record. 
-        return False
-
-    p = Patient.find_by_id(session, pat_id)
-    for con in p.consultations:
-        if con.dept_id == dept_id:
-            return False
-
-    return True
+##
+## 2019-02-02: No idea why these two global functions are even in the
+## code. Looks like some debugging code sneaked in. Commenting this out for
+## now.
+##
+## def first_doc_visit (context):
+##     try:
+##         pat_id = context.current_parameters['patient_id']
+##         doc_id = context.current_parameters['doctor_id']
+##     except KeyError, e:
+##         ## We are not updating the patient record.
+##         return False
+##
+##     p = Patient.find_by_id(session, pat_id)
+##     for con in p.consultations:
+##         if con.doctor_id == doc_id:
+##             return False
+##
+##     return True
+##
+## def first_dept_visit (context):
+##     try:
+##         pat_id = context.current_parameters['patient_id']
+##         dept_id = context.current_parameters['dept_id']
+##     except KeyError, e:
+##         ## We are not updating the patient record.
+##         return False
+##
+##     p = Patient.find_by_id(session, pat_id)
+##     for con in p.consultations:
+##         if con.dept_id == dept_id:
+##             return False
+##
+##     return True
 
 class Consultation(Base):
     __tablename__ = 'consultation'
@@ -484,6 +489,8 @@ class Consultation(Base):
     
         self.first_doc_visit  = first_docv
         self.first_dept_visit = first_depv
+
+        logging.info("first_docv: %s; first_devp: %s", first_docv, first_depv)
 
         return value
 

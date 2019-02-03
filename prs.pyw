@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Aug 25 23:08:30 PDT 2018
+## Last Modified : Sat Feb 02 23:21:19 PST 2019
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -684,7 +684,7 @@ class ViewHandler(BaseHandler):
             lvisit = rec.consultations[-1]
             ldoc = models.Doctor.find_by_id(session, lvisit.doctor_id)
             avail = ldoc.get_availability()
-            visit_type = "new" if len(rec.consultations) == 1 else "old"
+            visit_type = "new" if lvisit.first_doc_visit else "old"
         else:
             lvisit = None
             ldoc   = None

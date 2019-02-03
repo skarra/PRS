@@ -119,6 +119,7 @@
 	<th>Charge</th>
 	<th class='hidden'>Docid</th>
 	<th class='hidden'>Doc Availability</th>
+	<th class='hidden'>Visit Type</th>
       </tr>
     </thead>
 
@@ -139,6 +140,7 @@
 	   <td> {{ c.charge }} </td>
 	   <td class='hidden'> {{ c.doctor_id }} </td>
 	   <td class='hidden'> {{ doc.get_availability_pretty() }} </td>
+	   <td class='hidden'> {{ "new" if c.first_doc_visit else "old" }} </td>
          </tr>
       {% end %}
     </tbody>
@@ -177,7 +179,7 @@ in a far more usable systm, but oh well.
 <div id="visit_receipt" class="show-only-in-print">
   <span> Received with thanks from {{
   rec.name }} Rs. <span id=lvisit_charge>{{ lvisit.charge }} </span> towards
-  registration fee for {{ visit_type }} visit.</span>
+  registration fee for <span id=lvisit_type>{{ visit_type }} </span> visit.</span>
   <hr/>
 </div>
 {% end %}
