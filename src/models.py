@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Sun Feb 03 01:00:19 PST 2019
+## Last Modified : Fri Feb 08 23:34:42 PST 2019
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -137,7 +137,8 @@ class Patient(Base):
     free    = Column(Boolean, default=True)
     reg_fee = Column(Integer, default=0)
 
-    consultations = relationship("Consultation", 
+    consultations = relationship("Consultation",
+                                 order_by="Consultation.date",
                                  backref=backref('patient',
                                                  cascade="all"))
 
@@ -149,6 +150,13 @@ class Patient(Base):
         q   = session().query(Patient)
         recs = q.filter_by(id=did)
         return recs.first() if recs.count() > 0 else None
+
+    def is_first_doc_in_dept_visit (self, docid, deptid):
+        for con in self.consultations:
+            if con.doctor_id == docid and con.dept_id == deptid:
+                return False
+
+        return True
 
     def earliest_visit_id (self, session):
         """Returns the ID of this patient's earliest visit. For now this is
@@ -282,6 +290,17 @@ class Doctor(Base):
 
         q   = session().query(Doctor)
         recs = q.filter_by(id=did)
+        return recs.first() if recs.count() > 0 else None
+
+    @classmethod
+    def id_from_name (self, session, name):
+        rec = self.find_by_name(session, name)
+        return rec.id if rec else None
+
+    @classmethod
+    def find_by_name (self, session, dname):
+        q = session().query(Doctor)
+        recs = q.filter_by(name=dname)
         return recs.first() if recs.count() > 0 else None
 
 class Department(Base):
@@ -493,6 +512,16 @@ class Consultation(Base):
         logging.info("first_docv: %s; first_devp: %s", first_docv, first_depv)
 
         return value
+
+    def is_first_doc_in_dept_visit (self):
+        if not self.patient_id:
+            return False
+
+        p = Patient.find_by_id(session, self.patient_id)
+        return p.is_first_doc_in_dept_visit(self.doctor_id, self.dept_id)
+
+    def visit_type (self):
+        return "new" if self.is_first_doc_in_dept_visit() else "old"
 
     @classmethod
     def num_in_day (self, session, date):

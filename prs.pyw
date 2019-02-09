@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Sat Feb 02 23:21:19 PST 2019
+## Last Modified : Fri Feb 08 23:38:05 PST 2019
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -533,6 +533,12 @@ class AjaxDocAvailability(BaseHandler):
         if not dept_name:
             ## FIXME: handle error
             return
+        dept_id = models.Department.id_from_name(session(), dept_name)
+
+        pat_id = self.get_argument('patid', None)
+        if not pat_id:
+            ## FIXME: handle error
+            return
 
         day    = self.get_argument('day', '-- Any --')
         shiftn = self.get_argument('shift', '-- Any --')
@@ -552,11 +558,18 @@ class AjaxDocAvailability(BaseHandler):
         docs = dq.all()
         for doc, slot in docs:
             if not doc.name in ret:
+                pat = models.Patient.find_by_id(session(), pat_id)
+                if pat.is_first_doc_in_dept_visit(doc.id, dept_id):
+                    charge = doc.fee_newp
+                else:
+                    charge = doc.fee_oldp
+
                 ret[doc.name] = {
                     'id'    : doc.id,
                     'quals' : doc.quals,
                     'fee_newp' : doc.fee_newp,
                     'fee_oldp' : doc.fee_oldp,
+                    'charge' : charge,
                     }
             slots = ret[doc.name]
             if not slot.day in slots:
@@ -684,7 +697,7 @@ class ViewHandler(BaseHandler):
             lvisit = rec.consultations[-1]
             ldoc = models.Doctor.find_by_id(session, lvisit.doctor_id)
             avail = ldoc.get_availability()
-            visit_type = "new" if lvisit.first_doc_visit else "old"
+            visit_type = lvisit.visit_type()
         else:
             lvisit = None
             ldoc   = None

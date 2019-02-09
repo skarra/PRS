@@ -17,7 +17,7 @@
 <h1>New Visit Form for: {{ patname }}</h1>
 <p/>
 
-<form id="new_visit_form" method="POST">
+<form id="new_visit_form" patid={{ patid }} method="POST">
   <input type="submit" id="newv_submit" class="submit_but"
          value="Save Visit Details &rarr;"/>
   <p/>
@@ -81,6 +81,7 @@
       <th> Afternoon      </th>
       <th> Fee (New Patient) </th>
       <th> Fee (Old Patient) </th>
+      <th> Charge for this visit </th>
    </tr>
   </thead>
   <tbody>

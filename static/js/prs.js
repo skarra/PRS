@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Sun Feb 03 00:58:39 PST 2019
+// Last Modified : Fri Feb 08 23:23:35 PST 2019
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -162,6 +162,7 @@ function validateNewPatient (event) {
 function refreshVisitDocTable () {
     newv_doc_table.fnClearTable();
     var dept = $("#newv_dept_list").val();
+    var patid = $("#new_visit_form").attr("patid");
     var date = $("#newv_date").val();
     var day  = dayOfWeek(date);
 
@@ -171,7 +172,7 @@ function refreshVisitDocTable () {
     // var shift = $("#newv_shift_list").val();
 
     var base  = "/ajax/docavailability";
-    var params = "?dept=" + encodeURIComponent(dept) + "&day=" + encodeURIComponent(day);
+    var params = "?patid=" + patid + "&dept=" + encodeURIComponent(dept) + "&day=" + encodeURIComponent(day);
     var url   = base + params;
 
     $.getJSON(url, function(data) {
@@ -188,7 +189,8 @@ function refreshVisitDocTable () {
                 newv_doc_table.dataTable().fnAddData(
                     [[data.doctors[key].id, "Dr. " + key, data.doctors[key].quals,
                       morns, evens, data.doctors[key].fee_newp, 
-                      data.doctors[key].fee_oldp]]);
+                      data.doctors[key].fee_oldp,
+                      data.doctors[key].charge]]);
                 });
         }
     });
@@ -238,18 +240,7 @@ function newvRowSelected (event) {
     $(event.target.parentNode).addClass('row_selected');
     var docid = fnGetSelected(newv_doc_table, 0);
     $("#newv_docid_hack").val(docid);
-
-    // We have to fetch the default consultation charge of the doctor
-    // and popualte the 'Charge' field. Note that it will overwrite
-    // any manual entry the user might have made before this
-
-    $.getJSON("/ajax/doctor/id/"+docid, function(data) {
-	if ($.inArray(docid, vn_visited_docids) == -1) {
-	    $("#newv_charge").val(data.fee_newp);
-	} else {
-	    $("#newv_charge").val(data.fee_oldp);
-	}
-    });
+    $("#newv_charge").val(fnGetSelected(newv_doc_table, 7));
 }
 
 //
@@ -268,9 +259,15 @@ function addHandlers_new_visit () {
             { "sWidth": "15%", "sClass": "center"},
             { "sWidth": "15%", "sClass": "center"},
 	    { "sClass": "right"},
-	    { "sClass": "right"}],
+            { "sClass": "right"},
+            { "sClass": "right"}],
 	"aLengthMenu": [[10, 25, 50, 100, 200, -1],
 			[10, 25, 50, 100, 200, "All"]],
+        "columnDefs": [{
+                "targets": [ 7 ],
+                "visible": false,
+                "searchable": false
+            }],
 	"iDisplayLength": 20
     });
 
