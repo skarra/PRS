@@ -1,6 +1,6 @@
 ##
 ## Created       : Mon May 14 23:04:44 IST 2012
-## Last Modified : Fri Feb 08 23:34:42 PST 2019
+## Last Modified : Mon Feb 25 00:53:40 PST 2019
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -151,12 +151,22 @@ class Patient(Base):
         recs = q.filter_by(id=did)
         return recs.first() if recs.count() > 0 else None
 
-    def is_first_doc_in_dept_visit (self, docid, deptid):
-        for con in self.consultations:
-            if con.doctor_id == docid and con.dept_id == deptid:
-                return False
+    def is_first_doc_in_dept_visit (self, docid, deptid, conid=None):
+        if conid is None:
+            for con in self.consultations:
+                if con.doctor_id == docid and con.dept_id == deptid:
+                    return False
 
-        return True
+            return True
+        else:
+            for con in self.consultations:
+                if con.doctor_id == docid and con.dept_id == deptid:
+                    if conid == con.id:
+                        return True
+                    else:
+                        return False
+
+            return True
 
     def earliest_visit_id (self, session):
         """Returns the ID of this patient's earliest visit. For now this is
@@ -518,7 +528,8 @@ class Consultation(Base):
             return False
 
         p = Patient.find_by_id(session, self.patient_id)
-        return p.is_first_doc_in_dept_visit(self.doctor_id, self.dept_id)
+        return p.is_first_doc_in_dept_visit(self.doctor_id, self.dept_id,
+                                            self.id)
 
     def visit_type (self):
         return "new" if self.is_first_doc_in_dept_visit() else "old"

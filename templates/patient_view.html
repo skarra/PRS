@@ -140,7 +140,7 @@
 	   <td> {{ c.charge }} </td>
 	   <td class='hidden'> {{ c.doctor_id }} </td>
 	   <td class='hidden'> {{ doc.get_availability_pretty() }} </td>
-	   <td class='hidden'> {{ "new" if c.first_doc_visit else "old" }} </td>
+	   <td class='hidden'> {{ c.visit_type() }} </td>
          </tr>
       {% end %}
     </tbody>
