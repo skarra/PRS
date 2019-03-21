@@ -1,7 +1,7 @@
 ## -*- python -*-
 ##
 ## Created       : Mon May 14 18:10:41 IST 2012
-## Last Modified : Fri Feb 08 23:38:05 PST 2019
+## Last Modified : Thu Mar 21 00:06:03 PDT 2019
 ##
 ## Copyright (C) 2012 Sriram Karra <karra.etc@gmail.com>
 ##
@@ -231,17 +231,59 @@ class StatsHandler(BaseHandler):
                                     models.Consultation.date <= to_d))
 
         docsu = {}
+        grandsu = {
+            'patcnt_new_paid' : 0,
+            'patcnt_new_waived' : 0,
+            'patcnt_new_total' : 0,
+            'patcnt_revisit_paid' : 0,
+            'patcnt_revisit_waived' : 0,
+            'patcnt_revisit_total' : 0,
+
+            'charges_new_paid' : 0,
+            'charges_new_waived' : 0,
+            'charges_new_total' : 0,
+            'charges_revisit_paid' : 0,
+            'charges_revisit_waived' : 0,
+            'charges_revisit_total' : 0
+            }
+
         for visit in visits:
             if visit.first_doc_visit:
                 new_incr   = 1
                 new_charge = visit.charge
+                if visit.charge == 0:
+                    new_waived_incr = 1
+                else:
+                    new_waived_incr = 0
+
                 old_incr   = 0
                 old_charge = 0
+                old_waived_incr = 0
+                old_waived_charge = 0
             else:
                 new_incr   = 0
                 new_charge = 0
+                new_waived_incr = 0
+
                 old_incr   = 1
                 old_charge = visit.charge
+                if visit.charge == 0:
+                    old_waived_incr = 1
+                else:
+                    old_waived_incr = 0
+
+            ## First update the grand totals
+            grandsu['patcnt_new_paid'] += (new_incr - new_waived_incr)
+            grandsu['patcnt_new_waived'] += new_waived_incr
+            grandsu['patcnt_new_total'] += new_incr
+            grandsu['patcnt_revisit_paid'] += (old_incr - old_waived_incr)
+            grandsu['patcnt_revisit_waived'] += old_waived_incr
+            grandsu['patcnt_revisit_total'] += old_incr
+
+            grandsu['charges_new_paid'] += new_charge
+            grandsu['charges_new_total'] += new_charge
+            grandsu['charges_revisit_paid'] += old_charge
+            grandsu['charges_revisit_total'] += old_charge
 
             if visit.doctor_id in docsu:
                 val = docsu[visit.doctor_id]
@@ -263,6 +305,7 @@ class StatsHandler(BaseHandler):
                     })
 
         summary = {'doc'  : docsu,
+                   'grandsu' : grandsu,
                    'from' : inp_from,
                    'to'   : inp_to}
 
@@ -282,22 +325,67 @@ class StatsHandler(BaseHandler):
                                     models.Consultation.date <= to_d))
 
         depsu = {}
+        grandsu = {
+            'patcnt_new_paid' : 0,
+            'patcnt_new_waived' : 0,
+            'patcnt_new_total' : 0,
+            'patcnt_revisit_paid' : 0,
+            'patcnt_revisit_waived' : 0,
+            'patcnt_revisit_total' : 0,
+
+            'charges_new_paid' : 0,
+            'charges_new_waived' : 0,
+            'charges_new_total' : 0,
+            'charges_revisit_paid' : 0,
+            'charges_revisit_waived' : 0,
+            'charges_revisit_total' : 0
+            }
+
         for visit in visits:
             if visit.first_doc_visit:
                 new_incr   = 1
                 new_charge = visit.charge
+                if visit.charge == 0:
+                    new_waived_incr = 1
+                else:
+                    new_waived_incr = 0
+
                 old_incr   = 0
                 old_charge = 0
+                old_waived_incr = 0
+                old_waived_charge = 0
             else:
                 new_incr   = 0
                 new_charge = 0
+                new_waived_incr = 0
+
                 old_incr   = 1
                 old_charge = visit.charge
+                if visit.charge == 0:
+                    old_waived_incr = 1
+                else:
+                    old_waived_incr = 0
 
+            ## First update the grand totals
+            grandsu['patcnt_new_paid'] += (new_incr - new_waived_incr)
+            grandsu['patcnt_new_waived'] += new_waived_incr
+            grandsu['patcnt_new_total'] += new_incr
+            grandsu['patcnt_revisit_paid'] += (old_incr - old_waived_incr)
+            grandsu['patcnt_revisit_waived'] += old_waived_incr
+            grandsu['patcnt_revisit_total'] += old_incr
+
+            grandsu['charges_new_paid'] += new_charge
+            grandsu['charges_new_total'] += new_charge
+            grandsu['charges_revisit_paid'] += old_charge
+            grandsu['charges_revisit_total'] += old_charge
+
+            ## Now update the department-wise totals
             try:
                 dep = depsu[visit.dept_id]
                 dep['patcnt_new'] += new_incr
                 dep['patcnt_old'] += old_incr
+                dep['patcnt_new_waived'] += new_waived_incr
+                dep['patcnt_old_waived'] += old_waived_incr
                 dep['fee_old']    += old_charge
                 dep['fee_new']    += new_charge
                 dep['fee_total']  += visit.charge
@@ -308,12 +396,15 @@ class StatsHandler(BaseHandler):
                                                             visit.dept_id),
                     'patcnt_new' : new_incr,
                     'patcnt_old' : old_incr,
+                    'patcnt_new_waived' : new_waived_incr,
+                    'patcnt_old_waived' : old_waived_incr,
                     'fee_old'    : old_charge,
                     'fee_new'    : new_charge,
                     'fee_total'  : visit.charge,
                     }
 
         summary = {'dept' : depsu,
+                   'grandsu' : grandsu,
                    'from' : inp_from,
                    'to'   : inp_to}
 

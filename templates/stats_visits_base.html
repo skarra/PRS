@@ -25,8 +25,6 @@
   </div>
 </div>
 
-<h1>Visit Statistics <span class="blue"> by {{ by }} </span></h1>
-
 <form id="vs_form" method="GET">
  <label>From:</label>
   <input type="text" class="date date-field " id="vs_from" name="vs_from"
@@ -43,14 +41,97 @@
 
 <hr/>
 
+<strong>Note:</strong>
+<ul>
+<li>
+  <b>New Visit</b> is when a particular patient comes to the doctor for the
+  first time. Note that this patient could have consulted another doctor (even
+  in the same department) earlier, and as such an old 'registration'.
+</li>
+
+<li>
+  <b>Revisit</b> is when a particular patient comes to a doctor that he or
+she has visited in the past.
+</li>
+</ul>
+
+<hr/>
+
+<h2 class="blue">Visit Statistics: Summary</h2>
+
 {% if summary %}
-  <div> New Patients Visited : <span id="vs_new_visits"> </span> </div>
-  <div> Old Patients Visited : <span id="vs_old_visits"> </span> </div>
-  <div> Total Patients Visited : <span id="vs_total_visits"> </span> </div>
-  <div> New Patients Fee Collected : <span id="vs_new_fee"> </span> </div>
-  <div> Old Patients Fee Collected : <span id="vs_old_fee"> </span> </div>
-  <div> Total Fee Collected : <span id="vs_total_fee"> </span> </div>
-  <hr/>
+<table id="vs_summary_table" class="display" name="vs_summary_table"
+       style="width:70%">
+  <thead>
+    <th>  </th>
+    <th> Full charge visits </th>
+    <th> Waived charge visits </th>
+    <th> Total </th>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td> <strong>Patient Count</strong> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+
+    <tr>
+      <td> New visits </td>
+      <td> {{ summary['grandsu']['patcnt_new_paid'] }} </td>
+      <td> {{ summary['grandsu']['patcnt_new_waived'] }} </td>
+      <td> {{ summary['grandsu']['patcnt_new_total'] }} </td>
+    </tr>
+
+    <tr>
+      <td> Revisits </td>
+      <td> {{ summary['grandsu']['patcnt_revisit_paid'] }} </td>
+      <td> {{ summary['grandsu']['patcnt_revisit_waived'] }} </td>
+      <td> {{ summary['grandsu']['patcnt_revisit_total'] }} </td>
+    </tr>
+
+    <tr>
+      <td> Total  </td>
+      <td> {{ summary['grandsu']['patcnt_new_paid'] + summary['grandsu']['patcnt_revisit_paid'] }}</td>
+      <td> {{ summary['grandsu']['patcnt_new_waived'] + summary['grandsu']['patcnt_revisit_waived'] }}</td>
+      <td> {{ summary['grandsu']['patcnt_new_total'] + summary['grandsu']['patcnt_revisit_total'] }}</td>
+    </tr>
+
+    <tr>
+      <td> <strong>Collected charges</strong> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+
+    <tr>
+      <td> New visits </td>
+      <td> {{ summary['grandsu']['charges_new_paid'] }} </td>
+      <td> {{ summary['grandsu']['charges_new_waived'] }} </td>
+      <td> {{ summary['grandsu']['charges_new_total'] }} </td>
+    </tr>
+
+    <tr>
+      <td> Revisits </td>
+      <td> {{ summary['grandsu']['charges_revisit_paid'] }} </td>
+      <td> {{ summary['grandsu']['charges_revisit_waived'] }} </td>
+      <td> {{ summary['grandsu']['charges_revisit_total'] }} </td>
+    </tr>
+
+    <tr>
+      <td> Total  </td>
+      <td> {{ summary['grandsu']['charges_new_paid'] + summary['grandsu']['charges_revisit_paid'] }} </td>
+      <td> {{ summary['grandsu']['charges_new_waived'] + summary['grandsu']['charges_revisit_waived'] }} </td>
+      <td> {{ summary['grandsu']['charges_new_total'] + summary['grandsu']['charges_revisit_total'] }} </td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+<p>
+<hr/>
 
   {% block vs_content %}
   {% end block %}

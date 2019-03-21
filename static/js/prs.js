@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Fri Feb 08 23:23:35 PST 2019
+// Last Modified : Wed Mar 20 22:35:26 PDT 2019
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -77,7 +77,7 @@ function setupDateLocale () {
 function setupDeptNamesInControl () {
     var url = "/ajax/departments";
     $.getJSON(url, function(data) {
-	console.log("Got " + data.count + " entries in ajax response.");
+	console.log("Got " + data.departments.length + " entries in ajax response.");
 	$.each(data.departments, function(key) {
 	    var name = data.departments[key][1];
 	    var id   = data.departments[key][0];

@@ -1,6 +1,6 @@
 //
 // Created       : Wed Jan 30 18:07:03 IST 2013
-// Last Modified : Fri Aug 10 21:13:09 PDT 2018
+// Last Modified : Thu Mar 21 00:15:30 PDT 2019
 //
 // Copyright (C) 2012-2018 Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -53,15 +53,6 @@ function setUpTable (elemid, aoColumns) {
 	    }
             console.log("Footer Callback: index is: " + i);
 
-            $("#vs_total_visits").html(iTotalVisitN+iTotalVisitO);
-
-            $("#vs_new_visits").html(iTotalVisitN);
-            $("#vs_old_visits").html(iTotalVisitO);
-            $("#vs_total_visits").html(iTotalVisitO + iTotalVisitN);
-            $("#vs_new_fee").html('Rs. ' + iTotalFeeN);
-            $("#vs_old_fee").html('Rs. ' + iTotalFeeO);
-            $("#vs_total_fee").html('Rs. ' + iTotalFee);
-
 	    var iPageVisitN = 0, iPageVisitO = 0;
 	    var iPageFeeN = 0, iPageFeeO = 0, iPageFee = 0;
 	    for (var i=iStart; i<iEnd ; i++) {
@@ -103,4 +94,17 @@ jQuery(function() {
 		{ "sClass": "right",},
 		{ "sClass": "right",},
 		{ "sClass": "right"}]);
+
+    $("#vs_summary_table").dataTable({
+            "bFilter": false,
+                "bPaginate": false,
+            "bInfo": false,
+            "bSort": false,
+            "iDisplayLength" : -1,
+            "aoColumns": [
+    {"sClass": "left"},
+    {"sClass" : "right"},
+    {"sClass": "right"},
+    {"sClass": "right"}]
+        });
 });
