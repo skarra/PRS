@@ -28,7 +28,8 @@
 ## Releasing a new version
 ## =======================
 ##
-## $ make REL=v0.20
+## $ make release REL=v1.0
+## $ make install REL=v1.0
 ##
 ## General Info
 ## ============
