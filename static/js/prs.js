@@ -1,6 +1,6 @@
 //
 // Created       : Sat May 05 13:15:20 IST 2012
-// Last Modified : Wed Mar 20 22:35:26 PDT 2019
+// Last Modified : Sun Apr 14 10:50:18 PDT 2019
 //
 // Copyright (C) 2012, Sriram Karra <karra.etc@gmail.com>
 // All Rights Reserved
@@ -807,6 +807,13 @@ function addHandlers_patient_view () {
 
 function addHandlers () {
     console.log('addFormHandlers...');
+
+    // Disable all the submit buttons once they are clicked to avoid
+    // duplicate events from getting generated.
+
+    $('form').submit(function() {
+        $(this).find("input[type='submit']").prop('disabled',true);
+    });
 
     setupDateLocale();
     setUpExitHandlerDialog();
