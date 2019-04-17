@@ -474,6 +474,7 @@ class MiscAdminHandler(BaseHandler):
             toggle_env()
             self.redirect('/')
         elif op == 'mas_exit':
+            tornado.ioloop.IOLoop.instance().stop()
             sys.exit(0)
         elif op == 'mas_vs':
             self.redirect('/stats/visits/doctor')
