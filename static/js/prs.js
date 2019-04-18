@@ -151,6 +151,7 @@ function validateNewPatient (event) {
 
     if (error) {
         alert(errmsg);
+        $(this).find("input[type='submit']").prop('disabled', false);
         return false;
     }
 
@@ -226,6 +227,7 @@ function validateNewVisitForm () {
 
     if (msg != "") {
 	alert(msg);
+        $(this).find("input[type='submit']").prop('disabled', false);
 	return false;
     }
 
@@ -314,6 +316,7 @@ function validateNewDoctor () {
 
     if (errmsg != "") {
         alert(errmsg)
+        $(this).find("input[type='submit']").prop('disabled', false);
         return false;
     }
 
