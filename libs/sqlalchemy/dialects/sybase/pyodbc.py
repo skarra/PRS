@@ -1,23 +1,22 @@
 # sybase/pyodbc.py
-# Copyright (C) 2005-2012 the SQLAlchemy authors and contributors <see AUTHORS file>
+# Copyright (C) 2005-2019 the SQLAlchemy authors and contributors
+# <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
 # the MIT License: http://www.opensource.org/licenses/mit-license.php
 
 """
-Support for Sybase via pyodbc.
+.. dialect:: sybase+pyodbc
+    :name: PyODBC
+    :dbapi: pyodbc
+    :connectstring: sybase+pyodbc://<username>:<password>@<dsnname>[/<database>]
+    :url: http://pypi.python.org/pypi/pyodbc/
 
-http://pypi.python.org/pypi/pyodbc/
-
-Connect strings are of the form::
-
-    sybase+pyodbc://<username>:<password>@<dsn>/
-    sybase+pyodbc://<username>:<password>@<host>/<database>
 
 Unicode Support
 ---------------
 
-The pyodbc driver currently supports usage of these Sybase types with 
+The pyodbc driver currently supports usage of these Sybase types with
 Unicode or multibyte strings::
 
     CHAR
@@ -32,30 +31,31 @@ Currently *not* supported are::
     UNITEXT
     UNIVARCHAR
 
-"""
+"""  # noqa
 
-from sqlalchemy.dialects.sybase.base import SybaseDialect,\
-                                            SybaseExecutionContext
+import decimal
+
+from sqlalchemy import processors
+from sqlalchemy import types as sqltypes
 from sqlalchemy.connectors.pyodbc import PyODBCConnector
-from sqlalchemy import types as sqltypes, util, processors
-from sqlalchemy.util.compat import decimal
+from sqlalchemy.dialects.sybase.base import SybaseDialect
+from sqlalchemy.dialects.sybase.base import SybaseExecutionContext
+
 
 class _SybNumeric_pyodbc(sqltypes.Numeric):
     """Turns Decimals with adjusted() < -6 into floats.
 
-    It's not yet known how to get decimals with many 
+    It's not yet known how to get decimals with many
     significant digits or very large adjusted() into Sybase
     via pyodbc.
 
     """
 
     def bind_processor(self, dialect):
-        super_process = super(_SybNumeric_pyodbc,self).\
-                                    bind_processor(dialect)
+        super_process = super(_SybNumeric_pyodbc, self).bind_processor(dialect)
 
         def process(value):
-            if self.asdecimal and \
-                    isinstance(value, decimal.Decimal):
+            if self.asdecimal and isinstance(value, decimal.Decimal):
 
                 if value.adjusted() < -6:
                     return processors.to_float(value)
@@ -64,7 +64,9 @@ class _SybNumeric_pyodbc(sqltypes.Numeric):
                 return super_process(value)
             else:
                 return value
+
         return process
+
 
 class SybaseExecutionContext_pyodbc(SybaseExecutionContext):
     def set_ddl_autocommit(self, connection, value):
@@ -73,11 +75,11 @@ class SybaseExecutionContext_pyodbc(SybaseExecutionContext):
         else:
             connection.autocommit = False
 
+
 class SybaseDialect_pyodbc(PyODBCConnector, SybaseDialect):
     execution_ctx_cls = SybaseExecutionContext_pyodbc
 
-    colspecs = {
-        sqltypes.Numeric:_SybNumeric_pyodbc,
-    }
+    colspecs = {sqltypes.Numeric: _SybNumeric_pyodbc}
+
 
 dialect = SybaseDialect_pyodbc

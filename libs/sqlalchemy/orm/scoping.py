@@ -1,78 +1,119 @@
 # orm/scoping.py
-# Copyright (C) 2005-2012 the SQLAlchemy authors and contributors <see AUTHORS file>
+# Copyright (C) 2005-2019 the SQLAlchemy authors and contributors
+# <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
 # the MIT License: http://www.opensource.org/licenses/mit-license.php
 
-from sqlalchemy import exc as sa_exc
-from sqlalchemy.util import ScopedRegistry, ThreadLocalRegistry, warn
-from sqlalchemy.orm import class_mapper
-from sqlalchemy.orm import exc as orm_exc
-from sqlalchemy.orm.session import Session
+from . import class_mapper
+from . import exc as orm_exc
+from .session import Session
+from .. import exc as sa_exc
+from ..util import ScopedRegistry
+from ..util import ThreadLocalRegistry
+from ..util import warn
 
 
-__all__ = ['ScopedSession']
+__all__ = ["scoped_session"]
 
 
-class ScopedSession(object):
-    """Provides thread-local management of Sessions.
-    
-    Typical invocation is via the :func:`.scoped_session`
-    function::
-    
-      Session = scoped_session(sessionmaker())
+class scoped_session(object):
+    """Provides scoped management of :class:`.Session` objects.
 
-    The internal registry is accessible,
-    and by default is an instance of :class:`.ThreadLocalRegistry`.
-
-    See also: :ref:`unitofwork_contextual`.
+    See :ref:`unitofwork_contextual` for a tutorial.
 
     """
 
+    session_factory = None
+    """The `session_factory` provided to `__init__` is stored in this
+    attribute and may be accessed at a later time.  This can be useful when
+    a new non-scoped :class:`.Session` or :class:`.Connection` to the
+    database is needed."""
+
     def __init__(self, session_factory, scopefunc=None):
+        """Construct a new :class:`.scoped_session`.
+
+        :param session_factory: a factory to create new :class:`.Session`
+         instances. This is usually, but not necessarily, an instance
+         of :class:`.sessionmaker`.
+        :param scopefunc: optional function which defines
+         the current scope.   If not passed, the :class:`.scoped_session`
+         object assumes "thread-local" scope, and will use
+         a Python ``threading.local()`` in order to maintain the current
+         :class:`.Session`.  If passed, the function should return
+         a hashable token; this token will be used as the key in a
+         dictionary in order to store and retrieve the current
+         :class:`.Session`.
+
+        """
         self.session_factory = session_factory
+
         if scopefunc:
             self.registry = ScopedRegistry(session_factory, scopefunc)
         else:
             self.registry = ThreadLocalRegistry(session_factory)
 
-    def __call__(self, **kwargs):
-        if kwargs:
-            scope = kwargs.pop('scope', False)
-            if scope is not None:
-                if self.registry.has():
-                    raise sa_exc.InvalidRequestError(
-                            "Scoped session is already present; "
-                            "no new arguments may be specified.")
-                else:
-                    sess = self.session_factory(**kwargs)
-                    self.registry.set(sess)
-                    return sess
+    def __call__(self, **kw):
+        r"""Return the current :class:`.Session`, creating it
+        using the :attr:`.scoped_session.session_factory` if not present.
+
+        :param \**kw: Keyword arguments will be passed to the
+         :attr:`.scoped_session.session_factory` callable, if an existing
+         :class:`.Session` is not present.  If the :class:`.Session` is present
+         and keyword arguments have been passed,
+         :exc:`~sqlalchemy.exc.InvalidRequestError` is raised.
+
+        """
+        if kw:
+            if self.registry.has():
+                raise sa_exc.InvalidRequestError(
+                    "Scoped session is already present; "
+                    "no new arguments may be specified."
+                )
             else:
-                return self.session_factory(**kwargs)
+                sess = self.session_factory(**kw)
+                self.registry.set(sess)
+                return sess
         else:
             return self.registry()
 
     def remove(self):
-        """Dispose of the current contextual session."""
+        """Dispose of the current :class:`.Session`, if present.
+
+        This will first call :meth:`.Session.close` method
+        on the current :class:`.Session`, which releases any existing
+        transactional/connection resources still being held; transactions
+        specifically are rolled back.  The :class:`.Session` is then
+        discarded.   Upon next usage within the same scope,
+        the :class:`.scoped_session` will produce a new
+        :class:`.Session` object.
+
+        """
 
         if self.registry.has():
             self.registry().close()
         self.registry.clear()
 
     def configure(self, **kwargs):
-        """reconfigure the sessionmaker used by this ScopedSession."""
+        """reconfigure the :class:`.sessionmaker` used by this
+        :class:`.scoped_session`.
+
+        See :meth:`.sessionmaker.configure`.
+
+        """
 
         if self.registry.has():
-            warn('At least one scoped session is already present. '
-                      ' configure() can not affect sessions that have '
-                      'already been created.')
+            warn(
+                "At least one scoped session is already present. "
+                " configure() can not affect sessions that have "
+                "already been created."
+            )
 
         self.session_factory.configure(**kwargs)
 
     def query_property(self, query_cls=None):
-        """return a class property which produces a `Query` object 
-        against the class when called.
+        """return a class property which produces a :class:`.Query` object
+        against the class and the current :class:`.Session` when called.
 
         e.g.::
 
@@ -94,6 +135,7 @@ class ScopedSession(object):
         a class.
 
         """
+
         class query(object):
             def __get__(s, instance, owner):
                 try:
@@ -107,29 +149,56 @@ class ScopedSession(object):
                             return self.registry().query(mapper)
                 except orm_exc.UnmappedClassError:
                     return None
+
         return query()
+
+
+ScopedSession = scoped_session
+"""Old name for backwards compatibility."""
+
 
 def instrument(name):
     def do(self, *args, **kwargs):
         return getattr(self.registry(), name)(*args, **kwargs)
+
     return do
+
+
 for meth in Session.public_methods:
-    setattr(ScopedSession, meth, instrument(meth))
+    setattr(scoped_session, meth, instrument(meth))
+
 
 def makeprop(name):
-    def set(self, attr):
+    def set_(self, attr):
         setattr(self.registry(), name, attr)
+
     def get(self):
         return getattr(self.registry(), name)
-    return property(get, set)
-for prop in ('bind', 'dirty', 'deleted', 'new', 'identity_map', 
-                'is_active', 'autoflush', 'no_autoflush'):
-    setattr(ScopedSession, prop, makeprop(prop))
+
+    return property(get, set_)
+
+
+for prop in (
+    "bind",
+    "dirty",
+    "deleted",
+    "new",
+    "identity_map",
+    "is_active",
+    "autoflush",
+    "no_autoflush",
+    "info",
+    "autocommit",
+):
+    setattr(scoped_session, prop, makeprop(prop))
+
 
 def clslevel(name):
     def do(cls, *args, **kwargs):
         return getattr(Session, name)(*args, **kwargs)
-    return classmethod(do)
-for prop in ('close_all', 'object_session', 'identity_key'):
-    setattr(ScopedSession, prop, clslevel(prop))
 
+    return classmethod(do)
+
+
+for prop in ("close_all", "object_session", "identity_key"):
+    setattr(scoped_session, prop, clslevel(prop))

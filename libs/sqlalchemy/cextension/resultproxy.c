@@ -1,6 +1,7 @@
 /*
 resultproxy.c
-Copyright (C) 2010 Gaetan de Menten gdementen@gmail.com
+Copyright (C) 2010-2019 the SQLAlchemy authors and contributors <see AUTHORS file>
+Copyright (C) 2010-2011 Gaetan de Menten gdementen@gmail.com
 
 This module is part of SQLAlchemy and is released under
 the MIT License: http://www.opensource.org/licenses/mit-license.php
@@ -8,13 +9,16 @@ the MIT License: http://www.opensource.org/licenses/mit-license.php
 
 #include <Python.h>
 
+#define MODULE_NAME "cresultproxy"
+#define MODULE_DOC "Module containing C versions of core ResultProxy classes."
+
 #if PY_VERSION_HEX < 0x02050000 && !defined(PY_SSIZE_T_MIN)
 typedef int Py_ssize_t;
 #define PY_SSIZE_T_MAX INT_MAX
 #define PY_SSIZE_T_MIN INT_MIN
 typedef Py_ssize_t (*lenfunc)(PyObject *);
-#define PyInt_FromSsize_t(x) PyInt_FromLong(x) 
-typedef intargfunc ssizeargfunc; 
+#define PyInt_FromSsize_t(x) PyInt_FromLong(x)
+typedef intargfunc ssizeargfunc;
 #endif
 
 
@@ -121,7 +125,7 @@ BaseRowProxy_reduce(PyObject *self)
     if (state == NULL)
         return NULL;
 
-    module = PyImport_ImportModule("sqlalchemy.engine.base");
+    module = PyImport_ImportModule("sqlalchemy.engine.result");
     if (module == NULL)
         return NULL;
 
@@ -149,7 +153,11 @@ BaseRowProxy_dealloc(BaseRowProxy *self)
     Py_XDECREF(self->row);
     Py_XDECREF(self->processors);
     Py_XDECREF(self->keymap);
+#if PY_MAJOR_VERSION >= 3
+    Py_TYPE(self)->tp_free((PyObject *)self);
+#else
     self->ob_type->tp_free((PyObject *)self);
+#endif
 }
 
 static PyObject *
@@ -241,20 +249,32 @@ static PyObject *
 BaseRowProxy_subscript(BaseRowProxy *self, PyObject *key)
 {
     PyObject *processors, *values;
-    PyObject *processor, *value;
+    PyObject *processor, *value, *processed_value;
     PyObject *row, *record, *result, *indexobject;
-    PyObject *exc_module, *exception;
+    PyObject *exc_module, *exception, *cstr_obj;
+#if PY_MAJOR_VERSION >= 3
+    PyObject *bytes;
+#endif
     char *cstr_key;
     long index;
     int key_fallback = 0;
+    int tuple_check = 0;
 
+#if PY_MAJOR_VERSION < 3
     if (PyInt_CheckExact(key)) {
         index = PyInt_AS_LONG(key);
-    } else if (PyLong_CheckExact(key)) {
+        if (index < 0)
+            index += BaseRowProxy_length(self);
+    } else
+#endif
+
+    if (PyLong_CheckExact(key)) {
         index = PyLong_AsLong(key);
         if ((index == -1) && PyErr_Occurred())
             /* -1 can be either the actual value, or an error flag. */
             return NULL;
+        if (index < 0)
+            index += BaseRowProxy_length(self);
     } else if (PySlice_Check(key)) {
         values = PyObject_GetItem(self->row, key);
         if (values == NULL)
@@ -299,17 +319,47 @@ BaseRowProxy_subscript(BaseRowProxy *self, PyObject *key)
             if (exception == NULL)
                 return NULL;
 
-            cstr_key = PyString_AsString(key);
-            if (cstr_key == NULL)
+            cstr_obj = PyTuple_GetItem(record, 1);
+            if (cstr_obj == NULL)
                 return NULL;
 
+            cstr_obj = PyObject_Str(cstr_obj);
+            if (cstr_obj == NULL)
+                return NULL;
+
+/*
+           FIXME: raise encoding error exception (in both versions below)
+           if the key contains non-ascii chars, instead of an
+           InvalidRequestError without any message like in the
+           python version.
+*/
+
+
+#if PY_MAJOR_VERSION >= 3
+            bytes = PyUnicode_AsASCIIString(cstr_obj);
+            if (bytes == NULL)
+                return NULL;
+            cstr_key = PyBytes_AS_STRING(bytes);
+#else
+            cstr_key = PyString_AsString(cstr_obj);
+#endif
+            if (cstr_key == NULL) {
+                Py_DECREF(cstr_obj);
+                return NULL;
+            }
+            Py_DECREF(cstr_obj);
+
             PyErr_Format(exception,
-                    "Ambiguous column name '%.200s' in result set! "
-                    "try 'use_labels' option on select statement.", cstr_key);
+                    "Ambiguous column name '%.200s' in "
+                    "result set column descriptions", cstr_key);
             return NULL;
         }
 
+#if PY_MAJOR_VERSION >= 3
+        index = PyLong_AsLong(indexobject);
+#else
         index = PyInt_AsLong(indexobject);
+#endif
         if ((index == -1) && PyErr_Occurred())
             /* -1 can be either the actual value, or an error flag. */
             return NULL;
@@ -319,17 +369,28 @@ BaseRowProxy_subscript(BaseRowProxy *self, PyObject *key)
         return NULL;
 
     row = self->row;
-    if (PyTuple_CheckExact(row))
+    if (PyTuple_CheckExact(row)) {
         value = PyTuple_GetItem(row, index);
-    else
+        tuple_check = 1;
+    }
+    else {
         value = PySequence_GetItem(row, index);
+        tuple_check = 0;
+    }
+
     if (value == NULL)
         return NULL;
 
     if (processor != Py_None) {
-        return PyObject_CallFunctionObjArgs(processor, value, NULL);
+        processed_value = PyObject_CallFunctionObjArgs(processor, value, NULL);
+        if (!tuple_check) {
+            Py_DECREF(value);
+        }
+        return processed_value;
     } else {
-        Py_INCREF(value);
+        if (tuple_check) {
+            Py_INCREF(value);
+        }
         return value;
     }
 }
@@ -337,13 +398,23 @@ BaseRowProxy_subscript(BaseRowProxy *self, PyObject *key)
 static PyObject *
 BaseRowProxy_getitem(PyObject *self, Py_ssize_t i)
 {
-    return BaseRowProxy_subscript((BaseRowProxy*)self, PyInt_FromSsize_t(i));
+    PyObject *index;
+
+#if PY_MAJOR_VERSION >= 3
+    index = PyLong_FromSsize_t(i);
+#else
+    index = PyInt_FromSsize_t(i);
+#endif
+    return BaseRowProxy_subscript((BaseRowProxy*)self, index);
 }
 
 static PyObject *
 BaseRowProxy_getattro(BaseRowProxy *self, PyObject *name)
 {
     PyObject *tmp;
+#if PY_MAJOR_VERSION >= 3
+    PyObject *err_bytes;
+#endif
 
     if (!(tmp = PyObject_GenericGetAttr((PyObject *)self, name))) {
         if (!PyErr_ExceptionMatches(PyExc_AttributeError))
@@ -355,11 +426,23 @@ BaseRowProxy_getattro(BaseRowProxy *self, PyObject *name)
 
     tmp = BaseRowProxy_subscript(self, name);
     if (tmp == NULL && PyErr_ExceptionMatches(PyExc_KeyError)) {
+
+#if PY_MAJOR_VERSION >= 3
+        err_bytes = PyUnicode_AsASCIIString(name);
+        if (err_bytes == NULL)
+            return NULL;
         PyErr_Format(
-                PyExc_AttributeError, 
+                PyExc_AttributeError,
+                "Could not locate column in row for column '%.200s'",
+                PyBytes_AS_STRING(err_bytes)
+            );
+#else
+        PyErr_Format(
+                PyExc_AttributeError,
                 "Could not locate column in row for column '%.200s'",
                 PyString_AsString(name)
             );
+#endif
         return NULL;
     }
     return tmp;
@@ -387,7 +470,7 @@ BaseRowProxy_setparent(BaseRowProxy *self, PyObject *value, void *closure)
         return -1;
     }
 
-    module = PyImport_ImportModule("sqlalchemy.engine.base");
+    module = PyImport_ImportModule("sqlalchemy.engine.result");
     if (module == NULL)
         return -1;
 
@@ -545,8 +628,7 @@ static PyMappingMethods BaseRowProxy_as_mapping = {
 };
 
 static PyTypeObject BaseRowProxyType = {
-    PyObject_HEAD_INIT(NULL)
-    0,                                  /* ob_size */
+    PyVarObject_HEAD_INIT(NULL, 0)
     "sqlalchemy.cresultproxy.BaseRowProxy",          /* tp_name */
     sizeof(BaseRowProxy),               /* tp_basicsize */
     0,                                  /* tp_itemsize */
@@ -586,34 +668,60 @@ static PyTypeObject BaseRowProxyType = {
     0                                   /* tp_new */
 };
 
-
-#ifndef PyMODINIT_FUNC  /* declarations for DLL import/export */
-#define PyMODINIT_FUNC void
-#endif
-
-
 static PyMethodDef module_methods[] = {
     {"safe_rowproxy_reconstructor", safe_rowproxy_reconstructor, METH_VARARGS,
      "reconstruct a RowProxy instance from its pickled form."},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
+#ifndef PyMODINIT_FUNC  /* declarations for DLL import/export */
+#define PyMODINIT_FUNC void
+#endif
+
+
+#if PY_MAJOR_VERSION >= 3
+
+static struct PyModuleDef module_def = {
+    PyModuleDef_HEAD_INIT,
+    MODULE_NAME,
+    MODULE_DOC,
+    -1,
+    module_methods
+};
+
+#define INITERROR return NULL
+
+PyMODINIT_FUNC
+PyInit_cresultproxy(void)
+
+#else
+
+#define INITERROR return
+
 PyMODINIT_FUNC
 initcresultproxy(void)
+
+#endif
+
 {
     PyObject *m;
 
     BaseRowProxyType.tp_new = PyType_GenericNew;
     if (PyType_Ready(&BaseRowProxyType) < 0)
-        return;
+        INITERROR;
 
-    m = Py_InitModule3("cresultproxy", module_methods,
-                       "Module containing C versions of core ResultProxy classes.");
+#if PY_MAJOR_VERSION >= 3
+    m = PyModule_Create(&module_def);
+#else
+    m = Py_InitModule3(MODULE_NAME, module_methods, MODULE_DOC);
+#endif
     if (m == NULL)
-        return;
+        INITERROR;
 
     Py_INCREF(&BaseRowProxyType);
     PyModule_AddObject(m, "BaseRowProxy", (PyObject *)&BaseRowProxyType);
 
+#if PY_MAJOR_VERSION >= 3
+    return m;
+#endif
 }
-

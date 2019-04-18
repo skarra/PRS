@@ -1,53 +1,61 @@
 # util/topological.py
-# Copyright (C) 2005-2012 the SQLAlchemy authors and contributors <see AUTHORS file>
+# Copyright (C) 2005-2019 the SQLAlchemy authors and contributors
+# <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
 # the MIT License: http://www.opensource.org/licenses/mit-license.php
 
 """Topological sorting algorithms."""
 
-from sqlalchemy.exc import CircularDependencyError
-from sqlalchemy import util
+from .. import util
+from ..exc import CircularDependencyError
 
 
-__all__ = ['sort', 'sort_as_subsets', 'find_cycles']
+__all__ = ["sort", "sort_as_subsets", "find_cycles"]
 
-def sort_as_subsets(tuples, allitems):
+
+def sort_as_subsets(tuples, allitems, deterministic_order=False):
 
     edges = util.defaultdict(set)
     for parent, child in tuples:
         edges[child].add(parent)
 
-    todo = set(allitems)
+    Set = util.OrderedSet if deterministic_order else set
+
+    todo = Set(allitems)
 
     while todo:
-        output = set()
-        for node in list(todo):
-            if not todo.intersection(edges[node]):
+        output = Set()
+        for node in todo:
+            if todo.isdisjoint(edges[node]):
                 output.add(node)
 
         if not output:
             raise CircularDependencyError(
-                    "Circular dependency detected.",
-                    find_cycles(tuples, allitems), 
-                    _gen_edges(edges)
-                )
+                "Circular dependency detected.",
+                find_cycles(tuples, allitems),
+                _gen_edges(edges),
+            )
 
         todo.difference_update(output)
         yield output
 
-def sort(tuples, allitems):
+
+def sort(tuples, allitems, deterministic_order=False):
     """sort the given list of items by dependency.
 
     'tuples' is a list of tuples representing a partial ordering.
+    'deterministic_order' keeps items within a dependency tier in list order.
     """
 
-    for set_ in sort_as_subsets(tuples, allitems):
+    for set_ in sort_as_subsets(tuples, allitems, deterministic_order):
         for s in set_:
             yield s
 
+
 def find_cycles(tuples, allitems):
-    # straight from gvr with some mods
+    # adapted from:
+    # http://neopythonic.blogspot.com/2009/01/detecting-cycles-in-directed-graph.html
 
     edges = util.defaultdict(set)
     for parent, child in tuples:
@@ -56,7 +64,7 @@ def find_cycles(tuples, allitems):
 
     output = set()
 
-    # we'd like to find all nodes that are 
+    # we'd like to find all nodes that are
     # involved in cycles, so we do the full
     # pass through the whole thing for each
     # node in the original list.
@@ -72,7 +80,7 @@ def find_cycles(tuples, allitems):
             top = stack[-1]
             for node in edges[top]:
                 if node in stack:
-                    cyc = stack[stack.index(node):]
+                    cyc = stack[stack.index(node) :]
                     todo.difference_update(cyc)
                     output.update(cyc)
 
@@ -84,9 +92,6 @@ def find_cycles(tuples, allitems):
                 node = stack.pop()
     return output
 
+
 def _gen_edges(edges):
-    return set([
-                    (right, left) 
-                    for left in edges 
-                    for right in edges[left] 
-                ])
+    return set([(right, left) for left in edges for right in edges[left]])

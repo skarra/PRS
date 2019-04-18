@@ -1,39 +1,51 @@
 # util/queue.py
-# Copyright (C) 2005-2012 the SQLAlchemy authors and contributors <see AUTHORS file>
+# Copyright (C) 2005-2019 the SQLAlchemy authors and contributors
+# <see AUTHORS file>
 #
 # This module is part of SQLAlchemy and is released under
 # the MIT License: http://www.opensource.org/licenses/mit-license.php
 
 """An adaptation of Py2.3/2.4's Queue module which supports reentrant
-behavior, using RLock instead of Lock for its mutex object.
+behavior, using RLock instead of Lock for its mutex object.  The
+Queue object is used exclusively by the sqlalchemy.pool.QueuePool
+class.
 
 This is to support the connection pool's usage of weakref callbacks to return
 connections to the underlying Queue, which can in extremely
 rare cases be invoked within the ``get()`` method of the Queue itself,
 producing a ``put()`` inside the ``get()`` and therefore a reentrant
-condition."""
+condition.
+
+"""
 
 from collections import deque
 from time import time as _time
-from sqlalchemy.util import threading
 
-__all__ = ['Empty', 'Full', 'Queue']
+from .compat import threading
+
+
+__all__ = ["Empty", "Full", "Queue"]
+
 
 class Empty(Exception):
     "Exception raised by Queue.get(block=0)/get_nowait()."
 
     pass
 
+
 class Full(Exception):
     "Exception raised by Queue.put(block=0)/put_nowait()."
 
     pass
 
+
 class Queue:
-    def __init__(self, maxsize=0):
+    def __init__(self, maxsize=0, use_lifo=False):
         """Initialize a queue object with a given maximum size.
 
         If `maxsize` is <= 0, the queue size is infinite.
+
+        If `use_lifo` is True, this Queue acts like a Stack (LIFO).
         """
 
         self._init(maxsize)
@@ -48,6 +60,8 @@ class Queue:
         # Notify not_full whenever an item is removed from the queue;
         # a thread waiting to put is notified then.
         self.not_full = threading.Condition(self.mutex)
+        # If this queue uses LIFO or FIFO
+        self.use_lifo = use_lifo
 
     def qsize(self):
         """Return the approximate size of the queue (not reliable!)."""
@@ -129,7 +143,6 @@ class Queue:
         return an item if one is immediately available, else raise the
         ``Empty`` exception (`timeout` is ignored in that case).
         """
-
         self.not_empty.acquire()
         try:
             if not block:
@@ -188,4 +201,9 @@ class Queue:
 
     # Get an item from the queue
     def _get(self):
-        return self.queue.popleft()
+        if self.use_lifo:
+            # LIFO
+            return self.queue.pop()
+        else:
+            # FIFO
+            return self.queue.popleft()
