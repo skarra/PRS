@@ -2,10 +2,8 @@ Created       : Tue May 08 17:03:44 IST 2012
 
 * Status
 
-  No active development is happening on this. The original "client" the
-  non-profit clinic at Lajpat Bhavan, New Delhi, were just not
-  interested. Change Management, rather than custom build software, was the
-  medicine they needed. Oh, well...
+ Deployed at Lajpat Bhavan clinic, New Delhi. Project in bug fix / maintenance
+ mode
 
 * Introduction
 
