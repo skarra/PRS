@@ -1,3 +1,3 @@
 [submodule "libs/tornado"]
 	path = libs/tornado
-	url = git://github.com/skarra/tornado.git
+	url = https://github.com/skarra/tornado.git
