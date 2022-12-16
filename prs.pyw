@@ -27,7 +27,7 @@ from   datetime  import datetime, date
 from   threading import Thread
 
 ## Some Global Variables to get started
-prs_ver = 'v1.1+'
+prs_ver = 'v1.2'
 
 DIR_PATH    = os.path.abspath('')
 EXTRA_PATHS = [os.path.join(DIR_PATH, 'src'),
