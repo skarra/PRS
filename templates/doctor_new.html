@@ -1,5 +1,15 @@
 {% extends 'doctor_base.html' %}
 
+{% block morescripts %}
+<script>
+$(function() {
+    console.log("Setting some default values for visit fees URL: ");
+    $("#new_rfee_n").val(50);
+    $("#new_rfee_o").val(50);
+});
+</script>
+{% end block %}
+
 {% block formheader %}
 New Doctor Form:
 {% end block %}

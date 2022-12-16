@@ -242,7 +242,7 @@ function newvRowSelected (event) {
     $(event.target.parentNode).addClass('row_selected');
     var docid = fnGetSelected(newv_doc_table, 0);
     $("#newv_docid_hack").val(docid);
-    $("#newv_charge").val(fnGetSelected(newv_doc_table, 7));
+    $("#newv_charge").val(50); // fnGetSelected(newv_doc_table, 7));
 }
 
 //
